@@ -7,7 +7,7 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Console.WriteLine("test unity update")
+        Console.WriteLine("test unity update");
     }
 
     // Update is called once per frame
