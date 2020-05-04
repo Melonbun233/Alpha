@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Base class for all enemies
 
-public class Enemy : MonoBehaviour {
+public class Enemy : Destroyable {
     public float attackRange;
     internal float _initialAttackRange;
 
@@ -21,8 +21,9 @@ public class Enemy : MonoBehaviour {
     // nearest ally, then base
     internal GameObject _target;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         _initialAttackDamage = attackDamage;
         _initialAttackRange = attackRange;
         _initialAttackRate = attackRate;
@@ -43,7 +44,7 @@ public class Enemy : MonoBehaviour {
             return;
         
         if (_attackCoolDown <= 0) {
-            _target.GetComponent<Destroyable>().hit((int)attackDamage);
+            _target.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
             _attackCoolDown = 1.0f/attackRate;
         }
 

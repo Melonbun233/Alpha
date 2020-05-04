@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9084741122885902594}
   - component: {fileID: 8819348565492108626}
-  - component: {fileID: 2882383397165879610}
   m_Layer: 0
   m_Name: ExplodingEnemy
   m_TagString: Untagged
@@ -45,26 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce7a21c865c87b4cb39f2ac01e32871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  destroyEffect: {fileID: 1290736735069134721, guid: 5b01eba794878324d96ec129d1936aa7,
+    type: 3}
+  destroyEffectPeriod: 1.5
   attackRange: 5
   attackRate: 1
   attackDamage: 50
   speed: 5
---- !u!114 &2882383397165879610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373195965130842878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ca64fadb11a2a48be0fc1d3c4dd6dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  destroyEffect: {fileID: 1290736735069134721, guid: 5b01eba794878324d96ec129d1936aa7,
-    type: 3}
-  destroyEffectPeriod: 1.5
 --- !u!1 &1957919183165228066
 GameObject:
   m_ObjectHideFlags: 0

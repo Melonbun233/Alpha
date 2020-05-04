@@ -5,30 +5,25 @@ using UnityEngine;
 public class Destroyable : MonoBehaviour
 {
     public int health;
-    internal int _maxHealth;
+    public int maxHealth;
     public GameObject destroyEffect;
     public float destroyEffectPeriod;
 
-    void Update()
-    {
-
-        // Check object's health, if its lower or equal to 0, destroy it.
-        // If we have provided the destroy effect, instantiate the effect with a timeout.
-        if (health <= 0) {        
-            if (destroyEffect) {
-                GameObject effect = Instantiate(destroyEffect, transform.position, transform.rotation);
-                Destroy(effect, destroyEffectPeriod);
-            }
-            Destroy(gameObject);
+    public virtual void Start() {
+        if (maxHealth < health) {
+            health = maxHealth;
         }
     }
 
-    void Start()
-    {
-        _maxHealth = health;
-    }
+    // Deal damage to this object. This object will not be killed if the result is zero. 
+    // If the damage is negative, the attack will heal this object instead.
+    // Over damage will not result in negative health!
+    public virtual void receiveDamage(int damage) {
+        if (damage < 0) {
+            receiveHealing(-damage);
+            return;
+        }
 
-    public void hit(int damage) {
         // Avoid negative health
         if (health <= damage) {
             health = 0;
@@ -37,23 +32,74 @@ public class Destroyable : MonoBehaviour
         }
     }
 
-    public void heal(int healing) {
+    public virtual void receiveHealing(int healing) {
+        if (healing < 0) {
+            receiveDamage(-healing);
+            return;
+        }
+
         // Avoid overheal
-        if (health + healing > _maxHealth) {
-            health = _maxHealth;
+        if (health + healing > maxHealth) {
+            health = maxHealth;
         } else {
             health += healing;
         }
     }
 
     // fully heal the object to its current max health
-    public void fullyheal() {
-        health = _maxHealth;
+    public void fullyHeal() {
+        health = maxHealth;
     }
 
+    // Increment the maximum health of this object
+    // A negative increment will result in decrement of max health
     public void increMaxHealth(int increment) {
-        _maxHealth += increment;
-           heal(increment);
+        if (increment < 0) {
+            decreMaxHealth(-increment);
+            return;
+        }
+
+        maxHealth += increment;
+        receiveHealing(increment);
+    }
+
+    // Decrement max health. 
+    // The result will not be negative.
+    // If the health is higher than the new max health, current health 
+    // will be set to the new max health.
+    // If the current health is set to zero, this object will not be killed.
+    // A negative decrement will result in increment of max health
+    public void decreMaxHealth(int decrement) {
+        if (decrement < 0) {
+            increMaxHealth(-decrement);
+            return;
+        }
+
+        if (maxHealth - decrement < 0) {
+            maxHealth = 0;
+        } else {
+            maxHealth -= decrement;
+        }
+        
+        if (health < maxHealth) {
+            health = maxHealth;
+        }
+        
+    }
+
+    public virtual bool isDead() {
+        return health <= 0;
+    }
+
+
+    // destroy self with possible effect
+    public virtual void kill() {
+        health = 0;
+        if (destroyEffect) {
+            GameObject effect = Instantiate(destroyEffect, transform.position, transform.rotation);
+            Destroy(effect, destroyEffectPeriod);
+        }
+        Destroy(gameObject);
     }
 
 
