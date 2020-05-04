@@ -6,20 +6,20 @@ using UnityEngine;
 
 public class Enemy : Destroyable {
     public float attackRange;
-    internal float _initialAttackRange;
+    protected float _initialAttackRange;
 
     public float attackRate;
-    internal float _attackCoolDown;
-    internal float _initialAttackRate;
+    protected float _attackCoolDown;
+    protected float _initialAttackRate;
 
     public float attackDamage;
-    internal float _initialAttackDamage;
+    protected float _initialAttackDamage;
 
     public float speed;
-    internal float _initialSpeed;
+    protected float _initialSpeed;
 
     // nearest ally, then base
-    internal GameObject _target;
+    protected GameObject _target;
 
     public override void Start()
     {
