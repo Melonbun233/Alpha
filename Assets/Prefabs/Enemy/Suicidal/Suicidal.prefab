@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9084741122885902594}
-  - component: {fileID: 8819348565492108626}
+  - component: {fileID: 6774571869525644754}
   m_Layer: 0
-  m_Name: ExplodingEnemy
+  m_Name: Suicidal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8819348565492108626
+--- !u!114 &6774571869525644754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 1957919183165228095}
   - component: {fileID: 1957919183165228092}
   m_Layer: 0
-  m_Name: Exploding Enemy
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

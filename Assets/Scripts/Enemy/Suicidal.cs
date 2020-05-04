@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplotingEnemy : Enemy
+public class Suicidal : Enemy
 {
     public override void Start() {
         base.Start();
@@ -15,7 +15,7 @@ public class ExplotingEnemy : Enemy
         _target.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
 
         _attackCoolDown -= Time.deltaTime;
-        
+
         // self destruction
         kill();
     }

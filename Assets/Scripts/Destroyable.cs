@@ -15,6 +15,9 @@ public class Destroyable : MonoBehaviour
         }
     }
 
+    // Does nothing. But may be override by an extended class
+    public virtual void Update() {}
+
     // Deal damage to this object. This object will not be killed if the result is zero. 
     // If the damage is negative, the attack will heal this object instead.
     // Over damage will not result in negative health!
@@ -47,13 +50,13 @@ public class Destroyable : MonoBehaviour
     }
 
     // fully heal the object to its current max health
-    public void fullyHeal() {
+    public virtual void fullyHeal() {
         health = maxHealth;
     }
 
     // Increment the maximum health of this object
     // A negative increment will result in decrement of max health
-    public void increMaxHealth(int increment) {
+    public virtual void increMaxHealth(int increment) {
         if (increment < 0) {
             decreMaxHealth(-increment);
             return;
@@ -69,7 +72,7 @@ public class Destroyable : MonoBehaviour
     // will be set to the new max health.
     // If the current health is set to zero, this object will not be killed.
     // A negative decrement will result in increment of max health
-    public void decreMaxHealth(int decrement) {
+    public virtual void decreMaxHealth(int decrement) {
         if (decrement < 0) {
             increMaxHealth(-decrement);
             return;

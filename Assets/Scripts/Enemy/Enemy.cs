@@ -6,17 +6,13 @@ using UnityEngine;
 
 public class Enemy : Destroyable {
     public float attackRange;
-    protected float _initialAttackRange;
 
     public float attackRate;
     protected float _attackCoolDown;
-    protected float _initialAttackRate;
 
     public float attackDamage;
-    protected float _initialAttackDamage;
 
     public float speed;
-    protected float _initialSpeed;
 
     // nearest ally, then base
     protected GameObject _target;
@@ -24,16 +20,13 @@ public class Enemy : Destroyable {
     public override void Start()
     {
         base.Start();
-        _initialAttackDamage = attackDamage;
-        _initialAttackRange = attackRange;
-        _initialAttackRate = attackRate;
-        _initialSpeed = speed;
 
         InvokeRepeating("updateTarget", 0f, 0.5f);
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
         move();
         attack();
     }
