@@ -7,6 +7,8 @@ TagManager:
   - Base
   - Enemy
   - Ally
+  - walls
+  - valley
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - map_tile
   - 
   - 
   - 
