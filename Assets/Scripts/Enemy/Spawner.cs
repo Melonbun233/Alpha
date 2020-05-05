@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : Enemy
 {
     public float spawnRate;
     private float _spawnCoolDown = 0f;
@@ -10,13 +10,18 @@ public class Spawner : MonoBehaviour
     public GameObject rangeEnemy;
 
 
-    void Start()
+    public override void Start()
     {
         
     }
 
-    void Update()
+    public override void Update()
     {
+        // Check if there's a base
+        if (GameObject.FindGameObjectWithTag("Base") == null) {
+            return;
+        }
+
         // Simply spawn a range enemy at a spawning rate
         if (_spawnCoolDown <= 0f) {
             Vector3 spawnPosition = new Vector3(transform.position.x, 1, transform.position.y);

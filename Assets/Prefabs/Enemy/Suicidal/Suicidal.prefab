@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6774571869525644754}
   m_Layer: 0
   m_Name: Suicidal
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce7a21c865c87b4cb39f2ac01e32871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Suicidal
   health: 100
   maxHealth: 100
   destroyEffect: {fileID: 1290736735069134721, guid: 5b01eba794878324d96ec129d1936aa7,

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 309079086921007041}
   - component: {fileID: 7514468537400657663}
   m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_Name: Spawner
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9154e072e3ac4524d92fefd263e02861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Spawner
+  health: 100
+  maxHealth: 100
+  destroyEffect: {fileID: 0}
+  destroyEffectPeriod: 0
+  attackRange: 0
+  attackRate: 0
+  attackDamage: 0
+  speed: 0
   spawnRate: 0.5
   meleeEnemy: {fileID: 1373195965130842878, guid: 6f7e0922f6eb2634f8340420d12f92f4,
     type: 3}
