@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // Base class for all enemies
 
@@ -18,10 +19,14 @@ public class Enemy : Destroyable {
     protected GameObject _attackTarget;
     protected GameObject _moveTarget;
 
+    protected NavMeshAgent _navAgent;
+
 
     public override void Start()
     {
         base.Start();
+
+        _navAgent = GetComponent<NavMeshAgent>();
 
         InvokeRepeating("updateAttackTarget", 0f, 0.5f);
         InvokeRepeating("updateMoveTarget", 0f, 0.5f);
@@ -30,7 +35,6 @@ public class Enemy : Destroyable {
     public override void Update()
     {
         base.Update();
-        move();
         attack();
     }
 
@@ -109,15 +113,15 @@ public class Enemy : Destroyable {
 
         Ray oppositeDirection = new Ray(targetPosition, transform.position - targetPosition);
         
-        Vector3 destination = oppositeDirection.GetPoint(attackRange);
+        Vector3 destination = oppositeDirection.GetPoint(attackRange - 0.2f);
 
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, destination, step);
+        _navAgent.destination = destination;
     }
 
     // Basically, just find the base
     public virtual void updateMoveTarget() {
         _moveTarget = GameObject.FindGameObjectWithTag("Base");
+        move();
     }
 
 
