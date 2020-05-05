@@ -9,6 +9,7 @@ TagManager:
   - Ally
   - walls
   - valley
+  - Enemy_spawn
   layers:
   - Default
   - TransparentFX

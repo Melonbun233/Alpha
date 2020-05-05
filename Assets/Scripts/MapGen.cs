@@ -7,7 +7,7 @@ public class MapGen : MonoBehaviour
 
     public int rows;
     public int columns;
-    public GameObject Base;
+    public GameObject[] Base;
     public GameObject[] midTiles;
     public GameObject[] sideTiles;
     public GameObject[] enemySpawn;
