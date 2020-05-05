@@ -15,13 +15,16 @@ public class Enemy : Destroyable {
     public float speed;
 
     // nearest ally, then base
-    protected GameObject _target;
+    protected GameObject _attackTarget;
+    protected GameObject _moveTarget;
+
 
     public override void Start()
     {
         base.Start();
 
-        InvokeRepeating("updateTarget", 0f, 0.5f);
+        InvokeRepeating("updateAttackTarget", 0f, 0.5f);
+        InvokeRepeating("updateMoveTarget", 0f, 0.5f);
     }
 
     public override void Update()
@@ -37,21 +40,70 @@ public class Enemy : Destroyable {
             return;
         
         if (_attackCoolDown <= 0) {
-            _target.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
+            _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
             _attackCoolDown = 1.0f/attackRate;
         }
 
         _attackCoolDown -= Time.deltaTime;
     }
 
-    // Move toward the target until reached the attacking range
-    public virtual void move() {
-        // if no target, stall
-        if (_target == null) {
+    // Update the attack target of this enemy
+    // Default alg is to check if base is within attack range
+    // If not, check whether any ally is within range
+    // If not, set the attack target as null
+    public virtual void updateAttackTarget() {
+        
+        GameObject _base = GameObject.FindGameObjectWithTag("Base");
+        // Check if base is destroyed
+        if (_base == null) {
+            _attackTarget = null;
             return;
         }
 
-        Transform targetTransform = _target.transform;
+        // Check if the base is within attack range
+        if (Utils.horizontalDistance(transform, _base.transform) <= attackRange) {
+            _attackTarget = _base;
+            return;
+        }
+
+        // Check if there's an ally within attack range
+        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+        if (allies.Length == 0) {
+            // no attack target can be found
+            _attackTarget = null;
+            return;
+        } else {
+            // find the nearest ally that is within attack range and set it as target
+            float nearestDistance = float.PositiveInfinity;
+            foreach (GameObject ally in allies) {
+                float distance = Utils.horizontalDistance(transform, ally.transform);
+
+                // check if the ally is within attack range
+                if (distance > attackRange) {
+                    continue;
+                }
+
+                if (distance <= nearestDistance) {
+                    nearestDistance = distance;
+                    _attackTarget = ally;
+                }
+            }
+
+            if (float.IsPositiveInfinity(nearestDistance)) {
+                _attackTarget = null;
+                return;
+            }
+        }
+    }
+
+    // Move toward the target until reached the attacking range
+    public virtual void move() {
+        // if no target, stall
+        if (_moveTarget == null) {
+            return;
+        }
+
+        Transform targetTransform = _moveTarget.transform;
         Vector3 targetPosition = new Vector3(targetTransform.position.x, transform.position.y, 
             targetTransform.position.z);
 
@@ -63,37 +115,19 @@ public class Enemy : Destroyable {
         transform.position = Vector3.MoveTowards(transform.position, destination, step);
     }
 
-    // Update the target of this enemy
-    // Default alg is to find the nearest ally, then the base
-    public virtual void updateTarget() {
-        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
-        if (allies.Length == 0) {
-            // Use the base as its target
-            _target = GameObject.FindGameObjectWithTag("Base");
-        } else {
-            // find the nearest ally and set it as target
-            float nearestDistance = float.PositiveInfinity;
-            foreach (GameObject ally in allies) {
-                float distance = Vector3.Distance(transform.position, ally.transform.position);
-                if (distance <= nearestDistance) {
-                    nearestDistance = distance;
-                    _target = ally;
-                }
-            }
-        }
+    // Basically, just find the base
+    public virtual void updateMoveTarget() {
+        _moveTarget = GameObject.FindGameObjectWithTag("Base");
     }
 
 
     // Check if the target is within attack range
     public virtual bool isWithinAttackRange() {
-        if (_target == null) {
+        if (_attackTarget == null) {
             return false;
         }
-        Transform targetTransform = _target.transform;
-        Vector3 targetPos = new Vector3(targetTransform.position.x, transform.position.y, 
-            targetTransform.position.z);
 
-        return Vector3.Distance(transform.position, targetPos) <= attackRange; 
+        return Utils.horizontalDistance(transform, _attackTarget.transform) <= attackRange;
     }
 
     

@@ -8,7 +8,7 @@ public class Suicidal : Enemy
         if (!isWithinAttackRange())
             return;
         
-        _target.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
+        _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
 
         // self destruction
         kill();

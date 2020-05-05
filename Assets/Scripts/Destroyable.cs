@@ -15,8 +15,12 @@ public class Destroyable : MonoBehaviour
         }
     }
 
-    // Does nothing. But may be override by an extended class
-    public virtual void Update() {}
+    // Check if dead. Kill self if dead.
+    public virtual void Update() {
+        if (isDead()) {
+            kill();
+        }
+    }
 
     // Deal damage to this object. This object will not be killed if the result is zero. 
     // If the damage is negative, the attack will heal this object instead.

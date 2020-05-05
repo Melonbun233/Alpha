@@ -2,14 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Base : Destroyable
+public class Base : Ally
 {
-    public override void Update()
-    {
-        // Check if self is daed
-        if (isDead()) {
-            kill();
-        }
-    }
 
 }
