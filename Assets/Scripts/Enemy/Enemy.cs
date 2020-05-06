@@ -13,7 +13,6 @@ public class Enemy : Destroyable {
 
     public float attackDamage;
 
-    public float speed;
 
     // nearest ally, then base
     protected GameObject _attackTarget;
