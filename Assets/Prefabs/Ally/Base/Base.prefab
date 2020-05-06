@@ -63,6 +63,10 @@ MonoBehaviour:
   maxHealth: 100
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
+  attackRange: 0
+  attackRate: 0
+  attackDamage: 0
+  speed: 0
 --- !u!1 &7345736063228700727
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +172,11 @@ PrefabInstance:
       propertyPath: m_SelectedEditorRenderState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 536176642312022114, guid: e8dd7892449a40a41995e31ed6c1a572,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e0ce5423f7e6a3409aa4b0e05a13d99, type: 2}
     - target: {fileID: 2650481697951769030, guid: e8dd7892449a40a41995e31ed6c1a572,
         type: 3}
       propertyPath: m_LocalPosition.x
