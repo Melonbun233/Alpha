@@ -9,6 +9,9 @@ public class Destroyable : MonoBehaviour
     public GameObject destroyEffect;
     public float destroyEffectPeriod;
 
+    // used to be pointed by attack indicator
+    public Vector3 center;
+
     public virtual void Start() {
         if (maxHealth < health) {
             health = maxHealth;

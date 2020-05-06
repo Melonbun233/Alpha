@@ -18,4 +18,25 @@ public static class Utils
         Gizmos.DrawWireSphere(trans.position, attackRange);
     }
 
+    // Create a line renderer to draw a line between two points
+    public static GameObject drawLine(Vector3 start, Vector3 end, Color color, 
+        float width = 0.1f, string name = "line", 
+        string shaderName = "HDRP/Lit") {
+
+        GameObject line = new GameObject(name);
+        line.transform.position = start;
+        line.AddComponent<LineRenderer>();
+
+        LineRenderer lr = line.GetComponent<LineRenderer>();
+        lr.material = new Material(Shader.Find(shaderName));
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.startWidth = width;
+        lr.endWidth = width;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
+
+        return line;
+    }
+
 }

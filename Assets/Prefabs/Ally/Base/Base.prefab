@@ -63,6 +63,7 @@ MonoBehaviour:
   maxHealth: 100
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
+  center: {x: 0, y: 15, z: 0}
   attackRange: 0
   attackRate: 0
   attackDamage: 0

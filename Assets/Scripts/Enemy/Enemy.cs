@@ -33,20 +33,28 @@ public class Enemy : Destroyable {
     public override void Update()
     {
         base.Update();
-        attack();
+        preAttack();
     }
 
-    // Attack target
-    public virtual void attack() {
+    // Check if the enemy can perform an attack on the attack target
+    // If possible, perform the attack action
+    public virtual void preAttack() {
         if (!isWithinAttackRange())
             return;
-        
+
         if (_attackCoolDown <= 0) {
-            _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
-            _attackCoolDown = 1.0f/attackRate;
+            attack();
         }
 
         _attackCoolDown -= Time.deltaTime;
+    }
+    
+    public virtual void attack() {
+        if (_attackTarget == null) {
+            return;
+        }
+        _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
+        _attackCoolDown = 1.0f/attackRate;
     }
 
     // Update the attack target of this enemy
