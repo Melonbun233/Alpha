@@ -93,7 +93,7 @@ public class Ally : Destroyable
         return Utils.horizontalDistance(transform, _attackTarget.transform) <= attackRange;
     }
 
-    protected virtual void OnDrawGizmosSelected() {
+    public virtual void OnDrawGizmosSelected() {
         Utils.drawAttackRange(transform, attackRange);
     }
 

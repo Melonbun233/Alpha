@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // Base class for all enemies
-
 public class Enemy : Destroyable {
     public float attackRange;
 
