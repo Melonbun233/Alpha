@@ -43,7 +43,7 @@ public class Enemy : Destroyable {
             return;
         
         if (_attackCoolDown <= 0) {
-            _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
+            _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
             _attackCoolDown = 1.0f/attackRate;
         }
 
@@ -131,6 +131,10 @@ public class Enemy : Destroyable {
         }
 
         return Utils.horizontalDistance(transform, _attackTarget.transform) <= attackRange;
+    }
+
+    public virtual void OnDrawGizmosSelected() {
+        Utils.drawAttackRange(transform, attackRange);
     }
 
     

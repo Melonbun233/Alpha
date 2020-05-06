@@ -13,4 +13,9 @@ public static class Utils
         return horizontalDistance(t1.position, t2.position);
     }
 
+    public static void drawAttackRange(Transform trans, float attackRange) {
+        Gizmos.color = new Color(1, 0, 0, 1);
+        Gizmos.DrawWireSphere(trans.position, attackRange);
+    }
+
 }
