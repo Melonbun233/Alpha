@@ -14,9 +14,14 @@ public class Enemy : Destroyable {
 
     public float attackDamage;
 
+    [Header("Path Finding Settings")]
+    // Used to find allies to attack
+    public float visionRange;
+
 
     // nearest ally, then base
     protected GameObject _attackTarget;
+    private GameObject _lastMoveTarget;
     protected GameObject _moveTarget;
 
     protected NavMeshAgent _navAgent;
@@ -112,23 +117,60 @@ public class Enemy : Destroyable {
     public virtual void move() {
         // if no target, stall
         if (_moveTarget == null) {
+            _navAgent.destination = transform.position;
             return;
         }
 
         Transform targetTransform = _moveTarget.transform;
-        Vector3 targetPosition = new Vector3(targetTransform.position.x, transform.position.y, 
-            targetTransform.position.z);
+        // Vector3 targetPosition = new Vector3(targetTransform.position.x, transform.position.y, 
+        //     targetTransform.position.z);
 
-        Ray oppositeDirection = new Ray(targetPosition, transform.position - targetPosition);
+        Ray oppositeDirection = new Ray(targetTransform.position, 
+        transform.position - targetTransform.position);
         
-        Vector3 destination = oppositeDirection.GetPoint(attackRange - 0.2f);
+        Vector3 destination = oppositeDirection.GetPoint(attackRange);
 
         _navAgent.destination = destination;
     }
 
-    // Basically, just find the base
+    // Temporarily find blockers within vision range as move target
+    // If no target can be found, search for the base
+    // If base is destroyed, enemy will stall
+    // Later we might replace the alg to a priority queue
     public virtual void updateMoveTarget() {
+        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+
+        if (allies.Length != 0) {
+            float cloestDistance = float.PositiveInfinity;
+            foreach (GameObject ally in allies) {
+                // only set if the ally is a blocker and within vision range
+                if (ally.GetComponent<Ally>().type == AllyType.Blocker && 
+                    Utils.isWithinRange(transform.position, ally.transform.position, visionRange)) {
+                    // Use the ally that's cloeset
+                    float distance = Utils.horizontalDistance(transform, ally.transform);
+                    if (distance <= cloestDistance) {
+                        _moveTarget = ally;
+                        cloestDistance = distance;
+                    }
+                }
+            }
+
+            if (!float.IsPositiveInfinity(cloestDistance)) {
+                updateNavAgent();
+                return;
+            }
+        }
+
+        // reach here only because all allies are rangers or out of vision
         _moveTarget = GameObject.FindGameObjectWithTag("Base");
+        updateNavAgent();
+    }
+
+    private void updateNavAgent() {
+        if (_moveTarget != _lastMoveTarget) {
+            _lastMoveTarget = _moveTarget;
+        }
+
         move();
     }
 
@@ -139,11 +181,12 @@ public class Enemy : Destroyable {
             return false;
         }
 
-        return Utils.horizontalDistance(transform, _attackTarget.transform) <= attackRange;
+        return Utils.isWithinRange(transform.position, _attackTarget.transform.position, attackRange);
     }
 
     public virtual void OnDrawGizmosSelected() {
-        Utils.drawAttackRange(transform, attackRange);
+        Utils.drawRange(transform, attackRange, Color.red);
+        Utils.drawRange(transform, visionRange, Color.green);
     }
 
     

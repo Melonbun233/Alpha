@@ -64,15 +64,14 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}
-  AllyType: 0
+  type: 0
   attackRange: 5
   attackRate: 1
   attackDamage: 10
-  speed: 0
   rotateSpeed: 40
   attackRotateSpeed: 300
   rotateSpeedUpPeriod: 0.5
-  attackCoreColor: {r: 0.8679245, g: 0.28248486, b: 0.28248486, a: 0}
+  attackCoreColor: {r: 0.46431112, g: 0.49821395, b: 0.8867924, a: 0}
 --- !u!120 &3413228401717227787
 LineRenderer:
   m_ObjectHideFlags: 0

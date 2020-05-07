@@ -107,7 +107,7 @@ public class Ally : Destroyable
     }
 
     public virtual void OnDrawGizmosSelected() {
-        Utils.drawAttackRange(transform, attackRange);
+        Utils.drawRange(transform, attackRange, Color.red);
     }
 
 }
