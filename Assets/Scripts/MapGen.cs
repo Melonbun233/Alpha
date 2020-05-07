@@ -4,6 +4,64 @@ using UnityEngine;
 
 public class MapGen : MonoBehaviour
 {
+    //grid DataStructure
+    public class grid
+    {
+        public GameObject Grid;
+        public int index;
+        public GameObject up;
+        public GameObject down;
+        public GameObject left;
+        public GameObject right;
+
+        public grid(Vector3 vector, int index) 
+        {
+            Grid = new GameObject("grid" + index);
+            Grid.transform.position = vector;
+            this.index = index;
+            up = null;
+            down = null;
+            left = null;
+            right = null;
+        }
+
+        public grid(GameObject Object,GameObject up,GameObject down,GameObject left, GameObject right)
+        {
+            Grid = Object;
+            this.up = up;
+            this.down = down;
+            this.left = left;
+            this.right = right;
+        }
+
+        public GameObject setleft(GameObject left)
+        {
+            this.left = left;
+            return this.left;
+        }
+
+        public GameObject setright(GameObject right)
+        {
+            this.right = right;
+            return this.right;
+        }
+
+        public GameObject setup(GameObject up)
+        {
+            this.up = up;
+            return this.up;
+        }
+
+        public GameObject setdown(GameObject down)
+        {
+            this.down = down;
+            return this.down;
+        }
+
+    }
+
+
+
     //public parameters for UI
     public int rows;
     public int columns;
@@ -50,6 +108,47 @@ public class MapGen : MonoBehaviour
                 gridPositions.Add(new Vector3(c, 0f, r));
             }
         }
+    }
+
+    List<grid> SetUpGridSystem()
+    {
+        int i = 0;
+        Transform gridHolder = new GameObject("Grids").transform;
+        List<grid> Grid = new List<grid>();
+
+        for (int c = 0; c < columns*10; c = c + 10)
+        {
+            for (int r = 0; r < rows*10; r = r + 10)
+            {
+                Grid.Add(new grid(new Vector3(c, 0f, r), i));
+                Grid[i].Grid.transform.SetParent(gridHolder);
+
+                if (r!= 0)
+                {
+                    Grid[i].left = GameObject.Find("grid" + (i - 1));
+                }
+
+                i++;
+                }
+            }
+
+            for(int count = 0; count < i; count++)
+            {
+                Grid[count].right = GameObject.Find("grid" + (count + 1));
+
+            if (Grid[count].down == null && count <= i-rows) 
+            { 
+                Grid[count].down = GameObject.Find("grid" + (count + rows));
+            }
+
+            if (Grid[count].up == null && count >= rows) 
+            {
+                Grid[count].up = GameObject.Find("grid" + (count - rows));
+            }
+
+            }
+
+        return Grid;
     }
 
     //convert unhuman quaternion to euler rotation.
@@ -178,7 +277,7 @@ public class MapGen : MonoBehaviour
     void Start()
     {
         mapCenterMark = rows/2*rows + columns ;
-
+        List<grid> grids = SetUpGridSystem();
 
         baseSetup();
         spawnSetup();
