@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AllyType {
+    Ranger, // rangers can only be placed on walls and will not block enemies
+    Blocker // blockers can only be placed on vallys and will block enemies
+}
 // Base class for all allies
 public class Ally : Destroyable
 {
+    [Header("Ally Type")]
+    public AllyType type;
+
+    [Header("Attack Settings")]
     public float attackRange;
 
     public float attackRate;
     protected float _attackCoolDown;
 
     public float attackDamage;
-
-    // Typecally, allies dont move
-    public float speed;
 
     // nearest enemy
     protected GameObject _attackTarget;

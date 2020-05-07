@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 // Base class for all enemies
 public class Enemy : Destroyable {
+
+    [Header("Attack Settings")]
     public float attackRange;
 
     public float attackRate;

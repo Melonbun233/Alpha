@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Spawner : Enemy
 {
+    [Header("Spawn Rate")]
     public float spawnRate;
     private float _spawnCoolDown = 0f;
+
+    [Header("Spawn Enemies")]
     public GameObject meleeEnemy;
     public GameObject rangeEnemy;
 

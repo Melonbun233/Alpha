@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Destroyable : MonoBehaviour
 {
+    [Header("Health Settings")]
     public int health;
     public int maxHealth;
+
+    [Header("Destory Effect Settings")]
     public GameObject destroyEffect;
     public float destroyEffectPeriod;
 
+    [Header("Receive Attack At")]
     // used to be pointed by attack indicator
     public Vector3 center;
 

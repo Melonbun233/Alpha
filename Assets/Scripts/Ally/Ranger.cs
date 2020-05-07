@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ranger : Ally
 {
-    
+    [Header("Attack Indicator Settings")]
     public float rotateSpeed;
     public float attackRotateSpeed;
     public float rotateSpeedUpPeriod;
