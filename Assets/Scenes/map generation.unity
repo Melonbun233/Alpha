@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rows: 5
-  columns: 4
+  columns: 5
   Base:
   - {fileID: 1411644786271259776, guid: 7ee6ac40eb048824eacbe5cea2ce032d, type: 3}
   - {fileID: 6557525490781571649, guid: 0cb70b3c8c62e9c41a906f07416158d5, type: 3}
@@ -361,5 +361,6 @@ MonoBehaviour:
   - {fileID: 4122397280612064237, guid: 01051df044720184fa9f7a68b8adccc6, type: 3}
   - {fileID: 1663729392031726993, guid: 6e1f105497f97b2488da9f461c85cbf9, type: 3}
   spawnNumber: 2
-  baseVector: {x: 0, y: 0, z: 0}
+  baselocMark: 0
+  mapCenterMark: 0
   spawnVectors: []
