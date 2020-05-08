@@ -19,6 +19,7 @@ public class MapGen : MonoBehaviour
         public grid right;
         public GameObject tile;
         public String exit;
+        public String tileType;
 
         public grid(Vector3 vector, int index) 
         {
@@ -45,7 +46,20 @@ public class MapGen : MonoBehaviour
             exit = null;
         }
 
-        public String checkExit(grid Grid)
+        public static String checkTileType(grid Grid)
+        {
+            if(Grid.tile.name.Contains("Base_tile_template01")|| Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template01") || Grid.tile.name.Contains("midtile_template02") || Grid.tile.name.Contains("midtile_template03") || Grid.tile.name.Contains("midtile_template04") || Grid.tile.name.Contains("transiTile_template01") || Grid.tile.name.Contains("Enemy"))
+            {
+                return "mid";
+            }
+            else
+            {
+                return "side";
+            }
+        }
+
+
+        public static String checkExit(grid Grid)
         {
             if (Grid.tile.name.Contains("Base_tile_template01") || Grid.tile.name.Contains("EnemySpawn_tile_template01") || Grid.tile.name.Contains("midtile_template01"))
             {
@@ -80,9 +94,65 @@ public class MapGen : MonoBehaviour
                 {
                     return "LRD";
                 }
+
+                if(Grid.tile.transform.eulerAngles.y == 180)
+                {
+                    return "RUD";
+                }
             }
 
-            return null;
+            if (Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template04"))
+            {
+                if(Grid.tile.transform.eulerAngles.y == 0f)
+                {
+                    return "LU";
+                }
+
+                if(Grid.tile.transform.eulerAngles.y == 90f)
+                {
+                    return "RU";
+                }
+
+                if(Grid.tile.transform.eulerAngles.y == -90f)
+                {
+                    return "LD";
+                }
+
+                if(Grid.tile.transform.eulerAngles.y == 180f)
+                {
+                    return "RD";
+                }
+            }
+
+            if(Grid.tile.name.Contains("Base_tile_template05") || Grid.tile.name.Contains("sidetile_template01"))
+            {
+                if(Grid.tile.transform.eulerAngles.y == 0f)
+                {
+                    return "LUD";
+                }
+
+                if (Grid.tile.transform.eulerAngles.y == 90f)
+                {
+                    return "LRU";
+                }
+
+                if (Grid.tile.transform.eulerAngles.y == -90f)
+                {
+                    return "LRD";
+                }
+
+                if (Grid.tile.transform.eulerAngles.y == 180f)
+                {
+                    return "RUD";
+                }
+            }
+
+            if (Grid.tile.name.Contains("Base_Tile_template06") || Grid.tile.name.Contains("transiTile_template01"))
+            {
+                return "LRUD";
+            }
+
+            return "";
         }
 
         //Instantiate maptiles
@@ -427,10 +497,6 @@ public class MapGen : MonoBehaviour
                 grids[i].setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
             }
         }
-
-
-
-
     }
 
     void Start()
@@ -441,6 +507,7 @@ public class MapGen : MonoBehaviour
         baseSetup(grids);
         setupSpawn(grids);
         setupMap(grids);
+        print(grid.checkExit(grids[baselocMark]));
     }
 
 
