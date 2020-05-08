@@ -18,6 +18,7 @@ public class MapGen : MonoBehaviour
         public grid left;
         public grid right;
         public GameObject tile;
+        public String exit;
 
         public grid(Vector3 vector, int index) 
         {
@@ -29,6 +30,7 @@ public class MapGen : MonoBehaviour
             left = null;
             right = null;
             tile = null;
+            exit = null;
         }
 
         public grid(GameObject Grid, int index)
@@ -40,6 +42,47 @@ public class MapGen : MonoBehaviour
             left = null;
             right = null;
             tile = null;
+            exit = null;
+        }
+
+        public String checkExit(grid Grid)
+        {
+            if (Grid.tile.name.Contains("Base_tile_template01") || Grid.tile.name.Contains("EnemySpawn_tile_template01") || Grid.tile.name.Contains("midtile_template01"))
+            {
+                if (Grid.tile.transform.eulerAngles.y == 90f || Grid.tile.transform.eulerAngles.y == -90f )
+                {
+                    return "LR";
+                }
+                else
+                {
+                    return "UD";
+                }
+            }
+
+            if (Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("EnemySpawn_tile_template02") || Grid.tile.name.Contains("midtile_template02"))
+            {
+                return "LRUD";
+            }
+
+            if (Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("midtile_template03"))
+            {
+                if (Grid.tile.transform.eulerAngles.y == 0f)
+                {
+                    return "LUD";
+                }
+
+                if (Grid.tile.transform.eulerAngles.y == 90f)
+                {
+                    return "LRU";
+                }
+
+                if (Grid.tile.transform.eulerAngles.y == -90f)
+                {
+                    return "LRD";
+                }
+            }
+
+            return null;
         }
 
         //Instantiate maptiles
@@ -78,6 +121,9 @@ public class MapGen : MonoBehaviour
             return temp;
         }
 
+
+
+
         //check if contains a index
         public static bool Contains(int index, List<grid> grids)
         {
@@ -89,29 +135,6 @@ public class MapGen : MonoBehaviour
             return temp;
         }
 
-        public grid setleft(grid left)
-        {
-            this.left = left;
-            return this.left;
-        }
-
-        public grid setright(grid right)
-        {
-            this.right = right;
-            return this.right;
-        }
-
-        public grid setup(grid up)
-        {
-            this.up = up;
-            return this.up;
-        }
-
-        public grid setdown(grid down)
-        {
-            this.down = down;
-            return this.down;
-        }
 
     }
 
@@ -389,6 +412,7 @@ public class MapGen : MonoBehaviour
         for(int i = 0; i < spawnNumber ; i++)
         {
             grids[temp[i]].setSpawnTile(Instantiate(enemySpawn[Random.Range(0, enemySpawn.Length)]), spawnHolder);
+            spawnVectors.Add(grids[temp[i]].tile.transform.position);
         }
     }
 
@@ -403,6 +427,9 @@ public class MapGen : MonoBehaviour
                 grids[i].setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
             }
         }
+
+
+
 
     }
 
