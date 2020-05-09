@@ -152,7 +152,7 @@ public class MapGen : MonoBehaviour
                 return "LRUD";
             }
 
-            return "";
+            return "This has problem";
         }
 
         //Instantiate maptiles
@@ -233,6 +233,7 @@ public class MapGen : MonoBehaviour
     public int mapCenterMark;
 
     public List<Vector3> spawnVectors = new List<Vector3>();
+    public List<int> spawnlocMark = new List<int>();
 
 
 
@@ -273,25 +274,24 @@ public class MapGen : MonoBehaviour
                 Grid[i].Grid.transform.SetParent(gridHolder);
                 if (r!= 0)
                 {
-                    Grid[i].left = new grid(GameObject.Find("grid" + (i - 1)), i - 1);
+                    Grid[i].left = Grid[i-1];
                 }
-
                 i++;
                 }
             }
 
-            for(int count = 0; count < i; count++)
+            for(int count = 0; count < i - 1; count++)
             {
-                Grid[count].right = new grid(GameObject.Find("grid" + (count + 1)), count + 1);
+                Grid[count].right = Grid[count + 1];
 
-            if (Grid[count].down == null && count <= i-rows) 
-            { 
-                Grid[count].down = new grid(GameObject.Find("grid" + (count + rows)), count + rows);
+            if (Grid[count].down == null && count <= i - rows - 1) 
+            {
+                Grid[count].down = Grid[count + rows];
             }
 
             if (Grid[count].up == null && count >= rows) 
             {
-                Grid[count].up = new grid(GameObject.Find("grid" + (count - rows)), count - rows);
+                Grid[count].up = Grid[count - rows];
             }
 
             }
@@ -478,11 +478,11 @@ public class MapGen : MonoBehaviour
     void setupSpawn(List<grid> grids)
     {
         spawnHolder = new GameObject("EnemySpawn").transform;
-        List<int> temp = markSpawn(spawnNumber);
+        spawnlocMark = markSpawn(spawnNumber);
         for(int i = 0; i < spawnNumber ; i++)
         {
-            grids[temp[i]].setSpawnTile(Instantiate(enemySpawn[Random.Range(0, enemySpawn.Length)]), spawnHolder);
-            spawnVectors.Add(grids[temp[i]].tile.transform.position);
+            grids[spawnlocMark[i]].setSpawnTile(Instantiate(enemySpawn[Random.Range(0, enemySpawn.Length)]), spawnHolder);
+            spawnVectors.Add(grids[spawnlocMark[i]].tile.transform.position);
         }
     }
 
@@ -490,11 +490,45 @@ public class MapGen : MonoBehaviour
     void setupMap(List<grid> grids)
     {
         mapHolder = new GameObject("MapTile").transform;
-        for(int i = 0; i < grids.Count; i++)
+        grid pointer = grids[baselocMark];
+
+        while (pointer.up != null)
         {
-            if(grids[i].tile == null)
+
+            if (spawnlocMark.Contains(pointer.up.index))
             {
-                grids[i].setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
+                pointer = pointer.up.up;
+                continue;
+            }
+
+            String Exit = grid.checkExit(pointer);
+            String Type = grid.checkTileType(pointer);
+
+            if (Exit.Contains("U"))
+            {
+                if (Type.Equals("mid"))
+                {
+                    pointer.up.setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
+                    while (!grid.checkExit(pointer.up).Contains("D"))
+                    {
+                        pointer.up.tile.transform.rotation = ranRotation();
+                    }
+                    pointer = pointer.up;
+                }
+                else
+                {
+                    pointer.up.setMapTile(Instantiate(sideTiles[Random.Range(0, sideTiles.Length)]), mapHolder);
+                    print(grid.checkExit(pointer.up));
+                    while (!grid.checkExit(pointer.up).Contains("D"))
+                    {
+                        pointer.up.tile.transform.rotation = ranRotation();
+                    }
+                    pointer = pointer.up;
+                }
+            }
+            else
+            {
+                break;
             }
         }
     }
@@ -507,7 +541,6 @@ public class MapGen : MonoBehaviour
         baseSetup(grids);
         setupSpawn(grids);
         setupMap(grids);
-        print(grid.checkExit(grids[baselocMark]));
     }
 
 
