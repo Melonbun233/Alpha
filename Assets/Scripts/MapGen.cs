@@ -191,7 +191,21 @@ public class MapGen : MonoBehaviour
             return temp;
         }
 
-
+        public grid turnSwitch(String turn)
+        {
+            switch (turn)
+            {
+                case "U":
+                    return this.up;
+                case "D":
+                    return this.down;
+                case "L":
+                    return this.left;
+                case "R":
+                    return this.right;
+            }
+            return null;
+        }
 
 
         //check if contains a index
@@ -275,27 +289,34 @@ public class MapGen : MonoBehaviour
                 if (r!= 0)
                 {
                     Grid[i].left = Grid[i-1];
+                    print("set " + i + " left to " + (i - 1));
                 }
                 i++;
                 }
             }
 
-            for(int count = 0; count < i - 1; count++)
+            for(int count = 0; count <= i-1; count++)
+            {
+
+            if (Grid[count].right == null && (count+1) % columns != 0)
             {
                 Grid[count].right = Grid[count + 1];
+                print("set " + count + " right to " + (count + 1)); 
+            }
 
             if (Grid[count].down == null && count <= i - rows - 1) 
             {
                 Grid[count].down = Grid[count + rows];
+                print("set " + count + " down to " + (count + rows));
             }
 
             if (Grid[count].up == null && count >= rows) 
             {
                 Grid[count].up = Grid[count - rows];
+                print("set " + count + " up to " + (count - rows));
             }
 
             }
-
         return Grid;
     }
 
@@ -307,122 +328,6 @@ public class MapGen : MonoBehaviour
         return temp;
     }
 
-    /*
-    //Mark base location for setting up map reasonablly.
-    int markBase() {
-        int tempC = Random.Range(0, columns);
-        int tempR = Random.Range(0, rows);
-        baseVector = new Vector3(tempC * 10, 0f, tempR * 10);
-        return ((tempC) * rows) + tempR + 1;
-    }
-
-    //set up base tiles.
-    void baseSetup() {
-
-        baseHolder = new GameObject("Base").transform;
-        int row = rows * 10;
-        int colum = columns * 10;
-        baselocMark = markBase();
-
-        for (int c = 0; c < colum; c = c + 10)
-        {
-            for (int r = 0; r < row; r = r + 10)
-            {
-                if (new Vector3(c,0f,r).Equals(baseVector))
-                {
-                    GameObject toInstantiate = Base[Random.Range(0, Base.Length)];
-                    GameObject instance = Instantiate(toInstantiate, new Vector3(c, 0f, r), ranRotation()) as GameObject;
-                    instance.transform.SetParent(baseHolder);
-                    break;
-                }
-            }
-        }
-    }
-
-    //decide spawn locations according to base location
-    List<int> markSpawn(int num)
-    {
-        if (num > mapCenterMark) throw new System.ArgumentException("Too many enemy spawns");
-        List<int> locmark = new List<int>();
-
-        if (baselocMark <= mapCenterMark-1) {
-            for(int i = 0; i < num; i++)
-            {
-                int temp = Random.Range(mapCenterMark, rows*columns);
-                while (locmark.Contains(temp))
-                {
-                    temp = Random.Range(mapCenterMark, rows * columns);
-                }
-                locmark.Add(temp);
-            }
-        }
-        else
-        {
-            for(int i = 0; i < num; i++)
-            {
-                int temp = Random.Range(0, mapCenterMark);
-                while (locmark.Contains(temp))
-                {
-                    temp = Random.Range(0, mapCenterMark);
-                }
-                locmark.Add(temp);
-            }
-        }
-
-        return locmark;
-    }
-
-    //set up enemy spawn tiles.
-    void spawnSetup() {
-        spawnHolder = new GameObject("Spawns").transform;
-        List<int> locmark = markSpawn(spawnNumber);
-        int row = rows * 10;
-        int colum = columns * 10;
-
-        int i = 0;
-        for (int c = 0; c < colum; c = c + 10)
-        {
-            for (int r = 0; r < row; r = r + 10)
-            {
-                if (locmark.Contains(i))
-                {
-                    spawnVectors.Add(new Vector3(c, 0f, r));
-                    GameObject toInstant = enemySpawn[Random.Range(0, enemySpawn.Length)];
-                    GameObject instant = Instantiate(toInstant, new Vector3(c, 0f, r), ranRotation());
-                    instant.transform.SetParent(spawnHolder);
-                }
-                i++;
-            }
-        }
-    }
-
-
-    //fill out the rest of the map tiles.
-    void mapSetup()
-    {
-        mapHolder = new GameObject("Map").transform;
-        int row = rows * 10;
-        int colum = columns * 10;
-
-        for (int c = 0; c < colum; c = c+10)
-        {
-            for (int r = 0; r < row; r = r+10)
-            {
-                Vector3 loc = new Vector3(c, 0f, r);
-                if (!loc.Equals(baseVector) && !spawnVectors.Contains(loc))
-                {
-                    GameObject toInstantiate = midTiles[Random.Range(0, midTiles.Length)];
-                    GameObject instance = Instantiate(toInstantiate, new Vector3(c, 0f, r), ranRotation()) as GameObject;
-                    instance.transform.SetParent(mapHolder);
-                }
-
-                int i = 0;
-                if (i == mapCenterMark) mapCenter = loc;
-                i++;
-            }
-        }
-    }
-    */
 
     //
     int markBase()
@@ -486,12 +391,66 @@ public class MapGen : MonoBehaviour
         }
     }
 
+    String ranTurn()
+    {
+        String[] temp = { "U", "D", "L", "R" };
+        return temp[Random.Range(0,4)];
+    }
+
+    bool checkCorner(grid grid)
+    {
+        
+    }
+
     //build fillout tiles
     void setupMap(List<grid> grids)
     {
         mapHolder = new GameObject("MapTile").transform;
         grid pointer = grids[baselocMark];
+        int i = 0;
 
+        String Exit = grid.checkExit(pointer);
+        String Type = grid.checkTileType(pointer);
+
+        while (checkCorner(pointer))
+        {
+            if (i >= 500) { break; }
+
+            Exit = grid.checkExit(pointer);
+            Type = grid.checkTileType(pointer);
+            String turn = ranTurn();
+            if(Type == "mid")
+            {
+                if (Exit.Contains(turn))
+                {
+                    pointer.turnSwitch(turn).setMapTile(Instantiate(midTiles[Random.Range(0,midTiles.Length)]), mapHolder);
+                    pointer = pointer.turnSwitch(turn);
+                    i++;
+                }
+                else
+                {
+                    i++;
+                    continue;
+                }
+            }
+            else
+            {
+                if (Exit.Contains(turn))
+                {
+                    pointer.turnSwitch(turn).setMapTile(Instantiate(sideTiles[Random.Range(0, sideTiles.Length)]), mapHolder);
+                    pointer = pointer.turnSwitch(turn);
+                    i++;
+                }
+                else
+                {
+                    i++;
+                    continue;
+                }
+            }
+        }
+
+
+        /*
         while (pointer.up != null)
         {
 
@@ -530,7 +489,7 @@ public class MapGen : MonoBehaviour
             {
                 break;
             }
-        }
+        */
     }
 
     void Start()
@@ -539,7 +498,7 @@ public class MapGen : MonoBehaviour
 
         List<grid> grids = SetUpGridSystem();
         baseSetup(grids);
-        setupSpawn(grids);
+        //setupSpawn(grids);
         setupMap(grids);
     }
 
