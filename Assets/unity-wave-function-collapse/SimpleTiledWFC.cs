@@ -98,7 +98,7 @@ public class SimpleTiledWFC : MonoBehaviour{
 					GameObject fab = null;
 					if (v != "?"){
 						rot = int.Parse(v.Substring(0,1));
-						v = v.Substring(1);
+						v = v.Substring(18);
 						if (!obmap.ContainsKey(v)){
 							fab = (GameObject)Resources.Load(v, typeof(GameObject));
 							obmap[v] = fab;
@@ -106,6 +106,7 @@ public class SimpleTiledWFC : MonoBehaviour{
 							fab = obmap[v];
 						}
 						if (fab == null){
+							Debug.Log("cannot load" + v);
 							continue;}
 						Vector3 pos = new Vector3(x*gridsize, y*gridsize, 0f);
 						GameObject tile = (GameObject)Instantiate(fab, new Vector3() , Quaternion.identity);

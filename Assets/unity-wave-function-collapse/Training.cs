@@ -55,7 +55,7 @@ class Training : MonoBehaviour{
 
 	public string AssetPath(UnityEngine.Object o){
 		#if UNITY_EDITOR
-		return AssetDatabase.GetAssetPath(o).Trim().Replace("Assets/Prefabs/WFC_tiles", "").Replace(".prefab", "");
+		return AssetDatabase.GetAssetPath(o).Trim().Replace("Assets/Resources/Prefabs/WFC_tiles", "").Replace(".prefab", "");
 		#else
 		return "";
 		#endif
