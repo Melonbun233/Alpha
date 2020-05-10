@@ -1,0 +1,10 @@
+<set>
+  <tiles>
+<tile name="Prefabs/HD_map_tiles/Base_tile_template02" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template01" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template04" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/transiTile_template01" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template02" symmetry="X" weight="1.0"/>
+	</tiles>
+<neighbors>	</neighbors>
+</set>

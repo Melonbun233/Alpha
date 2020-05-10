@@ -1,7 +1,12 @@
 <set>
   <tiles>
-<tile name="Prefabs/map_tiles/Base_tile_template01" symmetry="X" weight="1.0"/>
-<tile name="Prefabs/map_tiles/midtile_template04" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template01_I" symmetry="I" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template02_X" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template03_T" symmetry="T" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/midtile_template04_L" symmetry="L" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/sidetile_template01_T" symmetry="T" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/sidetile_template02_X" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/HD_map_tiles/Base_tile_template02_X" symmetry="X" weight="1.0"/>
 	</tiles>
 <neighbors>	</neighbors>
 </set>
