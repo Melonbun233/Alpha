@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // Base class for all enemies
-
 public class Enemy : Destroyable {
+
+    [Header("Attack Settings")]
     public float attackRange;
 
     public float attackRate;
@@ -12,88 +14,136 @@ public class Enemy : Destroyable {
 
     public float attackDamage;
 
-    public float speed;
 
     // nearest ally, then base
-    protected GameObject _target;
+    protected GameObject _attackTarget;
+    protected GameObject _moveTarget;
+
+    protected NavMeshAgent _navAgent;
+
 
     public override void Start()
     {
         base.Start();
 
-        InvokeRepeating("updateTarget", 0f, 0.5f);
+        _navAgent = GetComponent<NavMeshAgent>();
+
+        InvokeRepeating("updateAttackTarget", 0f, 0.5f);
+        InvokeRepeating("updateMoveTarget", 0f, 0.5f);
     }
 
     public override void Update()
     {
         base.Update();
-        move();
-        attack();
+        preAttack();
     }
 
-    // Attack target
-    public virtual void attack() {
+    // Check if the enemy can perform an attack on the attack target
+    // If possible, perform the attack action
+    public virtual void preAttack() {
         if (!isWithinAttackRange())
             return;
-        
+
         if (_attackCoolDown <= 0) {
-            _target.GetComponent<Destroyable>().receiveDamage((int)attackDamage);
-            _attackCoolDown = 1.0f/attackRate;
+            attack();
         }
 
         _attackCoolDown -= Time.deltaTime;
+    }
+    
+    public virtual void attack() {
+        if (_attackTarget == null) {
+            return;
+        }
+        _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
+        _attackCoolDown = 1.0f/attackRate;
+    }
+
+    // Update the attack target of this enemy
+    // Default alg is to check if base is within attack range
+    // If not, check whether any ally is within range
+    // If not, set the attack target as null
+    public virtual void updateAttackTarget() {
+        
+        GameObject _base = GameObject.FindGameObjectWithTag("Base");
+        // Check if base is destroyed
+        if (_base == null) {
+            _attackTarget = null;
+            return;
+        }
+
+        // Check if the base is within attack range
+        if (Utils.horizontalDistance(transform, _base.transform) <= attackRange) {
+            _attackTarget = _base;
+            return;
+        }
+
+        // Check if there's an ally within attack range
+        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+        if (allies.Length == 0) {
+            // no attack target can be found
+            _attackTarget = null;
+            return;
+        } else {
+            // find the nearest ally that is within attack range and set it as target
+            float nearestDistance = float.PositiveInfinity;
+            foreach (GameObject ally in allies) {
+                float distance = Utils.horizontalDistance(transform, ally.transform);
+
+                // check if the ally is within attack range
+                if (distance > attackRange) {
+                    continue;
+                }
+
+                if (distance <= nearestDistance) {
+                    nearestDistance = distance;
+                    _attackTarget = ally;
+                }
+            }
+
+            if (float.IsPositiveInfinity(nearestDistance)) {
+                _attackTarget = null;
+                return;
+            }
+        }
     }
 
     // Move toward the target until reached the attacking range
     public virtual void move() {
         // if no target, stall
-        if (_target == null) {
+        if (_moveTarget == null) {
             return;
         }
 
-        Transform targetTransform = _target.transform;
+        Transform targetTransform = _moveTarget.transform;
         Vector3 targetPosition = new Vector3(targetTransform.position.x, transform.position.y, 
             targetTransform.position.z);
 
         Ray oppositeDirection = new Ray(targetPosition, transform.position - targetPosition);
         
-        Vector3 destination = oppositeDirection.GetPoint(attackRange);
+        Vector3 destination = oppositeDirection.GetPoint(attackRange - 0.2f);
 
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, destination, step);
+        _navAgent.destination = destination;
     }
 
-    // Update the target of this enemy
-    // Default alg is to find the nearest ally, then the base
-    public virtual void updateTarget() {
-        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
-        if (allies.Length == 0) {
-            // Use the base as its target
-            _target = GameObject.FindGameObjectWithTag("Base");
-        } else {
-            // find the nearest ally and set it as target
-            float nearestDistance = float.PositiveInfinity;
-            foreach (GameObject ally in allies) {
-                float distance = Vector3.Distance(transform.position, ally.transform.position);
-                if (distance <= nearestDistance) {
-                    nearestDistance = distance;
-                    _target = ally;
-                }
-            }
-        }
+    // Basically, just find the base
+    public virtual void updateMoveTarget() {
+        _moveTarget = GameObject.FindGameObjectWithTag("Base");
+        move();
     }
 
 
     // Check if the target is within attack range
     public virtual bool isWithinAttackRange() {
-        if (_target == null) {
+        if (_attackTarget == null) {
             return false;
         }
-        Transform targetTransform = _target.transform;
-        Vector3 targetPos = new Vector3(targetTransform.position.x, transform.position.y, 
-            targetTransform.position.z);
 
-        return Vector3.Distance(transform.position, targetPos) <= attackRange; 
+        return Utils.horizontalDistance(transform, _attackTarget.transform) <= attackRange;
+    }
+
+    public virtual void OnDrawGizmosSelected() {
+        Utils.drawAttackRange(transform, attackRange);
     }
 
     
