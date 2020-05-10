@@ -450,27 +450,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8527e91a7d33b404e801f507da569e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 5
-  columns: 5
+  rows: 3
+  columns: 3
   Base:
-  - {fileID: 1411644786271259776, guid: 7ee6ac40eb048824eacbe5cea2ce032d, type: 3}
-  - {fileID: 6557525490781571649, guid: 0cb70b3c8c62e9c41a906f07416158d5, type: 3}
-  - {fileID: 7207747055163403743, guid: 8ce408227478aaf4d88dbd7ca95adee6, type: 3}
-  - {fileID: 8529462136963107677, guid: 3d3e0444b8284a745bc34590803a866d, type: 3}
-  - {fileID: 8594173207260840877, guid: c873472b7b5ad1c43a6167284e8317eb, type: 3}
-  - {fileID: 5756892529028305285, guid: dcea78dedd727d648845a6808eabc241, type: 3}
+  - {fileID: 2864209651357198787, guid: 56dc714da144be940a51e43a38323f01, type: 3}
+  - {fileID: 6278239301309160967, guid: 94dda3051505de643be5f4d77ad7b28e, type: 3}
+  - {fileID: 3659213565050147393, guid: aeece8eb4f1032a4aa89c96fb88f95c9, type: 3}
+  - {fileID: 700745009276303629, guid: 400ecc63ee9021544afd2279f06eb26a, type: 3}
+  - {fileID: 5935224138715397002, guid: f3ec2c494e5ecbc40b6d5d3603ee8403, type: 3}
+  - {fileID: 6506516892105481560, guid: c6aeeede50b3a854a9da50dd84380453, type: 3}
   midTiles:
-  - {fileID: 1758790775901307936, guid: 1cd37bb7bfd181540a328228ccdc4e67, type: 3}
-  - {fileID: 6052512833999952211, guid: abb8b9dcab1323c4182a3a4e020aa762, type: 3}
-  - {fileID: 7995219647037102637, guid: 61b2a582314695a4faf6e2cefb49de78, type: 3}
-  - {fileID: 5697963526793735467, guid: 224d9fde7b4b0694d92c86b6c28c93c7, type: 3}
+  - {fileID: 3755496013569448402, guid: 8edcfb8f841ea17459b41591974f95e8, type: 3}
+  - {fileID: 6471464856302806339, guid: 1c429e16fba2d1745add3cfa2233f70a, type: 3}
+  - {fileID: 2822786162790862785, guid: 1f9bf78c5e386c845800e6e88a0d57e8, type: 3}
+  - {fileID: 1278547258915261106, guid: 3884986518ca41f44a8f3e7f93eb9d03, type: 3}
   sideTiles:
-  - {fileID: 4374274905386837692, guid: d4ad74d6a51085041ba35572036dd189, type: 3}
-  - {fileID: 6153574772593043787, guid: 9c522c0c7e996bc4681be1db4456cf40, type: 3}
-  - {fileID: 7493787648451981138, guid: 0c30c33dcd67cac46bf15e393b4408b5, type: 3}
+  - {fileID: 721637017998917927, guid: fb01a6cc19c4bcd42a6b2e80b9a4c6a6, type: 3}
+  - {fileID: 7942728465761472498, guid: bda8608d7e542c44d9a990ca0cc2d4c8, type: 3}
   enemySpawn:
-  - {fileID: 4122397280612064237, guid: 01051df044720184fa9f7a68b8adccc6, type: 3}
-  - {fileID: 1663729392031726993, guid: 6e1f105497f97b2488da9f461c85cbf9, type: 3}
+  - {fileID: 8497662699508211760, guid: 2c38370fbc19f8041b1823bc26d47940, type: 3}
+  - {fileID: 8557833033864292617, guid: 8b569f1c061e6b24eae3fa4daf4a8171, type: 3}
   spawnNumber: 2
   baselocMark: 0
   mapLength: 0

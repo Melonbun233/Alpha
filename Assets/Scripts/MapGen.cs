@@ -48,7 +48,7 @@ public class MapGen : MonoBehaviour
 
         public static String checkTileType(grid Grid)
         {
-            if(Grid.tile.name.Contains("Base_tile_template01")|| Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template01") || Grid.tile.name.Contains("midtile_template02") || Grid.tile.name.Contains("midtile_template03") || Grid.tile.name.Contains("midtile_template04") || Grid.tile.name.Contains("transiTile_template01") || Grid.tile.name.Contains("Enemy"))
+            if(Grid.tile.name.Contains("Base_tile_template01") || Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template01") || Grid.tile.name.Contains("midtile_template02") || Grid.tile.name.Contains("midtile_template03") || Grid.tile.name.Contains("midtile_template04") || Grid.tile.name.Contains("transiTile_template01") || Grid.tile.name.Contains("Enemy"))
             {
                 return "mid";
             }
@@ -290,7 +290,7 @@ public class MapGen : MonoBehaviour
                 if (r!= 0)
                 {
                     Grid[i].left = Grid[i-1];
-                    print("set " + i + " left to " + (i - 1));
+                    
                 }
                 i++;
                 }
@@ -299,22 +299,22 @@ public class MapGen : MonoBehaviour
             for(int count = 0; count <= i-1; count++)
             {
 
-            if (Grid[count].right == null && (count+1) % columns != 0)
+            if (Grid[count].right == null && (count + 1) % columns != 0)
             {
                 Grid[count].right = Grid[count + 1];
-                print("set " + count + " right to " + (count + 1)); 
+                 
             }
 
             if (Grid[count].down == null && count <= i - rows - 1) 
             {
                 Grid[count].down = Grid[count + rows];
-                print("set " + count + " down to " + (count + rows));
+                
             }
 
             if (Grid[count].up == null && count >= rows) 
             {
                 Grid[count].up = Grid[count - rows];
-                print("set " + count + " up to " + (count - rows));
+                
             }
 
             }
@@ -333,10 +333,9 @@ public class MapGen : MonoBehaviour
     //
     int markBase()
     {
-        int tempC = Random.Range(0, columns);
-        int tempR = Random.Range(0, rows);
-        baselocMark = ((tempC) * rows) + tempR + 1;
-        return ((tempC) * rows) + tempR + 1;
+        int temp = Random.Range(0, (columns - 1) * (rows - 1));
+        baselocMark = temp;
+        return temp;
     }
 
     //Setup the base tiles
@@ -400,7 +399,7 @@ public class MapGen : MonoBehaviour
 
     bool checkCorner(grid grid)
     {
-        if(grid.index >= rows && grid.index < (mapLength - rows) && ((grid.index + 1 ) % columns) != 0 && (grid.index + 1) % columns != 1)
+        if(grid.index >= rows && grid.index < (mapLength - rows) && ((grid.index + 1 ) % rows) != 0 && (grid.index + 1) % rows != 1)
         {
             return true;
         }
@@ -431,7 +430,7 @@ public class MapGen : MonoBehaviour
             {
                 if (Exit.Contains(turn))
                 {
-                    pointer.turnSwitch(turn).setMapTile(Instantiate(midTiles[Random.Range(0,midTiles.Length)]), mapHolder);
+                    pointer.turnSwitch(turn).setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
                     pointer = pointer.turnSwitch(turn);
                     i++;
                 }
