@@ -242,6 +242,7 @@ public class MapGen : MonoBehaviour
 
     //Mark base location for setting up map reasonablly.
     public int baselocMark;
+    public int mapLength;
 
     private Vector3 mapCenter;
     public int mapCenterMark;
@@ -399,7 +400,14 @@ public class MapGen : MonoBehaviour
 
     bool checkCorner(grid grid)
     {
-        
+        if(grid.index >= rows && grid.index < (mapLength - rows) && ((grid.index + 1 ) % columns) != 0 && (grid.index + 1) % columns != 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //build fillout tiles
@@ -494,6 +502,7 @@ public class MapGen : MonoBehaviour
 
     void Start()
     {
+        mapLength = columns * rows;
         mapCenterMark = (int)(Math.Floor((double)columns/2d) * (double)rows + (double)rows/2d);
 
         List<grid> grids = SetUpGridSystem();
