@@ -10,6 +10,7 @@ TagManager:
   - walls
   - valley
   - Enemy_spawn
+  - Spawner
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7514468537400657663}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Enemy
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,13 +49,12 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}
-  attackRange: 0
-  attackRate: 0
-  attackDamage: 0
-  spawnRate: 0.25
-  meleeEnemy: {fileID: 1373195965130842878, guid: 6f7e0922f6eb2634f8340420d12f92f4,
-    type: 3}
-  rangeEnemy: {fileID: 0}
+  waves:
+  - enemy: {fileID: 0}
+    spawnRate: 0
+    count: 0
+    preparationTime: 0
+  localSpawnPosition: {x: 2, y: 1, z: 0}
 --- !u!1 &309079087838746006
 GameObject:
   m_ObjectHideFlags: 0
