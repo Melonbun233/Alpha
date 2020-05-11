@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class SimpleTiledWFC : MonoBehaviour{
 	
 	public TextAsset xml = null;
