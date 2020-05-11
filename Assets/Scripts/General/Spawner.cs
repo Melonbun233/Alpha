@@ -19,6 +19,10 @@ public class Wave {
 
 public class Spawner : Destroyable
 {
+    [Tooltip("Prefab: Enemy prefab to be spawned\n" + 
+        "Spawn Cool Down: Time between each enemy spawned in one wave\n" +
+        "Count: Number of enemies spawned in one wave\n" +
+        "Preparation Time: Time before starting spawning the first enemey of this wave")]
     [Header("Wave Settings")]
     public List<Wave> waves;
     public int currentWave = 0;
