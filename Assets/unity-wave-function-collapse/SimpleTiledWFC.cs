@@ -64,10 +64,10 @@ public class SimpleTiledWFC : MonoBehaviour{
 		obmap = new  Dictionary<string, GameObject>();
 
 		if (output == null){
-			Transform ot = transform.Find("output-tiled");
+			Transform ot = transform.Find("map");
 			if (ot != null){output = ot.gameObject;}}
 		if (output == null){
-			output = new GameObject("output-tiled");
+			output = new GameObject("map");
 			output.transform.parent = transform;
 			output.transform.position = this.gameObject.transform.position;
 			output.transform.rotation = this.gameObject.transform.rotation;}
@@ -106,7 +106,7 @@ public class SimpleTiledWFC : MonoBehaviour{
 							fab = obmap[v];
 						}
 						if (fab == null){
-							Debug.Log("cannot load " + v);
+							Debug.LogError("Cannot load prefab: " + v);
 							continue;}
 						Vector3 pos = new Vector3(x*gridsize, y*gridsize, 0f);
 						GameObject tile = (GameObject)Instantiate(fab, new Vector3() , Quaternion.identity);

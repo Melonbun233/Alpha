@@ -167,8 +167,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4348397872644879156}
+  - component: {fileID: 5397530251838276167}
   m_Layer: 8
-  m_Name: sidetile_template01
+  m_Name: sidetile_template01_T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +214,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5397530251838276167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721637017998917927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1226d8ba75b7048449b2404fd3d79926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  symmetry: 3
 --- !u!1 &1013764636089611261
 GameObject:
   m_ObjectHideFlags: 0
