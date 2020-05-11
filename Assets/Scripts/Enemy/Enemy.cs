@@ -18,9 +18,15 @@ public class Enemy : Destroyable {
     // Used to find allies to attack
     public float visionRange;
 
+    // [Header("Priority Settings")]
+    // public int priority;
+
 
     // nearest ally, then base
     protected GameObject _attackTarget;
+    // used to store possible targets (within attack range)
+    protected List<GameObject> _attackTargets;
+
     protected GameObject _lastMoveTarget;
 
     protected GameObject _moveTarget;
@@ -29,6 +35,8 @@ public class Enemy : Destroyable {
     protected NavMeshAgent _navAgent;
 
     protected bool _baseDestroyed = false;
+
+    
 
 
     public override void Start()
@@ -50,10 +58,8 @@ public class Enemy : Destroyable {
     // Check if the enemy can perform an attack on the attack target
     // If possible, perform the attack action
     public virtual void preAttack() {
-        if (!isWithinAttackRange())
-            return;
 
-        if (_attackCoolDown <= 0) {
+        if (_attackCoolDown <= 0 && _attackTarget != null) {
             attack();
         }
 
@@ -82,39 +88,24 @@ public class Enemy : Destroyable {
         }
 
         // Check if the base is within attack range
-        if (Utils.horizontalDistance(transform, _base.transform) <= attackRange) {
+        _attackTargets = Utils.findGameObjectsWithinRange(transform.position, attackRange, "Base");
+        if (_attackTargets.Count != 0) {
             _attackTarget = _base;
             return;
         }
 
+
         // Check if there's an ally within attack range
-        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
-        if (allies.Length == 0) {
+        _attackTargets = Utils.findGameObjectsWithinRange(transform.position, attackRange, "Ally");
+        if (_attackTargets.Count == 0) {
             // no attack target can be found
             _attackTarget = null;
             return;
         } else {
-            // find the nearest ally that is within attack range and set it as target
-            float nearestDistance = float.PositiveInfinity;
-            foreach (GameObject ally in allies) {
-                float distance = Utils.horizontalDistance(transform, ally.transform);
-
-                // check if the ally is within attack range
-                if (distance > attackRange) {
-                    continue;
-                }
-
-                if (distance <= nearestDistance) {
-                    nearestDistance = distance;
-                    _attackTarget = ally;
-                }
-            }
-
-            if (float.IsPositiveInfinity(nearestDistance)) {
-                _attackTarget = null;
-                return;
-            }
+            // just pick the closest ally
+            _attackTarget = Utils.findNearestGameObject(transform.position, _attackTargets);
         }
+        
     }
 
     // Move toward the target until reached the attacking range
@@ -175,16 +166,6 @@ public class Enemy : Destroyable {
         }
 
         move();
-    }
-
-
-    // Check if the target is within attack range
-    public virtual bool isWithinAttackRange() {
-        if (_attackTarget == null) {
-            return false;
-        }
-
-        return Utils.isWithinRange(transform.position, _attackTarget.transform.position, attackRange);
     }
 
     public virtual void OnDrawGizmosSelected() {
