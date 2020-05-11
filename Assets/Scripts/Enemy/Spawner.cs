@@ -35,11 +35,6 @@ public class Spawner : Enemy
         _spawnCoolDown -= Time.deltaTime;
     }
 
-    // Spawner doesnt move nor attack
-    public override void attack(){}
-    public override void updateAttackTarget(){}
-    public override void move(){}
-    public override void updateMoveTarget(){}
 
     private void Spawn(GameObject enemy, Vector3 position, Quaternion rotation) {
         Instantiate(meleeEnemy, position, rotation);
