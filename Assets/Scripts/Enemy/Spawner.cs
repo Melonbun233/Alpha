@@ -34,7 +34,7 @@ public class Spawner : Enemy
 
         _spawnCoolDown -= Time.deltaTime;
     }
-
+ 
 
     private void Spawn(GameObject enemy, Vector3 position, Quaternion rotation) {
         Instantiate(meleeEnemy, position, rotation);
