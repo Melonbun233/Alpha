@@ -56114,7 +56114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xml: {fileID: 4900000, guid: 99654988c42ab074391f47cb5482f4ee, type: 3}
   gridsize: 10
-  width: 5
+  width: 6
   depth: 5
   seed: 0
   periodic: 0

@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.6051903, y: 17.585823, z: 5.585411}
-  m_Center: {x: 0, y: 8.782238, z: 0}
+  m_Size: {x: 2.9960463, y: 17.585823, z: 3.3506775}
+  m_Center: {x: 0.11638987, y: 8.782238, z: 0}
 --- !u!114 &-3466521012330729345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,10 +64,10 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 15, z: 0}
+  type: 0
   attackRange: 0
   attackRate: 0
   attackDamage: 0
-  speed: 0
 --- !u!1 &7345736063228700727
 GameObject:
   m_ObjectHideFlags: 0

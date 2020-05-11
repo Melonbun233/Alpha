@@ -65,7 +65,7 @@ MonoBehaviour:
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}
   type: 0
-  attackRange: 5
+  attackRange: 7
   attackRate: 1
   attackDamage: 10
   rotateSpeed: 40

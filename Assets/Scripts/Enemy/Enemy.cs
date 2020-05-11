@@ -21,10 +21,14 @@ public class Enemy : Destroyable {
 
     // nearest ally, then base
     protected GameObject _attackTarget;
-    private GameObject _lastMoveTarget;
+    protected GameObject _lastMoveTarget;
+
     protected GameObject _moveTarget;
+    protected Vector3 _destination;
 
     protected NavMeshAgent _navAgent;
+
+    protected bool _baseDestroyed = false;
 
 
     public override void Start()
@@ -115,9 +119,8 @@ public class Enemy : Destroyable {
 
     // Move toward the target until reached the attacking range
     public virtual void move() {
-        // if no target, stall
+        // game over
         if (_moveTarget == null) {
-            _navAgent.destination = transform.position;
             return;
         }
 
