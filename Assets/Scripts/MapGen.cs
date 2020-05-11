@@ -8,6 +8,20 @@ using Random = UnityEngine.Random;
 
 public class MapGen : MonoBehaviour
 {
+    public class MIDpoint
+    {
+        public int Gridnum;
+        public String leadsTo;
+
+        public MIDpoint(int gridnum, String leadsTo)
+        {
+            Gridnum = gridnum;
+            this.leadsTo = leadsTo;
+        }
+
+
+    }
+
     //grid DataStructure
     public class grid
     {
@@ -18,7 +32,7 @@ public class MapGen : MonoBehaviour
         public grid left;
         public grid right;
         public GameObject tile;
-        public String exit;
+        public int exit;
         public String tileType;
 
         public grid(Vector3 vector, int index) 
@@ -31,7 +45,7 @@ public class MapGen : MonoBehaviour
             left = null;
             right = null;
             tile = null;
-            exit = null;
+            exit = 0;
         }
 
         public grid(GameObject Grid, int index)
@@ -43,7 +57,7 @@ public class MapGen : MonoBehaviour
             left = null;
             right = null;
             tile = null;
-            exit = null;
+            exit = 0;
         }
 
         public static String checkTileType(grid Grid)
@@ -63,7 +77,7 @@ public class MapGen : MonoBehaviour
         {
             if (Grid.tile.name.Contains("Base_tile_template01") || Grid.tile.name.Contains("EnemySpawn_tile_template01") || Grid.tile.name.Contains("midtile_template01"))
             {
-                if (Grid.tile.transform.eulerAngles.y == 90f || Grid.tile.transform.eulerAngles.y == -90f )
+                if (Grid.exit == 1 || Grid.exit == 3)
                 {
                     return "LR";
                 }
@@ -73,29 +87,29 @@ public class MapGen : MonoBehaviour
                 }
             }
 
-            if (Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("EnemySpawn_tile_template02") || Grid.tile.name.Contains("midtile_template02"))
+            if (Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("EnemySpawn_tile_template02") || Grid.tile.name.Contains("midtile_template02") || Grid.tile.name.Contains("sidetile_template02"))
             {
                 return "LRUD";
             }
 
             if (Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("midtile_template03"))
             {
-                if (Grid.tile.transform.eulerAngles.y == 0f)
+                if (Grid.exit == 0)
                 {
                     return "LUD";
                 }
 
-                if (Grid.tile.transform.eulerAngles.y == 90f)
+                if (Grid.exit == 1)
                 {
                     return "LRU";
                 }
 
-                if (Grid.tile.transform.eulerAngles.y == -90f)
+                if (Grid.exit == 3)
                 {
                     return "LRD";
                 }
 
-                if(Grid.tile.transform.eulerAngles.y == 180)
+                if (Grid.exit == 2)
                 {
                     return "RUD";
                 }
@@ -103,22 +117,22 @@ public class MapGen : MonoBehaviour
 
             if (Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template04"))
             {
-                if(Grid.tile.transform.eulerAngles.y == 0f)
+                if(Grid.exit == 0)
                 {
                     return "LU";
                 }
 
-                if(Grid.tile.transform.eulerAngles.y == 90f)
+                if(Grid.exit == 1)
                 {
                     return "RU";
                 }
 
-                if(Grid.tile.transform.eulerAngles.y == -90f)
+                if(Grid.exit == 3)
                 {
                     return "LD";
                 }
 
-                if(Grid.tile.transform.eulerAngles.y == 180f)
+                if(Grid.exit == 2)
                 {
                     return "RD";
                 }
@@ -126,33 +140,33 @@ public class MapGen : MonoBehaviour
 
             if(Grid.tile.name.Contains("Base_tile_template05") || Grid.tile.name.Contains("sidetile_template01"))
             {
-                if(Grid.tile.transform.eulerAngles.y == 0f)
+                if(Grid.exit == 0)
                 {
                     return "LUD";
                 }
 
-                if (Grid.tile.transform.eulerAngles.y == 90f)
+                if (Grid.exit == 1)
                 {
                     return "LRU";
                 }
 
-                if (Grid.tile.transform.eulerAngles.y == -90f)
+                if (Grid.exit == 3)
                 {
                     return "LRD";
                 }
 
-                if (Grid.tile.transform.eulerAngles.y == 180f)
+                if (Grid.exit == 2)
                 {
                     return "RUD";
                 }
             }
 
-            if (Grid.tile.name.Contains("Base_Tile_template06") || Grid.tile.name.Contains("transiTile_template01"))
+            if (Grid.tile.name.Contains("Base_tile_template06") || Grid.tile.name.Contains("transiTile_template01"))
             {
                 return "LRUD";
             }
 
-            return "This has problem";
+            return "LRUD";
         }
 
         //Instantiate maptiles
@@ -186,9 +200,38 @@ public class MapGen : MonoBehaviour
         Quaternion ranRotation()
         {
             Quaternion temp = new Quaternion(0, 0, 0, 0);
-            int temp2 = Random.Range(0, 4);
-            temp = Quaternion.Euler(0, 90 * temp2, 0);
+            this.exit = Random.Range(0, 4);
+            temp = Quaternion.Euler(0, 90f * this.exit, 0);
             return temp;
+        }
+
+        public void makeConnect(grid toConnect, String Exit)
+        {
+            String connectivity = grid.checkExit(toConnect);
+            int i = 0;
+            while (!connectivity.Contains(grid.connectOrient(Exit)))
+            {
+                if (i > 15) break;
+                toConnect.tile.transform.rotation = ranRotation();
+                connectivity = grid.checkExit(toConnect);
+                i++;
+            }
+        }
+
+        public static String connectOrient(String exit)
+        {
+            switch (exit)
+            {
+                case "U":
+                    return "D";
+                case "D":
+                    return "U";
+                case "L":
+                    return "R";
+                case "R":
+                    return "L";
+            }
+            return null;
         }
 
         public grid turnSwitch(String turn)
@@ -208,17 +251,10 @@ public class MapGen : MonoBehaviour
         }
 
 
-        //check if contains a index
-        public static bool Contains(int index, List<grid> grids)
+        public static List<grid> ReturnUnreached(List<grid> grids, List<int> index)
         {
-            bool temp = false;
-            for(int i = 0; i < grids.Count; i++)
-            {
-                if (grids[i].index == index) temp = true;
-            }
-            return temp;
+            return null;
         }
-
 
     }
 
@@ -238,40 +274,22 @@ public class MapGen : MonoBehaviour
     private Transform spawnHolder;
     private Transform baseHolder;
 
-    private List<Vector3> gridPositions = new List<Vector3>();
+    private List<int> reached;
+    private List<MIDpoint> midpoints;
+    private List<grid> unreached;
 
     //Mark base location for setting up map reasonablly.
     public int baselocMark;
     public int mapLength;
 
-    private Vector3 mapCenter;
     public int mapCenterMark;
 
     public List<Vector3> spawnVectors = new List<Vector3>();
     public List<int> spawnlocMark = new List<int>();
 
+    private bool hasRun = false;
 
 
-    //get center Vector3;
-    public Vector3 getCenter() {
-        return mapCenter;
-    }
-
-
-    void InitialiseList()
-    {
-        gridPositions.Clear();
-        int row = rows * 10;
-        int colum = columns * 10;
-
-        for (int c = 0; c < colum; c=c+10)
-        {
-            for (int r = 0; r < row; r=r+10)
-            {
-                gridPositions.Add(new Vector3(c, 0f, r));
-            }
-        }
-    }
 
     //Create Grid System with 4 direction's pointer;
     List<grid> SetUpGridSystem()
@@ -290,7 +308,6 @@ public class MapGen : MonoBehaviour
                 if (r!= 0)
                 {
                     Grid[i].left = Grid[i-1];
-                    
                 }
                 i++;
                 }
@@ -333,9 +350,10 @@ public class MapGen : MonoBehaviour
     //
     int markBase()
     {
-        int temp = Random.Range(0, (columns - 1) * (rows - 1));
-        baselocMark = temp;
-        return temp;
+        int row = Random.Range(1 , rows - 1);
+        int colm = Random.Range(1, columns - 1);
+        baselocMark = colm * rows + row;
+        return baselocMark;
     }
 
     //Setup the base tiles
@@ -391,14 +409,58 @@ public class MapGen : MonoBehaviour
         }
     }
 
-    String ranTurn()
+    String ranTurn(grid pointer)
     {
-        String[] temp = { "U", "D", "L", "R" };
-        return temp[Random.Range(0,4)];
+        List<String> temp = new List<String>();
+
+        if (grid.checkExit(pointer).Contains("U"))
+        {
+            temp.Add("U");
+        }
+        if (grid.checkExit(pointer).Contains("D"))
+        {
+            temp.Add("D");
+        }
+        if (grid.checkExit(pointer).Contains("L"))
+        {
+            temp.Add("L");
+        }
+        if (grid.checkExit(pointer).Contains("R"))
+        {
+            temp.Add("R");
+        }
+
+
+        if (!checkInner(pointer.up))
+        {
+            temp.Remove("U");
+        }
+        if (!checkInner(pointer.down))
+        {
+            temp.Remove("D");
+        }
+        if (!checkInner(pointer.left))
+        {
+            temp.Remove("L");
+        }
+        if (!checkInner(pointer.right))
+        {
+            temp.Remove("R");
+        }
+
+        if (temp.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return temp[Random.Range(0, temp.Count)];
+        }
     }
 
-    bool checkCorner(grid grid)
+    bool checkInner(grid grid)
     {
+        
         if(grid.index >= rows && grid.index < (mapLength - rows) && ((grid.index + 1 ) % rows) != 0 && (grid.index + 1) % rows != 1)
         {
             return true;
@@ -409,29 +471,63 @@ public class MapGen : MonoBehaviour
         }
     }
 
-    //build fillout tiles
-    void setupMap(List<grid> grids)
+    List<String> midPointMarker(grid grid, String turn) 
     {
-        mapHolder = new GameObject("MapTile").transform;
-        grid pointer = grids[baselocMark];
+        String exit = grid.checkExit(grid);
+        int temp = exit.IndexOf(turn);
+        exit = exit.Remove(temp);
+        List<String> Exits = new List<String>();
+
+        for (int i = 0; i < exit.Length; i++)
+        {
+            Exits.Add(exit[i].ToString()) ;
+        }
+
+        return Exits;
+    }
+
+    //build fillout tiles
+    void setupMap(int startGrid, List<grid> grids, Transform mapHolder)
+    {
+        grid pointer = grids[startGrid];
+        if(pointer.tile == null)
+        {
+            pointer.setMapTile(Instantiate(midTiles[4]), mapHolder);
+        }
+
+        print(pointer.Grid.name);
         int i = 0;
 
         String Exit = grid.checkExit(pointer);
         String Type = grid.checkTileType(pointer);
 
-        while (checkCorner(pointer))
+        while (i < columns*rows*10)
         {
-            if (i >= 500) { break; }
-
             Exit = grid.checkExit(pointer);
             Type = grid.checkTileType(pointer);
-            String turn = ranTurn();
+            String turn = ranTurn(pointer);
+
             if(Type == "mid")
             {
-                if (Exit.Contains(turn))
+                if (Exit.Contains(turn) && !this.reached.Contains(pointer.turnSwitch(turn).index))
                 {
                     pointer.turnSwitch(turn).setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
+                    this.reached.Add(pointer.index);
+                    List<String> midPointer = midPointMarker(pointer, turn);
+
+                    if(hasRun == false) 
+                    {
+                        for (int x = 0; x < midPointer.Count; x++)
+                        {
+                            if (checkInner(pointer.turnSwitch(midPointer[x])))
+                            {
+                                midpoints.Add(new MIDpoint(pointer.turnSwitch(midPointer[x]).index, turn));
+                            }
+                        }
+                    }
+
                     pointer = pointer.turnSwitch(turn);
+                    pointer.makeConnect(pointer, turn);
                     i++;
                 }
                 else
@@ -442,10 +538,12 @@ public class MapGen : MonoBehaviour
             }
             else
             {
-                if (Exit.Contains(turn))
+                if (Exit.Contains(turn) && !this.reached.Contains(pointer.turnSwitch(turn).index))
                 {
                     pointer.turnSwitch(turn).setMapTile(Instantiate(sideTiles[Random.Range(0, sideTiles.Length)]), mapHolder);
+                    this.reached.Add(pointer.index);
                     pointer = pointer.turnSwitch(turn);
+                    pointer.makeConnect(pointer, turn);
                     i++;
                 }
                 else
@@ -455,59 +553,31 @@ public class MapGen : MonoBehaviour
                 }
             }
         }
-
-
-        /*
-        while (pointer.up != null)
-        {
-
-            if (spawnlocMark.Contains(pointer.up.index))
-            {
-                pointer = pointer.up.up;
-                continue;
-            }
-
-            String Exit = grid.checkExit(pointer);
-            String Type = grid.checkTileType(pointer);
-
-            if (Exit.Contains("U"))
-            {
-                if (Type.Equals("mid"))
-                {
-                    pointer.up.setMapTile(Instantiate(midTiles[Random.Range(0, midTiles.Length)]), mapHolder);
-                    while (!grid.checkExit(pointer.up).Contains("D"))
-                    {
-                        pointer.up.tile.transform.rotation = ranRotation();
-                    }
-                    pointer = pointer.up;
-                }
-                else
-                {
-                    pointer.up.setMapTile(Instantiate(sideTiles[Random.Range(0, sideTiles.Length)]), mapHolder);
-                    print(grid.checkExit(pointer.up));
-                    while (!grid.checkExit(pointer.up).Contains("D"))
-                    {
-                        pointer.up.tile.transform.rotation = ranRotation();
-                    }
-                    pointer = pointer.up;
-                }
-            }
-            else
-            {
-                break;
-            }
-        */
     }
+
 
     void Start()
     {
+        mapHolder = new GameObject("MapTile").transform;
         mapLength = columns * rows;
         mapCenterMark = (int)(Math.Floor((double)columns/2d) * (double)rows + (double)rows/2d);
-
+        reached = new List<int>();
+        midpoints = new List<MIDpoint>();
         List<grid> grids = SetUpGridSystem();
         baseSetup(grids);
         //setupSpawn(grids);
-        setupMap(grids);
+        setupMap(baselocMark, grids, mapHolder);
+        print("iteration: 0");
+        hasRun = true;
+
+        for(int x = 0; x < midpoints.Count; x++)
+        {
+            setupMap(midpoints[x].Gridnum, grids, mapHolder);
+            print("iteration: " + (1 + x));
+        }
+        
+        
+
     }
 
 

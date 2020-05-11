@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8527e91a7d33b404e801f507da569e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 3
-  columns: 3
+  rows: 10
+  columns: 10
   Base:
   - {fileID: 2864209651357198787, guid: 56dc714da144be940a51e43a38323f01, type: 3}
   - {fileID: 6278239301309160967, guid: 94dda3051505de643be5f4d77ad7b28e, type: 3}
@@ -464,9 +464,11 @@ MonoBehaviour:
   - {fileID: 6471464856302806339, guid: 1c429e16fba2d1745add3cfa2233f70a, type: 3}
   - {fileID: 2822786162790862785, guid: 1f9bf78c5e386c845800e6e88a0d57e8, type: 3}
   - {fileID: 1278547258915261106, guid: 3884986518ca41f44a8f3e7f93eb9d03, type: 3}
+  - {fileID: 4701464549568187523, guid: 4ae73b031ffa6e4479a36fb9e865c725, type: 3}
   sideTiles:
   - {fileID: 721637017998917927, guid: fb01a6cc19c4bcd42a6b2e80b9a4c6a6, type: 3}
   - {fileID: 7942728465761472498, guid: bda8608d7e542c44d9a990ca0cc2d4c8, type: 3}
+  - {fileID: 4701464549568187523, guid: 4ae73b031ffa6e4479a36fb9e865c725, type: 3}
   enemySpawn:
   - {fileID: 8497662699508211760, guid: 2c38370fbc19f8041b1823bc26d47940, type: 3}
   - {fileID: 8557833033864292617, guid: 8b569f1c061e6b24eae3fa4daf4a8171, type: 3}
