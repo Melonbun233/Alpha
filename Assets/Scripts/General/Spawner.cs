@@ -37,12 +37,12 @@ public class Spawner : Destroyable
     private bool _isSpawning = false;
 
 
-    public override void Start()
+    protected override void Start()
     {
         
     }
 
-    public override void Update()
+    protected override void Update()
     {
         // Check if there's a base
         if (GameObject.FindGameObjectWithTag("Base") == null) {

@@ -18,7 +18,7 @@ public class Ranger : Ally
     private LineRenderer _attackIndicator;
     private GameObject _core;
 
-    public override void Start() {
+    protected override void Start() {
         base.Start();
         
         _initialRotateSpeed = rotateSpeed;
@@ -31,7 +31,7 @@ public class Ranger : Ally
         _initialCoreColor = _core.GetComponent<Renderer>().material.color;
     }
 
-    public override void Update() {
+    protected override void Update() {
         base.Update();
 
         rotate();
@@ -80,7 +80,5 @@ public class Ranger : Ally
                 _attackTarget.transform.TransformPoint(_attackTarget.GetComponent<Destroyable>().center));
         }
     }
-
-
 
 }

@@ -1,18 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 // Base class for all enemies
-public class Enemy : Destroyable {
+public class Enemy : Character {
 
-    [Header("Attack Settings")]
-    public float attackRange;
-
-    public float attackRate;
-    protected float _attackCoolDown;
-
-    public float attackDamage;
 
     [Header("Path Finding Settings")]
     // Used to find allies to attack
@@ -22,63 +15,11 @@ public class Enemy : Destroyable {
     // public int priority;
 
 
-    // nearest ally, then base
-    protected GameObject _attackTarget;
-    // used to store possible targets (within attack range)
-    protected List<GameObject> _attackTargets;
-
-    protected GameObject _lastMoveTarget;
-
-    protected GameObject _moveTarget;
-    protected Vector3 _destination;
-
-    protected NavMeshAgent _navAgent;
-
-    protected bool _baseDestroyed = false;
-
-    
-
-
-    public override void Start()
-    {
-        base.Start();
-
-        _navAgent = GetComponent<NavMeshAgent>();
-
-        InvokeRepeating("updateAttackTarget", 0f, 0.5f);
-        InvokeRepeating("updateMoveTarget", 0f, 0.5f);
-    }
-
-    public override void Update()
-    {
-        base.Update();
-        preAttack();
-    }
-
-    // Check if the enemy can perform an attack on the attack target
-    // If possible, perform the attack action
-    public virtual void preAttack() {
-
-        if (_attackCoolDown <= 0 && _attackTarget != null) {
-            attack();
-        }
-
-        _attackCoolDown -= Time.deltaTime;
-    }
-    
-    public virtual void attack() {
-        if (_attackTarget == null) {
-            return;
-        }
-        _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
-        _attackCoolDown = 1.0f/attackRate;
-    }
-
     // Update the attack target of this enemy
     // Default alg is to check if base is within attack range
     // If not, check whether any ally is within range
     // If not, set the attack target as null
-    public virtual void updateAttackTarget() {
+    public override void updateAttackTarget() {
         
         GameObject _base = GameObject.FindGameObjectWithTag("Base");
         // Check if base is destroyed
@@ -109,7 +50,7 @@ public class Enemy : Destroyable {
     }
 
     // Move toward the target until reached the attacking range
-    public virtual void move() {
+    public override void move() {
         // game over
         if (_moveTarget == null) {
             return;
@@ -124,14 +65,14 @@ public class Enemy : Destroyable {
         
         Vector3 destination = oppositeDirection.GetPoint(attackRange);
 
-        _navAgent.destination = destination;
+        updateNavAgentDestination(destination);
     }
 
     // Temporarily find blockers within vision range as move target
     // If no target can be found, search for the base
-    // If base is destroyed, enemy will stall
+    // If base is destroyed, enemy will continue move to the last destination
     // Later we might replace the alg to a priority queue
-    public virtual void updateMoveTarget() {
+    public override void updateMoveTarget() {
         GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
 
         if (allies.Length != 0) {
@@ -150,26 +91,27 @@ public class Enemy : Destroyable {
             }
 
             if (!float.IsPositiveInfinity(cloestDistance)) {
-                updateNavAgent();
+                // updateNavAgent();
                 return;
             }
         }
 
         // reach here only because all allies are rangers or out of vision
         _moveTarget = GameObject.FindGameObjectWithTag("Base");
-        updateNavAgent();
+        // updateNavAgent();
     }
 
-    private void updateNavAgent() {
-        if (_moveTarget != _lastMoveTarget) {
-            _lastMoveTarget = _moveTarget;
-        }
+    // private void updateNavAgent() {
+    //     if (_moveTarget != _lastMoveTarget) {
+    //         _lastMoveTarget = _moveTarget;
+    //     }
 
-        move();
-    }
+    //     move();
+    // }
 
-    public virtual void OnDrawGizmosSelected() {
-        Utils.drawRange(transform, attackRange, Color.red);
+    // Draw the vision range of the enemy
+    protected override void OnDrawGizmosSelected() {
+        base.OnDrawGizmosSelected();
         Utils.drawRange(transform, visionRange, Color.green);
     }
 
