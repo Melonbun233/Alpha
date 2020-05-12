@@ -16,14 +16,14 @@ public class Destroyable : MonoBehaviour
     // used to be pointed by attack indicator
     public Vector3 center;
 
-    public virtual void Start() {
+    protected virtual void Start() {
         if (maxHealth < health) {
             health = maxHealth;
         }
     }
 
     // Check if dead. Kill self if dead.
-    public virtual void Update() {
+    protected virtual void Update() {
         if (isDead()) {
             kill();
         }
