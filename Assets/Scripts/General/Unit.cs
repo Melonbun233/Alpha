@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Character : Destroyable
+public abstract class Unit : Destroyable
 {
     [Header("Attack Settings")]
     public float attackRange;
@@ -14,7 +14,7 @@ public abstract class Character : Destroyable
     public float attackDamage;
 
 
-    // Attack target this character will try to attack
+    // Attack target this unit will try to attack
     protected GameObject _attackTarget;
     // used to store possible targets (within attack range)
     protected List<GameObject> _attackTargets;
@@ -45,7 +45,7 @@ public abstract class Character : Destroyable
         
     }
 
-    // Check if this character has at least one attack target and attack is cooled down
+    // Check if this unit has at least one attack target and attack is cooled down
     // If all true, perform attack on the attack target
     public virtual void preAttack() {
         if (_attackCoolDown <= 0 && _attackTarget != null) {
@@ -56,7 +56,7 @@ public abstract class Character : Destroyable
     }
 
     // Perform the attack on the attack target
-    // This method assumes that the character has at least one attack target
+    // This method assumes that the unit has at least one attack target
     // and the attack is cooled down
     public virtual void attack() {
         if (_attackTarget == null) {
@@ -66,13 +66,13 @@ public abstract class Character : Destroyable
         _attackCoolDown = 1.0f/attackRate;
     }
 
-    // All character class should implement this method
-    // This method update the attack target of this character every 0.5 second
+    // All unit class should implement this method
+    // This method update the attack target of this unit every 0.5 second
     public abstract void updateAttackTarget();
 
     // Try to move by setting the destination of navAgent as the move target
     // This method is called every frame in Update() function
-    // If no Unity NavMeshAgent is attached to the character, no movement will be done
+    // If no Unity NavMeshAgent is attached to the unit, no movement will be done
     public virtual void move() {
         if (_moveTarget == null || _navAgent == null) {
             return;
@@ -83,10 +83,10 @@ public abstract class Character : Destroyable
 
 
     // All chracter classes should implement this method
-    // This method update the move target of the character every 0.5 second
+    // This method update the move target of the unit every 0.5 second
     public abstract void updateMoveTarget();
 
-    // Draw attack range of this character
+    // Draw attack range of this unit
     protected virtual void OnDrawGizmosSelected() {
          Utils.drawRange(transform, attackRange, Color.red);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 // Base class for all enemies
-public class Enemy : Character {
+public class Enemy : Unit {
 
 
     [Header("Path Finding Settings")]
@@ -91,23 +91,14 @@ public class Enemy : Character {
             }
 
             if (!float.IsPositiveInfinity(cloestDistance)) {
-                // updateNavAgent();
                 return;
             }
         }
 
         // reach here only because all allies are rangers or out of vision
         _moveTarget = GameObject.FindGameObjectWithTag("Base");
-        // updateNavAgent();
     }
 
-    // private void updateNavAgent() {
-    //     if (_moveTarget != _lastMoveTarget) {
-    //         _lastMoveTarget = _moveTarget;
-    //     }
-
-    //     move();
-    // }
 
     // Draw the vision range of the enemy
     protected override void OnDrawGizmosSelected() {

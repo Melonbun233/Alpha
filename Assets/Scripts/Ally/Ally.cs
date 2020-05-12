@@ -8,7 +8,7 @@ public enum AllyType {
 }
 
 // Base class for all allies
-public class Ally : Character
+public class Ally : Unit
 {
     [Header("Ally Type")]
     public AllyType type;
