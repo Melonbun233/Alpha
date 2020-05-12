@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -8875330397638809502
     second: background
+  - first:
+      213: 8741095769596249575
+    second: flat_bars_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -150,9 +153,9 @@ TextureImporter:
         x: 108
         y: 679
         width: 1704
-        height: 114
+        height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,9 +174,9 @@ TextureImporter:
         x: 108
         y: 257
         width: 1704
-        height: 114
+        height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +197,7 @@ TextureImporter:
         width: 1824
         height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,6 +205,27 @@ TextureImporter:
       bones: []
       spriteID: 2682380e60e74d480800000000000000
       internalID: -8875330397638809502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flat_bars_3
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 432
+        width: 160
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e544764a4c9e4970800000000000000
+      internalID: 8741095769596249575
       vertices: []
       indices: 
       edges: []
