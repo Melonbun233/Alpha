@@ -171,6 +171,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2105381977008142757}
     m_Modifications:
+    - target: {fileID: 585312978562031353, guid: 92dbb1f84d033e040ad1195f5623c0e0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.081
+      objectReference: {fileID: 0}
     - target: {fileID: 4621120431241996854, guid: 92dbb1f84d033e040ad1195f5623c0e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -285,6 +290,11 @@ PrefabInstance:
         type: 3}
       propertyPath: manaBarEnabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308873958388667063, guid: 92dbb1f84d033e040ad1195f5623c0e0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.055000067
       objectReference: {fileID: 0}
     - target: {fileID: 5849640316491565557, guid: 92dbb1f84d033e040ad1195f5623c0e0,
         type: 3}
