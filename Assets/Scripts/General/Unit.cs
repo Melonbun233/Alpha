@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public abstract class Unit : Destroyable
 {
+    [Header("Mana Settings")]
+    public int mana;
+    public int maxMana;
     [Header("Attack Settings")]
     public float attackRange;
 
