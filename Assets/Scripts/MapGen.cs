@@ -171,6 +171,8 @@ public class MapGen : MonoBehaviour
 
         //Instantiate maptiles
         public GameObject setMapTile(GameObject tile, Transform holder) {
+            if (this.tile != null) return this.tile;
+
             this.tile = tile;
             this.tile.transform.position = Grid.transform.position;
             this.tile.transform.rotation = ranRotation();
@@ -211,7 +213,6 @@ public class MapGen : MonoBehaviour
             int i = 0;
             while (!connectivity.Contains(grid.connectOrient(Exit)))
             {
-                if (i > 15) break;
                 toConnect.tile.transform.rotation = ranRotation();
                 connectivity = grid.checkExit(toConnect);
                 i++;
@@ -484,7 +485,7 @@ public class MapGen : MonoBehaviour
         return Exits;
     }
 
-    //build fillout tiles
+    //build map tiles
     void setupMap(int startGrid, List<grid> grids, Transform mapHolder)
     {
         grid pointer = grids[startGrid];
@@ -492,7 +493,6 @@ public class MapGen : MonoBehaviour
         {
             pointer.setMapTile(Instantiate(midTiles[4]), mapHolder);
             this.reached.Add(pointer.index);
-            print("grid " + pointer.index + " set");
         }
 
         int i = 0;
@@ -526,7 +526,6 @@ public class MapGen : MonoBehaviour
 
                     pointer = pointer.turnSwitch(turn);
                     pointer.makeConnect(pointer, turn);
-                    print("grid " + pointer.index + " set");
                     i++;
                 }
                 else
@@ -543,7 +542,6 @@ public class MapGen : MonoBehaviour
                     this.reached.Add(pointer.index);
                     pointer = pointer.turnSwitch(turn);
                     pointer.makeConnect(pointer, turn);
-                    print("grid " + pointer.index + " set");
                     i++;
                 }
                 else
@@ -560,7 +558,7 @@ public class MapGen : MonoBehaviour
         List<int> unreached = new List<int>();
         for (int i = 0; i < grids.Count; i++)
         {
-            if (grids[i].tile == null && checkInner(grids[i]))
+            if (!reached.Contains(grids[i].index) && checkInner(grids[i]))
             {
                 unreached.Add(grids[i].index);
             }
@@ -581,7 +579,7 @@ public class MapGen : MonoBehaviour
         {
             if (grids[unreached[i]].up.tile != null || grids[unreached[i]].down.tile != null || grids[unreached[i]].left.tile != null || grids[unreached[i]].right.tile != null)
             {
-                grids[unreached[i]].setBaseTile(Instantiate(fillOuts[Random.Range(0, fillOuts.Length)]), mapHolder);
+                grids[unreached[i]].setMapTile(Instantiate(fillOuts[Random.Range(0, fillOuts.Length)]), mapHolder);
                 reached.Add(unreached[i]);
             }
         }
@@ -614,14 +612,14 @@ public class MapGen : MonoBehaviour
         baseSetup(grids);
         //setupSpawn(grids);
         setupMap(baselocMark, grids, mapHolder);
-        hasRun = true;
 
-        for(int x = 0; x < midpoints.Count; x++)
+        for(int x = 0; x < iterations; x++)
         {
+            if (x >= midpoints.Count) break;
             setupMap(midpoints[x].Gridnum, grids, mapHolder);
         }
 
-        moreIterations(grids, mapHolder, iterations);
+        //moreIterations(grids, mapHolder, iterations);
         fillOut(grids, mapHolder);
 
     }
