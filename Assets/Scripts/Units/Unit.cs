@@ -11,7 +11,7 @@ public abstract class Unit : Destroyable
 
     // Actual counter for the attack
     protected float _attackCoolDown;
-    public float attackDamage;
+    public DamageData attackDamage;
     public int attackNumber;
     public int attackAoeRange;
 
@@ -64,7 +64,7 @@ public abstract class Unit : Destroyable
         if (_attackTarget == null) {
             return;
         }
-        _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
+        _attackTarget.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
         _attackCoolDown = attackCoolDown;
     }
 

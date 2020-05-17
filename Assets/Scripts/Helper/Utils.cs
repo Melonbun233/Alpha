@@ -71,4 +71,10 @@ public static class Utils
         return line;
     }
 
+    public static int mult(int origin, float percentMlt, int flatMlt) {
+        if (origin + flatMlt <= 0) {
+            return origin + flatMlt;
+        }
+        return (int)((float)(origin + flatMlt) * (1f + percentMlt));
+    }
 }
