@@ -65,16 +65,16 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}
-  mana: 0
-  maxMana: 0
   attackRange: 7
-  attackRate: 1
-  attackDamage: 10
+  attackCoolDown: 1
+  attackDamage: 20
+  attackNumber: 0
+  attackAoeRange: 0
   type: 0
   rotateSpeed: 40
   attackRotateSpeed: 200
   rotateSpeedUpPeriod: 0.5
-  attackCoreColor: {r: 1, g: 0.6933962, b: 0.6933962, a: 0}
+  attackCoreColor: {r: 0.9433962, g: 0.3693485, b: 0.701787, a: 0}
 --- !u!120 &3413228401717227787
 LineRenderer:
   m_ObjectHideFlags: 0
