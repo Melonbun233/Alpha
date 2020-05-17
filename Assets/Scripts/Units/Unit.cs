@@ -5,16 +5,15 @@ using UnityEngine.AI;
 
 public abstract class Unit : Destroyable
 {
-    [Header("Mana Settings")]
-    public int mana;
-    public int maxMana;
     [Header("Attack Settings")]
     public float attackRange;
+    public float attackCoolDown;
 
-    public float attackRate;
+    // Actual counter for the attack
     protected float _attackCoolDown;
-
     public float attackDamage;
+    public int attackNumber;
+    public int attackAoeRange;
 
 
     // Attack target this unit will try to attack
@@ -66,7 +65,7 @@ public abstract class Unit : Destroyable
             return;
         }
         _attackTarget.GetComponent<Destroyable>().receiveDamage((int)attackDamage, gameObject);
-        _attackCoolDown = 1.0f/attackRate;
+        _attackCoolDown = attackCoolDown;
     }
 
     // All unit class should implement this method

@@ -20,6 +20,8 @@ public class Ranger : Ally
 
     protected override void Start() {
         base.Start();
+
+        type = AllyType.Ranger;
         
         _initialRotateSpeed = rotateSpeed;
 

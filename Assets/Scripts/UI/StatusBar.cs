@@ -6,12 +6,9 @@ using UnityEngine.UI;
 public class StatusBar : MonoBehaviour
 {
     public bool healthBarEnabled = true;
-    public bool manaBarEnabled = true;
 
     public GameObject healthBar;
     public GameObject innerHealthBar;
-    public GameObject manaBar;
-    public GameObject innerManaBar;
 
     public Destroyable destroyable;
 
@@ -20,10 +17,6 @@ public class StatusBar : MonoBehaviour
     {
         if (!healthBarEnabled) {
             disableHealthBar();
-        }
-
-        if (!manaBarEnabled) {
-            disableManaBar();
         }
     }
 
@@ -36,10 +29,6 @@ public class StatusBar : MonoBehaviour
 
         if (healthBarEnabled) {
             updateHealthBar();
-        }
-
-        if (manaBarEnabled) {
-            updateManaBar();
         }
 
     }
@@ -55,21 +44,6 @@ public class StatusBar : MonoBehaviour
         }
     }
 
-    private void updateManaBar() {
-        // only unit has mana
-        if (!(destroyable is Unit)) {
-            return;
-        }
-
-        int curMana = ((Unit)destroyable).mana;
-        int maxMana = ((Unit)destroyable).mana;
-
-        if (maxMana == 0) {
-            innerManaBar.GetComponent<Image>().fillAmount = 0f;
-        } else {
-            innerManaBar.GetComponent<Image>().fillAmount = (float)curMana / (float)maxMana;
-        }
-    }
 
     public void enableHealthBar() {
         healthBarEnabled = true;
@@ -79,15 +53,5 @@ public class StatusBar : MonoBehaviour
     public void disableHealthBar() {
         healthBarEnabled = false;
         healthBar.SetActive(false);
-    }
-
-    public void enableManaBar() {
-        manaBarEnabled = true;
-        manaBar.SetActive(true);
-    }
-
-    public void disableManaBar() {
-        manaBarEnabled = false;
-        manaBar.SetActive(false);
     }
 }
