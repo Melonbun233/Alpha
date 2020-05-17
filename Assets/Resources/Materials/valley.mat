@@ -189,7 +189,11 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
+<<<<<<< HEAD
     - _Metallic: 0.502
+=======
+    - _Metallic: 0.3
+>>>>>>> d1a43020ab0840e101fbd4207c0b30c9f4baf8ac
     - _NormalMapSpace: 0
     - _NormalScale: 1
     - _PPDLodThreshold: 5

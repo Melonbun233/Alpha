@@ -13,9 +13,41 @@ public static class Utils
         return horizontalDistance(t1.position, t2.position);
     }
 
-    public static void drawAttackRange(Transform trans, float attackRange) {
-        Gizmos.color = new Color(1, 0, 0, 1);
+    public static bool isWithinRange(Vector3 origin, Vector3 targetPosition, float range) {
+        return horizontalDistance(origin, targetPosition) <= range;
+    }
+
+    public static void drawRange(Transform trans, float attackRange, Color color) {
+        Gizmos.color = color;
         Gizmos.DrawWireSphere(trans.position, attackRange);
+    }
+
+    public static List<GameObject> findGameObjectsWithinRange(Vector3 position, float range, string tag) {
+        Collider[] colliders = Physics.OverlapSphere(position, range);
+        List<GameObject> objects = new List<GameObject>();
+
+        foreach(Collider collider in colliders) {
+            if (collider.gameObject.tag == tag) {
+                objects.Add(collider.gameObject);
+            }   
+        }
+
+        return objects;
+    }
+
+    public static GameObject findNearestGameObject(Vector3 position, List<GameObject> targets) {
+        float nearestDistance = float.PositiveInfinity;
+        GameObject nearestTarget = null;
+
+        foreach (GameObject target in targets) {
+            float distance = Vector3.Distance(position, target.transform.position);
+            if (distance < nearestDistance) {
+                nearestTarget = target;
+                nearestDistance = distance;
+            }
+        }
+
+        return nearestTarget;
     }
 
     // Create a line renderer to draw a line between two points

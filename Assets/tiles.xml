@@ -1,7 +1,0 @@
-<set>
-  <tiles>
-<tile name="Assets/Resources/Prefabs/map_tiles/Base_tile_template01" symmetry="X" weight="1.0"/>
-<tile name="Assets/Resources/Prefabs/map_tiles/midtile_template04" symmetry="X" weight="1.0"/>
-	</tiles>
-<neighbors>	</neighbors>
-</set>
