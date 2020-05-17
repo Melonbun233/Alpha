@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7927832156493680333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7334e32211d714fb8196f1313e58b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6965c2412868ad34e8960ab02d87332e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
@@ -72,9 +72,9 @@ MonoBehaviour:
   attackDamage: 10
   type: 0
   rotateSpeed: 40
-  attackRotateSpeed: 300
+  attackRotateSpeed: 200
   rotateSpeedUpPeriod: 0.5
-  attackCoreColor: {r: 0.46431112, g: 0.49821395, b: 0.8867924, a: 0}
+  attackCoreColor: {r: 1, g: 0.6933962, b: 0.6933962, a: 0}
 --- !u!120 &3413228401717227787
 LineRenderer:
   m_ObjectHideFlags: 0

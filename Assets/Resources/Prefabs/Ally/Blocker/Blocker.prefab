@@ -139,11 +139,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7878802123115981918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40fb30ad7c1b1c246a7120b74861a4d2, type: 3}
+  m_Script: {fileID: 11500000, guid: c60610a51f4a63644a4ef14c4edc7546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  maxHealth: 50
+  health: 100
+  maxHealth: 100
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 0.5, z: 0}
