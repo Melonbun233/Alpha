@@ -195,7 +195,7 @@ public class Map_Generator : MonoBehaviour
         List<int> temp = markSpawn(spawnNumber, grids);
         foreach(int x in temp)
         {
-            GameObject spawns = Instantiate(enemySpawn[1], spawnHolder);
+            GameObject spawns = Instantiate(enemySpawn[0], spawnHolder);
             replaceTile(grids, x, spawns, spawnHolder);
         }
     }
