@@ -17,8 +17,8 @@ public class TowerOption : MonoBehaviour
     public GameObject placable;
     public GameObject Type1;
     public GameObject Type2;
-    public GameObject Type1_dmg;
-    public GameObject Type2_dmg;
+    public GameObject Type1_lvl;
+    public GameObject Type2_lvl;
     public GameObject TowerModel;
     public GameObject Cost;
 
@@ -40,8 +40,8 @@ public class TowerOption : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Type1_dmg.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
-        Type2_dmg.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
-        Cost.GetComponent<Text>().text = cost.ToString();
+        Type1_lvl.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
+        Type2_lvl.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
+        Cost.GetComponent<Text>().text = "Cost: " + cost.ToString();
     }
 }
