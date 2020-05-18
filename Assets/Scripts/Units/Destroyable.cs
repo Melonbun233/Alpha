@@ -7,6 +7,11 @@ public class Destroyable : MonoBehaviour
     [Header("Health Settings")]
     public int health;
     public int maxHealth;
+    public float healingPercentMultiplier = 0f;
+    public int healingFlatMultiplier = 0;
+
+    [Header("Resistance Settings")]
+    public ResistanceData resistance;
 
     [Header("Destory Effect Settings")]
     public GameObject destroyEffect;
@@ -29,14 +34,11 @@ public class Destroyable : MonoBehaviour
         }
     }
 
-    // Deal damage to this object. This object will not be killed if the result is zero. 
-    // If the damage is negative, the attack will heal this object instead.
+    // Deal damage to this object. This object will be killed if the health
+    // is 0 in the next frame
     // Over damage will not result in negative health!
-    public virtual void receiveDamage(int damage, GameObject receiveFrom) {
-        if (damage < 0) {
-            receiveHealing(-damage, receiveFrom);
-            return;
-        }
+    public virtual void receiveDamage(DamageData damageData, GameObject receiveFrom) {
+        int damage = damageData.getTotalDamage(this.resistance);
 
         // Avoid negative health
         if (health <= damage) {
@@ -46,23 +48,24 @@ public class Destroyable : MonoBehaviour
         }
     }
 
+    // Receive a healing
+    // Healing should not be negative
     public virtual void receiveHealing(int healing, GameObject receiveFrom) {
         if (healing < 0) {
-            receiveDamage(-healing, receiveFrom);
             return;
         }
 
+        int actualHealing = Utils.mult(healing, healingPercentMultiplier, healingFlatMultiplier);
+        if (actualHealing < 0) {
+            return;
+        }
+        
         // Avoid overheal
-        if (health + healing > maxHealth) {
+        if (health + actualHealing > maxHealth) {
             health = maxHealth;
         } else {
-            health += healing;
+            health += actualHealing;
         }
-    }
-
-    // fully heal the object to its current max health
-    public virtual void fullyHeal(GameObject receiveFrom) {
-        health = maxHealth;
     }
 
     // Increment the maximum health of this object
@@ -74,14 +77,13 @@ public class Destroyable : MonoBehaviour
         }
 
         maxHealth += increment;
-        receiveHealing(increment, receiveFrom);
+        health += increment;
     }
 
     // Decrement max health. 
     // The result will not be negative.
     // If the health is higher than the new max health, current health 
     // will be set to the new max health.
-    // If the current health is set to zero, this object will not be killed.
     // A negative decrement will result in increment of max health
     public virtual void decreMaxHealth(int decrement, GameObject receiveFrom) {
         if (decrement < 0) {
@@ -95,7 +97,7 @@ public class Destroyable : MonoBehaviour
             maxHealth -= decrement;
         }
         
-        if (health < maxHealth) {
+        if (health > maxHealth) {
             health = maxHealth;
         }
         

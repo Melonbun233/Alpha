@@ -50,15 +50,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 20
   maxHealth: 20
+  healingPercentMultiplier: 0
+  healingFlatMultiplier: 0
+  resistance:
+    physicalResistance: 0
+    fireResistance: 20
+    waterResistance: -20
+    windResistance: 0
+    thunderResistance: 0
+    physicalResisPercentMultiplier: 0
+    physicalResisFlatMultiplier: 0
+    fireResisPercentMultiplier: 0
+    fireResisFlatMultiplier: 0
+    waterResisPercentMultiplier: 0
+    waterResisFlatMultiplier: 0
+    windResisPercentMultiplier: 0
+    windResisFlatMultiplier: 0
+    thunderResisPercentMultiplier: 0
+    thunderResisFlatMultiplier: 0
   destroyEffect: {fileID: 1290736735069134721, guid: 5b01eba794878324d96ec129d1936aa7,
     type: 3}
   destroyEffectPeriod: 1.5
   center: {x: 0, y: 0.5, z: 0}
-  mana: 0
-  maxMana: 0
   attackRange: 1
-  attackRate: 1
-  attackDamage: 20
+  attackCoolDown: 0
+  attackDamage:
+    physicalDamage: 0
+    fireDamage: 20
+    waterDamage: 0
+    windDamage: 0
+    thunderDamage: 0
+    physicalDamagePercentMultiplier: 0
+    physicalDamageFlatMultiplier: 0
+    fireDamagePercentMultiplier: 0
+    fireDamageFlatMultiplier: 0
+    waterDamagePercentMultiplier: 0
+    waterDamageFlatMultiplier: 0
+    windDamagePercentMultiplier: 0
+    windDamageFlatMultiplier: 0
+    thunderDamagePercentMultiplier: 0
+    thunderDamageFlatMultiplier: 0
+  attackNumber: 0
+  attackAoeRange: 0
   visionRange: 10
 --- !u!135 &5151483282514609588
 SphereCollider:
