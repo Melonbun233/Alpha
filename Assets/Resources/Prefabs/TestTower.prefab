@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2830141297840575774}
   m_Layer: 0
-  m_Name: untitled
+  m_Name: TestTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233413851478075149}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19, y: 85, z: -123}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 2118582263771383286}
   - {fileID: 7007256152530199104}
@@ -329,7 +329,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4290609145563594846, guid: 6a5d3fbb6f35ea94b807eff26d21bde4, type: 3}
+  - {fileID: 2100000, guid: 0902b82b2a57ebe429f5662e2e76e563, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
