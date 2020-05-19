@@ -90,8 +90,9 @@ MonoBehaviour:
     windDamageFlatMultiplier: 0
     thunderDamagePercentMultiplier: 0
     thunderDamageFlatMultiplier: 0
-  attackNumber: 0
-  attackAoeRange: 0
+  attackNumber: 1
+  attackAoeRange: 1
+  attackIndicator: {fileID: 0}
   visionRange: 10
 --- !u!135 &5151483282514609588
 SphereCollider:

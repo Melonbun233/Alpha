@@ -51,6 +51,10 @@ public class Destroyable : MonoBehaviour
     // Receive a healing
     // Healing should not be negative
     public virtual void receiveHealing(int healing, GameObject receiveFrom) {
+        if (isDead()) {
+            return;
+        }
+
         if (healing < 0) {
             return;
         }
@@ -71,6 +75,10 @@ public class Destroyable : MonoBehaviour
     // Increment the maximum health of this object
     // A negative increment will result in decrement of max health
     public virtual void increMaxHealth(int increment, GameObject receiveFrom) {
+        if (isDead()) {
+            return;
+        }
+
         if (increment < 0) {
             decreMaxHealth(-increment, receiveFrom);
             return;
@@ -86,6 +94,9 @@ public class Destroyable : MonoBehaviour
     // will be set to the new max health.
     // A negative decrement will result in increment of max health
     public virtual void decreMaxHealth(int decrement, GameObject receiveFrom) {
+        if (isDead()) {
+            return;
+        } 
         if (decrement < 0) {
             increMaxHealth(-decrement, receiveFrom);
             return;

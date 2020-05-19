@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public static class Utils
@@ -22,32 +23,34 @@ public static class Utils
         Gizmos.DrawWireSphere(trans.position, attackRange);
     }
 
-    public static List<GameObject> findGameObjectsWithinRange(Vector3 position, float range, string tag) {
+    public static void findGameObjectsWithinRange(List<GameObject> ptr, Vector3 position, 
+        float range, string tag) {
         Collider[] colliders = Physics.OverlapSphere(position, range);
-        List<GameObject> objects = new List<GameObject>();
 
         foreach(Collider collider in colliders) {
             if (collider.gameObject.tag == tag) {
-                objects.Add(collider.gameObject);
+                ptr.Add(collider.gameObject);
             }   
         }
 
-        return objects;
     }
 
-    public static GameObject findNearestGameObject(Vector3 position, List<GameObject> targets) {
-        float nearestDistance = float.PositiveInfinity;
-        GameObject nearestTarget = null;
-
-        foreach (GameObject target in targets) {
-            float distance = Vector3.Distance(position, target.transform.position);
-            if (distance < nearestDistance) {
-                nearestTarget = target;
-                nearestDistance = distance;
-            }
+    public static void sortByDistance(List<GameObject> ptr, Vector3 position) {
+        List<Tuple<GameObject, float>> tmp = new List<Tuple<GameObject, float>>();
+        foreach(GameObject obj in ptr) {
+            tmp.Add(new Tuple<GameObject, float>(obj, 
+                Vector3.Distance(obj.transform.position, position)));
         }
 
-        return nearestTarget;
+        tmp.Sort(delegate(Tuple<GameObject, float> x, Tuple<GameObject, float> y) {
+            return x.Item2.CompareTo(y.Item2);
+        });
+
+        ptr.Clear();
+
+        for (int i = 0; i < tmp.Count; i ++) {
+            ptr.Add(tmp[i].Item1);
+        }
     }
 
     // Create a line renderer to draw a line between two points

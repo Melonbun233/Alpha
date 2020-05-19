@@ -15,11 +15,12 @@ public abstract class Unit : Destroyable
     public int attackNumber;
     public int attackAoeRange;
 
+    public GameObject attackIndicator;
 
-    // Attack target this unit will try to attack
-    protected GameObject _attackTarget;
-    // used to store possible targets (within attack range)
-    protected List<GameObject> _attackTargets;
+    // All attack targets this unit will attack if the attack is cooled down
+    // The size of this list should not large than attackNumber
+    protected List<GameObject> _attackTargets = new List<GameObject>();
+    
 
     protected GameObject _moveTarget;
     protected NavMeshAgent _navAgent;
@@ -50,7 +51,7 @@ public abstract class Unit : Destroyable
     // Check if this unit has at least one attack target and attack is cooled down
     // If all true, perform attack on the attack target
     public virtual void preAttack() {
-        if (_attackCoolDown <= 0 && _attackTarget != null) {
+        if (_attackCoolDown <= 0 && _attackTargets.Count != 0) {
             attack();
         }
 
@@ -61,15 +62,19 @@ public abstract class Unit : Destroyable
     // This method assumes that the unit has at least one attack target
     // and the attack is cooled down
     public virtual void attack() {
-        if (_attackTarget == null) {
-            return;
+        foreach(GameObject target in _attackTargets) {
+            target.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+            dealAoeDamage(target);
         }
-        _attackTarget.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+
         _attackCoolDown = attackCoolDown;
     }
 
+    public virtual void dealAoeDamage(GameObject initialTarget){}
+
     // All unit class should implement this method
     // This method update the attack target of this unit every 0.5 second
+    // Set the all attack targets for the next attack
     public abstract void updateAttackTarget();
 
     // Try to move by setting the destination of navAgent as the move target
@@ -86,6 +91,7 @@ public abstract class Unit : Destroyable
 
     // All chracter classes should implement this method
     // This method update the move target of the unit every 0.5 second
+    // Set move target to move
     public abstract void updateMoveTarget();
 
     // Draw attack range of this unit
