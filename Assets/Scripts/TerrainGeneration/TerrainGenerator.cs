@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class TerrianGenerator : MonoBehaviour
+public class TerrainGenerator : MonoBehaviour
 {
     public enum DrawMode {
-        NoiseMap, Terrian
+        NoiseMap, Terrain
     }
 
     [Header("Map Display Settings")]
@@ -39,8 +39,8 @@ public class TerrianGenerator : MonoBehaviour
     public MeshRenderer meshRenderer;
     public Renderer miniMapRenderer;
 
-    [Header("Terrian Region Settings")]
-    public TerrianRegion region;
+    [Header("Terrain Region Settings")]
+    public TerrainRegion region;
 
     float[,] _noiseMap;
     MeshData2D _meshData;
@@ -49,7 +49,7 @@ public class TerrianGenerator : MonoBehaviour
     public void generateMap() {
         _noiseMap = Noise.generateNoiseMap2D(width, height, seed, noiseScale,
             octaves, persistance, lacunarity, offset);
-        _meshData = MeshGenerator.generateTerrianMesh(_noiseMap, meshHeightMultiplier, meshHeightCurve);
+        _meshData = MeshGenerator.generateTerrainMesh(_noiseMap, meshHeightMultiplier, meshHeightCurve);
 
         drawMap();
         drawMesh();
@@ -94,11 +94,11 @@ public class TerrianGenerator : MonoBehaviour
         _texture = new Texture2D(width, height);
 
         switch (drawMode) {
-            case DrawMode.Terrian:
+            case DrawMode.Terrain:
                 Color[] colorMap = new Color[width * height];
                 for (int y = 0; y < height; y ++) {
                     for (int x = 0; x < width; x ++) {
-                        colorMap[y * width + x] = TerrianRegion.getTerrianTypeColor(
+                        colorMap[y * width + x] = TerrainRegion.getTerrainTypeColor(
                             _noiseMap[x, y], region);
                     }
                 }
@@ -131,11 +131,11 @@ public class TerrianGenerator : MonoBehaviour
     }
 }
 
-[CustomEditor (typeof (TerrianGenerator))]
-public class TerrianGeneratorEditor : Editor
+[CustomEditor (typeof (TerrainGenerator))]
+public class TerrainGeneratorEditor : Editor
 {
     public override void OnInspectorGUI() {
-        TerrianGenerator generator = (TerrianGenerator)target;
+        TerrainGenerator generator = (TerrainGenerator)target;
         
         if (DrawDefaultInspector()) {
             if (generator.autoUpdate) {
@@ -147,8 +147,8 @@ public class TerrianGeneratorEditor : Editor
             generator.clearMesh();
         }
 
-        if (GUILayout.Button ("Sort Terrian Types")) {
-            TerrianRegion.sortTerrianTypes(generator.region);
+        if (GUILayout.Button ("Sort Terrain Types")) {
+            TerrainRegion.sortTerrainTypes(generator.region);
         }
 
         if (GUILayout.Button ("Generate Map")) {

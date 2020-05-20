@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
-    public static MeshData2D generateTerrianMesh(float[,] heightMap, float heightMultiplier, 
+    public static MeshData2D generateTerrainMesh(float[,] heightMap, float heightMultiplier, 
         AnimationCurve heightCurve) {
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
