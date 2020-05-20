@@ -125,6 +125,10 @@ public class TerrianGenerator : MonoBehaviour
             // meshRenderer.transform.localScale = new Vector3(1, 1, 1);
         }    
     }
+
+    public void clearMesh() {
+        meshFilter.sharedMesh = new Mesh();
+    }
 }
 
 [CustomEditor (typeof (TerrianGenerator))]
@@ -137,6 +141,10 @@ public class TerrianGeneratorEditor : Editor
             if (generator.autoUpdate) {
                 generator.generateMap();
             }
+        }
+
+        if (GUILayout.Button ("Clear Mesh")) {
+            generator.clearMesh();
         }
 
         if (GUILayout.Button ("Sort Terrian Types")) {
