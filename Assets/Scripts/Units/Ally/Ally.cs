@@ -12,6 +12,9 @@ public class Ally : Unit
 {
     [Header("Ally Type")]
     public AllyType type;
+    public int cost;
+    public int level;
+    public int exp;
 
     // Update the attack target
     // Default alg is to find the nearest enemy within range
