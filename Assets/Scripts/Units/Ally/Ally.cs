@@ -17,14 +17,32 @@ public class Ally : Unit
     // Default alg is to find the nearest enemy within range
     // Enemies not within range will not be set as target
     public override void updateAttackTarget() {
-        _attackTargets = Utils.findGameObjectsWithinRange(transform.position, attackRange, "Enemy");
+        _attackTargets.Clear();
 
-        if (_attackTargets.Count == 0) {
-            // no enemy within range
-            _attackTarget = null;
-            return;
-        } else {
-            _attackTarget = Utils.findNearestGameObject(transform.position, _attackTargets);
+        List<GameObject> _attackTargetsWithinRange = new List<GameObject>();
+        Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, 
+            attackRange, "Enemy");
+        Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
+
+        for (int i = 0; i < attackNumber; i ++) {
+            if (i < _attackTargetsWithinRange.Count) {
+                _attackTargets.Add(_attackTargetsWithinRange[i]);
+            } else {
+                break;
+            }
+        }
+
+    }
+
+    public override void dealAoeDamage(GameObject initialTarget) {
+        List<GameObject> nearbyEnemies = new List<GameObject>();
+        Utils.findGameObjectsWithinRange(nearbyEnemies, initialTarget.transform.position,
+            attackAoeRange, "Enemy");
+
+        foreach(GameObject nearbyEnemy in nearbyEnemies) {
+            if (initialTarget != nearbyEnemy) {
+                nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+            }
         }
     }
 

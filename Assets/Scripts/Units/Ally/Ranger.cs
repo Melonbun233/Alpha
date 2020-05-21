@@ -15,7 +15,7 @@ public class Ranger : Ally
     private Color _initialCoreColor;
     
 
-    private LineRenderer _attackIndicator;
+    private List<LineRenderer> _lineRenderers = new List<LineRenderer>();
     private GameObject _core;
 
     protected override void Start() {
@@ -27,8 +27,6 @@ public class Ranger : Ally
 
         // Set the start position of the attack indicator
         _core = transform.Find("Core").gameObject;
-        _attackIndicator = GetComponent<LineRenderer>();
-        _attackIndicator.SetPosition(0, _core.transform.position);
 
         _initialCoreColor = _core.GetComponent<Renderer>().material.color;
     }
@@ -37,7 +35,7 @@ public class Ranger : Ally
         base.Update();
 
         rotate();
-        updateAttackIndicator();
+        updateAttackIndicators();
     }
 
     // Rotate when idle. rotate faster when attack
@@ -48,7 +46,7 @@ public class Ranger : Ally
     public override void updateAttackTarget() {
         base.updateAttackTarget();
 
-        if (_attackTarget != null) {
+        if (_attackTargets.Count != 0) {
             // speed up rotation for rotate speed up period
             rotateSpeed = attackRotateSpeed;
             CancelInvoke("resetRotateSpeed");
@@ -73,13 +71,33 @@ public class Ranger : Ally
         _core.GetComponent<Renderer>().material.SetColor("_BaseColor", _initialCoreColor);
     }
 
-    private void updateAttackIndicator() {
-        // check if the ranger has a target
-        if (_attackTarget == null) {
-            _attackIndicator.GetComponent<LineRenderer>().SetPosition(1, _core.transform.position);
-        } else {
-            _attackIndicator.GetComponent<LineRenderer>().SetPosition(1, 
-                _attackTarget.transform.TransformPoint(_attackTarget.GetComponent<Destroyable>().center));
+    private void addAttackIndicators(int number) {
+        for (int i = 0; i < number; i ++) {
+            GameObject indicator = Instantiate(attackIndicator, _core.transform.position,
+                transform.rotation, transform);
+            LineRenderer lr = indicator.GetComponent<LineRenderer>();
+            lr.SetPosition(0, _core.transform.position);
+            lr.SetPosition(1, _core.transform.position);
+            _lineRenderers.Add(lr);
+        }
+    }
+
+    private void updateAttackIndicators() {
+        if (_lineRenderers.Count < attackNumber) {
+            addAttackIndicators(attackNumber - _lineRenderers.Count);
+        }
+
+        // clear all attack indicators
+        foreach (LineRenderer lr in _lineRenderers) {
+            lr.SetPosition(1, _core.transform.position);
+        }
+
+        for(int i = 0; i < _attackTargets.Count; i ++) {
+            if (_attackTargets[i] != null) {
+                _lineRenderers[i].SetPosition(1, 
+                    _attackTargets[i].transform.TransformPoint(
+                    _attackTargets[i].GetComponent<Destroyable>().center));
+            }
         }
     }
 

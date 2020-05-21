@@ -20,33 +20,48 @@ public class Enemy : Unit {
     // If not, check whether any ally is within range
     // If not, set the attack target as null
     public override void updateAttackTarget() {
-        
+        _attackTargets.Clear();
+
         GameObject _base = GameObject.FindGameObjectWithTag("Base");
         // Check if base is destroyed
         if (_base == null) {
-            _attackTarget = null;
             return;
         }
 
+        int restAttackNumber = attackNumber;
+
         // Check if the base is within attack range
-        _attackTargets = Utils.findGameObjectsWithinRange(transform.position, attackRange, "Base");
-        if (_attackTargets.Count != 0) {
-            _attackTarget = _base;
-            return;
+        Utils.findGameObjectsWithinRange(_attackTargets, transform.position, attackRange, "Base");
+        if (_attackTargets.Count != 0 && restAttackNumber > 0) {
+            _attackTargets.Add(_base);
+            restAttackNumber --;
         }
 
 
         // Check if there's an ally within attack range
-        _attackTargets = Utils.findGameObjectsWithinRange(transform.position, attackRange, "Ally");
-        if (_attackTargets.Count == 0) {
-            // no attack target can be found
-            _attackTarget = null;
-            return;
-        } else {
-            // just pick the closest ally
-            _attackTarget = Utils.findNearestGameObject(transform.position, _attackTargets);
+        List<GameObject> _attackTargetsWithinRange = new List<GameObject>();
+        Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, 
+             attackRange, "Ally");
+        Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
+
+        for (int i = 0; i < restAttackNumber; i++) {
+            if (i < _attackTargetsWithinRange.Count) {
+                _attackTargets.Add(_attackTargetsWithinRange[i]);
+            } else {
+                break;
+            }
         }
         
+    }
+
+    public override void dealAoeDamage(GameObject initialTarget) {
+        List<GameObject> nearbyEnemies = new List<GameObject>();
+        Utils.findGameObjectsWithinRange(nearbyEnemies, initialTarget.transform.position,
+            attackAoeRange, "Ally");
+
+        foreach(GameObject nearbyEnemy in nearbyEnemies) {
+            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+        }
     }
 
     // Move toward the target until reached the attacking range
