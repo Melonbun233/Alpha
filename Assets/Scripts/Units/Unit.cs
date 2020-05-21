@@ -64,7 +64,7 @@ public abstract class Unit : Destroyable
         if (_attackTarget == null) {
             return;
         }
-        _attackTarget.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+        _attackTarget.GetComponent<Character>().receiveDamage(attackDamage, gameObject);
         _attackCoolDown = attackCoolDown;
     }
 

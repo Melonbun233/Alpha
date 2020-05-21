@@ -8,7 +8,7 @@ public class placement : MonoBehaviour
 
     public GameObject towerModel;
     public Vector3 cursor;
-    public GameObject tower;
+    public GameObject towerToFollow;
     public Vector3 wallOffset;
     public Vector3 valleyOffset;
 
@@ -23,7 +23,7 @@ public class placement : MonoBehaviour
     void OnMouseUp()
     {
         towerModel = GetComponent<TowerOption>().TowerModel;
-        tower = Instantiate(towerModel) as GameObject;
+        towerToFollow = Instantiate(towerModel) as GameObject;
     }
 
     // Start is called before the first frame update
@@ -36,15 +36,15 @@ public class placement : MonoBehaviour
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 1000) && tower != null && hit.collider != GetComponent<Collider>())
+        if(Physics.Raycast(ray, out hit, 1000) && towerToFollow != null && hit.transform.tag != "UI")
         {
             if(hit.transform.tag == "walls")
             {
-                tower.transform.position = hit.transform.position + wallOffset;
+                towerToFollow.transform.position = hit.transform.position + wallOffset;
             }
             else
             {
-                tower.transform.position = hit.transform.position + valleyOffset;
+                towerToFollow.transform.position = hit.transform.position + valleyOffset;
             }
             
         }
