@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using System;
 public class TowerOption : MonoBehaviour
 {
     public int type1_lvl;
     public int type2_lvl;
     public List<String> types;
-    private Ally ally;
+    public Ally ally;
     public GameObject placable;
     public GameObject Type1;
     public GameObject Type2;
@@ -16,14 +16,16 @@ public class TowerOption : MonoBehaviour
     public GameObject Type2_lvl;
     public GameObject TowerModel;
     public GameObject Cost;
+    public GameObject[] prefabs;
 
 
-    public Texture ranger;
-    public Texture melee;
-    public Texture Fire;
-    public Texture Water;
-    public Texture Wind;
-    public Texture Thunder;
+    public Sprite ranger;
+    public Sprite melee;
+    public Sprite Fire;
+    public Sprite Water;
+    public Sprite Wind;
+    public Sprite Thunder;
+
 
 
     public TowerOption(Ally ally)
@@ -31,10 +33,24 @@ public class TowerOption : MonoBehaviour
         this.ally = ally;
     }
 
+    public GameObject allyPrefab()
+    {
+        AllyType type = ally.type;
+        switch (type)
+        {
+            case AllyType.Ranger:
+                return prefabs[0];
+            case AllyType.Blocker:
+                return prefabs[1];
+        }
+        return null;
+    }
     void OnMouseUp()
     {
-        placement.toPlace.towerModel = TowerModel;
-        placement.toPlace.towerToFollow = Instantiate(placement.toPlace.towerModel) as GameObject;
+        GameObject temp = allyPrefab();
+        temp.GetComponent<Ally>().enabled = false;
+        placement.toPlace.towerOption = temp;
+        placement.toPlace.towerToFollow = Instantiate(placement.toPlace.towerOption) as GameObject;
     }
 
     void Start()
@@ -48,10 +64,10 @@ public class TowerOption : MonoBehaviour
         switch (type)
         {
             case AllyType.Ranger:
-                placable.GetComponent<Image>().image = ranger;
+                placable.GetComponent<Image>().sprite = ranger;
                 break;
             case AllyType.Blocker:
-                placable.GetComponent<Image>().image = melee;
+                placable.GetComponent<Image>().sprite = melee;
                 break;
         }
 
@@ -68,34 +84,34 @@ public class TowerOption : MonoBehaviour
         switch (x)
         {
             case "fire":
-                Type1.GetComponent<Image>().image = Fire;
+                Type1.GetComponent<Image>().sprite = Fire;
                 break;
             case "water":
-                Type1.GetComponent<Image>().image = Water;
+                Type1.GetComponent<Image>().sprite = Water;
                 break;
             case "thunder":
-                Type1.GetComponent<Image>().image = Thunder;
+                Type1.GetComponent<Image>().sprite = Thunder;
                 break;
             case "wind":
-                Type1.GetComponent<Image>().image = Wind;
+                Type1.GetComponent<Image>().sprite = Wind;
                 break;
         }
 
-        x = types[1];
+        if(types.Count == 2)x = types[1];
 
         switch (x)
         {
             case "fire":
-                Type2.GetComponent<Image>().image = Fire;
+                Type2.GetComponent<Image>().sprite = Fire;
                 break;
             case "water":
-                Type2.GetComponent<Image>().image = Water;
+                Type2.GetComponent<Image>().sprite = Water;
                 break;
             case "thunder":
-                Type2.GetComponent<Image>().image = Thunder;
+                Type2.GetComponent<Image>().sprite = Thunder;
                 break;
             case "wind":
-                Type2.GetComponent<Image>().image = Wind;
+                Type2.GetComponent<Image>().sprite = Wind;
                 break;
         }
 

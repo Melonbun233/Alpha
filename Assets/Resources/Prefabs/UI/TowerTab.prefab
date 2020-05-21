@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 8053981813582875749}
   - component: {fileID: 5016408483813839527}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,9 +309,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6786318192057336689}
+  - component: {fileID: -1889223326394362648}
+  - component: {fileID: -4340689767655565879}
   m_Layer: 5
   m_Name: TowerTab
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,6 +344,52 @@ RectTransform:
   m_AnchoredPosition: {x: -224.55, y: 0}
   m_SizeDelta: {x: 113.91365, y: 143.52225}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &-1889223326394362648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775279043506786854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c0f1504061d97458dbea6d107c1e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type1_lvl: 3
+  type2_lvl: 2
+  types: []
+  ally: {fileID: 0}
+  placable: {fileID: 2724106884056582252}
+  Type1: {fileID: 5570483126813705358}
+  Type2: {fileID: 1564780082407804494}
+  Type1_lvl: {fileID: 6424629942211140015}
+  Type2_lvl: {fileID: 5908429083208442200}
+  TowerModel: {fileID: 1233413851478075149, guid: 78828548f32c4864581fa355d47f7769,
+    type: 3}
+  Cost: {fileID: 4346171247835194480}
+  prefabs:
+  - {fileID: 7927832156493680333, guid: f306b79c99068d14da1aba091cd590a5, type: 3}
+  - {fileID: 7878802123115981918, guid: b4c186fd6f5a54e48be1f06481f4b2c8, type: 3}
+  ranger: {fileID: 21300000, guid: 5e8cacb6109f5284aba22669679d0fff, type: 3}
+  melee: {fileID: 21300000, guid: dbe8b41e380f4ce47b75ce76cebc1fd2, type: 3}
+  Fire: {fileID: 21300000, guid: e309e32d2011ec9418e0aead8d1b1f81, type: 3}
+  Water: {fileID: 21300000, guid: 0bd5736962ba5124086e6762c26d97be, type: 3}
+  Wind: {fileID: 21300000, guid: ea4d1b7ae510237449c894f9bb4b1122, type: 3}
+  Thunder: {fileID: 21300000, guid: 881975b1f20af5e44842d52bbe44edc3, type: 3}
+--- !u!65 &-4340689767655565879
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775279043506786854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 113.71211, y: 142.51024, z: 41.206856}
+  m_Center: {x: -0.6351242, y: 70.75512, z: -19.208588}
 --- !u!1 &5908429083208442200
 GameObject:
   m_ObjectHideFlags: 0

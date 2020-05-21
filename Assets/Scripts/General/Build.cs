@@ -19,6 +19,7 @@ public class Build : MonoBehaviour
             if(placement.toPlace.hit.transform.tag == "walls")
             {
                 GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset , Quaternion.identity) as GameObject;
+                instant.GetComponent<Ally>().enabled = true;
                 Destroy(placement.toPlace.towerToFollow);
                 placement.toPlace.towerToFollow = null;
                 hasbuilt = true;
@@ -27,6 +28,7 @@ public class Build : MonoBehaviour
             if(placement.toPlace.hit.transform.tag == "valley")
             {
                 GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
+                instant.GetComponent<Ally>().enabled = true;
                 Destroy(placement.toPlace.towerToFollow);
                 placement.toPlace.towerToFollow = null;
                 hasbuilt = true;
@@ -46,9 +48,9 @@ public class Build : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (placement.toPlace.towerToFollow != null)
+        if (placement.toPlace.towerOption != null)
         {
-            Tower = placement.toPlace.towerToFollow;
+            Tower = placement.toPlace.towerOption;
         }
     }
 }

@@ -6,15 +6,22 @@ public class TeamList : MonoBehaviour
 {
 
     public List<Ally> team;
-    public GameObject TowerTab;
+    public GameObject towerTab;
     public GameObject UI;
+    public Vector2 offset;
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Ally x in team)
+
+        foreach(Ally ally in team)
         {
-            Instantiate(TowerTab, UI.transform);
+            GameObject tower = Instantiate(towerTab, UI.transform) as GameObject;
+            tower.GetComponent<RectTransform>().anchoredPosition = offset;
+            offset.x = offset.x + 135f;
+            tower.GetComponent<TowerOption>().ally = ally;
         }
+        
+
     }
 
     // Update is called once per frame
