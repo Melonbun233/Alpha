@@ -3,19 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class UnitData{
+    public HealthData healthData;
+    public AttackData attackData;
+    public ResistanceData resistanceData;
+    public MoveData moveData;
+
+    public UnitData(HealthData healthData, AttackData attackData, 
+        ResistanceData resistanceData, MoveData moveData){
+        this.healthData = healthData;
+        this.attackData = attackData;
+        this.resistanceData = resistanceData;
+        this.moveData = moveData;
+    }
+
+    public static GameObject copyData(GameObject obj, UnitData data) {
+        Unit unit = obj.GetComponent<Unit>();
+        if (unit == null) {
+            return null;
+        }
+        unit.healthData = data.healthData;
+        unit.attackData = data.attackData;
+        unit.resistanceData = data.resistanceData;
+        unit.moveData = data.moveData;
+        return obj;
+    }
+}
+
 public abstract class Unit : Destroyable
 {
     [Header("Attack Settings")]
-    public float attackRange;
-    public float attackCoolDown;
-
-    // Actual counter for the attack
+    public AttackData attackData;
     protected float _attackCoolDown;
-    public DamageData attackDamage;
-    public int attackNumber;
-    public int attackAoeRange;
-
+        
     public GameObject attackIndicator;
+
+    public MoveData moveData;
 
     // All attack targets this unit will attack if the attack is cooled down
     // The size of this list should not large than attackNumber
@@ -63,11 +87,11 @@ public abstract class Unit : Destroyable
     // and the attack is cooled down
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
-            target.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+            target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
             dealAoeDamage(target);
         }
 
-        _attackCoolDown = attackCoolDown;
+        _attackCoolDown = attackData.attackCoolDown;
     }
 
     public virtual void dealAoeDamage(GameObject initialTarget){}
@@ -96,13 +120,26 @@ public abstract class Unit : Destroyable
 
     // Draw attack range of this unit
     protected virtual void OnDrawGizmosSelected() {
-         Utils.drawRange(transform, attackRange, Color.red);
+         Utils.drawRange(transform, attackData.attackRange, Color.red);
     }
 
     protected virtual void updateNavAgentDestination(Vector3 position) {
         if (_navAgent != null && gameObject != null && !isDead()) {
             _navAgent.destination = position; 
         }
+    }
+
+    public static GameObject spawn(GameObject prefab, UnitData data, 
+        Vector3 position, Quaternion rotation) {
+        if (prefab.GetComponent<Unit>() == null) {
+            Debug.Log("Cannot instantiate an non-unit object");
+            return null;
+        }
+
+        GameObject obj = Instantiate(prefab, position, rotation);
+        UnitData.copyData(obj, data);
+
+        return obj;
     }
 
 

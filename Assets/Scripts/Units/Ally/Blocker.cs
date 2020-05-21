@@ -7,6 +7,6 @@ public class Blocker : Ally
     protected override void Start() {
         base.Start();
 
-        type = AllyType.Blocker;
+        allyType = AllyType.Blocker;
     }
 }

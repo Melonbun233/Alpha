@@ -34,8 +34,8 @@ public class StatusBar : MonoBehaviour
     }
 
     private void updateHealthBar() {
-        int curHealth = destroyable.health;
-        int maxHealth = destroyable.maxHealth;
+        int curHealth = destroyable.healthData.health;
+        int maxHealth = destroyable.healthData.maxHealth;
 
         if (maxHealth == 0) {
             innerHealthBar.GetComponent<Image>().fillAmount = 0f;

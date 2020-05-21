@@ -2,6 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class EnemyData: UnitData {
+    public float visionRange;
+    public EnemyData(HealthData healthData, AttackData attackData,
+        ResistanceData resistanceData, MoveData moveData, float visionRange) :
+        base(healthData, attackData, resistanceData, moveData) {
+            this.visionRange = visionRange;
+        }
+
+    public static GameObject copyData(GameObject obj, EnemyData data) {
+        if (obj.GetComponent<Enemy>() == null) {
+            return null;
+        }
+
+        UnitData.copyData(obj, (UnitData) data);
+        Enemy enemy = obj.GetComponent<Enemy>();
+
+        enemy.visionRange = data.visionRange;
+        return obj;
+    }
+}
+
 
 // Base class for all enemies
 public class Enemy : Unit {
@@ -28,10 +50,10 @@ public class Enemy : Unit {
             return;
         }
 
-        int restAttackNumber = attackNumber;
+        int restAttackNumber = attackData.attackNumber;
 
         // Check if the base is within attack range
-        Utils.findGameObjectsWithinRange(_attackTargets, transform.position, attackRange, "Base");
+        Utils.findGameObjectsWithinRange(_attackTargets, transform.position, attackData.attackRange, "Base");
         if (_attackTargets.Count != 0 && restAttackNumber > 0) {
             _attackTargets.Add(_base);
             restAttackNumber --;
@@ -41,7 +63,7 @@ public class Enemy : Unit {
         // Check if there's an ally within attack range
         List<GameObject> _attackTargetsWithinRange = new List<GameObject>();
         Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, 
-             attackRange, "Ally");
+             attackData.attackRange, "Ally");
         Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
 
         for (int i = 0; i < restAttackNumber; i++) {
@@ -57,10 +79,10 @@ public class Enemy : Unit {
     public override void dealAoeDamage(GameObject initialTarget) {
         List<GameObject> nearbyEnemies = new List<GameObject>();
         Utils.findGameObjectsWithinRange(nearbyEnemies, initialTarget.transform.position,
-            attackAoeRange, "Ally");
+            attackData.attackAoeRange, "Ally");
 
         foreach(GameObject nearbyEnemy in nearbyEnemies) {
-            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
+            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
         }
     }
 
@@ -78,7 +100,7 @@ public class Enemy : Unit {
         Ray oppositeDirection = new Ray(targetTransform.position, 
         transform.position - targetTransform.position);
         
-        Vector3 destination = oppositeDirection.GetPoint(attackRange);
+        Vector3 destination = oppositeDirection.GetPoint(attackData.attackRange);
 
         updateNavAgentDestination(destination);
     }
@@ -94,7 +116,7 @@ public class Enemy : Unit {
             float cloestDistance = float.PositiveInfinity;
             foreach (GameObject ally in allies) {
                 // only set if the ally is a blocker and within vision range
-                if (ally.GetComponent<Ally>().type == AllyType.Blocker && 
+                if (ally.GetComponent<Ally>().allyType == AllyType.Blocker && 
                     Utils.isWithinRange(transform.position, ally.transform.position, visionRange)) {
                     // Use the ally that's cloeset
                     float distance = Utils.horizontalDistance(transform, ally.transform);
@@ -119,6 +141,18 @@ public class Enemy : Unit {
     protected override void OnDrawGizmosSelected() {
         base.OnDrawGizmosSelected();
         Utils.drawRange(transform, visionRange, Color.green);
+    }
+
+    public static GameObject spawn(GameObject prefab, EnemyData data, 
+        Vector3 position, Quaternion rotation) {
+        if (prefab.GetComponent<Enemy>() == null) {
+            Debug.Log("Cannot spawn an non-enemy object");
+            return null;
+        }
+
+        GameObject obj = Instantiate(prefab, position, rotation);
+        EnemyData.copyData(obj, data);
+        return obj;
     }
 
     

@@ -46,8 +46,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9154e072e3ac4524d92fefd263e02861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  healthData:
+    health: 100
+    maxHealth: 100
+    healingPercentMultiplier: 0
+    healingFlatMultiplier: 0
+  resistanceData:
+    physicalResistance: 100
+    fireResistance: 100
+    waterResistance: 100
+    windResistance: 100
+    thunderResistance: 100
+    physicalResisPercentMultiplier: 0
+    physicalResisFlatMultiplier: 0
+    fireResisPercentMultiplier: 0
+    fireResisFlatMultiplier: 0
+    waterResisPercentMultiplier: 0
+    waterResisFlatMultiplier: 0
+    windResisPercentMultiplier: 0
+    windResisFlatMultiplier: 0
+    thunderResisPercentMultiplier: 0
+    thunderResisFlatMultiplier: 0
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}

@@ -142,11 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60610a51f4a63644a4ef14c4edc7546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  healingPercentMultiplier: 1
-  healingFlatMultiplier: 0
-  resistance:
+  healthData:
+    health: 50
+    maxHealth: 50
+    healingPercentMultiplier: 0
+    healingFlatMultiplier: 0
+  resistanceData:
     physicalResistance: 10
     fireResistance: 0
     waterResistance: 0
@@ -165,28 +166,35 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 0.5, z: 0}
-  attackRange: 1
-  attackCoolDown: 2
-  attackDamage:
-    physicalDamage: 5
-    fireDamage: 0
-    waterDamage: 0
-    windDamage: 0
-    thunderDamage: 0
-    physicalDamagePercentMultiplier: 0
-    physicalDamageFlatMultiplier: 0
-    fireDamagePercentMultiplier: 0
-    fireDamageFlatMultiplier: 0
-    waterDamagePercentMultiplier: 0
-    waterDamageFlatMultiplier: 0
-    windDamagePercentMultiplier: 0
-    windDamageFlatMultiplier: 0
-    thunderDamagePercentMultiplier: 0
-    thunderDamageFlatMultiplier: 0
-  attackNumber: 1
-  attackAoeRange: 3
+  attackData:
+    attackRange: 1
+    attackCoolDown: 1
+    attackDamage:
+      physicalDamage: 5
+      fireDamage: 0
+      waterDamage: 0
+      windDamage: 0
+      thunderDamage: 0
+      physicalDamagePercentMultiplier: 0
+      physicalDamageFlatMultiplier: 0
+      fireDamagePercentMultiplier: 0
+      fireDamageFlatMultiplier: 0
+      waterDamagePercentMultiplier: 0
+      waterDamageFlatMultiplier: 0
+      windDamagePercentMultiplier: 0
+      windDamageFlatMultiplier: 0
+      thunderDamagePercentMultiplier: 0
+      thunderDamageFlatMultiplier: 0
+    attackNumber: 1
+    attackAoeRange: 1
   attackIndicator: {fileID: 0}
-  type: 1
+  moveData:
+    moveSpeed: 0
+  allyType: 1
+  levelData:
+    cost: 0
+    leve: 0
+    exp: 0
 --- !u!65 &7359050680728626505
 BoxCollider:
   m_ObjectHideFlags: 0
