@@ -6,14 +6,22 @@ using UnityEditor;
 public class TerrainGenerator : MonoBehaviour
 {
     public enum DrawMode {
-        NoiseMap, Terrain
+        NoiseMap, Terrain, Falloff
     }
 
     [Header("Map Display Settings")]
     public DrawMode drawMode;
 
+    [Header("Falloff Map Settings")]
+    public bool useFalloffMap;
+    // Variables control the curve of falloff map
+    [Range(0, 10)]
+    public float a;
+    [Range(0, 10)]
+    public float b;
+
     [Header("Noise Map Settings")]
-    // Map width
+
     public int width;
     public int height;
     public int seed;
@@ -42,17 +50,33 @@ public class TerrainGenerator : MonoBehaviour
     [Header("Terrain Region Settings")]
     public TerrainRegion region;
 
+    float[,] _falloffMap;
     float[,] _noiseMap;
     MeshData2D _meshData;
     Texture2D _texture;
 
     public void generateMap() {
+        _falloffMap = Falloff.generateFalloffMap2D(width, height, a, b);
         _noiseMap = Noise.generateNoiseMap2D(width, height, seed, noiseScale,
             octaves, persistance, lacunarity, offset);
+
+        if (useFalloffMap) {
+            combineFalloffMap();
+        }
+
         _meshData = MeshGenerator.generateTerrainMesh(_noiseMap, meshHeightMultiplier, meshHeightCurve);
 
         drawMap();
         drawMesh();
+    }
+
+    private void combineFalloffMap() {
+        for (int x = 0; x < width; x ++) {
+            for (int y = 0; y < height; y ++) {
+                _noiseMap [x, y] = Mathf.Clamp(_noiseMap[x, y] - 
+                    _falloffMap[x, y], 0, 1);
+            }
+        }
     }
 
 
@@ -107,7 +131,11 @@ public class TerrainGenerator : MonoBehaviour
             
             case DrawMode.NoiseMap:
                 _texture = TextureGenerator.textureFromHeightMap(_noiseMap);
-                break;              
+                break;        
+
+            case DrawMode.Falloff:
+                _texture = TextureGenerator.textureFromHeightMap(_falloffMap);
+                break;      
         }
 
         if (miniMapRenderer == null) {
@@ -115,14 +143,13 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         miniMapRenderer.sharedMaterial.SetTexture("_UnlitColorMap", _texture);
-        miniMapRenderer.transform.localScale = new Vector3(width, height, 1);
+        //miniMapRenderer.transform.localScale = new Vector3(width, height, 1);
     }
 
     private void drawMesh() {
         if (meshFilter != null && meshRenderer != null) {
             meshFilter.sharedMesh = _meshData.createMesh();
             meshRenderer.sharedMaterial.SetTexture("_BaseColorMap", _texture);
-            // meshRenderer.transform.localScale = new Vector3(1, 1, 1);
         }    
     }
 
