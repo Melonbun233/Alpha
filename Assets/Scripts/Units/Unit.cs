@@ -66,11 +66,7 @@ public abstract class Unit : Destroyable
             target.GetComponent<Destroyable>().receiveDamage(attackDamage, gameObject);
             dealAoeDamage(target);
         }
-<<<<<<< HEAD
-        _attackTarget.GetComponent<Character>().receiveDamage(attackDamage, gameObject);
-=======
 
->>>>>>> c81fd0dcfc17f4eb3ed14e26fcf1131f943ac432
         _attackCoolDown = attackCoolDown;
     }
 

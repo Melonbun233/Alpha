@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 2511192376140142741}
   m_Layer: 8
   m_Name: valley (8)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 8816856334538861914}
   m_Layer: 8
   m_Name: valley (6)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -1104,7 +1104,7 @@ GameObject:
   - component: {fileID: 5229440674049442190}
   m_Layer: 8
   m_Name: valley (5)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 8231855563435634953}
   m_Layer: 8
   m_Name: valley (11)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -1376,7 +1376,7 @@ GameObject:
   - component: {fileID: 5667050489257837192}
   m_Layer: 8
   m_Name: valley (3)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -2383,7 +2383,7 @@ GameObject:
   - component: {fileID: 2594392975276077082}
   m_Layer: 8
   m_Name: valley (13)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -2655,7 +2655,7 @@ GameObject:
   - component: {fileID: 8604558973546111619}
   m_Layer: 8
   m_Name: valley (1)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -2791,7 +2791,7 @@ GameObject:
   - component: {fileID: 8490171204173800054}
   m_Layer: 8
   m_Name: valley
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -3063,7 +3063,7 @@ GameObject:
   - component: {fileID: 8701922059888167871}
   m_Layer: 8
   m_Name: valley (10)
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
