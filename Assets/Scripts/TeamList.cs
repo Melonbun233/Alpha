@@ -5,7 +5,7 @@ using UnityEngine;
 public class TeamList : MonoBehaviour
 {
 
-    public List<Ally> team;
+    public List<AllyData> team;
     public GameObject towerTab;
     public GameObject UI;
     public Vector2 offset;
@@ -13,12 +13,15 @@ public class TeamList : MonoBehaviour
     void Start()
     {
 
-        foreach(Ally ally in team)
+        team.Add(DefaultAllyData.defaultRangerData);
+        team.Add(DefaultAllyData.defaultBlockerData);
+
+        foreach(AllyData ally in team)
         {
             GameObject tower = Instantiate(towerTab, UI.transform) as GameObject;
             tower.GetComponent<RectTransform>().anchoredPosition = offset;
             offset.x = offset.x + 135f;
-            tower.GetComponent<TowerOption>().ally = ally;
+            tower.GetComponent<TowerOption>().allyData = ally;
         }
         
 

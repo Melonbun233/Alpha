@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1530841986067063137}
   m_Layer: 0
   m_Name: Ranger
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ BoxCollider:
   m_GameObject: {fileID: 7927832156493680333}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.5113189, y: 1.7079802, z: 1.5309854}
   m_Center: {x: 0.009833097, y: 1, z: 0.00000023841858}
@@ -59,11 +59,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6965c2412868ad34e8960ab02d87332e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  maxHealth: 50
-  healingPercentMultiplier: 1
-  healingFlatMultiplier: 0
-  resistance:
+  healthData:
+    health: 20
+    maxHealth: 20
+    healingPercentMultiplier: 0
+    healingFlatMultiplier: 0
+  resistanceData:
     physicalResistance: 0
     fireResistance: 0
     waterResistance: 0
@@ -82,29 +83,36 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}
-  attackRange: 10
-  attackCoolDown: 1
-  attackDamage:
-    physicalDamage: 15
-    fireDamage: 0
-    waterDamage: 0
-    windDamage: 0
-    thunderDamage: 0
-    physicalDamagePercentMultiplier: 0
-    physicalDamageFlatMultiplier: 0
-    fireDamagePercentMultiplier: 0
-    fireDamageFlatMultiplier: 0
-    waterDamagePercentMultiplier: 0
-    waterDamageFlatMultiplier: 0
-    windDamagePercentMultiplier: 0
-    windDamageFlatMultiplier: 0
-    thunderDamagePercentMultiplier: 0
-    thunderDamageFlatMultiplier: 0
-  attackNumber: 1
-  attackAoeRange: 0
+  attackData:
+    attackRange: 10
+    attackCoolDown: 1
+    attackDamage:
+      physicalDamage: 10
+      fireDamage: 0
+      waterDamage: 0
+      windDamage: 0
+      thunderDamage: 0
+      physicalDamagePercentMultiplier: 0
+      physicalDamageFlatMultiplier: 0
+      fireDamagePercentMultiplier: 0
+      fireDamageFlatMultiplier: 0
+      waterDamagePercentMultiplier: 0
+      waterDamageFlatMultiplier: 0
+      windDamagePercentMultiplier: 0
+      windDamageFlatMultiplier: 0
+      thunderDamagePercentMultiplier: 0
+      thunderDamageFlatMultiplier: 0
+    attackNumber: 1
+    attackAoeRange: 0
   attackIndicator: {fileID: 2127691592609089203, guid: 2961b116257d3524abdcdea03a02006a,
     type: 3}
-  type: 0
+  moveData:
+    moveSpeed: 0
+  allyType: 0
+  levelData:
+    cost: 0
+    level: 0
+    exp: 0
   rotateSpeed: 40
   attackRotateSpeed: 200
   rotateSpeedUpPeriod: 0.5
@@ -120,7 +128,6 @@ GameObject:
   - component: {fileID: 1975432350741990856}
   - component: {fileID: 302328471354911853}
   - component: {fileID: 6778713016341213525}
-  - component: {fileID: 3008989413832669564}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -189,19 +196,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3008989413832669564
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9023487780637698271}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8538261126353685303
 PrefabInstance:
   m_ObjectHideFlags: 0

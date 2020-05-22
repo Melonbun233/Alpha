@@ -359,7 +359,6 @@ MonoBehaviour:
   type1_lvl: 3
   type2_lvl: 2
   types: []
-  ally: {fileID: 0}
   placable: {fileID: 2724106884056582252}
   Type1: {fileID: 5570483126813705358}
   Type2: {fileID: 1564780082407804494}
@@ -371,8 +370,59 @@ MonoBehaviour:
   prefabs:
   - {fileID: 7927832156493680333, guid: f306b79c99068d14da1aba091cd590a5, type: 3}
   - {fileID: 7878802123115981918, guid: b4c186fd6f5a54e48be1f06481f4b2c8, type: 3}
+  allyData:
+    healthData:
+      health: 0
+      maxHealth: 0
+      healingPercentMultiplier: 0
+      healingFlatMultiplier: 0
+    attackData:
+      attackRange: 0
+      attackCoolDown: 0
+      attackDamage:
+        physicalDamage: 0
+        fireDamage: 0
+        waterDamage: 0
+        windDamage: 0
+        thunderDamage: 0
+        physicalDamagePercentMultiplier: 0
+        physicalDamageFlatMultiplier: 0
+        fireDamagePercentMultiplier: 0
+        fireDamageFlatMultiplier: 0
+        waterDamagePercentMultiplier: 0
+        waterDamageFlatMultiplier: 0
+        windDamagePercentMultiplier: 0
+        windDamageFlatMultiplier: 0
+        thunderDamagePercentMultiplier: 0
+        thunderDamageFlatMultiplier: 0
+      attackNumber: 0
+      attackAoeRange: 0
+    resistanceData:
+      physicalResistance: 0
+      fireResistance: 0
+      waterResistance: 0
+      windResistance: 0
+      thunderResistance: 0
+      physicalResisPercentMultiplier: 0
+      physicalResisFlatMultiplier: 0
+      fireResisPercentMultiplier: 0
+      fireResisFlatMultiplier: 0
+      waterResisPercentMultiplier: 0
+      waterResisFlatMultiplier: 0
+      windResisPercentMultiplier: 0
+      windResisFlatMultiplier: 0
+      thunderResisPercentMultiplier: 0
+      thunderResisFlatMultiplier: 0
+    moveData:
+      moveSpeed: 0
+    allyType: 0
+    levelData:
+      cost: 0
+      level: 0
+      exp: 0
   ranger: {fileID: 21300000, guid: 5e8cacb6109f5284aba22669679d0fff, type: 3}
   melee: {fileID: 21300000, guid: dbe8b41e380f4ce47b75ce76cebc1fd2, type: 3}
+  physical: {fileID: 21300000, guid: 7439a017f5832c54d8dc275a56249bc4, type: 3}
   Fire: {fileID: 21300000, guid: e309e32d2011ec9418e0aead8d1b1f81, type: 3}
   Water: {fileID: 21300000, guid: 0bd5736962ba5124086e6762c26d97be, type: 3}
   Wind: {fileID: 21300000, guid: ea4d1b7ae510237449c894f9bb4b1122, type: 3}

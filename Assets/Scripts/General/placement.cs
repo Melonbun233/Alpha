@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class placement : MonoBehaviour
 {
-    public static placement toPlace;
 
-    public GameObject towerOption;
+
+
+
+    public static placement toPlace;
+    public AllyData allyData;
+    public GameObject towerModel;
     public Vector3 cursor;
     public GameObject towerToFollow;
     public Vector3 wallOffset;
     public Vector3 valleyOffset;
+    
+
 
     Ray ray;
     public RaycastHit hit;
@@ -31,7 +37,7 @@ public class placement : MonoBehaviour
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 1000) && towerToFollow != null && hit.transform.tag != "UI" && hit.transform.tag != "Ally")
+        if(Physics.Raycast(ray, out hit, 1000) && towerToFollow != null && hit.transform.tag != "UI" && hit.transform.tag != "Ally" && hit.transform.tag != "Untagged")
         {
             if(hit.transform.tag == "walls")
             {

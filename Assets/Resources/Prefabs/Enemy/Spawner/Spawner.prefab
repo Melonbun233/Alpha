@@ -50,16 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9154e072e3ac4524d92fefd263e02861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  healingPercentMultiplier: 0
-  healingFlatMultiplier: 0
-  resistance:
-    physicalResistance: 0
-    fireResistance: 0
-    waterResistance: 0
-    windResistance: 0
-    thunderResistance: 0
     physicalResisPercentMultiplier: 0
     physicalResisFlatMultiplier: 0
     fireResisPercentMultiplier: 0

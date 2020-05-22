@@ -5,13 +5,10 @@ using UnityEngine;
 public class Destroyable : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int health;
-    public int maxHealth;
-    public float healingPercentMultiplier = 0f;
-    public int healingFlatMultiplier = 0;
+    public HealthData healthData;
 
     [Header("Resistance Settings")]
-    public ResistanceData resistance;
+    public ResistanceData resistanceData;
 
     [Header("Destory Effect Settings")]
     public GameObject destroyEffect;
@@ -22,8 +19,8 @@ public class Destroyable : MonoBehaviour
     public Vector3 center;
 
     protected virtual void Start() {
-        if (maxHealth < health) {
-            health = maxHealth;
+        if (healthData.maxHealth < healthData.health) {
+            healthData.health = healthData.maxHealth;
         }
     }
 
@@ -38,13 +35,13 @@ public class Destroyable : MonoBehaviour
     // is 0 in the next frame
     // Over damage will not result in negative health!
     public virtual void receiveDamage(DamageData damageData, GameObject receiveFrom) {
-        int damage = damageData.getTotalDamage(this.resistance);
+        int damage = damageData.getTotalDamage(this.resistanceData);
 
         // Avoid negative health
-        if (health <= damage) {
-            health = 0;
+        if (healthData.health <= damage) {
+            healthData.health = 0;
         } else {
-            health -= damage;
+            healthData.health -= damage;
         }
     }
 
@@ -59,16 +56,17 @@ public class Destroyable : MonoBehaviour
             return;
         }
 
-        int actualHealing = Utils.mult(healing, healingPercentMultiplier, healingFlatMultiplier);
+        int actualHealing = Utils.mult(healing, healthData.healingPercentMultiplier, 
+            healthData.healingFlatMultiplier);
         if (actualHealing < 0) {
             return;
         }
         
         // Avoid overheal
-        if (health + actualHealing > maxHealth) {
-            health = maxHealth;
+        if (healthData.health + actualHealing > healthData.maxHealth) {
+            healthData.health = healthData.maxHealth;
         } else {
-            health += actualHealing;
+            healthData.health += actualHealing;
         }
     }
 
@@ -84,8 +82,8 @@ public class Destroyable : MonoBehaviour
             return;
         }
 
-        maxHealth += increment;
-        health += increment;
+        healthData.maxHealth += increment;
+        healthData.health += increment;
     }
 
     // Decrement max health. 
@@ -102,26 +100,26 @@ public class Destroyable : MonoBehaviour
             return;
         }
 
-        if (maxHealth - decrement < 0) {
-            maxHealth = 0;
+        if (healthData.maxHealth - decrement < 0) {
+            healthData.maxHealth = 0;
         } else {
-            maxHealth -= decrement;
+            healthData.maxHealth -= decrement;
         }
         
-        if (health > maxHealth) {
-            health = maxHealth;
+        if (healthData.health > healthData.maxHealth) {
+            healthData.health = healthData.maxHealth;
         }
         
     }
 
     public virtual bool isDead() {
-        return health <= 0;
+        return healthData.health <= 0;
     }
 
 
     // destroy self with possible effect
     public virtual void kill() {
-        health = 0;
+        healthData.health = 0;
         if (destroyEffect) {
             GameObject effect = Instantiate(destroyEffect, transform.position, transform.rotation);
             Destroy(effect, destroyEffectPeriod);

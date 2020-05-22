@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ranger : Ally
 {
-    [Header("Attack Indicator Settings")]
+    [Header("Ranger Attack Indicator Settings")]
     public float rotateSpeed;
     public float attackRotateSpeed;
     public float rotateSpeedUpPeriod;
@@ -21,7 +21,7 @@ public class Ranger : Ally
     protected override void Start() {
         base.Start();
 
-        type = AllyType.Ranger;
+        allyType = AllyType.Ranger;
         
         _initialRotateSpeed = rotateSpeed;
 
@@ -83,8 +83,8 @@ public class Ranger : Ally
     }
 
     private void updateAttackIndicators() {
-        if (_lineRenderers.Count < attackNumber) {
-            addAttackIndicators(attackNumber - _lineRenderers.Count);
+        if (_lineRenderers.Count < attackData.attackNumber) {
+            addAttackIndicators(attackData.attackNumber - _lineRenderers.Count);
         }
 
         // clear all attack indicators
