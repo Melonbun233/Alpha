@@ -49,6 +49,13 @@ public abstract class Unit : Destroyable
     protected GameObject _moveTarget;
     protected NavMeshAgent _navAgent;
 
+    // Effects
+    public EffectData effectData;
+
+    // Effect Events & Delegates
+    public delegate void OnAttackEventHandler(GameObject attacker, GameObject target);
+    public event OnAttackEventHandler OnAttackEvent;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -88,6 +95,8 @@ public abstract class Unit : Destroyable
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
+            OnAttackEvent(this.gameObject, target);
+
             dealAoeDamage(target);
         }
 
@@ -129,6 +138,8 @@ public abstract class Unit : Destroyable
         }
     }
 
+    // Spawn a unit with the predefined data
+    // Effect data inside the data will be applied to the object by default
     public static GameObject spawn(GameObject prefab, UnitData data, 
         Vector3 position, Quaternion rotation) {
         if (prefab.GetComponent<Unit>() == null) {
