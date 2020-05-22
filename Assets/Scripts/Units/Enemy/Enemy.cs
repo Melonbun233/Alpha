@@ -116,7 +116,7 @@ public class Enemy : Unit {
             float cloestDistance = float.PositiveInfinity;
             foreach (GameObject ally in allies) {
                 // only set if the ally is a blocker and within vision range
-                if (ally.GetComponent<Ally>().allyType == AllyType.Blocker && 
+                if (ally.GetComponent<Ally>().hasAllyType(AllyType.Blocker) && 
                     Utils.isWithinRange(transform.position, ally.transform.position, visionRange)) {
                     // Use the ally that's cloeset
                     float distance = Utils.horizontalDistance(transform, ally.transform);

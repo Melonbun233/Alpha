@@ -4,14 +4,16 @@ using UnityEngine;
 
 [System.Serializable]
 public class AllyData: UnitData {
-    public AllyType allyType;
+    public AllyType allyType1;
+    public AllyType allyType2;
     public AllyLevelData levelData;
 
     public AllyData(HealthData healthData, AttackData attackData,
         ResistanceData resistanceData, MoveData moveData, 
-        AllyType allyType, AllyLevelData levelData) : base(healthData, attackData,
-        resistanceData, moveData) {
-            this.allyType = allyType;
+        AllyType allyType1, AllyType allyType2, AllyLevelData levelData) : 
+        base(healthData, attackData, resistanceData, moveData) {
+            this.allyType1 = allyType1;
+            this.allyType2 = allyType2;
             this.levelData = levelData;
         }
 
@@ -23,23 +25,54 @@ public class AllyData: UnitData {
         UnitData.copyData(obj, (UnitData)data);
         Ally ally = obj.GetComponent<Ally>();
 
-        ally.allyType = data.allyType;
+        ally.allyType1 = data.allyType1;
+        ally.allyType2 = data.allyType2;
         ally.levelData = data.levelData;
         return obj;
+    }
+
+    // One ally can only have up to two types
+    // If non or only one type is selected, this returns true
+    // Otherwise return false
+    public bool hasAllyTypeSlot() {
+        return allyType1 == AllyType.None || allyType2 == AllyType.None;
+    }
+
+    // Set the ally type if there's at least one ally type slot free
+    // Return true on successful setting
+    // If there are already two types, nothing is set and false is returned
+    public bool setAllyType(AllyType type) {
+        if (!hasAllyTypeSlot()) {
+            return false;
+        }
+
+        if (allyType1 == AllyType.None) {
+            allyType1 = type;
+        } else {
+            allyType2 = type;
+        }
+
+        return true;
     }
 }
 
 [System.Serializable]
 public enum AllyType {
-    Ranger, // rangers can only be placed on walls and will not block enemies
-    Blocker // blockers can only be placed on vallys and will block enemies
+    Ranger, 
+    Blocker,
+    Fire,
+    Water,
+    Wind,
+    Thunder,
+    None
 }
 
 // Base class for all allies
 public class Ally : Unit
 {
     [Header("Ally Type")]
-    public AllyType allyType;
+    public AllyType allyType1 = AllyType.None;
+    public AllyType allyType2 = AllyType.None;
     public AllyLevelData levelData;
 
     // Update the attack target
@@ -91,5 +124,9 @@ public class Ally : Unit
         GameObject obj = Instantiate(prefab, position, rotation);
         AllyData.copyData(obj, data);
         return obj;
+    }
+
+    public bool hasAllyType(AllyType type) {
+        return allyType1 == type || allyType2 == type;
     }
 }
