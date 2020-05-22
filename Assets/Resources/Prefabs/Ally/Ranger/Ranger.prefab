@@ -108,10 +108,11 @@ MonoBehaviour:
     type: 3}
   moveData:
     moveSpeed: 0
-  allyType: 0
+  allyType1: 0
+  allyType2: 6
   levelData:
     cost: 0
-    leve: 0
+    level: 0
     exp: 0
   rotateSpeed: 40
   attackRotateSpeed: 200

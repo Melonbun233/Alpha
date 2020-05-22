@@ -6,7 +6,5 @@ public class Blocker : Ally
 {
     protected override void Start() {
         base.Start();
-
-        allyType = AllyType.Blocker;
     }
 }

@@ -190,10 +190,11 @@ MonoBehaviour:
   attackIndicator: {fileID: 0}
   moveData:
     moveSpeed: 0
-  allyType: 1
+  allyType1: 1
+  allyType2: 6
   levelData:
     cost: 0
-    leve: 0
+    level: 0
     exp: 0
 --- !u!65 &7359050680728626505
 BoxCollider:
