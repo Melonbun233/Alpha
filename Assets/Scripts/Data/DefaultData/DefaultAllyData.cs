@@ -13,7 +13,7 @@ public static class DefaultAllyData
                 new AttackData(10f, 1f, new DamageData(10, 0, 0, 0, 0), 1, 0f),
                 new ResistanceData(0, 0, 0, 0, 0),
                 new MoveData(0f),
-                AllyType.Ranger,
+                AllyType.Ranger, AllyType.None, 
                 new AllyLevelData(5, 1, 0)
             );
         }
@@ -28,8 +28,24 @@ public static class DefaultAllyData
                 new AttackData(1f, 1f, new DamageData(5, 0, 0, 0, 0), 1, 1f),
                 new ResistanceData(10, 0, 0, 0, 0),
                 new MoveData(0f),
-                AllyType.Blocker,
+                AllyType.Blocker, AllyType.None,
                 new AllyLevelData(5, 1, 0)
+            );
+        }
+    }
+
+    // Blank ally
+    public static AllyData defaultBlankData
+    {
+        get
+        {
+            return new AllyData (
+                new HealthData(10, 10, 0f, 0),
+                new AttackData(1f, 1f, new DamageData(5, 0, 0, 0, 0), 1, 0f),
+                new ResistanceData(0, 0, 0, 0, 0),
+                new MoveData(0f),
+                AllyType.None, AllyType.None,
+                new AllyLevelData(5, 0, 0)
             );
         }
     }
