@@ -38,6 +38,11 @@ public class ResistanceData
         this.thunderResistance = thunder;
     }
 
+    public static ResistanceData deepCopy(ResistanceData data) {
+        return new ResistanceData(data.physicalResistance, data.fireResistance,
+            data.waterResistance, data.windResistance, data.thunderResistance);
+    }
+
     public int getPhysicalResistance() {
         return Utils.mult(physicalResistance, physicalResisPercentMultiplier, physicalResisFlatMultiplier);
     }

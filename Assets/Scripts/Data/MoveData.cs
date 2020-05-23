@@ -9,4 +9,8 @@ public class MoveData {
     public MoveData (float moveSpeed) {
         this.moveSpeed = moveSpeed;
     }
+
+    public static MoveData deepCopy(MoveData data) {
+        return new MoveData(data.moveSpeed);
+    }
 }

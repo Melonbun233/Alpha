@@ -14,4 +14,8 @@ public class AllyLevelData {
         this.level = level;
         this.exp = exp;
     }
+
+    public static AllyLevelData deepCopy(AllyLevelData data) {
+        return new AllyLevelData(data.cost, data.level, data.exp);
+    }
 }

@@ -35,10 +35,10 @@ public class UnitData{
         if (unit == null) {
             return null;
         }
-        unit.healthData = data.healthData;
-        unit.attackData = data.attackData;
-        unit.resistanceData = data.resistanceData;
-        unit.moveData = data.moveData;
+        unit.healthData = HealthData.deepCopy(data.healthData);
+        unit.attackData = AttackData.deepCopy(data.attackData);
+        unit.resistanceData = ResistanceData.deepCopy(data.resistanceData);
+        unit.moveData = MoveData.deepCopy(data.moveData);
         return obj;
     }
 }
@@ -60,6 +60,18 @@ public abstract class Unit : Destroyable
 
     protected GameObject _moveTarget;
     protected NavMeshAgent _navAgent;
+
+    // Effects
+    //public EffectData effectData;
+
+    // Effect Events & Delegates
+    public delegate void OnAttackEventHandler(GameObject attacker, GameObject target);
+    // Called on each attack
+    public event OnAttackEventHandler onAttackEvent;
+
+    public delegate void OnUpdateHandler();
+    // Called on each update
+    public event OnUpdateHandler onUpdateEvent;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -100,6 +112,8 @@ public abstract class Unit : Destroyable
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
+            //OnAttackEvent(this.gameObject, target);
+
             dealAoeDamage(target);
         }
 
@@ -141,6 +155,8 @@ public abstract class Unit : Destroyable
         }
     }
 
+    // Spawn a unit with the predefined data
+    // Effect data inside the data will be applied to the object by default
     public static GameObject spawn(GameObject prefab, UnitData data, 
         Vector3 position, Quaternion rotation) {
         if (prefab.GetComponent<Unit>() == null) {

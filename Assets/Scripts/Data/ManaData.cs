@@ -13,4 +13,8 @@ public class ManaData {
         this.maxMana = maxMana;
         this.manaRegeneration = manaRegeneration;
     }
+
+    public static ManaData deepCopy(ManaData data) {
+        return new ManaData(data.mana, data.maxMana, data.manaRegeneration);
+    }
 }

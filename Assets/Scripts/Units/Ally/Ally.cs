@@ -6,15 +6,15 @@ using UnityEngine;
 public class AllyData: UnitData {
     public AllyType allyType1;
     public AllyType allyType2;
-    public AllyLevelData levelData;
+    public AllyLevelData allyLevelData;
 
     public AllyData(HealthData healthData, AttackData attackData,
         ResistanceData resistanceData, MoveData moveData, 
-        AllyType allyType1, AllyType allyType2, AllyLevelData levelData) : 
+        AllyType allyType1, AllyType allyType2, AllyLevelData allyLevelData) : 
         base(healthData, attackData, resistanceData, moveData) {
             this.allyType1 = allyType1;
             this.allyType2 = allyType2;
-            this.levelData = levelData;
+            this.allyLevelData = allyLevelData;
         }
 
     public static GameObject copyData(GameObject obj, AllyData data) {
@@ -27,7 +27,7 @@ public class AllyData: UnitData {
 
         ally.allyType1 = data.allyType1;
         ally.allyType2 = data.allyType2;
-        ally.levelData = data.levelData;
+        ally.allyLevelData = AllyLevelData.deepCopy(data.allyLevelData);
         return obj;
     }
 
@@ -79,7 +79,7 @@ public class Ally : Unit
     [Header("Ally Type")]
     public AllyType allyType1 = AllyType.None;
     public AllyType allyType2 = AllyType.None;
-    public AllyLevelData levelData;
+    public AllyLevelData allyLevelData;
 
     // Update the attack target
     // Default alg is to find the nearest enemy within range
