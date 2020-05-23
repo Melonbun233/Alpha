@@ -11,9 +11,13 @@ public class EffectData
     // Effect Stacks
     public int burningStack;
 
-    public bool hasEffect(Effect effect) {
-        foreach(Effect element in effects) {
-            
+    public bool hasEffect(EffectType type) {
+        foreach(Effect effect in effects) {
+            if (effect.type == type) {
+                return true;
+            }
         }
+
+        return false;
     }
 }

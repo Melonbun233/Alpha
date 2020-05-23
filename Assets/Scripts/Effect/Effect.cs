@@ -7,14 +7,26 @@ using UnityEngine;
 public abstract class Effect
 {
     // Whether multiple instances of this effect can be applied
-    // the a unit at the same time
-    public abstract bool stackable;
-    // Add the the effect to the unit
-    public void OnApplyEffect(Unit unit) {
-        
-    }
-    // Remove the effect from the unit
-    public void OnRemoveEffect(Unit unit) {
+    // on a unit at the same time
+    public abstract bool stackable {get; set;}
+    public abstract EffectType type {get;}
 
-    }
+    // Remaning time this effect applied on the unit
+    // If the period is PositiveInfinity, it should last forever
+    public abstract float period {get; set;}
+
+    // Add the the effect to the unit
+    // If this effect is non-stackable, there should be only
+    // one instance of this effect applied on the unit
+    public abstract void apply(Unit unit);
+
+    // Remove the effect from the unit
+    public abstract void remove(Unit unit); 
+}
+
+
+// All types of effect
+public enum EffectType {
+    BurningEffect,
+    BurningAttackEffect
 }

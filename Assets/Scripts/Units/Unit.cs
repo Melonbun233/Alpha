@@ -55,11 +55,11 @@ public abstract class Unit : Destroyable
     // Effect Events & Delegates
     public delegate void OnAttackEventHandler(GameObject attacker, GameObject target);
     // Called on each attack
-    public event OnAttackEventHandler onAttackEvent;
+    public event OnAttackEventHandler OnAttackEvent;
 
-    public delegate void OnUpdateHandler();
+    public delegate void OnUpdateHandler(GameObject unit, float deltaTime);
     // Called on each update
-    public event OnUpdateHandler onUpdateEvent;
+    public event OnUpdateHandler OnUpdateEvent;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -80,6 +80,10 @@ public abstract class Unit : Destroyable
         if (gameObject.activeSelf) {
             preAttack();
             move();
+        }
+
+        if (OnUpdateEvent != null) {
+            OnUpdateEvent(this, deltaTime);
         }
         
     }
