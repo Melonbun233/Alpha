@@ -54,7 +54,12 @@ public abstract class Unit : Destroyable
 
     // Effect Events & Delegates
     public delegate void OnAttackEventHandler(GameObject attacker, GameObject target);
-    public event OnAttackEventHandler OnAttackEvent;
+    // Called on each attack
+    public event OnAttackEventHandler onAttackEvent;
+
+    public delegate void OnUpdateHandler();
+    // Called on each update
+    public event OnUpdateHandler onUpdateEvent;
 
     // Start is called before the first frame update
     protected override void Start()

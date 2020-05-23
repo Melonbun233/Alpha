@@ -10,4 +10,10 @@ public class EffectData
 
     // Effect Stacks
     public int burningStack;
+
+    public bool hasEffect(Effect effect) {
+        foreach(Effect element in effects) {
+            
+        }
+    }
 }
