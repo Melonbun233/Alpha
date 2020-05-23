@@ -18,4 +18,9 @@ public class AttackData {
             this.attackNumber = attackNumber;
             this.attackAoeRange = attackAoeRange;
         }
+
+    public static AttackData deepCopy(AttackData data) {
+        return new AttackData(data.attackRange, data.attackCoolDown, 
+            DamageData.deepCopy(data.attackDamage), data.attackNumber, data.attackAoeRange);
+    }
 }

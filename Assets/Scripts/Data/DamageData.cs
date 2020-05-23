@@ -7,15 +7,15 @@ public class DamageData
 {
     [Header("Initial Damage Settings")]
     [SerializeField]
-    private int physicalDamage;
+    public int physicalDamage;
     [SerializeField]
-    private int fireDamage;
+    public int fireDamage;
     [SerializeField]
-    private int waterDamage;
+    public int waterDamage;
     [SerializeField]
-    private int windDamage;
+    public int windDamage;
     [SerializeField]
-    private int thunderDamage;
+    public int thunderDamage;
 
     [Header("Initial Muiltiplier Settings")]
     public float physicalDamagePercentMultiplier = 0f;
@@ -35,6 +35,11 @@ public class DamageData
         this.waterDamage = water;
         this.windDamage = wind;
         this.thunderDamage = thunder;
+    }
+
+    public static DamageData deepCopy(DamageData data) {
+        return new DamageData(data.physicalDamage, data.fireDamage, data.waterDamage,
+            data.windDamage, data.thunderDamage);
     }
 
     // Calculte damage with corresponding resistance
