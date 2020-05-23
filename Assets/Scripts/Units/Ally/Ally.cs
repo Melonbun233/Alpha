@@ -38,6 +38,12 @@ public class AllyData: UnitData {
         return allyType1 == AllyType.None || allyType2 == AllyType.None;
     }
 
+    //return true if contains type.
+    public bool isType(AllyType type)
+    {
+        return allyType1 == type || allyType2 == type;
+    }
+
     // Set the ally type if there's at least one ally type slot free
     // Return true on successful setting
     // If there are already two types, nothing is set and false is returned

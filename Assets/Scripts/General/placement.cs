@@ -15,7 +15,7 @@ public class placement : MonoBehaviour
     public GameObject towerToFollow;
     public Vector3 wallOffset;
     public Vector3 valleyOffset;
-    
+    Vector3 rotate;
 
 
     Ray ray;
@@ -30,7 +30,7 @@ public class placement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       rotate = new Vector3();
     }
 
     // Update is called once per frame
@@ -47,7 +47,14 @@ public class placement : MonoBehaviour
             {
                 towerToFollow.transform.position = hit.transform.position + valleyOffset;
             }
-            
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            rotate.y += 90f;
+            Quaternion temp = new Quaternion();
+            temp.eulerAngles = rotate;
+            towerToFollow.transform.rotation = temp;
         }
     }
 }

@@ -7,8 +7,6 @@ public class TowerOption : MonoBehaviour
 {
     public int type1_lvl;
     public int type2_lvl;
-    public List<String> types;
-    public GameObject placable;
     public GameObject Type1;
     public GameObject Type2;
     public GameObject Type1_lvl;
@@ -36,7 +34,7 @@ public class TowerOption : MonoBehaviour
 
     public GameObject allyPrefab()
     {
-        AllyType type = allyData.allyType;
+        AllyType type = allyData.allyType1;
         switch (type)
         {
             case AllyType.Ranger:
@@ -52,7 +50,7 @@ public class TowerOption : MonoBehaviour
         GameObject temp = allyPrefab();
         temp.GetComponent<Ally>().enabled = false;
         temp.GetComponent<Collider>().enabled = false;
-        if(allyData.allyType == AllyType.Blocker)temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+        if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
         temp.tag = "Untagged";
         placement.toPlace.towerModel = temp;
         placement.toPlace.allyData = allyData;
@@ -61,18 +59,6 @@ public class TowerOption : MonoBehaviour
 
     void Start()
     {
-        types = allyData.getAttackType();
-
-        AllyType type = allyData.allyType;
-        switch (type)
-        {
-            case AllyType.Ranger:
-                placable.GetComponent<Image>().sprite = ranger;
-                break;
-            case AllyType.Blocker:
-                placable.GetComponent<Image>().sprite = melee;
-                break;
-        }
 
 
     }
@@ -83,48 +69,56 @@ public class TowerOption : MonoBehaviour
         //Type1_lvl.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
         // Type2_lvl.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
         // Cost.GetComponent<Text>().text = "Cost: " + cost.ToString();
-        try
-        {
-            String x = types[0];
+            AllyType x = allyData.allyType1;
             switch (x)
             {
-                case "fire":
+                case AllyType.Fire:
                     Type1.GetComponent<Image>().sprite = Fire;
                     break;
-                case "water":
+                case AllyType.Water:
                     Type1.GetComponent<Image>().sprite = Water;
                     break;
-                case "thunder":
+                case AllyType.Thunder:
                     Type1.GetComponent<Image>().sprite = Thunder;
                     break;
-                case "wind":
+                case AllyType.Wind:
                     Type1.GetComponent<Image>().sprite = Wind;
                     break;
+                case AllyType.Ranger:
+                    Type1.GetComponent<Image>().sprite = ranger;
+                    break;
+                case AllyType.Blocker:
+                    Type1.GetComponent<Image>().sprite = melee;
+                    break;
             }
 
-            if (types.Count == 2) x = types[1];
+            AllyType z = allyData.allyType2;
 
-            switch (x)
+            switch (z)
             {
-                case "fire":
+                case AllyType.Fire:
                     Type2.GetComponent<Image>().sprite = Fire;
                     break;
-                case "water":
+                case AllyType.Water:
                     Type2.GetComponent<Image>().sprite = Water;
                     break;
-                case "thunder":
+                case AllyType.Thunder:
                     Type2.GetComponent<Image>().sprite = Thunder;
                     break;
-                case "wind":
+                case AllyType.Wind:
                     Type2.GetComponent<Image>().sprite = Wind;
                     break;
+                case AllyType.Ranger:
+                    Type2.GetComponent<Image>().sprite = ranger;
+                    break;
+                case AllyType.Blocker:
+                    Type2.GetComponent<Image>().sprite = melee;
+                    break;
+                case AllyType.None:
+                    Type2.SetActive(false);
+                    break;
             }
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            Type1.GetComponent<Image>().sprite = physical;
-            Type2.SetActive(false);
-        }
+
 
     }
 }

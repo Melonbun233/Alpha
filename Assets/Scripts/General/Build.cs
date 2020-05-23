@@ -18,11 +18,15 @@ public class Build : MonoBehaviour
         if (Tower != null && !hasbuilt) { 
             if(placement.toPlace.hit.transform.tag == "walls")
             {
+                if (placement.toPlace.allyData.isType(AllyType.Blocker))
+                {
+                    print("cannot place blocker on walls!");
+                    return;
+                }
+                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
                 GameObject instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.wallOffset, Quaternion.identity);
-                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset , Quaternion.identity) as GameObject;
                 instant.GetComponent<Ally>().enabled = true;
                 instant.GetComponent<Collider>().enabled = true;
-                if (placement.toPlace.allyData.allyType == AllyType.Blocker) instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                 instant.tag = "Ally";
                 Destroy(placement.toPlace.towerToFollow);
                 placement.toPlace.towerToFollow = null;
@@ -31,11 +35,16 @@ public class Build : MonoBehaviour
 
             if(placement.toPlace.hit.transform.tag == "valley")
             {
-                GameObject instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, Quaternion.identity);
+                if (!placement.toPlace.allyData.isType(AllyType.Blocker))
+                {
+                    print("cannot place ranger class on valleys!");
+                    return;
+                }
                 //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
+                GameObject instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, Quaternion.identity);
                 instant.GetComponent<Ally>().enabled = true;
                 instant.GetComponent<Collider>().enabled = true;
-                if (placement.toPlace.allyData.allyType == AllyType.Blocker) instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
+                instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                 instant.tag = "Ally";
                 Destroy(placement.toPlace.towerToFollow);
                 placement.toPlace.towerToFollow = null;
@@ -43,14 +52,6 @@ public class Build : MonoBehaviour
             }
         }
         
-    }
-
-    void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            print(placement.toPlace.hit.transform.position);
-        }
     }
 
     // Update is called once per frame

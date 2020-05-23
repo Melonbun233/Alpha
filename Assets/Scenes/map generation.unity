@@ -1062,7 +1062,8 @@ MonoBehaviour:
       thunderResisFlatMultiplier: 0
     moveData:
       moveSpeed: 0
-    allyType: 0
+    allyType1: 0
+    allyType2: 0
     levelData:
       cost: 0
       level: 0
@@ -1071,7 +1072,7 @@ MonoBehaviour:
   cursor: {x: 0, y: 0, z: 0}
   towerToFollow: {fileID: 0}
   wallOffset: {x: 0, y: 2, z: 0}
-  valleyOffset: {x: 0, y: 1, z: 0}
+  valleyOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1200664448
 MonoBehaviour:
   m_ObjectHideFlags: 0
