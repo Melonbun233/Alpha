@@ -24,7 +24,7 @@ public static class DefaultAllyData
         get 
         {
             return new AllyData (
-                new HealthData(50, 50, 0f, 0),
+                new HealthData(200, 200, 0f, 0),
                 new AttackData(1f, 1f, new DamageData(5, 0, 0, 0, 0), 1, 1f),
                 new ResistanceData(10, 0, 0, 0, 0),
                 new MoveData(0f),

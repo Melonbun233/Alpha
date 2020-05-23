@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1530841986067063137}
   m_Layer: 0
   m_Name: Ranger
-  m_TagString: Untagged
+  m_TagString: allyToPlace
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ BoxCollider:
   m_GameObject: {fileID: 7927832156493680333}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.5113189, y: 1.7079802, z: 1.5309854}
   m_Center: {x: 0.009833097, y: 1, z: 0.00000023841858}
@@ -110,7 +110,7 @@ MonoBehaviour:
     moveSpeed: 0
   allyType1: 0
   allyType2: 6
-  levelData:
+  allyLevelData:
     cost: 0
     level: 0
     exp: 0

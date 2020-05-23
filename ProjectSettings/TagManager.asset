@@ -12,6 +12,7 @@ TagManager:
   - Enemy_spawn
   - Spawner
   - UI
+  - allyToPlace
   layers:
   - Default
   - TransparentFX

@@ -45,13 +45,17 @@ public class TowerOption : MonoBehaviour
         return null;
     }
 
+
+
+
+
     void OnMouseUp()
     {
         GameObject temp = allyPrefab();
         temp.GetComponent<Ally>().enabled = false;
-        temp.GetComponent<Collider>().enabled = false;
+        //temp.GetComponent<Collider>().enabled = false;
         if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
-        temp.tag = "Untagged";
+        temp.tag = "allyToPlace";
         placement.toPlace.towerModel = temp;
         placement.toPlace.allyData = allyData;
         placement.toPlace.towerToFollow = Instantiate(temp) as GameObject;
@@ -88,7 +92,7 @@ public class TowerOption : MonoBehaviour
                     Type1.GetComponent<Image>().sprite = ranger;
                     break;
                 case AllyType.Blocker:
-                    Type1.GetComponent<Image>().sprite = melee;
+                    Type1.GetComponent<Image>().sprite = physical;
                     break;
             }
 
@@ -112,7 +116,7 @@ public class TowerOption : MonoBehaviour
                     Type2.GetComponent<Image>().sprite = ranger;
                     break;
                 case AllyType.Blocker:
-                    Type2.GetComponent<Image>().sprite = melee;
+                    Type2.GetComponent<Image>().sprite = physical;
                     break;
                 case AllyType.None:
                     Type2.SetActive(false);

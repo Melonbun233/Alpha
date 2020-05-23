@@ -1,22 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Build : MonoBehaviour
 {
-    bool  hasbuilt;
+    bool hasbuilt;
+    bool Validbuild;
     GameObject Tower;
+    GameObject Instant;
 
     // Start is called before the first frame update
     void Start()
     {
         hasbuilt = false;
+        Validbuild = true;
     }
 
-    void OnMouseUp()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Tower != null && !hasbuilt) { 
-            if(placement.toPlace.hit.transform.tag == "walls")
+        if (other.transform.tag == "walls")
+        {
+            Validbuild = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "walls")
+        {
+            Validbuild = true;
+        }
+    }
+
+
+    public void buildT()
+    {
+        if (Tower != null && !hasbuilt && placement.toPlace.towerModel != null)
+        {
+            if (placement.toPlace.hit.transform.tag == "walls")
             {
                 if (placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
@@ -24,35 +43,110 @@ public class Build : MonoBehaviour
                     return;
                 }
                 //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
-                GameObject instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.wallOffset, Quaternion.identity);
-                instant.GetComponent<Ally>().enabled = true;
-                instant.GetComponent<Collider>().enabled = true;
-                instant.tag = "Ally";
+                Quaternion rotate = new Quaternion();
+                rotate.eulerAngles = placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.wallOffset, rotate);
+                Instant.GetComponent<Ally>().enabled = true;
+                Instant.GetComponent<Collider>().enabled = true;
+                Instant.tag = "Ally";
                 Destroy(placement.toPlace.towerToFollow);
+                placement.toPlace.rotate = new Vector3(0, 0, 0);
                 placement.toPlace.towerToFollow = null;
+                placement.toPlace.towerModel = null;
+                Tower = null;
                 hasbuilt = true;
+
             }
 
-            if(placement.toPlace.hit.transform.tag == "valley")
+            if (placement.toPlace.hit.transform.tag == "valley")
             {
                 if (!placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
                     print("cannot place ranger class on valleys!");
                     return;
                 }
+                if (Validbuild == false)
+                {
+                    print("intercept with walls!");
+                    return;
+                }
+
                 //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
-                GameObject instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, Quaternion.identity);
-                instant.GetComponent<Ally>().enabled = true;
-                instant.GetComponent<Collider>().enabled = true;
-                instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
-                instant.tag = "Ally";
+                Quaternion rotate = new Quaternion();
+                rotate.eulerAngles = placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, rotate);
+                Instant.GetComponent<Ally>().enabled = true;
+                Instant.GetComponent<Collider>().enabled = true;
+                Instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
+                Instant.tag = "Ally";
                 Destroy(placement.toPlace.towerToFollow);
+                placement.toPlace.rotate = new Vector3(0, 0, 0);
                 placement.toPlace.towerToFollow = null;
+                placement.toPlace.towerModel = null;
+                Tower = null;
                 hasbuilt = true;
             }
         }
-        
     }
+
+    /*void OnMouseUp()
+    {
+        if (Tower != null && !hasbuilt && placement.toPlace.towerModel != null)
+        {
+            if (placement.toPlace.hit.transform.tag == "walls")
+            {
+                if (placement.toPlace.allyData.isType(AllyType.Blocker))
+                {
+                    print("cannot place blocker on walls!");
+                    return;
+                }
+                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
+                Quaternion rotate = new Quaternion();
+                rotate.eulerAngles = placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.wallOffset, rotate);
+                Instant.GetComponent<Ally>().enabled = true;
+                Instant.GetComponent<Collider>().enabled = true;
+                Instant.tag = "Ally";
+                Destroy(placement.toPlace.towerToFollow);
+                placement.toPlace.rotate = new Vector3(0, 0, 0);
+                placement.toPlace.towerToFollow = null;
+                placement.toPlace.towerModel = null;
+                Tower = null;
+                hasbuilt = true;
+
+            }
+
+            if (placement.toPlace.hit.transform.tag == "valley")
+            {
+                if (!placement.toPlace.allyData.isType(AllyType.Blocker))
+                {
+                    print("cannot place ranger class on valleys!");
+                    return;
+                }
+                if (Validbuild == false)
+                {
+                    print("intercept with walls!");
+                    return;
+                }
+
+                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
+                Quaternion rotate = new Quaternion();
+                rotate.eulerAngles = placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, rotate);
+                Instant.GetComponent<Ally>().enabled = true;
+                Instant.GetComponent<Collider>().enabled = true;
+                Instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
+                Instant.tag = "Ally";
+                Destroy(placement.toPlace.towerToFollow);
+                placement.toPlace.rotate = new Vector3(0, 0, 0);
+                placement.toPlace.towerToFollow = null;
+                placement.toPlace.towerModel = null;
+                Tower = null;
+                hasbuilt = true;
+            }
+        }
+
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -61,5 +155,7 @@ public class Build : MonoBehaviour
         {
             Tower = placement.toPlace.towerModel;
         }
+
+        if (Instant == null) hasbuilt = false;
     }
 }

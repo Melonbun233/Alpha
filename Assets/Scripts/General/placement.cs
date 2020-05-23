@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class placement : MonoBehaviour
 {
 
 
-
-
+    public LayerMask layer1;
+    public LayerMask layer2;
     public static placement toPlace;
     public AllyData allyData;
     public GameObject towerModel;
@@ -15,7 +16,7 @@ public class placement : MonoBehaviour
     public GameObject towerToFollow;
     public Vector3 wallOffset;
     public Vector3 valleyOffset;
-    Vector3 rotate;
+    public Vector3 rotate;
 
 
     Ray ray;
@@ -30,31 +31,43 @@ public class placement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       rotate = new Vector3();
+        
+        rotate = new Vector3();
     }
+
 
     // Update is called once per frame
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 1000) && towerToFollow != null && hit.transform.tag != "UI" && hit.transform.tag != "Ally" && hit.transform.tag != "Untagged")
+        if(Physics.Raycast(ray, out hit, 1000, (layer1 |layer2)) && towerToFollow != null)
+            //&& hit.transform.tag != "UI" && hit.transform.tag != "Ally" && hit.transform.tag != "Untagged")
         {
             if(hit.transform.tag == "walls")
             {
                 towerToFollow.transform.position = hit.transform.position + wallOffset;
             }
-            else
+            if(hit.transform.tag == "valley")
             {
                 towerToFollow.transform.position = hit.transform.position + valleyOffset;
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && towerToFollow != null)
         {
             rotate.y += 90f;
             Quaternion temp = new Quaternion();
             temp.eulerAngles = rotate;
             towerToFollow.transform.rotation = temp;
         }
+
+
+        if (Input.GetMouseButtonUp(0) && hit.transform.tag != "UI")
+        {
+            hit.transform.GetComponent<Build>().buildT();
+        }
+
+
+
     }
 }
