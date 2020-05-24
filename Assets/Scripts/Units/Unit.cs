@@ -24,10 +24,10 @@ public class UnitData{
         if (unit == null) {
             return null;
         }
-        unit.healthData = data.healthData;
-        unit.attackData = data.attackData;
-        unit.resistanceData = data.resistanceData;
-        unit.moveData = data.moveData;
+        unit.healthData = HealthData.deepCopy(data.healthData);
+        unit.attackData = AttackData.deepCopy(data.attackData);
+        unit.resistanceData = ResistanceData.deepCopy(data.resistanceData);
+        unit.moveData = MoveData.deepCopy(data.moveData);
         return obj;
     }
 }
