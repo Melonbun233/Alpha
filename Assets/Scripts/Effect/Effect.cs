@@ -4,6 +4,7 @@ using UnityEngine;
 
 // Each effect is essentially buff/debuff
 // Add the effect into the effectData for tracking purpose
+[System.Serializable]
 public abstract class Effect
 {
     // Whether multiple instances of this effect can be applied

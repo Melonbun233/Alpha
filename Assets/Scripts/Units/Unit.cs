@@ -10,13 +10,15 @@ public class UnitData{
     public AttackData attackData;
     public ResistanceData resistanceData;
     public MoveData moveData;
+    public EffectData effectData;
 
     public UnitData(HealthData healthData, AttackData attackData, 
-        ResistanceData resistanceData, MoveData moveData){
+        ResistanceData resistanceData, MoveData moveData, EffectData effectData){
         this.healthData = healthData;
         this.attackData = attackData;
         this.resistanceData = resistanceData;
         this.moveData = moveData;
+        this.effectData = effectData;
     }
 
     public static GameObject copyData(GameObject obj, UnitData data) {
@@ -28,6 +30,7 @@ public class UnitData{
         unit.attackData = AttackData.deepCopy(data.attackData);
         unit.resistanceData = ResistanceData.deepCopy(data.resistanceData);
         unit.moveData = MoveData.deepCopy(data.moveData);
+        unit.effectData = EffectData.deepCopy(data.effectData);
         return obj;
     }
 }
@@ -102,7 +105,11 @@ public abstract class Unit : Destroyable
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
-            OnAttackEvent(this, target.GetComponent<Unit>());
+            
+            if (OnAttackEvent != null) {
+                OnAttackEvent(this, target.GetComponent<Unit>());
+            }   
+            
 
             dealAoeDamage(target);
         }
@@ -156,6 +163,13 @@ public abstract class Unit : Destroyable
 
         GameObject obj = Instantiate(prefab, position, rotation);
         UnitData.copyData(obj, data);
+
+        // Apply all effects in the data
+        Unit unit = obj.GetComponent<Unit>();
+        // Need first to clear all existing effects
+        EffectData tmp = unit.effectData;
+        unit.effectData = new EffectData();
+        tmp.applyAllEffects(unit);
 
         return obj;
     }

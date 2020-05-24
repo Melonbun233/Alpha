@@ -8,8 +8,9 @@ public class CharacterData: UnitData{
     public ManaData manaData;
     
     public CharacterData(HealthData healthData, AttackData attackData, 
-        ResistanceData resistanceData, MoveData moveData, ManaData manaData, float summonRange) :
-        base(healthData, attackData, resistanceData, moveData) {
+        ResistanceData resistanceData, MoveData moveData, EffectData effectData, 
+        ManaData manaData, float summonRange) :
+        base(healthData, attackData, resistanceData, moveData, effectData) {
             this.summonRange = summonRange;
             this.manaData = manaData;
         }

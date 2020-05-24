@@ -6,8 +6,8 @@ using UnityEngine;
 public class EnemyData: UnitData {
     public float visionRange;
     public EnemyData(HealthData healthData, AttackData attackData,
-        ResistanceData resistanceData, MoveData moveData, float visionRange) :
-        base(healthData, attackData, resistanceData, moveData) {
+        ResistanceData resistanceData, MoveData moveData, EffectData effectData, float visionRange) :
+        base(healthData, attackData, resistanceData, moveData, effectData) {
             this.visionRange = visionRange;
         }
 
@@ -152,6 +152,14 @@ public class Enemy : Unit {
 
         GameObject obj = Instantiate(prefab, position, rotation);
         EnemyData.copyData(obj, data);
+
+        // Apply all effects in the data
+        Unit unit = obj.GetComponent<Unit>();
+        // Need first to clear all existing effects
+        EffectData tmp = unit.effectData;
+        unit.effectData = new EffectData();
+        tmp.applyAllEffects(unit);
+        
         return obj;
     }
 

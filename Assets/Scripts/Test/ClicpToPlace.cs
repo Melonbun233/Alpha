@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ClicpToPlace : MonoBehaviour
 {
-    public GameObject ranger;
+    public GameObject prefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,22 +20,19 @@ public class ClicpToPlace : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            AllyData data = DefaultAllyData.defaultRangerData;
+            data.attackData.attackDamage = new DamageData(0, 0, 0, 0, 0);
+            data.attackData.attackNumber = 5;
+
+            for (int i = 0; i < 1; i ++) {
+                //data.effectData.effects.Add(new BurningEffect() as Effect);
+            }
+            data.effectData.effects.Add(new BurningAttackEffect() as Effect);
+            data.effectData.effects.Add(new BurningAttackEffect() as Effect);
+            
             if (Physics.Raycast(ray, out hit)) {
-<<<<<<< HEAD
-                // if (hit.transform.tag == "walls") {
-                    AllyData data = DefaultAllyData.defaultRangerData;
-                    data.attackData.damageData = new DamageData(0, 0, 0, 0, 0);
-                    Ally.spawn(ranger, data, hit.transform.position + new Vector3(0, 1, 0), 
-                        hit.transform.rotation);
-                // }
-=======
-                //if (hit.transform.tag == "walls") {
-                    AllyData data = DefaultAllyData.defaultBlockerData;
-                    data.attackData.attackNumber = 2;
-                    Ally.spawn(ranger, data, hit.transform.position + new Vector3(0, 1, 0), 
-                        hit.transform.rotation);
-                //}
->>>>>>> dev
+                Ally.spawn(prefab, data, hit.transform.position + new Vector3(0, 1, 0), 
+                    hit.transform.rotation);
             }
         }
     }

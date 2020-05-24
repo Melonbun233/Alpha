@@ -6,10 +6,52 @@ using UnityEngine;
 public class EffectData
 {
     // Storing all effects on the unit
-    public List<Effect> effects;
+    public List<Effect> effects = new List<Effect>();
 
     // Effect Stacks
     public int burningStack;
+    public int burningAttackStack;
+
+    public EffectData() {}
+
+    public EffectData(List<Effect> effects) {
+        this.effects = effects;
+    }
+
+    public static EffectData deepCopy(EffectData effectData) {
+        List<Effect> list = new List<Effect>();
+        foreach(Effect effect in effectData.effects) {
+            switch (effect.type) {
+                case EffectType.BurningAttackEffect:
+                    list.Add(BurningAttackEffect.deepCopy((BurningAttackEffect)effect) as Effect);
+                    break;
+                
+                case EffectType.BurningEffect:
+                    list.Add(BurningEffect.deepCopy((BurningEffect)effect) as Effect);
+                    break;
+            }
+        }
+        
+        return new EffectData(list);
+    }
+
+    // Apply all effects in this effect data to a unit
+    // This should only be called right after a deepCopy
+    // or spawn a unit 
+    // This unit should use this effect data!
+    public void applyAllEffects(Unit unit) {
+        foreach (Effect effect in effects) {
+            effect.applyEffect(unit);
+        }
+    }
+
+    // Remove all effect from a unit
+    // This unit should use this effect data!
+    public void removeAllEffects(Unit unit) {
+        foreach (Effect effect in effects) {
+            effect.removeEffect(unit);
+        }
+    }
 
     public bool hasEffect(EffectType type) {
         foreach(Effect effect in effects) {

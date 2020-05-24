@@ -14,6 +14,7 @@ public static class DefaultEnemyData
                 new AttackData(1, 1, new DamageData(0, 10, 0, 0, 0), 1, 1),
                 new ResistanceData(0, 10, 0, 0, 0),
                 new MoveData(2f),
+                new EffectData(),
                 10f
             );
         }

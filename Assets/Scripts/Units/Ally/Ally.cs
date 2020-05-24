@@ -9,9 +9,9 @@ public class AllyData: UnitData {
     public AllyLevelData allyLevelData;
 
     public AllyData(HealthData healthData, AttackData attackData,
-        ResistanceData resistanceData, MoveData moveData, 
+        ResistanceData resistanceData, MoveData moveData, EffectData effectData,
         AllyType allyType1, AllyType allyType2, AllyLevelData allyLevelData) : 
-        base(healthData, attackData, resistanceData, moveData) {
+        base(healthData, attackData, resistanceData, moveData, effectData) {
             this.allyType1 = allyType1;
             this.allyType2 = allyType2;
             this.allyLevelData = allyLevelData;
@@ -123,6 +123,14 @@ public class Ally : Unit
 
         GameObject obj = Instantiate(prefab, position, rotation);
         AllyData.copyData(obj, data);
+
+        // Apply all effects in the data
+        Unit unit = obj.GetComponent<Unit>();
+        // Need first to clear all existing effects
+        EffectData tmp = unit.effectData;
+        unit.effectData = new EffectData();
+        tmp.applyAllEffects(unit);
+        
         return obj;
     }
 

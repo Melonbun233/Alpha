@@ -5,11 +5,13 @@ using UnityEngine;
 
 // Unit with this effect will add @burningEffectPerAttack burning effects to the target 
 // on each attack.
+[System.Serializable]
 public class BurningAttackEffect : Effect
 {
     public const float defaultPeriod = float.PositiveInfinity;
     public const bool defaultStackable = false;
     public const int defaultBurningEffectPerAttack = 1;
+
 
     public override EffectType type { get;} = EffectType.BurningAttackEffect;
     public override bool stackable {get; set;} = defaultStackable;
@@ -24,6 +26,7 @@ public class BurningAttackEffect : Effect
             periodCD = value;
         }
     }
+    public float periodCD;
 
 
     // Add amount of burning stacks to the target on every attack
@@ -33,7 +36,7 @@ public class BurningAttackEffect : Effect
 
     Action<Unit, Unit> onAttackAction;
     Action<Unit, float> onUpdateAction;
-    float periodCD;
+    
 
     // Constructor for the burning attack effect
     // Note that we will directly use the reference of the provided burning effect
@@ -66,9 +69,11 @@ public class BurningAttackEffect : Effect
         // Need to check whether overwrite the current effect
         if (hasEffect && !stackable) {
             // overwrite the effect only when the new effect has longer period
-            Effect oldEffect = effectData.getEffect(type);
-            if (oldEffect.period < this.period) {
-                effectData.effects.Remove(oldEffect);
+            BurningAttackEffect oldEffect = effectData.getEffect(type) as BurningAttackEffect;
+            if (oldEffect.periodCD < this.period) {
+                oldEffect.removeEffect(unit);
+            } else {
+                return;
             }
         }
 
@@ -76,6 +81,7 @@ public class BurningAttackEffect : Effect
         unit.effectData.effects.Add(this);
         unit.OnUpdateEvent += onUpdateAction;
         unit.OnAttackEvent += onAttackAction;
+        unit.effectData.burningAttackStack ++;
     }
 
     // Action attached to OnAttackEvent on a unit, and it applies burning effect
@@ -106,5 +112,6 @@ public class BurningAttackEffect : Effect
         unit.effectData.effects.Remove(this);
         unit.OnUpdateEvent -= onUpdateAction;
         unit.OnAttackEvent -= onAttackAction;
+        unit.effectData.burningAttackStack --;
     }
 }
