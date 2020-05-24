@@ -20,12 +20,12 @@ public class ClicpToPlace : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit)) {
-                if (hit.transform.tag == "walls") {
+                // if (hit.transform.tag == "walls") {
                     AllyData data = DefaultAllyData.defaultRangerData;
-                    data.attackData.attackNumber = 2;
+                    data.attackData.damageData = new DamageData(0, 0, 0, 0, 0);
                     Ally.spawn(ranger, data, hit.transform.position + new Vector3(0, 1, 0), 
                         hit.transform.rotation);
-                }
+                // }
             }
         }
     }

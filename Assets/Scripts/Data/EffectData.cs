@@ -20,4 +20,28 @@ public class EffectData
 
         return false;
     }
+
+    // get the first effect with specified type
+    public Effect getEffect(EffectType type) {
+        foreach(Effect effect in effects) {
+            if (effect.type == type) {
+                return effect;
+            }
+        }
+
+        return null;
+    }
+
+    // get all the effects in the Effect data with specified type 
+    public List<Effect> getEffects(EffectType type) {
+        List<Effect> allEffects = new List<Effect>();
+        foreach(Effect effect in effects) {
+            if (effect.type == type) {
+                allEffects.Add(effect);
+            }
+        }
+
+        return allEffects;
+    }
+
 }

@@ -11,17 +11,18 @@ public abstract class Effect
     public abstract bool stackable {get; set;}
     public abstract EffectType type {get;}
 
-    // Remaning time this effect applied on the unit
+    // life time this effect applied on the unit
     // If the period is PositiveInfinity, it should last forever
     public abstract float period {get; set;}
 
     // Add the the effect to the unit
     // If this effect is non-stackable, there should be only
     // one instance of this effect applied on the unit
-    public abstract void apply(Unit unit);
+    public abstract void applyEffect(Unit unit);
 
     // Remove the effect from the unit
-    public abstract void remove(Unit unit); 
+    public abstract void removeEffect(Unit unit); 
+
 }
 
 

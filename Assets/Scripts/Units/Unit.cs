@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -53,13 +54,10 @@ public abstract class Unit : Destroyable
     public EffectData effectData;
 
     // Effect Events & Delegates
-    public delegate void OnAttackEventHandler(GameObject attacker, GameObject target);
     // Called on each attack
-    public event OnAttackEventHandler OnAttackEvent;
-
-    public delegate void OnUpdateHandler(GameObject unit, float deltaTime);
+    public event Action<Unit, Unit> OnAttackEvent;
     // Called on each update
-    public event OnUpdateHandler OnUpdateEvent;
+    public event Action<Unit, float> OnUpdateEvent;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -83,7 +81,7 @@ public abstract class Unit : Destroyable
         }
 
         if (OnUpdateEvent != null) {
-            OnUpdateEvent(this, deltaTime);
+            OnUpdateEvent(this, Time.deltaTime);
         }
         
     }
@@ -104,7 +102,7 @@ public abstract class Unit : Destroyable
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
-            OnAttackEvent(this.gameObject, target);
+            OnAttackEvent(this, target.GetComponent<Unit>());
 
             dealAoeDamage(target);
         }

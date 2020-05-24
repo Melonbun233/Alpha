@@ -37,6 +37,11 @@ public class DamageData
         this.thunderDamage = thunder;
     }
 
+    public static DamageData deepCopy(DamageData data) {
+        return new DamageData(data.physicalDamage, data.fireDamage, data.waterDamage,
+            data.windDamage, data.thunderDamage);
+    }
+
     // Calculte damage with corresponding resistance
     private int calculateRealDamage (int damage, int resistance) {
         float multiplier = resistance >= 0 ? 
