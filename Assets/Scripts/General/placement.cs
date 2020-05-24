@@ -11,7 +11,7 @@ public class placement : MonoBehaviour
     public LayerMask layer2;
     public static placement toPlace;
     public AllyData allyData;
-    public GameObject towerModel;
+    public GameObject towerPrefab;
     public Vector3 cursor;
     public GameObject towerToFollow;
     public Vector3 wallOffset;
@@ -40,7 +40,7 @@ public class placement : MonoBehaviour
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 1000, (layer1 |layer2)) && towerToFollow != null)
+        if(Physics.Raycast(ray, out hit, 1000, (layer1 | layer2)) && towerToFollow != null)
             //&& hit.transform.tag != "UI" && hit.transform.tag != "Ally" && hit.transform.tag != "Untagged")
         {
             if(hit.transform.tag == "walls")
@@ -62,9 +62,18 @@ public class placement : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonUp(0) && hit.transform.tag != "UI")
+        if (Input.GetMouseButtonUp(0) && hit.transform != null && hit.transform.tag != "UI"  && towerToFollow != null)
         {
-            hit.transform.GetComponent<Build>().buildT();
+            if (towerToFollow.GetComponent<placementValidation>().Validbuild)
+            {
+                hit.transform.GetComponent<Build>().buildT();
+            }
+            else
+            {
+                print("Invalid build position!");
+            }
+
+            
         }
 
 

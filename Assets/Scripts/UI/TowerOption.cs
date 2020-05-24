@@ -11,9 +11,11 @@ public class TowerOption : MonoBehaviour
     public GameObject Type2;
     public GameObject Type1_lvl;
     public GameObject Type2_lvl;
-    public GameObject TowerModel;
+    public GameObject TowerVisual;
     public GameObject Cost;
     public GameObject[] prefabs;
+    public GameObject[] modelsOnly;
+    public GameObject highlight;
 
     public AllyData allyData;
 
@@ -45,26 +47,46 @@ public class TowerOption : MonoBehaviour
         return null;
     }
 
+    public GameObject getModel()
+    {
+        AllyType type = allyData.allyType1;
+        switch (type)
+        {
+            case AllyType.Ranger:
+                return modelsOnly[0];
+            case AllyType.Blocker:
+                return modelsOnly[1];
+        }
+        return null;
+    }
 
+    private void OnMouseOver()
+    {
+        highlight.SetActive(true);
+    }
 
-
+    private void OnMouseExit()
+    {
+        highlight.SetActive(false);
+    }
 
     void OnMouseUp()
     {
         GameObject temp = allyPrefab();
-        temp.GetComponent<Ally>().enabled = false;
+        //temp.GetComponent<Ally>().enabled = false;
         //temp.GetComponent<Collider>().enabled = false;
-        if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
-        temp.tag = "allyToPlace";
-        placement.toPlace.towerModel = temp;
+        //if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+        //temp.tag = "allyToPlace";
+        placement.toPlace.towerPrefab = temp;
         placement.toPlace.allyData = allyData;
-        placement.toPlace.towerToFollow = Instantiate(temp) as GameObject;
+        placement.toPlace.towerToFollow = Instantiate(getModel()) as GameObject;
     }
 
     void Start()
     {
-
-
+        GameObject towerVisual = Instantiate(getModel(), TowerVisual.transform);
+        towerVisual.transform.localScale = new Vector3(20, 20, 20);
+        highlight.SetActive(false);
     }
 
     // Update is called once per frame

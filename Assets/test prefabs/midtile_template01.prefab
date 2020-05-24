@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 4107471638962522380}
   - component: {fileID: 7408420767460840302}
   - component: {fileID: 3089642407863490493}
+  - component: {fileID: 7718081765136826060}
   m_Layer: 8
   m_Name: walls
   m_TagString: walls
@@ -544,6 +545,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &7718081765136826060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316692987822080727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1346912656578095517
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +572,7 @@ GameObject:
   - component: {fileID: 1627671443642539281}
   - component: {fileID: 7345196862879187607}
   - component: {fileID: 8859333633688451393}
+  - component: {fileID: 3011406195711365245}
   m_Layer: 8
   m_Name: walls (5)
   m_TagString: walls
@@ -680,6 +695,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &3011406195711365245
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346912656578095517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2396998269218080944
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +722,7 @@ GameObject:
   - component: {fileID: 2890117761625481969}
   - component: {fileID: 8472159268954790709}
   - component: {fileID: 8029786441523419100}
+  - component: {fileID: 4650503270163160212}
   m_Layer: 8
   m_Name: walls (4)
   m_TagString: walls
@@ -816,6 +845,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &4650503270163160212
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2396998269218080944}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2527829581579992200
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +872,7 @@ GameObject:
   - component: {fileID: 2402205255882099001}
   - component: {fileID: 3482559048460792667}
   - component: {fileID: 895537464140722079}
+  - component: {fileID: 7097907144784947151}
   m_Layer: 8
   m_Name: walls (2)
   m_TagString: walls
@@ -952,6 +995,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &7097907144784947151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527829581579992200}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.017003, y: 2.088301, z: 2}
+  m_Center: {x: -0.00850153, y: 1.0441505, z: 0}
 --- !u!1 &2714446005675880362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +1893,7 @@ GameObject:
   - component: {fileID: 2452487957807773883}
   - component: {fileID: 8261930044176234424}
   - component: {fileID: 6211235152039052715}
+  - component: {fileID: 2146214302767218658}
   m_Layer: 8
   m_Name: walls (1)
   m_TagString: walls
@@ -1959,6 +2016,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &2146214302767218658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4499596435440441262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4930971751831350188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,6 +2043,7 @@ GameObject:
   - component: {fileID: 3267692128483433749}
   - component: {fileID: 3054312084976786394}
   - component: {fileID: 8432304832730216711}
+  - component: {fileID: 3966445896459945459}
   m_Layer: 8
   m_Name: walls
   m_TagString: walls
@@ -2095,6 +2166,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &3966445896459945459
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4930971751831350188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5014909518543787853
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,6 +2329,7 @@ GameObject:
   - component: {fileID: 2787291978541681510}
   - component: {fileID: 3624046413020700843}
   - component: {fileID: 451661086103875846}
+  - component: {fileID: 8477932162941904560}
   m_Layer: 8
   m_Name: walls
   m_TagString: walls
@@ -2367,6 +2452,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &8477932162941904560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5047329816331339858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.017003, y: 2.088301, z: 2}
+  m_Center: {x: -0.00850153, y: 1.0441505, z: 0}
 --- !u!1 &5555018557357005643
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,6 +2479,7 @@ GameObject:
   - component: {fileID: 1145794664509052042}
   - component: {fileID: 6946793967918493261}
   - component: {fileID: 8265158380194526817}
+  - component: {fileID: 5159808366675662625}
   m_Layer: 8
   m_Name: walls (3)
   m_TagString: walls
@@ -2503,6 +2602,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &5159808366675662625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555018557357005643}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5600512082813346077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2629,7 @@ GameObject:
   - component: {fileID: 6721243483524409679}
   - component: {fileID: 9139289449639770268}
   - component: {fileID: 5635167035768722771}
+  - component: {fileID: 1864775726354430149}
   m_Layer: 8
   m_Name: walls
   m_TagString: walls
@@ -2639,6 +2752,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &1864775726354430149
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600512082813346077}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000005, y: 2, z: 2.0000005}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6593139708552420706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,6 +3051,7 @@ GameObject:
   - component: {fileID: 8816286299654656818}
   - component: {fileID: 2856419885047663185}
   - component: {fileID: 1041615206839048437}
+  - component: {fileID: 7193408151958709198}
   m_Layer: 8
   m_Name: walls
   m_TagString: walls
@@ -3047,6 +3174,19 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &7193408151958709198
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123065381963059561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7544670206551536944
 GameObject:
   m_ObjectHideFlags: 0

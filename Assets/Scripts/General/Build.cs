@@ -3,7 +3,6 @@
 public class Build : MonoBehaviour
 {
     bool hasbuilt;
-    bool Validbuild;
     GameObject Tower;
     GameObject Instant;
 
@@ -11,29 +10,14 @@ public class Build : MonoBehaviour
     void Start()
     {
         hasbuilt = false;
-        Validbuild = true;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "walls")
-        {
-            Validbuild = false;
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.tag == "walls")
-        {
-            Validbuild = true;
-        }
-    }
 
 
     public void buildT()
     {
-        if (Tower != null && !hasbuilt && placement.toPlace.towerModel != null)
+        if (Tower != null && !hasbuilt && placement.toPlace.towerPrefab != null)
         {
             if (placement.toPlace.hit.transform.tag == "walls")
             {
@@ -52,7 +36,7 @@ public class Build : MonoBehaviour
                 Destroy(placement.toPlace.towerToFollow);
                 placement.toPlace.rotate = new Vector3(0, 0, 0);
                 placement.toPlace.towerToFollow = null;
-                placement.toPlace.towerModel = null;
+                placement.toPlace.towerPrefab = null;
                 Tower = null;
                 hasbuilt = true;
 
@@ -63,11 +47,6 @@ public class Build : MonoBehaviour
                 if (!placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
                     print("cannot place ranger class on valleys!");
-                    return;
-                }
-                if (Validbuild == false)
-                {
-                    print("intercept with walls!");
                     return;
                 }
 
@@ -82,7 +61,7 @@ public class Build : MonoBehaviour
                 Destroy(placement.toPlace.towerToFollow);
                 placement.toPlace.rotate = new Vector3(0, 0, 0);
                 placement.toPlace.towerToFollow = null;
-                placement.toPlace.towerModel = null;
+                placement.toPlace.towerPrefab = null;
                 Tower = null;
                 hasbuilt = true;
             }
@@ -151,9 +130,9 @@ public class Build : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (placement.toPlace.towerModel != null)
+        if (placement.toPlace.towerPrefab != null)
         {
-            Tower = placement.toPlace.towerModel;
+            Tower = placement.toPlace.towerPrefab;
         }
 
         if (Instant == null) hasbuilt = false;

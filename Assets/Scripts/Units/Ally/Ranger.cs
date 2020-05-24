@@ -37,7 +37,7 @@ public class Ranger : Ally
     }
 
     // Rotate when idle. rotate faster when attack
-    private void rotate() {
+    public void rotate() {
         transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
     }
 
