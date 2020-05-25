@@ -27,8 +27,7 @@ public class Projectile : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, 
             targetTransform.position, step);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation,
-            targetTransform.rotation, step);
+        transform.LookAt(targetTransform.position);
     }
 
     void OnCollisionEnter(Collision other) {
@@ -73,8 +72,9 @@ public class Projectile : MonoBehaviour
                 // projectiles.transform.rotation = new Quaternion(0, 0, 0, 0);
             }
             GameObject obj = Instantiate(prefab, position, rotation, projectiles.transform);
-            Projectile projectile = obj.GetComponent<Projectile>();
+            obj.transform.LookAt(target.transform.position);
 
+            Projectile projectile = obj.GetComponent<Projectile>();
             projectile.target = target;
             projectile.attacker = attacker;
             projectile.speed = speed;

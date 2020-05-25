@@ -120,7 +120,7 @@ MonoBehaviour:
   rotateSpeed: 40
   attackRotateSpeed: 200
   rotateSpeedUpPeriod: 0.5
-  projectile: {fileID: 7202969124617893764, guid: 8ebe5f5447011b245869b0909a10d061,
+  projectile: {fileID: 1574095961524907868, guid: c37d5fcfe0691e04386e844a9ed4e494,
     type: 3}
   projectileSpeed: 10
   attackCoreColor: {r: 0.9433962, g: 0.3693485, b: 0.701787, a: 0}
