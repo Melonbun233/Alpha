@@ -82,7 +82,6 @@ public abstract class Unit : Destroyable
 
             dealAoeDamage(target);
         }
-
         _attackCoolDown = attackData.attackCoolDown;
     }
 

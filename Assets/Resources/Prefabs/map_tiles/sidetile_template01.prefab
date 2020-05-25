@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1951092849098513860}
   - component: {fileID: 6856509379710695819}
   - component: {fileID: 1757828671633650602}
+  - component: {fileID: 2804698893064803196}
+  - component: {fileID: 7848391916484061302}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -58,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,6 +81,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2804698893064803196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902580037101284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -4, y: 0, z: -2}
+--- !u!114 &7848391916484061302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902580037101284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &833073848267149374
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +117,8 @@ GameObject:
   - component: {fileID: 7676473592870244807}
   - component: {fileID: 7503184236575972521}
   - component: {fileID: 52077871457430217}
+  - component: {fileID: 1900896838658077079}
+  - component: {fileID: 5701140491960181288}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -137,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,6 +187,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1900896838658077079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833073848267149374}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: -4}
+--- !u!114 &5701140491960181288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833073848267149374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1214794756359100859
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +223,8 @@ GameObject:
   - component: {fileID: 3655152887389545903}
   - component: {fileID: 3245301772749751792}
   - component: {fileID: 8390806184670203254}
+  - component: {fileID: 8383063238373833036}
+  - component: {fileID: 8728794061422254173}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -216,7 +272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,6 +293,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8383063238373833036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214794756359100859}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 4, y: 1, z: 2}
+--- !u!114 &8728794061422254173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214794756359100859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1767812603029922877
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +329,8 @@ GameObject:
   - component: {fileID: 9057807229188489947}
   - component: {fileID: 456448255613510338}
   - component: {fileID: 959032798816561293}
+  - component: {fileID: 3773119132643137201}
+  - component: {fileID: 9166209656606020746}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -295,7 +378,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -316,6 +399,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3773119132643137201
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767812603029922877}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 4, y: 0, z: -4}
+--- !u!114 &9166209656606020746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767812603029922877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1854995906953496269
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +435,8 @@ GameObject:
   - component: {fileID: 1773511885666479932}
   - component: {fileID: 6953400892981080965}
   - component: {fileID: 3275561054896258038}
+  - component: {fileID: 951634734918785100}
+  - component: {fileID: 6734139604723043721}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -374,7 +484,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -395,6 +505,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &951634734918785100
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854995906953496269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 4}
+--- !u!114 &6734139604723043721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854995906953496269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2229611506559712253
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +541,8 @@ GameObject:
   - component: {fileID: 81445262927210229}
   - component: {fileID: 7350174310702341531}
   - component: {fileID: 5184721135696490383}
+  - component: {fileID: 6923699445021582441}
+  - component: {fileID: 1935801544678836412}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -453,7 +590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -474,6 +611,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6923699445021582441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229611506559712253}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -4, y: 0, z: -4}
+--- !u!114 &1935801544678836412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229611506559712253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2341292229597247152
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +647,8 @@ GameObject:
   - component: {fileID: 8643291506940684070}
   - component: {fileID: 8247761130294166998}
   - component: {fileID: 2733972387002099434}
+  - component: {fileID: 1412432179978738431}
+  - component: {fileID: 6660273914906121171}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -532,7 +696,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -553,6 +717,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1412432179978738431
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341292229597247152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 4, y: 0, z: 0}
+--- !u!114 &6660273914906121171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341292229597247152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3791336186540294025
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,6 +753,8 @@ GameObject:
   - component: {fileID: 2843772578182796618}
   - component: {fileID: 7598222619900832789}
   - component: {fileID: 6950109435748284987}
+  - component: {fileID: 6420714355362804206}
+  - component: {fileID: 3748954600512456483}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -611,7 +802,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -632,6 +823,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6420714355362804206
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3791336186540294025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: -4}
+--- !u!114 &3748954600512456483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3791336186540294025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3986466806978446319
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +859,8 @@ GameObject:
   - component: {fileID: 91899009357882149}
   - component: {fileID: 8259789946796588432}
   - component: {fileID: 2219760682552447868}
+  - component: {fileID: 2382450217130644948}
+  - component: {fileID: 3641757887532970861}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -690,7 +908,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -711,6 +929,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2382450217130644948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3986466806978446319}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: -4, y: 1, z: 4}
+--- !u!114 &3641757887532970861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3986466806978446319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4082182394358830182
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +965,8 @@ GameObject:
   - component: {fileID: 1293118458696942865}
   - component: {fileID: 5729030719652812242}
   - component: {fileID: 481935058726763747}
+  - component: {fileID: 6409306586445499251}
+  - component: {fileID: 2038179101535132683}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -769,7 +1014,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -790,6 +1035,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6409306586445499251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082182394358830182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 2, y: 1, z: 4}
+--- !u!114 &2038179101535132683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082182394358830182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4374274905386837692
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +1126,8 @@ GameObject:
   - component: {fileID: 5958847836283538031}
   - component: {fileID: 7672734790016170716}
   - component: {fileID: 2227074550028341271}
+  - component: {fileID: 8551617849107365961}
+  - component: {fileID: 809294808796873546}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -903,7 +1175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -924,6 +1196,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8551617849107365961
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4763048795280278784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: -4}
+--- !u!114 &809294808796873546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4763048795280278784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4775259855505533589
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +1232,8 @@ GameObject:
   - component: {fileID: 3097594695228258392}
   - component: {fileID: 7684306352749805028}
   - component: {fileID: 9197999695624940770}
+  - component: {fileID: 3089835965120806673}
+  - component: {fileID: 1282761411941854318}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -982,7 +1281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1003,6 +1302,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3089835965120806673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775259855505533589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 4, y: 0, z: -2}
+--- !u!114 &1282761411941854318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775259855505533589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4832645395903459974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1338,8 @@ GameObject:
   - component: {fileID: 3867181427921066262}
   - component: {fileID: 4107296870241927009}
   - component: {fileID: 4602256775973052593}
+  - component: {fileID: 5705194736239468147}
+  - component: {fileID: 7595532555167960188}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1061,7 +1387,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1082,6 +1408,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5705194736239468147
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832645395903459974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: -4, y: 1, z: 2}
+--- !u!114 &7595532555167960188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832645395903459974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5629870768441884794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1444,8 @@ GameObject:
   - component: {fileID: 6843409390575414446}
   - component: {fileID: 7830089869896861845}
   - component: {fileID: 5558246090550132071}
+  - component: {fileID: 2750350344621840625}
+  - component: {fileID: 9051969211884450418}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1140,7 +1493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1161,6 +1514,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2750350344621840625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629870768441884794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -4, y: 0, z: 0}
+--- !u!114 &9051969211884450418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629870768441884794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5993574672830819967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1550,8 @@ GameObject:
   - component: {fileID: 6018747339918070481}
   - component: {fileID: 2655332659537981555}
   - component: {fileID: 719376532859217106}
+  - component: {fileID: 5778586761300418349}
+  - component: {fileID: 7108521221669765688}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1219,7 +1599,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1240,6 +1620,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5778586761300418349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993574672830819967}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: -2, y: 1, z: 2}
+--- !u!114 &7108521221669765688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993574672830819967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6238261505826962327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1656,8 @@ GameObject:
   - component: {fileID: 5059889564735679922}
   - component: {fileID: 3752502674376966321}
   - component: {fileID: 3873950007968591428}
+  - component: {fileID: 3979088938410835689}
+  - component: {fileID: 8245797482089257945}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1298,7 +1705,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1319,6 +1726,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3979088938410835689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238261505826962327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 4, y: 1, z: 4}
+--- !u!114 &8245797482089257945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238261505826962327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6269709788027460412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,6 +1762,8 @@ GameObject:
   - component: {fileID: 8469701156178967680}
   - component: {fileID: 5731552985248911554}
   - component: {fileID: 1129773593407609920}
+  - component: {fileID: 5145132349844598737}
+  - component: {fileID: 8269365208786249040}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1377,7 +1811,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1398,6 +1832,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5145132349844598737
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269709788027460412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: 0}
+--- !u!114 &8269365208786249040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269709788027460412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6528228028143887508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,6 +1868,8 @@ GameObject:
   - component: {fileID: 5097170917731967447}
   - component: {fileID: 3381004197898095636}
   - component: {fileID: 9191891373088394151}
+  - component: {fileID: 3789450237116810970}
+  - component: {fileID: 5046465152783158438}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1456,7 +1917,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1477,6 +1938,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3789450237116810970
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6528228028143887508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: -2, y: 1, z: 4}
+--- !u!114 &5046465152783158438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6528228028143887508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6964158937769791214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1974,8 @@ GameObject:
   - component: {fileID: 8707980849387333938}
   - component: {fileID: 1024430601636325261}
   - component: {fileID: 8197954438706484321}
+  - component: {fileID: 7494728404928299056}
+  - component: {fileID: 6610184061094571619}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1535,7 +2023,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1556,6 +2044,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7494728404928299056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964158937769791214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: -2}
+--- !u!114 &6610184061094571619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964158937769791214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7666701448242765018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +2080,8 @@ GameObject:
   - component: {fileID: 1393883896443881998}
   - component: {fileID: 5409806688276346539}
   - component: {fileID: 1460095434541750426}
+  - component: {fileID: 2554013578503415562}
+  - component: {fileID: 6390757900658818933}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1614,7 +2129,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1635,6 +2150,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2554013578503415562
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666701448242765018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 2}
+--- !u!114 &6390757900658818933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666701448242765018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7765285960113486259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,6 +2186,8 @@ GameObject:
   - component: {fileID: 2858473991987446916}
   - component: {fileID: 7930485920056902047}
   - component: {fileID: 3978536791706731262}
+  - component: {fileID: 2535791905829054753}
+  - component: {fileID: 7370103005130471659}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1693,7 +2235,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1714,6 +2256,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2535791905829054753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765285960113486259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: 0}
+--- !u!114 &7370103005130471659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765285960113486259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8354238269867988029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +2292,8 @@ GameObject:
   - component: {fileID: 5973433008558500775}
   - component: {fileID: 3344563220193657718}
   - component: {fileID: 2025164653923709798}
+  - component: {fileID: 783885967242998990}
+  - component: {fileID: 8565270252787811812}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1772,7 +2341,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1793,6 +2362,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &783885967242998990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354238269867988029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: -2}
+--- !u!114 &8565270252787811812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354238269867988029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8610403564427989110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,6 +2398,8 @@ GameObject:
   - component: {fileID: 6002330125524750135}
   - component: {fileID: 8706638133747700043}
   - component: {fileID: 8395497512764025176}
+  - component: {fileID: 6711462330120309076}
+  - component: {fileID: 4408573475939951384}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1851,7 +2447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1872,6 +2468,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6711462330120309076
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610403564427989110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4408573475939951384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610403564427989110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8713835736196780484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +2504,8 @@ GameObject:
   - component: {fileID: 3632576274980973178}
   - component: {fileID: 4914808107989471918}
   - component: {fileID: 2849289047830392732}
+  - component: {fileID: 4541027778493966094}
+  - component: {fileID: 2659752496861459050}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1930,7 +2553,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1951,6 +2574,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4541027778493966094
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713835736196780484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 2, y: 1, z: 2}
+--- !u!114 &2659752496861459050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713835736196780484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9025817411157294686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,6 +2610,8 @@ GameObject:
   - component: {fileID: 6772712362882595808}
   - component: {fileID: 6822349174683482345}
   - component: {fileID: 948946629701240658}
+  - component: {fileID: 5147729076422383411}
+  - component: {fileID: 4957494887070566498}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -2009,7 +2659,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 0071840f17f7f31408f5ca8ca158d7a6, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2030,3 +2680,28 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5147729076422383411
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025817411157294686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: -2}
+--- !u!114 &4957494887070566498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025817411157294686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

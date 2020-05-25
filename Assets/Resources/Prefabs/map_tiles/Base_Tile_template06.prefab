@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2249089289493294577}
   - component: {fileID: 4364950182044992808}
   - component: {fileID: 5589956917808690729}
+  - component: {fileID: 7045257809584955935}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7045257809584955935
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172264837988473585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: 4}
 --- !u!1 &301267239382099791
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +104,7 @@ GameObject:
   - component: {fileID: 2313886949497026574}
   - component: {fileID: 829838645573658226}
   - component: {fileID: 563741709021765217}
+  - component: {fileID: 7446226709464022494}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -137,7 +152,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,6 +173,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7446226709464022494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301267239382099791}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1379277389933068883
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +197,7 @@ GameObject:
   - component: {fileID: 2434167256207297510}
   - component: {fileID: 7369300318336197924}
   - component: {fileID: 1594800566011203033}
+  - component: {fileID: 4886142947404968778}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -216,7 +245,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,6 +266,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4886142947404968778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379277389933068883}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 4, y: 0, z: -4}
 --- !u!1 &1933789370614157435
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +290,7 @@ GameObject:
   - component: {fileID: 8040303876690489096}
   - component: {fileID: 2150334277428999341}
   - component: {fileID: 2208222414160066428}
+  - component: {fileID: 4082262934159980799}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -295,7 +338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -316,6 +359,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4082262934159980799
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933789370614157435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: 4}
 --- !u!1 &2504233433235113721
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +383,7 @@ GameObject:
   - component: {fileID: 4347720979360976933}
   - component: {fileID: 3419860743138542189}
   - component: {fileID: 3588432360160136491}
+  - component: {fileID: 1416127550128845240}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -374,7 +431,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -395,6 +452,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1416127550128845240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2504233433235113721}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: -4}
 --- !u!1 &3092251112409980341
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +476,7 @@ GameObject:
   - component: {fileID: 3743148994611385403}
   - component: {fileID: 7905346589406728306}
   - component: {fileID: 143760810429247194}
+  - component: {fileID: 4165006838264312082}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -453,7 +524,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -474,6 +545,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4165006838264312082
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092251112409980341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: 4}
 --- !u!1 &4000907669738978618
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +569,7 @@ GameObject:
   - component: {fileID: 7348638487140886017}
   - component: {fileID: 1812880663707906211}
   - component: {fileID: 4916628586577817038}
+  - component: {fileID: 7907254362012435099}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -532,7 +617,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -553,6 +638,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7907254362012435099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000907669738978618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 4, y: 0, z: 0}
 --- !u!1 &4051788940179397615
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,6 +662,7 @@ GameObject:
   - component: {fileID: 1967965640461834568}
   - component: {fileID: 7427225712564652175}
   - component: {fileID: 6411570997510338722}
+  - component: {fileID: 27842417125664570}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -611,7 +710,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -632,6 +731,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &27842417125664570
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4051788940179397615}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: 0}
 --- !u!1 &4081494460078253963
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +755,7 @@ GameObject:
   - component: {fileID: 4103251971188094114}
   - component: {fileID: 5259317819323592104}
   - component: {fileID: 3704692058255308505}
+  - component: {fileID: 6699743492826194409}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -690,7 +803,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -711,6 +824,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6699743492826194409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081494460078253963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: 2}
 --- !u!1 &4258530591691070727
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +848,7 @@ GameObject:
   - component: {fileID: 1096438470997603054}
   - component: {fileID: 3248900192354123239}
   - component: {fileID: 2334246482942670264}
+  - component: {fileID: 6351080842247108447}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -769,7 +896,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -790,6 +917,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6351080842247108447
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258530591691070727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: 0}
 --- !u!1 &4401803198661543011
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +941,7 @@ GameObject:
   - component: {fileID: 2143744280655686103}
   - component: {fileID: 6268096557324706649}
   - component: {fileID: 2602623726241941308}
+  - component: {fileID: 6390347108591033199}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -848,7 +989,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -869,6 +1010,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6390347108591033199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401803198661543011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: -4}
 --- !u!1 &4907927837876887538
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +1034,7 @@ GameObject:
   - component: {fileID: 5550646298991375517}
   - component: {fileID: 9071117109329253695}
   - component: {fileID: 5220213360308876286}
+  - component: {fileID: 9016355856370454677}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -927,7 +1082,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -948,6 +1103,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &9016355856370454677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4907927837876887538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 4, y: 1, z: 4}
 --- !u!1 &5013531269608055916
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +1127,7 @@ GameObject:
   - component: {fileID: 6928014638214248899}
   - component: {fileID: 4064010721616719857}
   - component: {fileID: 2546304630144387990}
+  - component: {fileID: 5005160260593180574}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1006,7 +1175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1027,6 +1196,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5005160260593180574
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013531269608055916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -4, y: 0, z: 0}
 --- !u!1 &5183752127449315914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1220,7 @@ GameObject:
   - component: {fileID: 8904925493872484547}
   - component: {fileID: 2716980815629337538}
   - component: {fileID: 8800239821095058185}
+  - component: {fileID: 3500413983030293049}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -1085,7 +1268,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1106,6 +1289,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3500413983030293049
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183752127449315914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: -4}
 --- !u!1 &5196192780739862643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1313,7 @@ GameObject:
   - component: {fileID: 8565895711665959555}
   - component: {fileID: 6482447886927766346}
   - component: {fileID: 4245997942170846639}
+  - component: {fileID: 4256093978292169069}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -1164,7 +1361,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1185,6 +1382,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4256093978292169069
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5196192780739862643}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: -2}
 --- !u!1 &5267461705502570584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1406,7 @@ GameObject:
   - component: {fileID: 7611200029544081723}
   - component: {fileID: 6430116810626088143}
   - component: {fileID: 1832221024257158654}
+  - component: {fileID: 3224839726829853034}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1243,7 +1454,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1264,6 +1475,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3224839726829853034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5267461705502570584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -4, y: 0, z: -2}
 --- !u!1 &5702667524910592505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,6 +1499,7 @@ GameObject:
   - component: {fileID: 1674580496686432173}
   - component: {fileID: 7828971434281968107}
   - component: {fileID: 4117268052515792886}
+  - component: {fileID: 4878703870146002857}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1322,7 +1547,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1343,6 +1568,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4878703870146002857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702667524910592505}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -4, y: 0, z: -4}
 --- !u!1 &5756892529028305285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,6 +1647,7 @@ GameObject:
   - component: {fileID: 6722164125876030793}
   - component: {fileID: 6334696651108046467}
   - component: {fileID: 3207678938374385198}
+  - component: {fileID: 5302443661269866525}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1456,7 +1695,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1477,6 +1716,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5302443661269866525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6171802538663675349}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: -4, y: 1, z: 4}
 --- !u!1 &6420562185786533420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1740,7 @@ GameObject:
   - component: {fileID: 6210761926526047551}
   - component: {fileID: 8749531598036932959}
   - component: {fileID: 3384004311206542907}
+  - component: {fileID: 1711444153563564516}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1535,7 +1788,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1556,6 +1809,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1711444153563564516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6420562185786533420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: -4, y: 1, z: 2}
 --- !u!1 &6499279905593754791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1833,7 @@ GameObject:
   - component: {fileID: 239631412258892764}
   - component: {fileID: 4378510697542654948}
   - component: {fileID: 2996832922065653216}
+  - component: {fileID: 2557771411996516366}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1614,7 +1881,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1635,6 +1902,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2557771411996516366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499279905593754791}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: 2}
 --- !u!1 &6667962061348210951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,6 +1926,7 @@ GameObject:
   - component: {fileID: 655151398703775096}
   - component: {fileID: 7586916268073597646}
   - component: {fileID: 3621079256785733200}
+  - component: {fileID: 849953005298924982}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -1693,7 +1974,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1714,6 +1995,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &849953005298924982
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6667962061348210951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 2, y: 0, z: -2}
 --- !u!1 &7379939762910169283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +2019,7 @@ GameObject:
   - component: {fileID: 9213558414159937211}
   - component: {fileID: 193376329955320148}
   - component: {fileID: 1697920140898848435}
+  - component: {fileID: 6963323526744806787}
   m_Layer: 8
   m_Name: valley(Base)
   m_TagString: Base
@@ -1772,7 +2067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 775f91a2bdc447849a399f469b4d201d, type: 2}
+  - {fileID: 2100000, guid: 936a77a89ebc8ba41b9be3ab537b625b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1793,6 +2088,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6963323526744806787
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379939762910169283}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: -2}
 --- !u!1 &7421067471582220707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,6 +2112,7 @@ GameObject:
   - component: {fileID: 5670129694581503872}
   - component: {fileID: 7824116215910119897}
   - component: {fileID: 6936315389408905450}
+  - component: {fileID: 4126820644916657094}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -1851,7 +2160,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1872,6 +2181,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4126820644916657094
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421067471582220707}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: -2, y: 0, z: 2}
 --- !u!1 &7715675662352384024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +2205,7 @@ GameObject:
   - component: {fileID: 4196762881078510894}
   - component: {fileID: 962613101231525712}
   - component: {fileID: 9159736074924976599}
+  - component: {fileID: 1070806810068238725}
   m_Layer: 8
   m_Name: wall
   m_TagString: walls
@@ -1930,7 +2253,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1951,6 +2274,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1070806810068238725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7715675662352384024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 4, y: 1, z: 2}
 --- !u!1 &8154197394655451646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,6 +2298,7 @@ GameObject:
   - component: {fileID: 2617824807487252731}
   - component: {fileID: 2785867410530442540}
   - component: {fileID: 8041351012179320613}
+  - component: {fileID: 2627981284784515565}
   m_Layer: 8
   m_Name: valley
   m_TagString: valley
@@ -2009,7 +2346,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 01ce23e53082f0a45ba72e056d1787be, type: 3}
+  - {fileID: 2100000, guid: 47eaba4b53fe0784f90335604b268a06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2030,3 +2367,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2627981284784515565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154197394655451646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 4, y: 0, z: -2}

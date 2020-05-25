@@ -30,11 +30,15 @@ public class TowerOption : MonoBehaviour
     public Sprite Wind;
     public Sprite Thunder;
 
-    
-    // Start is called before the first frame update
+    void OnMouseUp()
+    {
+        placement.toPlace.towerModel = TowerModel;
+        placement.toPlace.towerToFollow = Instantiate(placement.toPlace.towerModel) as GameObject;
+    }
+
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
