@@ -108,15 +108,21 @@ MonoBehaviour:
     type: 3}
   moveData:
     moveSpeed: 0
+  effectData:
+    burningStack: 0
+    burningAttackStack: 0
   allyType1: 0
   allyType2: 6
-  levelData:
+  allyLevelData:
     cost: 0
     level: 0
     exp: 0
   rotateSpeed: 40
   attackRotateSpeed: 200
   rotateSpeedUpPeriod: 0.5
+  projectile: {fileID: 7202969124617893764, guid: 8ebe5f5447011b245869b0909a10d061,
+    type: 3}
+  projectileSpeed: 10
   attackCoreColor: {r: 0.9433962, g: 0.3693485, b: 0.701787, a: 0}
 --- !u!1 &9023487780637698271
 GameObject:

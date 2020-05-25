@@ -42,14 +42,14 @@ public class Ally : Unit
 
     }
 
-    public override void dealAoeDamage(GameObject initialTarget) {
+    public override void dealAoeDamage(GameObject initialTarget, DamageData aoeDamage) {
         List<GameObject> nearbyEnemies = new List<GameObject>();
         Utils.findGameObjectsWithinRange(nearbyEnemies, initialTarget.transform.position,
             attackData.attackAoeRange, "Enemy");
 
         foreach(GameObject nearbyEnemy in nearbyEnemies) {
             if (initialTarget != nearbyEnemy) {
-                nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
+                nearbyEnemy.GetComponent<Destroyable>().receiveDamage(aoeDamage, gameObject);
             }
         }
     }

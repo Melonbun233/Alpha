@@ -54,13 +54,13 @@ public class Enemy : Unit {
         
     }
 
-    public override void dealAoeDamage(GameObject initialTarget) {
+    public override void dealAoeDamage(GameObject initialTarget, DamageData damage) {
         List<GameObject> nearbyEnemies = new List<GameObject>();
         Utils.findGameObjectsWithinRange(nearbyEnemies, initialTarget.transform.position,
             attackData.attackAoeRange, "Ally");
 
         foreach(GameObject nearbyEnemy in nearbyEnemies) {
-            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
+            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(damage, gameObject);
         }
     }
 

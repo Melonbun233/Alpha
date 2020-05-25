@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6774571869525644754}
   - component: {fileID: 5151483282514609588}
   - component: {fileID: 5664085369435860485}
-  - component: {fileID: 7690615615261434388}
+  - component: {fileID: 1089995312734758029}
   m_Layer: 0
   m_Name: Suicidal
   m_TagString: Enemy
@@ -97,6 +97,9 @@ MonoBehaviour:
   attackIndicator: {fileID: 0}
   moveData:
     moveSpeed: 2
+  effectData:
+    burningStack: 0
+    burningAttackStack: 0
   visionRange: 10
 --- !u!135 &5151483282514609588
 SphereCollider:
@@ -133,7 +136,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &7690615615261434388
+--- !u!54 &1089995312734758029
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +151,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1 &1957919183165228066
 GameObject:
   m_ObjectHideFlags: 0

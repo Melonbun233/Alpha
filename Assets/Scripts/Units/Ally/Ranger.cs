@@ -8,6 +8,8 @@ public class Ranger : Ally
     public float rotateSpeed;
     public float attackRotateSpeed;
     public float rotateSpeedUpPeriod;
+    public GameObject projectile;
+    public float projectileSpeed;
     private float _initialRotateSpeed;
 
     // Core color when attacking
@@ -53,7 +55,20 @@ public class Ranger : Ally
     }
 
     public override void attack() {
-        base.attack();
+        if (projectile == null) {
+            base.attack();
+        } else {
+            foreach(GameObject target in _attackTargets) {
+                if (target == null) {
+                    continue;
+                }
+                
+                Projectile.spawn(projectile, transform.position, transform.rotation,
+                    gameObject, target, projectileSpeed);
+            }
+            _attackCoolDown = attackData.attackCoolDown;
+        }
+        
 
         // Change the color of core for 0.1 second
         _core.GetComponent<Renderer>().material.SetColor("_BaseColor", attackCoreColor);
