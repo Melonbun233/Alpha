@@ -31,7 +31,7 @@ public class ClicpToPlace : MonoBehaviour
             data.effectData.effects.Add(new BurningAttackEffect() as Effect);
             
             if (Physics.Raycast(ray, out hit)) {
-                Ally.spawn(prefab, data, hit.transform.position + new Vector3(0, 1, 0), 
+                Ally.spawn(prefab, data, hit.transform.position + new Vector3(0, 2, 0), 
                     hit.transform.rotation);
             }
         }

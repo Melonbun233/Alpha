@@ -73,6 +73,10 @@ public abstract class Unit : Destroyable
     // and the attack is cooled down
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
+            if (target == null) {
+                continue;
+            }
+            
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
             
             if (OnAttackEvent != null) {
