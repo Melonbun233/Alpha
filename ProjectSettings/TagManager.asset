@@ -12,6 +12,7 @@ TagManager:
   - Enemy_spawn
   - Spawner
   - UI
+  - projectile
   layers:
   - Default
   - TransparentFX
