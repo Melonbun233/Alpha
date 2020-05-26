@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
     public float maxY;
 
     private Vector3 _initialPosition;
+    public int cameraAngle1;
+    public int cameraAngle2;
 
     void Start() {
         _initialPosition = transform.position;
@@ -57,6 +59,29 @@ public class CameraController : MonoBehaviour
             _initialPosition.x + moveLimitXAxis);
 
         transform.position = position;
+    }
+
+    public void angleSwtich()
+    {
+        Vector3 angle = transform.rotation.eulerAngles;
+
+        if ((int)angle.x == cameraAngle1)
+        {
+            Quaternion rotate = new Quaternion();
+            angle.x = cameraAngle2;
+            rotate.eulerAngles = angle;
+            transform.rotation = rotate;
+            return;
+        }
+
+        if((int)angle.x == cameraAngle2)
+        {
+            Quaternion rotate = new Quaternion();
+            angle.x = cameraAngle1;
+            rotate.eulerAngles = angle;
+            transform.rotation = rotate;
+            return;
+        }
     }
 
     private void updateVertically() {

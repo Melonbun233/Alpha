@@ -20,7 +20,7 @@ public class TeamList : MonoBehaviour
         {
             GameObject tower = Instantiate(towerTab, UI.transform) as GameObject;
             tower.GetComponent<RectTransform>().anchoredPosition = offset;
-            offset.x = offset.x + 135f;
+            offset.x = offset.x + 130f;
             tower.GetComponent<TowerOption>().allyData = ally;
         }
         
