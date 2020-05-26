@@ -12,10 +12,6 @@ GameObject:
   - component: {fileID: 7514468537400657663}
   - component: {fileID: 7691783052389368916}
   - component: {fileID: 3837108219760559860}
-  - component: {fileID: 2973054943942906625}
-  - component: {fileID: -5786757918565643026}
-  - component: {fileID: -7001219250273713529}
-  - component: {fileID: 8664479506652807666}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
@@ -50,6 +46,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9154e072e3ac4524d92fefd263e02861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthData:
+    health: 0
+    maxHealth: 0
+    healingPercentMultiplier: 0
+    healingFlatMultiplier: 0
+  resistanceData:
+    physicalResistance: 0
+    fireResistance: 0
+    waterResistance: 0
+    windResistance: 0
+    thunderResistance: 0
     physicalResisPercentMultiplier: 0
     physicalResisFlatMultiplier: 0
     fireResisPercentMultiplier: 0
@@ -62,20 +69,10 @@ MonoBehaviour:
     thunderResisFlatMultiplier: 0
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
-  center: {x: 0, y: 1, z: 0}
-  waves:
-  - prefab: {fileID: 1373195965130842878, guid: 6f7e0922f6eb2634f8340420d12f92f4,
-      type: 3}
-    spawnCoolDown: 1
-    count: 10
-    preparationTime: 2
-  - prefab: {fileID: 1373195965130842878, guid: 6f7e0922f6eb2634f8340420d12f92f4,
-      type: 3}
-    spawnCoolDown: 1
-    count: 10
-    preparationTime: 0
+  center: {x: 0, y: 0, z: 0}
+  waves: []
   currentWave: 0
-  localSpawnPosition: {x: 2, y: 1, z: 0}
+  localSpawnPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &7691783052389368916
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105,122 +102,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &2973054943942906625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309079086921007040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
---- !u!114 &-5786757918565643026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309079086921007040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 1
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
---- !u!114 &-7001219250273713529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309079086921007040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
---- !u!114 &8664479506652807666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309079086921007040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 1
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
 --- !u!1 &309079087838746006
 GameObject:
   m_ObjectHideFlags: 0

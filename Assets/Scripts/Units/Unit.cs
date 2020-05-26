@@ -1,47 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.AI;
 
-[System.Serializable]
-public class UnitData{
-    public HealthData healthData;
-    public AttackData attackData;
-    public ResistanceData resistanceData;
-    public MoveData moveData;
 
-    public UnitData(HealthData healthData, AttackData attackData, 
-        ResistanceData resistanceData, MoveData moveData){
-        this.healthData = healthData;
-        this.attackData = attackData;
-        this.resistanceData = resistanceData;
-        this.moveData = moveData;
-    }
-
-    public List<String> getAttackType()
-    {
-        List<String> temp = new List<string>();
-        if (attackData.attackDamage.getFireDamage() != 0) temp.Add("fire");
-        if (attackData.attackDamage.getWaterDamage() != 0) temp.Add("water");
-        if (attackData.attackDamage.getWindDamage() != 0) temp.Add("wind");
-        if (attackData.attackDamage.getThunderDamage() != 0) temp.Add("thunder");
-
-        return temp;
-    }
-
-    public static GameObject copyData(GameObject obj, UnitData data) {
-        Unit unit = obj.GetComponent<Unit>();
-        if (unit == null) {
-            return null;
-        }
-        unit.healthData = HealthData.deepCopy(data.healthData);
-        unit.attackData = AttackData.deepCopy(data.attackData);
-        unit.resistanceData = ResistanceData.deepCopy(data.resistanceData);
-        unit.moveData = MoveData.deepCopy(data.moveData);
-        return obj;
-    }
-}
 
 public abstract class Unit : Destroyable
 {
@@ -62,16 +26,13 @@ public abstract class Unit : Destroyable
     protected NavMeshAgent _navAgent;
 
     // Effects
-    //public EffectData effectData;
+    public EffectData effectData;
 
     // Effect Events & Delegates
-    public delegate void OnAttackEventHandler(GameObject attacker, GameObject target);
     // Called on each attack
-    public event OnAttackEventHandler onAttackEvent;
-
-    public delegate void OnUpdateHandler();
+    public event Action<Unit, Unit> OnAttackEvent;
     // Called on each update
-    public event OnUpdateHandler onUpdateEvent;
+    public event Action<Unit, float> OnUpdateEvent;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -93,6 +54,10 @@ public abstract class Unit : Destroyable
             preAttack();
             move();
         }
+
+        if (OnUpdateEvent != null) {
+            OnUpdateEvent(this, Time.deltaTime);
+        }
         
     }
 
@@ -111,8 +76,16 @@ public abstract class Unit : Destroyable
     // and the attack is cooled down
     public virtual void attack() {
         foreach(GameObject target in _attackTargets) {
+            if (target == null) {
+                continue;
+            }
+            
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
-            //OnAttackEvent(this.gameObject, target);
+            
+            if (OnAttackEvent != null) {
+                OnAttackEvent(this, target.GetComponent<Unit>());
+            }   
+            
 
             dealAoeDamage(target);
         }
@@ -166,6 +139,13 @@ public abstract class Unit : Destroyable
 
         GameObject obj = Instantiate(prefab, position, rotation);
         UnitData.copyData(obj, data);
+
+        // Apply all effects in the data
+        Unit unit = obj.GetComponent<Unit>();
+        // Need first to clear all existing effects
+        EffectData tmp = unit.effectData;
+        unit.effectData = new EffectData();
+        tmp.applyAllEffects(unit);
 
         return obj;
     }

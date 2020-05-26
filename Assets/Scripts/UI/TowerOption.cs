@@ -15,7 +15,10 @@ public class TowerOption : MonoBehaviour
     public GameObject Cost;
     public GameObject[] prefabs;
     public GameObject[] modelsOnly;
-    public GameObject highlight;
+    public float cd;
+    public bool isCd;
+    private Button button;
+    public GameObject highLight;
 
     public AllyData allyData;
 
@@ -27,12 +30,8 @@ public class TowerOption : MonoBehaviour
     public Sprite Wind;
     public Sprite Thunder;
 
+    private static GameObject status;
 
-
-    public TowerOption(AllyData allyData)
-    {
-        this.allyData = allyData;
-    }
 
     public GameObject allyPrefab()
     {
@@ -62,59 +61,78 @@ public class TowerOption : MonoBehaviour
 
     private void OnMouseOver()
     {
-        highlight.SetActive(true);
+        if (Input.GetMouseButtonDown(1)&&status==null)
+        {
+            status = placement.toPlace.instStatus(allyData);
+        }
     }
 
     private void OnMouseExit()
     {
-        highlight.SetActive(false);
+        if (status != null)
+        {
+            Destroy(status);
+        }
     }
 
     void OnMouseUp()
     {
-        GameObject temp = allyPrefab();
-        //temp.GetComponent<Ally>().enabled = false;
-        //temp.GetComponent<Collider>().enabled = false;
-        //if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
-        //temp.tag = "allyToPlace";
-        placement.toPlace.towerPrefab = temp;
-        placement.toPlace.allyData = allyData;
-        placement.toPlace.towerToFollow = Instantiate(getModel()) as GameObject;
+        if (!isCd)
+        {
+            GameObject temp = allyPrefab();
+            //temp.GetComponent<Ally>().enabled = false;
+            //temp.GetComponent<Collider>().enabled = false;
+            //if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+            //temp.tag = "allyToPlace";
+            placement.toPlace.towerPrefab = temp;
+            placement.toPlace.allyData = allyData;
+            placement.toPlace.towerToFollow = Instantiate(getModel()) as GameObject;
+            placement.toPlace.towerOption = this;
+        }
+        else
+        {
+            print("This Tower is on CD!");
+        }
     }
 
     void Start()
     {
         GameObject towerVisual = Instantiate(getModel(), TowerVisual.transform);
         towerVisual.transform.localScale = new Vector3(20, 20, 20);
-        highlight.SetActive(false);
+        isCd = false;
+        button = gameObject.GetComponent<Button>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Type1_lvl.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
-        // Type2_lvl.GetComponent<Text>().text = "Level: " + attack_lvl.ToString();
-        // Cost.GetComponent<Text>().text = "Cost: " + cost.ToString();
+        Cost.GetComponent<Text>().text = "Cost: " + allyData.allyLevelData.cost.ToString();
             AllyType x = allyData.allyType1;
             switch (x)
             {
                 case AllyType.Fire:
                     Type1.GetComponent<Image>().sprite = Fire;
+                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getFireDamage().ToString();
                     break;
                 case AllyType.Water:
                     Type1.GetComponent<Image>().sprite = Water;
+                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWaterDamage().ToString();
                     break;
                 case AllyType.Thunder:
                     Type1.GetComponent<Image>().sprite = Thunder;
+                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getThunderDamage().ToString();
                     break;
                 case AllyType.Wind:
                     Type1.GetComponent<Image>().sprite = Wind;
+                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWindDamage().ToString();
                     break;
                 case AllyType.Ranger:
                     Type1.GetComponent<Image>().sprite = ranger;
+                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
                     break;
                 case AllyType.Blocker:
                     Type1.GetComponent<Image>().sprite = physical;
+                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
                     break;
             }
 
@@ -124,27 +142,43 @@ public class TowerOption : MonoBehaviour
             {
                 case AllyType.Fire:
                     Type2.GetComponent<Image>().sprite = Fire;
+                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getFireDamage().ToString();
                     break;
                 case AllyType.Water:
                     Type2.GetComponent<Image>().sprite = Water;
+                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWaterDamage().ToString();
                     break;
                 case AllyType.Thunder:
                     Type2.GetComponent<Image>().sprite = Thunder;
+                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getThunderDamage().ToString();
                     break;
                 case AllyType.Wind:
                     Type2.GetComponent<Image>().sprite = Wind;
+                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWindDamage().ToString();
                     break;
                 case AllyType.Ranger:
                     Type2.GetComponent<Image>().sprite = ranger;
+                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
                     break;
                 case AllyType.Blocker:
                     Type2.GetComponent<Image>().sprite = physical;
+                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
                     break;
                 case AllyType.None:
                     Type2.SetActive(false);
+                    Type2_lvl.SetActive(false);
                     break;
             }
 
-
+        if (isCd) 
+        {
+            button.enabled = false;
+            highLight.SetActive(false);
+        } 
+        else
+        {
+            button.enabled = true;
+            highLight.SetActive(true);
+        }
     }
 }

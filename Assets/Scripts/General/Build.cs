@@ -5,6 +5,7 @@ public class Build : MonoBehaviour
     bool hasbuilt;
     GameObject Tower;
     GameObject Instant;
+    public TowerOption towerOption;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,7 @@ public class Build : MonoBehaviour
                 placement.toPlace.towerPrefab = null;
                 Tower = null;
                 hasbuilt = true;
+                towerOption.isCd = true;
 
             }
 
@@ -64,6 +66,7 @@ public class Build : MonoBehaviour
                 placement.toPlace.towerPrefab = null;
                 Tower = null;
                 hasbuilt = true;
+                towerOption.isCd = true;
             }
         }
     }

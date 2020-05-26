@@ -22,6 +22,7 @@ public class TeamList : MonoBehaviour
             tower.GetComponent<RectTransform>().anchoredPosition = offset;
             offset.x = offset.x + 130f;
             tower.GetComponent<TowerOption>().allyData = ally;
+            tower.GetComponent<TowerOption>().cd = ally.allyLevelData.cd;
         }
         
 
