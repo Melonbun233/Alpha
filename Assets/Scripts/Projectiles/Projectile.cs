@@ -17,12 +17,18 @@ public class Projectile : MonoBehaviour
     public AudioClip hitSFX;
     public List<GameObject> trails;
 
+    public bool useMuzzleVFX;
+    public bool useHitVFX;
+
     private bool collided;
     private Rigidbody rb;
 
     private Vector3 lastTargetPosition;
     private Quaternion lastTargetRotation;
     private Vector3 targetCenter;
+
+    private Transform muzzleParent;
+    private Transform hitParent;
 
 
 
@@ -35,9 +41,25 @@ public class Projectile : MonoBehaviour
         lastTargetPosition = target.transform.TransformPoint(targetCenter);
         lastTargetRotation = target.transform.rotation;
 
+        GameObject muzzleParentGameObject = GameObject.Find("Muzzles");
+        GameObject hitParentGameObject = GameObject.Find("Hits");
+
+        if (muzzleParentGameObject == null) {
+            muzzleParent = new GameObject("Muzzles").transform;
+        } else {
+            muzzleParent = muzzleParentGameObject.transform;
+        }
+
+        if (hitParentGameObject == null) {
+            hitParent = new GameObject("Hits").transform;
+        } else {
+            hitParent = hitParentGameObject.transform;
+        }
+
         // Muzzle and shot
-        if (muzzlePrefab != null) {
-            GameObject muzzleVFX  = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
+        if (muzzlePrefab != null && useMuzzleVFX) {
+            GameObject muzzleVFX  = Instantiate(muzzlePrefab, transform.position, 
+                Quaternion.identity, muzzleParent);
             muzzleVFX.transform.forward = transform.forward + muzzleOffset;
             ParticleSystem ps = muzzleVFX.GetComponent<ParticleSystem>();
             if (ps != null) {
@@ -141,11 +163,17 @@ public class Projectile : MonoBehaviour
         // On hit vfx
         // Guess the collision position
         Vector3 collidingPosition = collider.ClosestPointOnBounds(transform.position);
-        Quaternion rotation = Quaternion.LookRotation(collidingPosition -
-            target.transform.TransformPoint(targetCenter));
+        Quaternion rotation;
+        if (!target) {
+            rotation = Quaternion.identity;
+        } else {
+            rotation = Quaternion.LookRotation(collidingPosition -
+                target.transform.TransformPoint(targetCenter));
+        }
+        
 
-        if (hitPrefab != null) {
-            GameObject hitVFX = Instantiate(hitPrefab, collidingPosition, rotation);
+        if (hitPrefab != null && useHitVFX) {
+            GameObject hitVFX = Instantiate(hitPrefab, collidingPosition, rotation, hitParent);
             ParticleSystem ps = hitVFX.GetComponent<ParticleSystem>();
 
             if (ps == null) {
