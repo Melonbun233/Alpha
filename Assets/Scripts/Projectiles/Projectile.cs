@@ -141,8 +141,8 @@ public class Projectile : MonoBehaviour
         // On hit vfx
         // Guess the collision position
         Vector3 collidingPosition = collider.ClosestPointOnBounds(transform.position);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, 
-            collidingPosition - target.transform.TransformPoint(targetCenter));
+        Quaternion rotation = Quaternion.LookRotation(collidingPosition -
+            target.transform.TransformPoint(targetCenter));
 
         if (hitPrefab != null) {
             GameObject hitVFX = Instantiate(hitPrefab, collidingPosition, rotation);
