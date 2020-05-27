@@ -18,11 +18,11 @@ public class Projectile : MonoBehaviour
     public List<GameObject> trails;
 
     private bool collided;
-    private bool isColliding;
     private Rigidbody rb;
 
     private Vector3 lastTargetPosition;
     private Quaternion lastTargetRotation;
+    private Vector3 targetCenter;
 
 
 
@@ -30,7 +30,9 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();    
-        lastTargetPosition = target.transform.position;
+        Destroyable d = target.GetComponent<Destroyable>();
+        targetCenter = d.center;
+        lastTargetPosition = target.transform.TransformPoint(targetCenter);
         lastTargetRotation = target.transform.rotation;
 
         // Muzzle and shot
@@ -74,7 +76,7 @@ public class Projectile : MonoBehaviour
 
         if (target != null) {
             lastTargetRotation = Quaternion.LookRotation(target.transform.position);
-            lastTargetPosition = target.transform.position;
+            lastTargetPosition = target.transform.TransformPoint(targetCenter);
         }
 
         transform.position = Vector3.MoveTowards(transform.position, lastTargetPosition,
@@ -137,12 +139,13 @@ public class Projectile : MonoBehaviour
         speed = 0;
 
         // On hit vfx
+        // Guess the collision position
+        Vector3 collidingPosition = collider.ClosestPointOnBounds(transform.position);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, 
-            transform.position - collider.transform.position);
-        Vector3 position = transform.position;
+            collidingPosition - target.transform.TransformPoint(targetCenter));
 
         if (hitPrefab != null) {
-            GameObject hitVFX = Instantiate(hitPrefab, position, rotation);
+            GameObject hitVFX = Instantiate(hitPrefab, collidingPosition, rotation);
             ParticleSystem ps = hitVFX.GetComponent<ParticleSystem>();
 
             if (ps == null) {
