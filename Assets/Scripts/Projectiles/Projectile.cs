@@ -17,12 +17,20 @@ public class Projectile : MonoBehaviour
     public List<GameObject> trails;
 
     private bool collided;
+    private bool isColliding;
     private Rigidbody rb;
+
+    private Vector3 lastTargetPosition;
+    private Quaternion lastTargetRotation;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();    
+        lastTargetPosition = target.transform.position;
+        lastTargetRotation = target.transform.rotation;
     }
 
     // Update is called once per frame
@@ -32,19 +40,29 @@ public class Projectile : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (target == null) {
+        if (gameObject == null) {
+            return;
+        }
+
+
+        if (target == null && 
+            Vector3.Distance(lastTargetPosition, transform.position) <= 0.2f && 
+            Mathf.Abs(Quaternion.Dot(lastTargetRotation, transform.rotation)) >= 0.8f) {
             Destroy(gameObject);
             return;
         }
 
         float step = speed * Time.deltaTime;
-        Transform targetTransform = target.transform;
 
-        transform.position = Vector3.MoveTowards(transform.position, 
-            targetTransform.position, step);
-        
-        Quaternion rotation = Quaternion.LookRotation(targetTransform.position);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, step);
+        if (target != null) {
+            lastTargetRotation = Quaternion.LookRotation(target.transform.position);
+            lastTargetPosition = target.transform.position;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, lastTargetPosition,
+            step);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lastTargetRotation, 
+            step);
     }
 
     void OnTriggerEnter(Collider collider) {
@@ -88,6 +106,9 @@ public class Projectile : MonoBehaviour
 
         // Destroy trails
         foreach (GameObject trail in trails) {
+            if (trail == null) {
+                continue;
+            }
             ParticleSystem ps = trail.GetComponent<ParticleSystem>();
             if (ps != null) {
                 ps.Stop();
