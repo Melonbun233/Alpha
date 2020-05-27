@@ -35,6 +35,7 @@ public class Build : MonoBehaviour
                 Instant.GetComponent<Collider>().enabled = true;
                 Instant.tag = "Ally";
                 Destroy(placement.toPlace.towerToFollow);
+                placement.toPlace.Mana -= placement.toPlace.allyData.allyLevelData.cost;
                 placement.toPlace.rotate = new Vector3(0, 0, 0);
                 placement.toPlace.towerToFollow = null;
                 placement.toPlace.towerPrefab = null;
@@ -61,6 +62,7 @@ public class Build : MonoBehaviour
                 Instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                 Instant.tag = "Ally";
                 Destroy(placement.toPlace.towerToFollow);
+                placement.toPlace.Mana -= placement.toPlace.allyData.allyLevelData.cost;
                 placement.toPlace.rotate = new Vector3(0, 0, 0);
                 placement.toPlace.towerToFollow = null;
                 placement.toPlace.towerPrefab = null;

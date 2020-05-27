@@ -6,31 +6,31 @@ using UnityEditor.AI;
 
 public class Map_Generator : MonoBehaviour
 {
+
+    [Header("Map parameter")]
     public int rows;
     public int columns;
     public int iterations;
+    public int spawnNumber;
+    public int goldNum;
+    public int baselocMark;
+    public List<int> spawnlocMark;
+    public List<int> goldsMark;
+    public int mapCenterMark;
+
+    [Header("Map tile prefabs")]
     public GameObject[] Base;
     public GameObject[] midTiles;
     public GameObject[] sideTiles;
     public GameObject[] enemySpawn;
     public GameObject[] fillOuts;
     public GameObject[] Golds;
-
     public GameObject spawnPrefabs;
     public GameObject BasePrefabs;
-
-    public int spawnNumber;
-    public int goldNum;
 
     private int mapLength;
     private List<int> reached;
     private List<int> midPoints;
-
-    public int baselocMark;
-    public List<int> spawnlocMark;
-    public List<int> goldsMark;
-    public int mapCenterMark;
-
     private bool hasBaked;
 
     //Initialize Grids.
@@ -91,7 +91,8 @@ public class Map_Generator : MonoBehaviour
     void baseSetup(List<grid> grids, Transform baseHolder)
     {
         int marks = markBase();
-        grids[marks].setMapTile(Instantiate(Base[Random.Range(0, Base.Length)], baseHolder));
+        GameObject Base_ = Instantiate(Base[Random.Range(0, Base.Length)], baseHolder);
+        grids[marks].setMapTile(Base_);
         this.reached.Add(baselocMark);
     }
 
@@ -399,7 +400,6 @@ public class Map_Generator : MonoBehaviour
         int i = 0;
         while (!checkValid(grids))
         {
-            print("times: " + i);
             eraseMap(mapHolder, baseHolder, spawnHolder, grids);
             mapHolder = new GameObject("MapTiles" + i).transform;
             baseHolder = new GameObject("BaseTiles" + i).transform;
@@ -416,7 +416,8 @@ public class Map_Generator : MonoBehaviour
         setupSpawn(grids, spawnHolder);
         setupGold(grids);
         fillOut(grids, mapHolder);
-        GameObject base_ = Instantiate(BasePrefabs, grids[baselocMark].Grid.transform.position, Quaternion.identity);
+        GameObject base_ = Instantiate(BasePrefabs, grids[baselocMark].Grid.transform.position, Quaternion.identity) as GameObject;
+        LevelController.levelCtr.Base = base_.GetComponent<Character>();
         //map built
         hasBaked = false;
         

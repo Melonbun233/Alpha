@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 public class TowerOption : MonoBehaviour
 {
+    [Header("GameObject reference field.")]
     public int type1_lvl;
     public int type2_lvl;
     public GameObject Type1;
@@ -15,13 +16,16 @@ public class TowerOption : MonoBehaviour
     public GameObject Cost;
     public GameObject[] prefabs;
     public GameObject[] modelsOnly;
-    public float cd;
-    public bool isCd;
     private Button button;
     public GameObject highLight;
+    private static GameObject status;
 
+    [Header("Status data")]
+    public float cd;
+    public bool isCd;
     public AllyData allyData;
 
+    [Header("Sprites for UI icons")]
     public Sprite ranger;
     public Sprite melee;
     public Sprite physical;
@@ -30,7 +34,7 @@ public class TowerOption : MonoBehaviour
     public Sprite Wind;
     public Sprite Thunder;
 
-    private static GameObject status;
+
 
 
     public GameObject allyPrefab()
@@ -61,6 +65,8 @@ public class TowerOption : MonoBehaviour
 
     private void OnMouseOver()
     {
+
+
         if (Input.GetMouseButtonDown(1)&&status==null)
         {
             status = placement.toPlace.instStatus(allyData);
@@ -77,6 +83,12 @@ public class TowerOption : MonoBehaviour
 
     void OnMouseUp()
     {
+        if ((int)placement.toPlace.Mana < allyData.allyLevelData.cost)
+        {
+            print("Not Enough Mana");
+            return;
+        }
+
         if (!isCd)
         {
             GameObject temp = allyPrefab();
@@ -92,6 +104,7 @@ public class TowerOption : MonoBehaviour
         else
         {
             print("This Tower is on CD!");
+            return;
         }
     }
 
@@ -170,11 +183,27 @@ public class TowerOption : MonoBehaviour
                     break;
             }
 
+        if (LevelController.levelCtr.Base.isDead())
+        {
+            gameObject.GetComponent<TowerOption>().enabled = false;
+        }
+
         if (isCd) 
         {
             button.enabled = false;
             highLight.SetActive(false);
         } 
+        else
+        {
+            button.enabled = true;
+            highLight.SetActive(true);
+        }
+
+        if ((int)placement.toPlace.Mana < allyData.allyLevelData.cost)
+        {
+            button.enabled = false;
+            highLight.SetActive(false);
+        }
         else
         {
             button.enabled = true;
