@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
 
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
+    public Vector3 muzzleOffset;
 
     public AudioClip shotSFX;
     public AudioClip hitSFX;
@@ -31,6 +32,23 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();    
         lastTargetPosition = target.transform.position;
         lastTargetRotation = target.transform.rotation;
+
+        // Muzzle and shot
+        if (muzzlePrefab != null) {
+            GameObject muzzleVFX  = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
+            muzzleVFX.transform.forward = transform.forward + muzzleOffset;
+            ParticleSystem ps = muzzleVFX.GetComponent<ParticleSystem>();
+            if (ps != null) {
+                Destroy(muzzleVFX, ps.main.duration);
+            } else {
+                ParticleSystem psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+				Destroy (muzzleVFX, psChild.main.duration);
+            }
+        }
+
+        if (shotSFX != null && GetComponent<AudioSource>()) {
+            GetComponent<AudioSource>().PlayOneShot(shotSFX);
+        }
     }
 
     // Update is called once per frame
@@ -172,6 +190,7 @@ public class Projectile : MonoBehaviour
             if (projectiles == null) {
                 projectiles = new GameObject("Projectiles");
             }
+
             GameObject obj = Instantiate(vfx, position, rotation, projectiles.transform);
             obj.transform.LookAt(target.transform.position);
 
