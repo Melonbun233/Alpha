@@ -18,7 +18,9 @@ public class Ally : Unit
 {
     [Header("Ally Type")]
     public AllyType allyType1 = AllyType.None;
+    public int allyType1Level = 0;
     public AllyType allyType2 = AllyType.None;
+    public int allyType2Level = 0;
     public AllyLevelData allyLevelData;
 
     // Update the attack target
@@ -82,5 +84,21 @@ public class Ally : Unit
 
     public bool hasAllyType(AllyType type) {
         return allyType1 == type || allyType2 == type;
+    }
+
+    public AllyType getMainType() {
+        return allyType1Level >= allyType2Level ? allyType1 : allyType2;
+    }
+
+    public int getMainTypeLevel() {
+        return allyType1Level >= allyType2Level ? allyType1Level : allyType2Level;
+    }
+
+    public AllyType getSubType() {
+        return allyType1Level >= allyType2Level ? allyType2 : allyType1; 
+    }
+
+    public int getSubTypeLevel() {
+        return allyType1Level >= allyType2Level ? allyType2Level : allyType1Level;
     }
 }

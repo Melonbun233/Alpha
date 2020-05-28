@@ -14,7 +14,8 @@ public static class DefaultAllyData
                 new ResistanceData(0, 0, 0, 0, 0),
                 new MoveData(0f),
                 new EffectData(),
-                AllyType.Ranger, AllyType.None, 
+                AllyType.Ranger, 1,
+                AllyType.None, 0,
                 new AllyLevelData(5, 1, 0)
             );
         }
@@ -30,7 +31,8 @@ public static class DefaultAllyData
                 new ResistanceData(10, 0, 0, 0, 0),
                 new MoveData(0f),
                 new EffectData(),
-                AllyType.Blocker, AllyType.None,
+                AllyType.Blocker, 1,
+                AllyType.None, 0,
                 new AllyLevelData(5, 1, 0)
             );
         }
@@ -47,7 +49,8 @@ public static class DefaultAllyData
                 new ResistanceData(0, 0, 0, 0, 0),
                 new MoveData(0f),
                 new EffectData(),
-                AllyType.None, AllyType.None,
+                AllyType.None, 0,
+                AllyType.None, 0,
                 new AllyLevelData(5, 0, 0)
             );
         }

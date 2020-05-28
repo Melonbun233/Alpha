@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 181456434671996762}
   - component: {fileID: 209412646215963652}
   - component: {fileID: 8060708962174105547}
-  - component: {fileID: 2017322276996652390}
+  - component: {fileID: -5980520653338787237}
   - component: {fileID: 6331676747500392787}
   m_Layer: 0
   m_Name: fire_level1_projectile
@@ -4896,7 +4896,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.12659e-40, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1.19688e-40, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5023,7 +5023,7 @@ MonoBehaviour:
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
---- !u!114 &2017322276996652390
+--- !u!114 &-5980520653338787237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5032,12 +5032,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 216210771215004848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb546614170fe764e94ed95726425b1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1608c941dcfa9ca46b6d7b2f2ce4c0f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   attacker: {fileID: 0}
-  speed: 30
+  speed: 0
   muzzlePrefab: {fileID: 3611281396777858897, guid: c5812585ab45ce8408444806781ee116,
     type: 3}
   hitPrefab: {fileID: 8169476761968246629, guid: cb072996134b691499d6fca778be2df5,
@@ -5052,6 +5052,10 @@ MonoBehaviour:
   - {fileID: 216634879323406102}
   useMuzzleVFX: 1
   useHitVFX: 1
+  mainType: 6
+  subType: 6
+  mainTypeLevel: 0
+  subTypeLevel: 0
 --- !u!54 &6331676747500392787
 Rigidbody:
   m_ObjectHideFlags: 0

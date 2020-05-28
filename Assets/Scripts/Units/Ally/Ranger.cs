@@ -8,7 +8,7 @@ public class Ranger : Ally
     public float rotateSpeed;
     public float attackRotateSpeed;
     public float rotateSpeedUpPeriod;
-    public GameObject projectile;
+    public GameObject projectilePrefab;
     public float projectileSpeed;
     private float _initialRotateSpeed;
 
@@ -55,7 +55,7 @@ public class Ranger : Ally
     }
 
     public override void attack() {
-        if (projectile == null) {
+        if (projectilePrefab == null) {
             base.attack();
         } else {
             foreach(GameObject target in _attackTargets) {
@@ -63,8 +63,14 @@ public class Ranger : Ally
                     continue;
                 }
                 
-                Projectile.spawn(projectile, transform.position, transform.rotation,
-                    gameObject, target, projectileSpeed);
+                AllyProjectile projectile = projectilePrefab.GetComponent<AllyProjectile>();
+                if (projectile == null) {
+                    Debug.LogWarning("Cannot spawn non-projectile gameobject");
+                    continue;
+                }
+
+                projectile.spawnAllyProjectile(transform.position, transform.rotation, 
+                    gameObject, target);
             }
             _attackCoolDown = attackData.attackCoolDown;
         }

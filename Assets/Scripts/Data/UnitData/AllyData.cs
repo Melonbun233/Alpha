@@ -5,15 +5,20 @@ using UnityEngine;
 [System.Serializable]
 public class AllyData: UnitData {
     public AllyType allyType1;
+    public int allyType1Level;
     public AllyType allyType2;
+    public int allyType2Level;
     public AllyLevelData allyLevelData;
 
     public AllyData(HealthData healthData, AttackData attackData,
         ResistanceData resistanceData, MoveData moveData, EffectData effectData,
-        AllyType allyType1, AllyType allyType2, AllyLevelData allyLevelData) : 
+        AllyType allyType1, int allyType1Level, AllyType allyType2, int allyType2Level,
+        AllyLevelData allyLevelData) : 
         base(healthData, attackData, resistanceData, moveData, effectData) {
             this.allyType1 = allyType1;
+            this.allyType1Level = allyType1Level;
             this.allyType2 = allyType2;
+            this.allyType2Level = allyType2Level;
             this.allyLevelData = allyLevelData;
         }
 
@@ -26,7 +31,9 @@ public class AllyData: UnitData {
         Ally ally = obj.GetComponent<Ally>();
 
         ally.allyType1 = data.allyType1;
+        ally.allyType1Level = data.allyType1Level;
         ally.allyType2 = data.allyType2;
+        ally.allyType2Level = data.allyType2Level;
         ally.allyLevelData = AllyLevelData.deepCopy(data.allyLevelData);
         return obj;
     }
@@ -48,8 +55,10 @@ public class AllyData: UnitData {
 
         if (allyType1 == AllyType.None) {
             allyType1 = type;
+            allyType1Level = 1;
         } else {
             allyType2 = type;
+            allyType2Level = 1;
         }
 
         return true;

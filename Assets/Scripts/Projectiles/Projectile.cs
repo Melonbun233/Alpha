@@ -30,8 +30,6 @@ public class Projectile : MonoBehaviour
     private Transform muzzleParent;
     private Transform hitParent;
 
-
-
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -245,20 +243,22 @@ public class Projectile : MonoBehaviour
 		Destroy (gameObject);
     }
 
-    public static GameObject spawn(GameObject vfx, Vector3 position, Quaternion rotation, 
+    static GameObject getProjectileParent() {
+        GameObject projectileParent = GameObject.Find("Projectile Parent");
+        if (projectileParent == null) {
+            projectileParent = new GameObject("Projectile Parent");
+        }
+
+        return projectileParent;
+    }
+
+    public GameObject spawnProjectile(Vector3 position, Quaternion rotation, 
         GameObject attacker, GameObject target, float speed) {
 
-            if (vfx.GetComponent<Projectile>() == null) {
-                Debug.Log("Cannot spawn non-projectile object");
-                return null;
-            }
+            GameObject projectileParent = getProjectileParent();
 
-            GameObject projectiles = GameObject.Find("Projectiles");
-            if (projectiles == null) {
-                projectiles = new GameObject("Projectiles");
-            }
-
-            GameObject obj = Instantiate(vfx, position, rotation, projectiles.transform);
+            GameObject obj = Instantiate(gameObject, position, rotation, 
+                projectileParent.transform);
             obj.transform.LookAt(target.transform.position);
 
             Projectile projectile = obj.GetComponent<Projectile>();

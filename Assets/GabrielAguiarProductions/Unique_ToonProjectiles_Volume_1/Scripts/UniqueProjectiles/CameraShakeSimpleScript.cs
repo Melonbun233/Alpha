@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class CameraShakeSimpleScript : MonoBehaviour {
 
-	private bool isRunning = false;
+	//private bool isRunning = false;
 	private Animation anim;
 
 	void Start () {
@@ -30,7 +30,7 @@ public class CameraShakeSimpleScript : MonoBehaviour {
 	}
 
 	IEnumerator Shake (float amount, float duration){
-		isRunning = true;
+		//isRunning = true;
 
 		Vector3 originalPos = transform.localPosition;
 		int counter = 0;
@@ -50,6 +50,6 @@ public class CameraShakeSimpleScript : MonoBehaviour {
 
 		transform.localPosition = originalPos;
 
-		isRunning = false;
+		//isRunning = false;
 	}
 }
