@@ -8382,7 +8382,7 @@ PrefabInstance:
     - target: {fileID: 9084741122885902594, guid: 6f7e0922f6eb2634f8340420d12f92f4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.13
+      value: -29.04
       objectReference: {fileID: 0}
     - target: {fileID: 9084741122885902594, guid: 6f7e0922f6eb2634f8340420d12f92f4,
         type: 3}
@@ -24846,6 +24846,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
+        type: 3}
+      propertyPath: attackData.attackNumber
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
+        type: 3}
+      propertyPath: allyType1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
+        type: 3}
+      propertyPath: allyType1Level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7927832156493680333, guid: f306b79c99068d14da1aba091cd590a5,
         type: 3}
       propertyPath: m_Name
@@ -59616,7 +59631,7 @@ PrefabInstance:
     - target: {fileID: 9084741122885902594, guid: 6f7e0922f6eb2634f8340420d12f92f4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.58
+      value: 39.22
       objectReference: {fileID: 0}
     - target: {fileID: 9084741122885902594, guid: 6f7e0922f6eb2634f8340420d12f92f4,
         type: 3}
