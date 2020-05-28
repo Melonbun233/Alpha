@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2136086837156166598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2136086837156166602}
+  - component: {fileID: 2136086837156166601}
+  - component: {fileID: 2136086837156166600}
+  - component: {fileID: 2136086837156166599}
+  m_Layer: 0
+  m_Name: Map_Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2136086837156166602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136086837156166598}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -927.64124, y: -574.6865, z: 1556.9669}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136086837156166601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136086837156166598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92df2d88d50f27e43b38ce357e7fb86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rows: 7
+  columns: 6
+  iterations: 3
+  spawnNumber: 2
+  goldNum: 1
+  baselocMark: 0
+  spawnlocMark: 
+  goldsMark: 
+  mapCenterMark: 0
+  Base:
+  - {fileID: 5265161450082493002, guid: 9aa09ed8dc17dc741a76af5c368e5228, type: 3}
+  midTiles:
+  - {fileID: 2714446005675880362, guid: d4f73a9199e11354580aa2efef8ab7c2, type: 3}
+  - {fileID: 8687431942122060466, guid: 60b656ed1870a4d4badb18bd3f3543df, type: 3}
+  - {fileID: 2371693940643229381, guid: 9b8a1b45ed0cd5b43bd886e601fc12df, type: 3}
+  - {fileID: 3311435606014226769, guid: b5e0ddd42dc57c245af0cbee21924c9b, type: 3}
+  - {fileID: 3861427725135284278, guid: 7af37347c94f3ee469fa69d23dd1dde6, type: 3}
+  sideTiles:
+  - {fileID: 6416124027416348221, guid: 0ebe2837b62c50041a7d93a513134fd1, type: 3}
+  - {fileID: 3861427725135284278, guid: 7af37347c94f3ee469fa69d23dd1dde6, type: 3}
+  - {fileID: 3927405374823997457, guid: fc17bb76c2e6e6b4cb716b49a632d6b0, type: 3}
+  enemySpawn:
+  - {fileID: 2289844012128985510, guid: 88ade2c2b4d85e14a9c52eff72f385f7, type: 3}
+  fillOuts:
+  - {fileID: 8912448474209229975, guid: 8336d315d3d24414bb6a0c79d9198816, type: 3}
+  Golds:
+  - {fileID: 2270177611936942419, guid: 02f782513ec63ff41b897fe27472d3c1, type: 3}
+  spawnPrefabs: {fileID: 309079086921007040, guid: cb80de8fac6c7594aaf97ffaa3753428,
+    type: 3}
+  BasePrefabs: {fileID: 2105381977008142762, guid: ca55958be2b390d42840ae582234543e,
+    type: 3}
+--- !u!114 &2136086837156166600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136086837156166598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daae26d651efeb746852c8ddaed4ce70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer1:
+    serializedVersion: 2
+    m_Bits: 32
+  layer2:
+    serializedVersion: 2
+    m_Bits: 256
+  allyData:
+    healthData:
+      health: 0
+      maxHealth: 0
+      healingPercentMultiplier: 0
+      healingFlatMultiplier: 0
+    attackData:
+      attackRange: 0
+      attackCoolDown: 0
+      attackDamage:
+        physicalDamage: 0
+        fireDamage: 0
+        waterDamage: 0
+        windDamage: 0
+        thunderDamage: 0
+        physicalDamagePercentMultiplier: 0
+        physicalDamageFlatMultiplier: 0
+        fireDamagePercentMultiplier: 0
+        fireDamageFlatMultiplier: 0
+        waterDamagePercentMultiplier: 0
+        waterDamageFlatMultiplier: 0
+        windDamagePercentMultiplier: 0
+        windDamageFlatMultiplier: 0
+        thunderDamagePercentMultiplier: 0
+        thunderDamageFlatMultiplier: 0
+      attackNumber: 0
+      attackAoeRange: 0
+    resistanceData:
+      physicalResistance: 0
+      fireResistance: 0
+      waterResistance: 0
+      windResistance: 0
+      thunderResistance: 0
+      physicalResisPercentMultiplier: 0
+      physicalResisFlatMultiplier: 0
+      fireResisPercentMultiplier: 0
+      fireResisFlatMultiplier: 0
+      waterResisPercentMultiplier: 0
+      waterResisFlatMultiplier: 0
+      windResisPercentMultiplier: 0
+      windResisFlatMultiplier: 0
+      thunderResisPercentMultiplier: 0
+      thunderResisFlatMultiplier: 0
+    moveData:
+      moveSpeed: 0
+    effectData:
+      burningStack: 0
+      burningAttackStack: 0
+    allyType1: 0
+    allyType2: 0
+    allyLevelData:
+      cost: 0
+      level: 0
+      exp: 0
+      cd: 0
+  towerPrefab: {fileID: 0}
+  towerToFollow: {fileID: 0}
+  wallOffset: {x: 0, y: 2, z: 0}
+  valleyOffset: {x: 0, y: 0, z: 0}
+  rotate: {x: 0, y: 0, z: 0}
+  Maincamera: {fileID: 0}
+  UIE: {fileID: 0}
+  status: {fileID: 8666502980356797597, guid: e6942d5904db1664d85f24b5fc42c033, type: 3}
+  towerOption: {fileID: -1889223326394362648, guid: 7a42e00439a2aa842914610a190afa91,
+    type: 3}
+--- !u!114 &2136086837156166599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136086837156166598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716fd6e1e11c7ba4283ef807b779f084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: []
+  towerTab: {fileID: 5775279043506786854, guid: 7a42e00439a2aa842914610a190afa91,
+    type: 3}
+  UI: {fileID: 0}
+  startPoint: {x: -225, y: 0}
+  offset: 133
