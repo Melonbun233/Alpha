@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.AI;
 
 
@@ -34,6 +33,18 @@ public abstract class Unit : Destroyable
     // Called on each update
     public event Action<Unit, float> OnUpdateEvent;
 
+    public virtual void OnAttack(GameObject target) {
+        if (OnAttackEvent != null) {
+            OnAttackEvent(this, target.GetComponent<Unit>());
+        }
+    }
+
+    public virtual void OnUpdate() {
+        if (OnUpdateEvent != null) {
+            OnUpdateEvent(this, Time.deltaTime);
+        }
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -55,9 +66,7 @@ public abstract class Unit : Destroyable
             move();
         }
 
-        if (OnUpdateEvent != null) {
-            OnUpdateEvent(this, Time.deltaTime);
-        }
+        OnUpdate();
         
     }
 
@@ -82,18 +91,15 @@ public abstract class Unit : Destroyable
             
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
             
-            if (OnAttackEvent != null) {
-                OnAttackEvent(this, target.GetComponent<Unit>());
-            }   
-            
+            OnAttack(target); 
 
-            dealAoeDamage(target);
+            dealAoeDamage(target, attackData.attackDamage);
         }
 
         _attackCoolDown = attackData.attackCoolDown;
     }
 
-    public virtual void dealAoeDamage(GameObject initialTarget){}
+    public virtual void dealAoeDamage(GameObject initialTarget, DamageData aoeDamage){}
 
     // All unit class should implement this method
     // This method update the attack target of this unit every 0.5 second

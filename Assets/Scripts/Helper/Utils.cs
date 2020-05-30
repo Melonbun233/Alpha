@@ -18,6 +18,28 @@ public static class Utils
         return horizontalDistance(origin, targetPosition) <= range;
     }
 
+    public static bool isWithinRangeObstacle(Vector3 origin, Vector3 targetPosition, float range)
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(origin, (targetPosition - origin));
+        if (Physics.Raycast(ray, out hit, range))
+        {
+            if (hit.transform.tag == "walls")
+            {
+                return false;
+            }
+            if(hit.transform.tag == "Ally")
+            {
+                return true;
+            }
+            return false;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
     public static void drawRange(Transform trans, float attackRange, Color color) {
         Gizmos.color = color;
         Gizmos.DrawWireSphere(trans.position, attackRange);

@@ -10,7 +10,6 @@ public class Enemy : Unit {
     [Header("Path Finding Settings")]
     // Used to find allies to attack
     public float visionRange;
-
     // [Header("Priority Settings")]
     // public int priority;
 
@@ -32,55 +31,89 @@ public class Enemy : Unit {
 
         // Check if the base is within attack range
         Utils.findGameObjectsWithinRange(_attackTargets, transform.position, attackData.attackRange, "Base");
-        if (_attackTargets.Count != 0 && restAttackNumber > 0) {
+        if (_attackTargets.Count != 0 && restAttackNumber > 0)
+        {
+            //_attackTargets[_attackTargets.Count] = _base;
             _attackTargets.Add(_base);
-            restAttackNumber --;
+            restAttackNumber--;
         }
-
 
         // Check if there's an ally within attack range
         List<GameObject> _attackTargetsWithinRange = new List<GameObject>();
-        Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, 
+        Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position,
              attackData.attackRange, "Ally");
         Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
 
-        for (int i = 0; i < restAttackNumber; i++) {
-            if (i < _attackTargetsWithinRange.Count) {
+        for (int i = 0; i < restAttackNumber; i++)
+        {
+            if (i < _attackTargetsWithinRange.Count)
+            {
                 _attackTargets.Add(_attackTargetsWithinRange[i]);
-            } else {
+            }
+            else
+            {
                 break;
             }
         }
-        
+
+
     }
 
-    public override void dealAoeDamage(GameObject initialTarget) {
+    public override void dealAoeDamage(GameObject initialTarget, DamageData damage) {
         List<GameObject> nearbyEnemies = new List<GameObject>();
         Utils.findGameObjectsWithinRange(nearbyEnemies, initialTarget.transform.position,
             attackData.attackAoeRange, "Ally");
 
         foreach(GameObject nearbyEnemy in nearbyEnemies) {
-            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
+            nearbyEnemy.GetComponent<Destroyable>().receiveDamage(damage, gameObject);
         }
     }
 
     // Move toward the target until reached the attacking range
     public override void move() {
         // game over
-        if (_moveTarget == null) {
+        if (_moveTarget == null) 
+        {
             return;
         }
-
         Transform targetTransform = _moveTarget.transform;
+        
+        if (Utils.isWithinRange(transform.position, targetTransform.position, attackData.attackRange))
+        {
+            if(FollowAnimationCurve.ifHitWall(FollowAnimationCurve.CurveRayCast(transform.position, targetTransform.position, FollowAnimationCurve.DefaultCurveY, 5)))
+            {
+                _navAgent.speed = moveData.moveSpeed;
+                //_navAgent.enabled = true;
+                updateNavAgentDestination(_moveTarget.transform.position);
+            }
+            else
+            {
+                
+                Ray oppositeDirection = new Ray(targetTransform.position,
+                transform.position - targetTransform.position);
+                Vector3 destination = oppositeDirection.GetPoint(attackData.attackRange);
+                updateNavAgentDestination(destination);
+                _navAgent.speed = 0;
+                //_navAgent.enabled = false;
+            }
+        }
+        else
+        {
+            _navAgent.speed = moveData.moveSpeed;
+            //_navAgent.enabled = true;
+            updateNavAgentDestination(_moveTarget.transform.position);
+        }
+
+
         // Vector3 targetPosition = new Vector3(targetTransform.position.x, transform.position.y, 
         //     targetTransform.position.z);
-
+        /*
         Ray oppositeDirection = new Ray(targetTransform.position, 
         transform.position - targetTransform.position);
         
         Vector3 destination = oppositeDirection.GetPoint(attackData.attackRange);
 
-        updateNavAgentDestination(destination);
+        updateNavAgentDestination(destination);*/
     }
 
     // Temporarily find blockers within vision range as move target
@@ -95,7 +128,7 @@ public class Enemy : Unit {
             foreach (GameObject ally in allies) {
                 // only set if the ally is a blocker and within vision range
                 if (ally.GetComponent<Ally>().hasAllyType(AllyType.Blocker) && 
-                    Utils.isWithinRange(transform.position, ally.transform.position, visionRange)) {
+                    Utils.isWithinRangeObstacle(transform.position, ally.transform.position, visionRange)) {
                     // Use the ally that's cloeset
                     float distance = Utils.horizontalDistance(transform, ally.transform);
                     if (distance <= cloestDistance) {

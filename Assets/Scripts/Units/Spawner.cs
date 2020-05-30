@@ -15,6 +15,14 @@ public class Wave {
 
     // time (seconds) before starting spawning
     public float preparationTime;
+
+    public Wave(GameObject prefab, float spawnCoolDown, int count, float preparationTime)
+    {
+        this.prefab = prefab;
+        this.spawnCoolDown = spawnCoolDown;
+        this.count = count;
+        this.preparationTime = preparationTime;
+    }
 }
 
 public class Spawner : Destroyable

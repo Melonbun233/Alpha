@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/Materials/UI.meta
 guid: 6a734d4c8fec0a141933f1a95b68a5a4
+=======
+guid: 2ccca48d0c6d4874f9d694304539beb5
+>>>>>>> c0b8e3c2507dd3e1ff5319a4d629a939e63b91ea:Assets/GabrielAguiarProductions.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

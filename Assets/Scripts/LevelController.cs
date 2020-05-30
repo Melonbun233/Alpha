@@ -15,6 +15,7 @@ public class LevelController : MonoBehaviour
     public int colums;
     public int iterations;
     public int Levels;
+    public int seed;
 
     [Header("Level Settings")]
     public float ManaRegen;
@@ -43,7 +44,15 @@ public class LevelController : MonoBehaviour
 
     [Header("Game Status")]
     public Character Base;
+    public List<GameObject> spawns;
+    public List<GameObject> enemyPrefabs;
+    [SerializeField]
+    public List<Wave> waves;
+    public float SpawnCoolDown;
+    public int count;
+    public float preparationTime;
 
+    private int times = 0;
 
     private void Awake()
     {
@@ -52,6 +61,7 @@ public class LevelController : MonoBehaviour
         teamList = LevelGenerator.GetComponent<TeamList>();
         Placement = LevelGenerator.GetComponent<placement>();
         MapGenerator = LevelGenerator.GetComponent<Map_Generator>();
+        MapGenerator.seed = this.seed;
 
         teamList.UI = UI;
         MapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
@@ -76,12 +86,19 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         placement.toPlace.Mana = StartingMana;
+        
     }
 
     // Update is called once per frame
 
     void Update()
     {
+        if(times < 1)
+        {
+            spawns[0].GetComponent<Spawner>().waves.Add(new Wave(enemyPrefabs[0], SpawnCoolDown, count, preparationTime));
+            times++;
+        }
+        
         if (Base.isDead())
         {
             UI.transform.Find("GO").gameObject.SetActive(true);

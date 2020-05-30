@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 1.2
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.7
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.4
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -705,9 +705,10 @@ MonoBehaviour:
   colums: 5
   iterations: 3
   Levels: 1
+  seed: 1
   ManaRegen: 1
-  MaxMana: 10
-  StartingMana: 0
+  MaxMana: 100
+  StartingMana: 10
   mana: 0
   TeamOptionOffset: 133
   TeamOptionStartingPoint: {x: -225, y: 0}
@@ -716,6 +717,14 @@ MonoBehaviour:
   cam: {fileID: 837295276}
   UI: {fileID: 355742988}
   Base: {fileID: 0}
+  spawns: []
+  enemyPrefabs:
+  - {fileID: 3422076805768724914, guid: 352af795b973bb649a6e6a98def2a48d, type: 3}
+  - {fileID: 1373195965130842878, guid: 6f7e0922f6eb2634f8340420d12f92f4, type: 3}
+  waves: []
+  SpawnCoolDown: 1
+  count: 1
+  preparationTime: 1
 --- !u!4 &1164233548
 Transform:
   m_ObjectHideFlags: 0

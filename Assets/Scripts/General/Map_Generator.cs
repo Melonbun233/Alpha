@@ -17,6 +17,7 @@ public class Map_Generator : MonoBehaviour
     public List<int> spawnlocMark;
     public List<int> goldsMark;
     public int mapCenterMark;
+    public int seed;
 
     [Header("Map tile prefabs")]
     public GameObject[] Base;
@@ -199,15 +200,18 @@ public class Map_Generator : MonoBehaviour
         return spawnlocMark;
     }
 
-    void setupSpawn(List<grid> grids, Transform spawnHolder)
+    List<GameObject> setupSpawn(List<grid> grids, Transform spawnHolder)
     {
         List<int> temp = markSpawn(spawnNumber, grids);
+        List<GameObject> temp2 = new List<GameObject>();
         foreach (int x in temp)
         {
             GameObject spawnsTile = Instantiate(enemySpawn[0], spawnHolder);
             GameObject spawn = Instantiate(spawnPrefabs, grids[x].Grid.transform.position, Quaternion.identity) as GameObject;
             replaceTile(grids, x, spawnsTile, spawnHolder);
+            temp2.Add(spawn);
         }
+        return temp2;
     }
 
     void replaceTile(List<grid> grids, int index, GameObject tile, Transform holder)
@@ -390,6 +394,7 @@ public class Map_Generator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Random.seed = this.seed;
         reached = new List<int>();
         midPoints = new List<int>();
         List<grid> grids = SetUpGridSystem();
@@ -413,11 +418,12 @@ public class Map_Generator : MonoBehaviour
             }
             i++;
         }
-        setupSpawn(grids, spawnHolder);
+        List<GameObject> spawns = setupSpawn(grids, spawnHolder);
         setupGold(grids);
         fillOut(grids, mapHolder);
         GameObject base_ = Instantiate(BasePrefabs, grids[baselocMark].Grid.transform.position, Quaternion.identity) as GameObject;
         LevelController.levelCtr.Base = base_.GetComponent<Character>();
+        LevelController.levelCtr.spawns = spawns;
         //map built
         hasBaked = false;
         
