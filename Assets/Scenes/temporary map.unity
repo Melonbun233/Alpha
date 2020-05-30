@@ -24859,7 +24859,17 @@ PrefabInstance:
     - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
         type: 3}
       propertyPath: allyType1Level
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
+        type: 3}
+      propertyPath: allyType2
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
+        type: 3}
+      propertyPath: allyType2Level
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7927832156493680333, guid: f306b79c99068d14da1aba091cd590a5,
         type: 3}

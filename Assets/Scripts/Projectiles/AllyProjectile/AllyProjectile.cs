@@ -1,70 +1,143 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Used to spawn ally projectiles
-// Projectiles will have color
-public class AllyProjectile : Projectile
-{   
-    // Speed for different ally projectile main type
-    public static readonly Dictionary<AllyType, float> allyProjectileSpeeds = 
-        new Dictionary<AllyType, float>() {
-            {AllyType.Ranger, 30f},
-            {AllyType.Blocker, 20f},
-            {AllyType.Fire, 10f},
-            {AllyType.Water, 10f},
-            {AllyType.Wind, 20f},
-            {AllyType.Thunder, 30f},
-            {AllyType.None, 20f},
-        };
+public abstract class AllyProjectile : MonoBehaviour
+{
+    public readonly int availableLevels = 3;
 
-    public AllyType mainType;
-    public AllyType subType;
+    public abstract string[] defaultPaths {get;}
+    public abstract string[] prefabPaths {get; set;}
 
-    // level of the main type
-    public int mainTypeLevel;
-    public int subTypeLevel;
+    public abstract string[] modifyNamesLevel1 {get; set;}
+    public abstract Action<GameObject, int, int, Color> modifyLevel1Action {get; set;}
 
-    // Set the vfx based on the types
-    public void setVFX() {
-        switch (mainType) {
-            case AllyType.None:
-                break;
-            case AllyType.Blocker:
-            case AllyType.Ranger:
-                break;
-            case AllyType.Fire:
-                break;
-            case AllyType.Water:
-                break;
-            case AllyType.Wind:
-                break;
-            case AllyType.Thunder:
-                break;
+    public abstract string[] modifyNamesLevel2 {get; set;}
+    public abstract Action<GameObject, int, int, Color> modifyLevel2Action {get; set;}
+
+    public abstract string[] modifyNamesLevel3 {get; set;}
+    public abstract Action<GameObject, int, int, Color> modifyLevel3Action {get; set;}
+
+
+    protected Action<GameObject, int, int, Color> defaultModifyAction;   
+        
+
+    protected string[] _lastPrefabPaths = {"", "", ""};
+
+    protected GameObject[] _lastPrefabs = {null, null, null};
+
+    protected virtual void Start() {
+        for (int i = 0; i < availableLevels; i ++) {
+            loadPrefab(i + 1);
+        }
+
+        defaultModifyAction = new Action<GameObject, int, int, Color>(
+            (GameObject obj, int mainTypeLevel, int subTypeLevel, Color color) => {
+
+            string[] modifyNames = getModifyNames(mainTypeLevel);
+
+            foreach (string gameObjectName in modifyNames) {
+                Transform transform = obj.transform.Find(gameObjectName);
+                if (transform == null) {
+                    continue;
+                }
+                
+                ParticleSystem ps = transform.gameObject.GetComponent<ParticleSystem>();
+                if (ps != null) {
+                    ParticleSystem.MainModule main = ps.main;
+                    ParticleSystemRenderer renderer = transform.gameObject.GetComponent<ParticleSystemRenderer>();
+
+                    renderer.material.SetFloat("_Emission", 0.1f);
+                    renderer.material.SetColor("_Color", color * 0.02f);
+                    main.startColor = color;
+                }
+                
+            }
+
+        });
+    }
+
+    protected virtual string[] getModifyNames(int mainTypeLevel) {
+        switch (mainTypeLevel) {
+            case 1: 
+                return modifyNamesLevel1;
+            case 2:
+                return modifyNamesLevel2;
+            case 3:
+                return modifyNamesLevel3;
+            default:
+                return null; 
         }
     }
 
-    public GameObject spawnAllyProjectile(Vector3 position, Quaternion rotation,
-        GameObject attacker, GameObject target) {
-            Ally ally = attacker.GetComponent<Ally>();
-            if (ally == null) {
-                Debug.LogWarning("Non-ally object cannot shot ally projectile");
-                return null;
-            }
+    protected virtual void Update() {}
 
-            AllyType mainType = ally.getMainType();
-            AllyType subType = ally.getSubType();
+    public virtual GameObject getProjectile(int mainTypeLevel, AllyType subType, int subTypeLevel) {
+        if (mainTypeLevel <= 0 || mainTypeLevel > availableLevels) {
+            Debug.LogError("Projectile doesn't have level " + mainTypeLevel + " prefab");
+            return null;
+        }
 
-            GameObject obj = base.spawnProjectile(position, rotation, attacker, target, 
-                AllyProjectile.allyProjectileSpeeds[mainType]);
+        GameObject prefab = loadPrefab(mainTypeLevel);
+        if (prefab == null) {
+            Debug.LogError("Failed to load projectile level " + mainTypeLevel + " prefab");
+            return null;
+        }
+        GameObject obj = GameObject.Instantiate(prefab);
 
-            AllyProjectile projectile = obj.GetComponent<AllyProjectile>();
-            projectile.mainType = mainType;
-            projectile.subType = subType;
-            projectile.mainTypeLevel = ally.getMainTypeLevel();
-            projectile.subTypeLevel = ally.getSubTypeLevel();
-            projectile.setVFX();
+        Action<GameObject, int, int, Color> modifyAction;
+        switch (mainTypeLevel) {
+            case 1: 
+                modifyAction = modifyLevel1Action;
+                break;
+            case 2:
+                modifyAction = modifyLevel2Action;
+                break;
+            case 3:
+                modifyAction = modifyLevel3Action;
+                break;
+            default:
+                return null; 
+        }
 
-            return obj;
+        modifyPrefab(mainTypeLevel, subType, subTypeLevel, obj, modifyAction);
+        return obj;
+    } 
+
+    protected GameObject loadPrefab(int mainTypeLevel) {
+        if (_lastPrefabPaths[mainTypeLevel - 1] == prefabPaths[mainTypeLevel - 1]) {
+            return _lastPrefabs[mainTypeLevel - 1];
+        } else {
+            _lastPrefabPaths[mainTypeLevel - 1] = prefabPaths[mainTypeLevel - 1];
+            _lastPrefabs[mainTypeLevel - 1] = Resources.Load<GameObject>(_lastPrefabPaths[mainTypeLevel - 1]);
+            return _lastPrefabs[mainTypeLevel - 1];
+        }
     }
+
+    protected void modifyPrefab(int mainTypeLevel, AllyType subType, int subTypeLevel, GameObject obj,
+        Action<GameObject, int, int, Color> modifyAction) {
+            switch (subType) {
+                case AllyType.Blocker:
+                case AllyType.Ranger:
+                    modifyAction(obj, mainTypeLevel, subTypeLevel, CustomColors.physicalMainColor);
+                    break;
+
+                case AllyType.Fire:
+                    modifyAction(obj, mainTypeLevel, subTypeLevel, CustomColors.fireMainColor);
+                    break;
+
+                case AllyType.Water:
+                    modifyAction(obj, mainTypeLevel, subTypeLevel, CustomColors.waterMainColor);
+                    break;
+
+                case AllyType.Wind:
+                    modifyAction(obj, mainTypeLevel, subTypeLevel, CustomColors.windMainColor);
+                    break;
+
+                case AllyType.Thunder:
+                    modifyAction(obj, mainTypeLevel, subTypeLevel, CustomColors.thunderMainColor);
+                    break;
+            }
+        }
 }

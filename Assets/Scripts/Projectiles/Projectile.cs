@@ -34,8 +34,7 @@ public class Projectile : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();    
-        Destroyable d = target.GetComponent<Destroyable>();
-        targetCenter = d.center;
+        
 
         updateMoveTarget();
 
@@ -98,6 +97,8 @@ public class Projectile : MonoBehaviour
         float step = speed * Time.deltaTime;
 
         if (target != null) {
+            Destroyable d = target.GetComponent<Destroyable>();
+            targetCenter = d.center;
             updateMoveTarget();
         }
 
@@ -109,6 +110,9 @@ public class Projectile : MonoBehaviour
     // By default movePosition is set to target's position, and moveRotation
     // is set to the rotation looking to the target
     protected virtual void updateMoveTarget() {
+        if (target == null) {
+            return;
+        }
         moveRotation = Quaternion.LookRotation(target.transform.position);
         movePosition = target.transform.TransformPoint(targetCenter);
     }
@@ -268,6 +272,24 @@ public class Projectile : MonoBehaviour
             
             return obj;
     }
+
+    // reset an already spawned projectile
+    public void setProjectile(Vector3 position, Quaternion rotation,
+        GameObject attacker, GameObject target, float speed) {
+
+            GameObject projectileParent = getProjectileParent();    
+            Transform transform = gameObject.transform;
+
+            transform.parent = projectileParent.transform;
+            transform.LookAt(target.transform.position);
+
+            transform.position = position;
+            transform.rotation = rotation;
+
+            this.target = target;
+            this.attacker = attacker;
+            this.speed = speed;
+        }
 
 
 }

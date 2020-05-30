@@ -23,7 +23,7 @@ Material:
   m_Name: Trail26bcg
   m_Shader: {fileID: -6465566751694194690, guid: 96d4b760912e054428d35443a339ddbe,
     type: 3}
-  m_ShaderKeywords: _BLENDMODE_ALPHA _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_ADD _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -91,9 +91,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoffEnable: 0
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
-    - _BlendMode: 0
+    - _BlendMode: 1
     - _BumpScale: 1
     - _CullMode: 0
     - _CullModeForward: 0
@@ -102,7 +102,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
-    - _DstBlend: 10
+    - _DstBlend: 1
     - _Emission: 3
     - _EnableFogOnTransparent: 1
     - _GlossMapScale: 1
