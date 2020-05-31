@@ -52,11 +52,13 @@ public abstract class ProjectileSet : MonoBehaviour
         defaultModifyAction = new Action<GameObject, int, int, Color>
         (
             (GameObject obj, int mainTypeLevel, int subTypeLevel, Color color) => {
+                if (color == CustomColors.noviceMainColor) {
+                    return;
+                }
                 ParticleSystem ps = obj.GetComponent<ParticleSystem>();
                 if (ps != null) {
                     ParticleSystem.MainModule main = ps.main;
-                    ParticleSystemRenderer renderer = 
-                        transform.gameObject.GetComponent<ParticleSystemRenderer>();
+                    ParticleSystemRenderer renderer = obj.GetComponent<ParticleSystemRenderer>();
                     
                     renderer.material.SetFloat("_Emission", 0.1f);
                     renderer.material.SetColor("_Color", color * 0.02f);

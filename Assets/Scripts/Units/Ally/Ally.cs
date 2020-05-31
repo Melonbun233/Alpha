@@ -87,32 +87,31 @@ public class Ally : Unit
         return allyType1 == type || allyType2 == type;
     }
 
-    // If ally is a blocker, its main type should always be blocker
     public AllyType getMainType() {
-        if (hasAllyType(AllyType.Blocker)) {
-            return AllyType.Blocker;
-        }
+        // if (hasAllyType(AllyType.Blocker)) {
+        //     return AllyType.Blocker;
+        // }
         return allyType1Level >= allyType2Level ? allyType1 : allyType2;
     }
 
     public int getMainTypeLevel() {
-        if (hasAllyType(AllyType.Blocker)) {
-            return allyType1 == AllyType.Blocker ? allyType1Level : allyType2Level;
-        }
+        // if (hasAllyType(AllyType.Blocker)) {
+        //     return allyType1 == AllyType.Blocker ? allyType1Level : allyType2Level;
+        // }
         return allyType1Level >= allyType2Level ? allyType1Level : allyType2Level;
     }
 
     public AllyType getSubType() {
-        if (hasAllyType(AllyType.Blocker)) {
-            return allyType1 == AllyType.Blocker ? allyType2 : allyType1;
-        }
+        // if (hasAllyType(AllyType.Blocker)) {
+        //     return allyType1 == AllyType.Blocker ? allyType2 : allyType1;
+        // }
         return allyType1Level >= allyType2Level ? allyType2 : allyType1; 
     }
 
     public int getSubTypeLevel() {
-        if (hasAllyType(AllyType.Blocker)) {
-            return allyType1 == AllyType.Blocker ? allyType2Level : allyType1Level;
-        }
+        // if (hasAllyType(AllyType.Blocker)) {
+        //     return allyType1 == AllyType.Blocker ? allyType2Level : allyType1Level;
+        // }
         return allyType1Level >= allyType2Level ? allyType2Level : allyType1Level;
     }
 }

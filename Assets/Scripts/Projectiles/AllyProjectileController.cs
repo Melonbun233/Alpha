@@ -15,12 +15,12 @@ public class AllyProjectileController : MonoBehaviour
     // Speed for different ally projectile main type
     public static readonly Dictionary<AllyType, float> allyProjectileSpeeds = 
         new Dictionary<AllyType, float>() {
-            {AllyType.Ranger, 20f},
-            {AllyType.Blocker, 10f},
+            {AllyType.Ranger, 15f},
+            {AllyType.Blocker, 5f},
             {AllyType.Fire, 5f},
-            {AllyType.Water, 5f},
+            {AllyType.Water, 10f},
             {AllyType.Wind, 10f},
-            {AllyType.Thunder, 20f},
+            {AllyType.Thunder, 15f},
             {AllyType.None, 10f},
         };
 

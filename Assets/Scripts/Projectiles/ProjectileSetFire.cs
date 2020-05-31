@@ -21,7 +21,14 @@ public class ProjectileSetFire : ProjectileSet
         "Particles"
     };
 
-    public static readonly string[] defaultModifyNamesLevel4 = {
+    public static readonly string[] modifyNamesLevel1 = {
+        "MainBeam",
+        // "GlowBeam",
+        // "Smoke",
+        "Particles",
+    };
+
+    public static readonly string[] modifyNamesLevel4 = {
         // "SemiCircles",
         // "Circle",
         // "Ring",
@@ -32,37 +39,11 @@ public class ProjectileSetFire : ProjectileSet
     protected override void Start() {
         base.Start();
 
-        for (int i = 0; i < 3; i ++) {
-            addLevel(new LevelConfig(defaultPaths[i], defaultModifyNames, 
-            fireDefaultModifyAction));
-        }
-
-        addLevel(new LevelConfig(defaultPaths[3], defaultModifyNamesLevel4, fireDefaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[0], modifyNamesLevel1, defaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[1], defaultModifyNames, fireDefaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[2], defaultModifyNames, fireDefaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[3], modifyNamesLevel4, fireDefaultModifyAction));
     }
-
-    void fireDefaultModifyActionLevel4 (GameObject obj, int mainTypeLevel, 
-        int subTypeLevel, Color color) {
-            if (color == CustomColors.noviceMainColor) {
-                return;
-            }
-            Color transparentColor = new Color(color.r, color.g, color.b, 80);
-            ParticleSystem ps = obj.GetComponent<ParticleSystem>();
-            if (ps != null) {
-                ParticleSystem.MainModule main = ps.main;
-                ParticleSystemRenderer renderer = obj.GetComponent<ParticleSystemRenderer>();
-
-                renderer.material.SetFloat("_Emission", 0.1f);
-
-                if (obj.name == "Beam") {
-                    renderer.material.SetColor("_Color", transparentColor * 0.02f);
-                    main.startColor = color;
-                } else {
-                    renderer.material.SetColor("_Color", color * 0.02f);
-                    main.startColor = color;
-                }
-                
-            }
-        }
 
     void fireDefaultModifyAction (GameObject obj, int mainTypeLevel, 
         int subTypeLevel, Color color) {
