@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class AllyProjectileController : MonoBehaviour
 {
-    AllyProjectile allyProjectilePhysic;
-    AllyProjectile allyProjectileFire;
-    AllyProjectile allyProjectileWater;
-    AllyProjectile allyProjectileWind;
-    AllyProjectile allyProjectileThunder;
+    ProjectileSet projectileSetPhysic;
+    ProjectileSet projectileSetFire;
+    ProjectileSet projectileSetWater;
+    ProjectileSet projectileSetWind;
+    ProjectileSet projectileSetThunder;
 
     // Speed for different ally projectile main type
     public static readonly Dictionary<AllyType, float> allyProjectileSpeeds = 
@@ -24,14 +24,25 @@ public class AllyProjectileController : MonoBehaviour
             {AllyType.None, 10f},
         };
 
+    public static readonly Dictionary<AllyType, Color> allyProjectileColors = 
+        new Dictionary<AllyType, Color>() {
+            {AllyType.Ranger, CustomColors.physicalMainColor},
+            {AllyType.Blocker, CustomColors.physicalMainColor},
+            {AllyType.Fire, CustomColors.fireMainColor},
+            {AllyType.Water, CustomColors.waterMainColor},
+            {AllyType.Wind, CustomColors.windMainColor},
+            {AllyType.Thunder, CustomColors.thunderMainColor},
+            {AllyType.None, CustomColors.noviceMainColor},
+        };
+
     // Start is called before the first frame update
     void Start()
     {
-        allyProjectilePhysic = gameObject.AddComponent<AllyProjectilePhysic>() as AllyProjectile;
-        allyProjectileFire = gameObject.AddComponent<AllyProjectileFire>() as AllyProjectile;
-        allyProjectileWater = gameObject.AddComponent<AllyProjectileWater>() as AllyProjectile;
-        allyProjectileWind = gameObject.AddComponent<AllyProjectileWind>() as AllyProjectile;
-        allyProjectileThunder = gameObject.AddComponent<AllyProjectileThunder>() as AllyProjectile;
+        projectileSetPhysic = gameObject.AddComponent<ProjectileSetPhysic>() as ProjectileSet;
+        projectileSetFire = gameObject.AddComponent<ProjectileSetFire>() as ProjectileSet;
+        projectileSetWater = gameObject.AddComponent<ProjectileSetWater>() as ProjectileSet;
+        projectileSetWind = gameObject.AddComponent<ProjectileSetWind>() as ProjectileSet;
+        projectileSetThunder = gameObject.AddComponent<ProjectileSetThunder>() as ProjectileSet;
         //Time.timeScale = 0.2f;
     }
 
@@ -49,24 +60,24 @@ public class AllyProjectileController : MonoBehaviour
         switch (mainType) {
             case AllyType.Ranger :
             case AllyType.Blocker :
-                return allyProjectilePhysic.getProjectile(ally.getMainTypeLevel(), 
-                    ally.getSubType(), ally.getSubTypeLevel());
+                return projectileSetPhysic.getProjectile(ally.getMainTypeLevel(), 
+                    allyProjectileColors[ally.getSubType()], ally.getSubTypeLevel());
 
             case AllyType.Fire :
-                return allyProjectileFire.getProjectile(ally.getMainTypeLevel(), 
-                    ally.getSubType(), ally.getSubTypeLevel());
+                return projectileSetFire.getProjectile(ally.getMainTypeLevel(), 
+                    allyProjectileColors[ally.getSubType()], ally.getSubTypeLevel());
 
             case AllyType.Water :
-                return allyProjectileWater.getProjectile(ally.getMainTypeLevel(), 
-                    ally.getSubType(), ally.getSubTypeLevel());
+                return projectileSetWater.getProjectile(ally.getMainTypeLevel(), 
+                    allyProjectileColors[ally.getSubType()], ally.getSubTypeLevel());
 
             case AllyType.Wind :
-                return allyProjectileWind.getProjectile(ally.getMainTypeLevel(), 
-                    ally.getSubType(), ally.getSubTypeLevel());
+                return projectileSetWind.getProjectile(ally.getMainTypeLevel(), 
+                    allyProjectileColors[ally.getSubType()], ally.getSubTypeLevel());
             
             case AllyType.Thunder :
-                return allyProjectileThunder.getProjectile(ally.getMainTypeLevel(), 
-                    ally.getSubType(), ally.getSubTypeLevel());
+                return projectileSetThunder.getProjectile(ally.getMainTypeLevel(), 
+                    allyProjectileColors[ally.getSubType()], ally.getSubTypeLevel());
 
             default: 
                 Debug.LogError("Ally Type : " + Enum.GetName(typeof(AllyType), mainType) + 

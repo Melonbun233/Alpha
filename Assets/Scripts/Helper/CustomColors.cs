@@ -27,4 +27,8 @@ public static class CustomColors
     public static Color transparent {
         get {return new Color(0, 0, 0, 0);}
     }
+
+    public static Color noviceMainColor {
+        get {return new Color(150, 150, 150, 200);}
+    }
 }

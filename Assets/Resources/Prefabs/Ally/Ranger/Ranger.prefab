@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8048048295189327827}
   - component: {fileID: 6861531239737234898}
   - component: {fileID: 1530841986067063137}
-  - component: {fileID: 7964962866312901202}
+  - component: {fileID: 6734697425312543982}
   m_Layer: 0
   m_Name: Ranger
   m_TagString: Untagged
@@ -124,7 +124,8 @@ MonoBehaviour:
   attackRotateSpeed: 200
   rotateSpeedUpPeriod: 0.5
   attackCoreColor: {r: 0.9433962, g: 0.3693485, b: 0.701787, a: 0}
---- !u!114 &7964962866312901202
+  attackPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &6734697425312543982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7927832156493680333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c39a6188163b304e9326b263d3b32c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 43eff301cca186a4da3a9e04adb4aa6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9023487780637698271
