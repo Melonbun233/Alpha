@@ -9622,7 +9622,7 @@ MonoBehaviour:
   speed: 0
   muzzlePrefab: {fileID: 2919642948817120813, guid: 5117940a1518b9947a2c3e66c7cada2e,
     type: 3}
-  hitPrefab: {fileID: 769156530951879459, guid: 8d185d5612a10a34da31f493e415c103,
+  hitPrefab: {fileID: 7969639936509219941, guid: 88e29fcd3eb28ff4d8cd8aa655d8dce5,
     type: 3}
   muzzleOffset: {x: 0, y: 0, z: 0}
   shotSFX: {fileID: 0}

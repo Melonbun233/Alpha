@@ -19172,9 +19172,9 @@ MonoBehaviour:
   target: {fileID: 0}
   attacker: {fileID: 0}
   speed: 0
-  muzzlePrefab: {fileID: 2919642948817120813, guid: 5117940a1518b9947a2c3e66c7cada2e,
+  muzzlePrefab: {fileID: 49411407878429031, guid: 3e63abacec36f1c46b5796740e13e291,
     type: 3}
-  hitPrefab: {fileID: 769156530951879459, guid: 8d185d5612a10a34da31f493e415c103,
+  hitPrefab: {fileID: 5929118989601124330, guid: 66220e664bf2b7c4f8ca84ea291c9dd5,
     type: 3}
   muzzleOffset: {x: 0, y: 0, z: 0}
   shotSFX: {fileID: 0}
