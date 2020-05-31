@@ -9624,8 +9624,8 @@ MonoBehaviour:
   - {fileID: 5189726583761687972}
   - {fileID: 5189673317284296578}
   - {fileID: 4859576522139582977}
-  useMuzzleVFX: 0
-  useHitVFX: 0
+  useMuzzleVFX: 1
+  useHitVFX: 1
 --- !u!1 &5189673317284296578
 GameObject:
   m_ObjectHideFlags: 0
