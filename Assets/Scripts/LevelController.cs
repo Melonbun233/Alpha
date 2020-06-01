@@ -69,7 +69,7 @@ public class LevelController : MonoBehaviour
 
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
-        teamList.team.Add(DefaultAllyData.defaultRangerData);
+        teamList.team.Add(DefaultAllyData.TestRangerData);
         teamList.team.Add(DefaultAllyData.defaultBlockerData);
 
         Placement.wallOffset = wallOffset;

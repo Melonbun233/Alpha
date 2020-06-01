@@ -23,23 +23,20 @@ public class Projectile : MonoBehaviour
     private bool collided;
     private Rigidbody rb;
 
-    private Vector3 lastTargetPosition;
-    private Quaternion lastTargetRotation;
+    private Vector3 movePosition;
+    private Quaternion moveRotation;
     private Vector3 targetCenter;
 
     private Transform muzzleParent;
     private Transform hitParent;
 
-
-
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();    
-        Destroyable d = target.GetComponent<Destroyable>();
-        targetCenter = d.center;
-        lastTargetPosition = target.transform.TransformPoint(targetCenter);
-        lastTargetRotation = target.transform.rotation;
+        
+
+        updateMoveTarget();
 
         GameObject muzzleParentGameObject = GameObject.Find("Muzzles");
         GameObject hitParentGameObject = GameObject.Find("Hits");
@@ -76,20 +73,23 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
 
-    void FixedUpdate() {
+    protected virtual void FixedUpdate() {
+        // Check if this projectile has been detroyed
         if (gameObject == null) {
             return;
         }
 
-
+        // Check if the target has been destroyed,
+        // If true, destroy this projectile until it is close enough
+        // to the last target position
         if (target == null && 
-            Vector3.Distance(lastTargetPosition, transform.position) <= 0.2f && 
-            Mathf.Abs(Quaternion.Dot(lastTargetRotation, transform.rotation)) >= 0.8f) {
+            Vector3.Distance(movePosition, transform.position) <= 0.2f) {
+            //Mathf.Abs(Quaternion.Dot(moveRotation, transform.rotation)) >= 0.8f) {
             Destroy(gameObject);
             return;
         }
@@ -97,33 +97,74 @@ public class Projectile : MonoBehaviour
         float step = speed * Time.deltaTime;
 
         if (target != null) {
-            lastTargetRotation = Quaternion.LookRotation(target.transform.position);
-            lastTargetPosition = target.transform.TransformPoint(targetCenter);
+            Destroyable d = target.GetComponent<Destroyable>();
+            targetCenter = d.center;
+            updateMoveTarget();
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, lastTargetPosition,
-            step);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, lastTargetRotation, 
-            step);
+        transform.position = Vector3.MoveTowards(transform.position, movePosition, step);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, step);
     }
 
-    void OnTriggerEnter(Collider collider) {
+    // Update the position and rotation this projectile is moving towards
+    // By default movePosition is set to target's position, and moveRotation
+    // is set to the rotation looking to the target
+    protected virtual void updateMoveTarget() {
+        if (target == null) {
+            return;
+        }
+        moveRotation = Quaternion.LookRotation(target.transform.position);
+        movePosition = target.transform.TransformPoint(targetCenter);
+    }
+
+    protected virtual void OnTriggerEnter(Collider collider) {
+        // Already dealt projectile effect
         if (collided) {
             return;
         }
 
-        string tag = collider.tag;
-
-        // if (tag == "walls" || tag == "valley") {
-        //     OnHitVFX(collision);
-        //     return;
-        // }
-
-        if (tag != "Enemy") {    
+        if (!isValidCollision(collider)) {
             return;
         }
 
+        if (isValidTarget(collider)) {
+            onHitTarget(collider);
+        }
 
+        onHitVFX(collider);
+    }
+
+    // Check wheter we want to ignore this collision
+    // return false if we want to ignore this, and the projectile
+    // will continue move to the target
+    // By default, ignore all walls and valley
+    protected virtual bool isValidCollision(Collider collider) {
+        if (collider.tag == "walls" || collider.tag == "valley") {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Check whether the collision can be treat as an attack to
+    // the object associated with the collider
+    // Return false if we want to simply destroy this projectile,
+    // and doesn't deal damage/effect to the collider
+    // By default use the target's type
+    protected virtual bool isValidTarget(Collider collider) {
+        if (target == null) {
+            return false;
+        }
+
+        if (target.tag == collider.tag) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    protected virtual void onHitTarget(Collider collider) {
         // deal damage to the enemy
         GameObject target = collider.gameObject;
         Unit attackUnit = attacker.GetComponent<Unit>();
@@ -132,12 +173,9 @@ public class Projectile : MonoBehaviour
         attackUnit.dealAoeDamage(target, damage);
         // apply on attack event
         attackUnit.OnAttack(target);
-
-        // Play on hit vfx
-        OnHitVFX(collider);
     }
 
-    private void OnHitVFX(Collider collider) {
+    protected virtual void onHitVFX(Collider collider) {
         collided = true;
 
         // Play on hit sfx
@@ -188,7 +226,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(destroyParticle(0f));
     }
 
-    private IEnumerator destroyParticle(float waitTime) {
+    protected virtual IEnumerator destroyParticle(float waitTime) {
         if (transform.childCount > 0 && waitTime != 0) {
 			List<Transform> tList = new List<Transform> ();
 
@@ -209,20 +247,22 @@ public class Projectile : MonoBehaviour
 		Destroy (gameObject);
     }
 
-    public static GameObject spawn(GameObject vfx, Vector3 position, Quaternion rotation, 
+    static GameObject getProjectileParent() {
+        GameObject projectileParent = GameObject.Find("Projectile Parent");
+        if (projectileParent == null) {
+            projectileParent = new GameObject("Projectile Parent");
+        }
+
+        return projectileParent;
+    }
+
+    public GameObject spawnProjectile(Vector3 position, Quaternion rotation, 
         GameObject attacker, GameObject target, float speed) {
 
-            if (vfx.GetComponent<Projectile>() == null) {
-                Debug.Log("Cannot spawn non-projectile object");
-                return null;
-            }
+            GameObject projectileParent = getProjectileParent();
 
-            GameObject projectiles = GameObject.Find("Projectiles");
-            if (projectiles == null) {
-                projectiles = new GameObject("Projectiles");
-            }
-
-            GameObject obj = Instantiate(vfx, position, rotation, projectiles.transform);
+            GameObject obj = Instantiate(gameObject, position, rotation, 
+                projectileParent.transform);
             obj.transform.LookAt(target.transform.position);
 
             Projectile projectile = obj.GetComponent<Projectile>();
@@ -232,6 +272,24 @@ public class Projectile : MonoBehaviour
             
             return obj;
     }
+
+    // reset an already spawned projectile
+    public void setProjectile(Vector3 position, Quaternion rotation,
+        GameObject attacker, GameObject target, float speed) {
+
+            GameObject projectileParent = getProjectileParent();    
+            Transform transform = gameObject.transform;
+
+            transform.parent = projectileParent.transform;
+            transform.LookAt(target.transform.position);
+
+            transform.position = position;
+            transform.rotation = rotation;
+
+            this.target = target;
+            this.attacker = attacker;
+            this.speed = speed;
+        }
 
 
 }

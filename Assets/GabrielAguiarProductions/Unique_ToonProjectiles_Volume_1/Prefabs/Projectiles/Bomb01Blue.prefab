@@ -19118,7 +19118,7 @@ GameObject:
   - component: {fileID: 54293977024897032}
   - component: {fileID: 114423067646368432}
   m_Layer: 0
-  m_Name: vfx_ToonProjectile_Bomb01Blue
+  m_Name: Bomb01Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -46,6 +46,8 @@ public class TowerOption : MonoBehaviour
                 return prefabs[0];
             case AllyType.Blocker:
                 return prefabs[1];
+            case AllyType.Fire:
+                return prefabs[0];
         }
         return null;
     }
@@ -59,6 +61,8 @@ public class TowerOption : MonoBehaviour
                 return modelsOnly[0];
             case AllyType.Blocker:
                 return modelsOnly[1];
+            case AllyType.Fire:
+                return modelsOnly[0];
         }
         return null;
     }

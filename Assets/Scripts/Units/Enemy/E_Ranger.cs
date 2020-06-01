@@ -10,7 +10,7 @@ public class E_Ranger : Enemy
     public Projectile projectile;
     public void setDefaultData()
     {
-        EnemyData data = DefaultEnemyData.defaultRangerData;
+        EnemyData data = DefaultEnemyData.testRangerData;
         this.attackData = data.attackData;
         this.resistanceData = data.resistanceData;
         this.healthData = data.healthData;
@@ -58,11 +58,8 @@ public class E_Ranger : Enemy
             }
             else
             {
-                if (!FollowAnimationCurve.ifHitWall(FollowAnimationCurve.CurveRayCast(transform.position, x.transform.position, curve, 5)) || FollowAnimationCurve.ifHitRanger(FollowAnimationCurve.CurveRayCast(transform.position, x.transform.position, curve, 5)))
-                {
                     others.Add(x);
                     restAttackNumber--;
-                }
             }
         }
 

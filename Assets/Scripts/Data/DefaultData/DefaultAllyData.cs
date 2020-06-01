@@ -4,6 +4,25 @@ using UnityEngine;
 
 public static class DefaultAllyData
 {
+    public static AllyData TestRangerData
+    {
+        get
+        {
+            return new AllyData(
+                new HealthData(20, 20, 0f, 0),
+                new AttackData(10f, 1f, new DamageData(0, 10, 0, 0, 0), 1, 0f),
+                new ResistanceData(0, 0, 0, 0, 0),
+                new MoveData(0f),
+                new EffectData(),
+                AllyType.Fire, 1,
+                AllyType.None, 0,
+                new AllyLevelData(5, 1, 0, 3f)
+            );
+        }
+    }
+
+
+
     public static AllyData defaultRangerData 
     {
         get 
@@ -14,7 +33,8 @@ public static class DefaultAllyData
                 new ResistanceData(0, 0, 0, 0, 0),
                 new MoveData(0f),
                 new EffectData(),
-                AllyType.Ranger, AllyType.None, 
+                AllyType.Ranger, 1,
+                AllyType.None, 0,
                 new AllyLevelData(5, 1, 0, 3f)
             );
         }
@@ -30,7 +50,8 @@ public static class DefaultAllyData
                 new ResistanceData(10, 0, 0, 0, 0),
                 new MoveData(0f),
                 new EffectData(),
-                AllyType.Blocker, AllyType.None,
+                AllyType.Blocker, 1,
+                AllyType.None, 0,
                 new AllyLevelData(5, 1, 0, 5f)
             );
         }
@@ -47,7 +68,8 @@ public static class DefaultAllyData
                 new ResistanceData(0, 0, 0, 0, 0),
                 new MoveData(0f),
                 new EffectData(),
-                AllyType.None, AllyType.None,
+                AllyType.None, 0,
+                AllyType.None, 0,
                 new AllyLevelData(5, 0, 0, 3f)
             );
         }

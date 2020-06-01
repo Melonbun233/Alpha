@@ -447,9 +447,9 @@ MonoBehaviour:
   modelsOnly:
   - {fileID: 5955010231580993163, guid: 71c2486b5a6bec44a8ccee643836b08e, type: 3}
   - {fileID: 284676313130643214, guid: aa0718e2742d4e64e96c2902e4e3676a, type: 3}
+  highLight: {fileID: 4438020178820870750}
   cd: 0
   isCd: 0
-  highLight: {fileID: 4438020178820870750}
   allyData:
     healthData:
       health: 0
@@ -499,7 +499,9 @@ MonoBehaviour:
       burningStack: 0
       burningAttackStack: 0
     allyType1: 0
+    allyType1Level: 0
     allyType2: 0
+    allyType2Level: 0
     allyLevelData:
       cost: 0
       level: 0

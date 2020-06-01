@@ -8,17 +8,19 @@ public class Ranger : Ally
     public float rotateSpeed;
     public float attackRotateSpeed;
     public float rotateSpeedUpPeriod;
-    public GameObject projectile;
-    public float projectileSpeed;
     private float _initialRotateSpeed;
 
     // Core color when attacking
     public Color attackCoreColor;
     private Color _initialCoreColor;
+
+    public Vector3 attackPosition;
     
 
     private List<LineRenderer> _lineRenderers = new List<LineRenderer>();
     private GameObject _core;
+
+    private AllyProjectileController _projectileController;
 
     protected override void Start() {
         base.Start();
@@ -29,6 +31,8 @@ public class Ranger : Ally
         _core = transform.Find("Core").gameObject;
 
         _initialCoreColor = _core.GetComponent<Renderer>().material.color;
+
+        _projectileController = gameObject.GetComponent<AllyProjectileController>();
     }
 
     protected override void Update() {
@@ -55,16 +59,18 @@ public class Ranger : Ally
     }
 
     public override void attack() {
-        if (projectile == null) {
+        if (_projectileController == null) {
+            Debug.LogWarning("No projectile controller attached");
             base.attack();
         } else {
             foreach(GameObject target in _attackTargets) {
                 if (target == null) {
                     continue;
                 }
-                
-                Projectile.spawn(projectile, transform.position, transform.rotation,
-                    gameObject, target, projectileSpeed);
+
+                GameObject obj = _projectileController.spawnAllyProjectile(
+                    transform.TransformPoint(attackPosition), Quaternion.identity, gameObject, target);
+                obj.transform.LookAt(target.transform.TransformPoint(target.GetComponent<Unit>().center));
             }
             _attackCoolDown = attackData.attackCoolDown;
         }

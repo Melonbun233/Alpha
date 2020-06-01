@@ -51,7 +51,10 @@ public class placement : MonoBehaviour
     public GameObject instStatus(Ally ally)
     {
         GameObject instant = Instantiate(status, UIE.transform) as GameObject;
-        AllyData data = new AllyData(ally.healthData, ally.attackData, ally.resistanceData, ally.moveData, ally.effectData, ally.allyType1, ally.allyType2, ally.allyLevelData);
+
+        AllyData data = new AllyData(ally.healthData, ally.attackData, ally.resistanceData, ally.moveData,
+            ally.effectData, ally.allyType1, ally.allyType1Level, ally.allyType2, ally.allyType2Level, ally.allyLevelData);
+
         Vector3 temp2 = Input.mousePosition;
         temp2.z = 1f;
         Vector3 temp = Camera.main.ScreenToWorldPoint(temp2);
