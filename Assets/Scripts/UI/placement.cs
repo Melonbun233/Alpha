@@ -107,6 +107,10 @@ public class placement : MonoBehaviour
             towerToFollow.transform.rotation = temp;
         }
 
+        if (Input.GetKeyUp("escape") && towerToFollow != null)
+        {
+            Destroy(towerToFollow);
+        }
 
         if (Input.GetMouseButtonUp(0) && hit.transform != null && hit.transform.tag != "UI"  && towerToFollow != null)
         {

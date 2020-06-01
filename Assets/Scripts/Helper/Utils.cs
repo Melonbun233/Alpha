@@ -22,13 +22,14 @@ public static class Utils
     {
         RaycastHit hit;
         Ray ray = new Ray(origin, (targetPosition - origin));
+        Debug.DrawRay(origin, (targetPosition - origin), Color.red, 30f);
         if (Physics.Raycast(ray, out hit, range))
         {
             if (hit.transform.tag == "walls")
             {
                 return false;
             }
-            if(hit.transform.tag == "Ally")
+            if(hit.transform.tag == "Ally" || hit.transform.tag == "Base")
             {
                 return true;
             }

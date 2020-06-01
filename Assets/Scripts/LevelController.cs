@@ -47,7 +47,7 @@ public class LevelController : MonoBehaviour
     public List<GameObject> spawns;
     public List<GameObject> enemyPrefabs;
     [SerializeField]
-    public List<Wave> waves;
+    public List<Wave> waves = new List<Wave>();
     public float SpawnCoolDown;
     public int count;
     public float preparationTime;
@@ -81,6 +81,9 @@ public class LevelController : MonoBehaviour
         Placement.startingMana = this.StartingMana;
 
         ManaText = UI.GetComponentInChildren<Text>();
+
+        waves.Add(WaveFormation.RangerSuicidal23());
+        waves.Add(WaveFormation.RangerWave3());
     }
 
     void Start()
@@ -95,7 +98,7 @@ public class LevelController : MonoBehaviour
     {
         if(times < 1)
         {
-            spawns[0].GetComponent<Spawner>().waves.Add(new Wave(enemyPrefabs[0], SpawnCoolDown, count, preparationTime));
+            spawns[0].GetComponent<Spawner>().waves = this.waves;
             times++;
         }
         

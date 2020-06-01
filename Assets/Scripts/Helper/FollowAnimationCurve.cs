@@ -21,10 +21,8 @@ public class FollowAnimationCurve : MonoBehaviour
             end.y = curve.Evaluate(partitionP * (i+1));
             float rayDistance = (end - start).magnitude;
             RaycastHit hit = new RaycastHit();
-            Debug.DrawRay(start, (end - start), Color.red, 30f);
             if (Physics.Raycast(start, (end-start), out hit, rayDistance))
             {
-                print(hit.transform.name);
                 hits.Add(hit);
             }
             start = end;

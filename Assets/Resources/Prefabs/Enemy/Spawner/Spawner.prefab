@@ -73,6 +73,9 @@ MonoBehaviour:
   waves: []
   currentWave: 0
   localSpawnPosition: {x: 2.5, y: 0, z: 0}
+  prefabs:
+  - {fileID: 1373195965130842878, guid: 6f7e0922f6eb2634f8340420d12f92f4, type: 3}
+  - {fileID: 3422076805768724914, guid: 352af795b973bb649a6e6a98def2a48d, type: 3}
 --- !u!65 &7691783052389368916
 BoxCollider:
   m_ObjectHideFlags: 0

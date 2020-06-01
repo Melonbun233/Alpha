@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public enum EnemyType
+{
+    ranger,
+    suicidal,
+    none
+}
 
 // Base class for all enemies
 public class Enemy : Unit {
 
-
+    public EnemyType type;
     [Header("Path Finding Settings")]
     // Used to find allies to attack
     public float visionRange;
@@ -77,8 +84,7 @@ public class Enemy : Unit {
             return;
         }
         Transform targetTransform = _moveTarget.transform;
-        
-        if (Utils.isWithinRange(transform.position, targetTransform.position, attackData.attackRange))
+        if (Utils.isWithinRangeObstacle(transform.position, targetTransform.position, attackData.attackRange))
         {
             if(FollowAnimationCurve.ifHitWall(FollowAnimationCurve.CurveRayCast(transform.position, targetTransform.position, FollowAnimationCurve.DefaultCurveY, 5)))
             {

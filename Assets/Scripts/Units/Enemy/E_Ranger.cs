@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UIElements;
 
 
 public class E_Ranger : Enemy
@@ -23,7 +21,7 @@ public class E_Ranger : Enemy
     {
         setDefaultData();
         base.Start();
-        
+
     }
 
     public override void updateAttackTarget()
@@ -43,10 +41,10 @@ public class E_Ranger : Enemy
         int restAttackNumber = attackData.attackNumber;
         Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, attackData.attackRange, "Ally");
         Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
-        foreach(GameObject x in _attackTargetsWithinRange)
+        foreach (GameObject x in _attackTargetsWithinRange)
         {
             if (restAttackNumber == 0) { break; }
-            
+
 
             if (x.GetComponent<Blocker>() != null)
             {
@@ -56,28 +54,26 @@ public class E_Ranger : Enemy
                     restAttackNumber--;
                 }
             }
-            else
-            {
-                    others.Add(x);
-                    restAttackNumber--;
-            }
         }
 
-        if(blockers.Count != 0)
+        foreach (GameObject x in _attackTargetsWithinRange)
         {
-            foreach(GameObject x in blockers)
-            {
-                _attackTargets.Add(x);
-            }
-            return;
+            if (restAttackNumber == 0) { break; }
+            others.Add(x);
+            restAttackNumber--;
         }
-        
-        foreach(GameObject x in others)
+
+        foreach (GameObject x in blockers)
         {
             _attackTargets.Add(x);
         }
 
-        if (Utils.isWithinRangeObstacle(transform.position, _base.transform.position, attackData.attackRange)) _attackTargets.Add(_base);
+        foreach (GameObject x in others)
+        {
+            _attackTargets.Add(x);
+        }
+
+        if (Utils.isWithinRangeObstacle(transform.position, _base.transform.position, attackData.attackRange) && restAttackNumber != 0) _attackTargets.Add(_base);
 
 
         /*

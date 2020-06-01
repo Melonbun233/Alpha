@@ -5,7 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Wave {
     // Enemy prefab spawned
-    public GameObject prefab;
+    public List<GameObject> prefab;
+
+    //Multiple Enemy combinations.
+    public List<EnemyData> datas;
     
     // Spawn rate in one wave. Enemies are always spawned one by one
     public float spawnCoolDown;
@@ -16,11 +19,21 @@ public class Wave {
     // time (seconds) before starting spawning
     public float preparationTime;
 
-    public Wave(GameObject prefab, float spawnCoolDown, int count, float preparationTime)
+
+
+    public Wave(List<EnemyData> datas, float spawnCoolDown, float preparationTime)
+    {
+        this.datas = datas;
+        this.spawnCoolDown = spawnCoolDown;
+        this.count = datas.Count;
+        this.preparationTime = preparationTime;
+    }
+
+    public Wave(List<GameObject> prefab, float spawnCoolDown, float preparationTime)
     {
         this.prefab = prefab;
         this.spawnCoolDown = spawnCoolDown;
-        this.count = count;
+        this.count = prefab.Count;
         this.preparationTime = preparationTime;
     }
 }
@@ -38,12 +51,25 @@ public class Spawner : Destroyable
 
     [Header("Spawn Settings")]
     public Vector3 localSpawnPosition;
+    public List<GameObject> prefabs;
 
     private float _preparationWaited = 0f;
     private float _spawnWaited = 0f;
     private int _spawnCount = 0;
+    private int _waveIndex = 0;
     private bool _isSpawning = false;
 
+    public GameObject fetchPrefab(EnemyData data)
+    {
+        switch (data.type)
+        {
+            case EnemyType.suicidal:
+                return prefabs[0];
+            case EnemyType.ranger:
+                return prefabs[1];
+        }
+        return null;
+    }
 
     protected override void Start()
     {
@@ -84,7 +110,8 @@ public class Spawner : Destroyable
             } else {
                 // check spawn count down and spawn enemy
                 if (_spawnWaited >= wave.spawnCoolDown) {
-                    spawn(wave.prefab);
+
+                    Enemy.spawn(fetchPrefab(wave.datas[_spawnCount]), wave.datas[_spawnCount], transform.TransformPoint(localSpawnPosition), Quaternion.identity);
                     _spawnCount ++;
                     _spawnWaited = 0f;
                 } else {
@@ -96,8 +123,8 @@ public class Spawner : Destroyable
 
     }
 
-    private void spawn(GameObject prefab) {
-        Instantiate(prefab, transform.TransformPoint(localSpawnPosition), Quaternion.identity);
+    private void spawn(List<GameObject> prefab, int countIndex) {
+        Instantiate(prefab[countIndex], transform.TransformPoint(localSpawnPosition), Quaternion.identity);
     }
 
     public bool spawnedAllWaves() {
