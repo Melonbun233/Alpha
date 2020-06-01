@@ -21,7 +21,7 @@ public class FollowAnimationCurve : MonoBehaviour
             end.y = curve.Evaluate(partitionP * (i+1));
             float rayDistance = (end - start).magnitude;
             RaycastHit hit = new RaycastHit();
-            Debug.DrawRay(start, (end - start), Color.red, 100f);
+            Debug.DrawRay(start, (end - start), Color.red, 30f);
             if (Physics.Raycast(start, (end-start), out hit, rayDistance))
             {
                 print(hit.transform.name);
@@ -34,6 +34,8 @@ public class FollowAnimationCurve : MonoBehaviour
 
     public static bool ifHitWall(List<RaycastHit> hits)
     {
+        if (hits.Count == 0) return false;
+
         foreach(RaycastHit x in hits)
         {
             if (x.transform.tag == "walls") return true;
@@ -43,9 +45,10 @@ public class FollowAnimationCurve : MonoBehaviour
 
     public static bool ifHitRanger(List<RaycastHit> hits)
     {
-        foreach(RaycastHit x in hits)
+        if (hits.Count == 0) return false;
+        foreach (RaycastHit x in hits)
         {
-            if (x.transform.name.Contains("Ranger")) return true;
+            if (x.transform.GetComponent<Ranger>() != null) return true;
         }
         return false;
     }

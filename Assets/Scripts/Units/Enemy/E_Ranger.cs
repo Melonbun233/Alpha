@@ -7,7 +7,7 @@ using UnityEditor.UIElements;
 public class E_Ranger : Enemy
 {
     public AnimationCurve curve;
-
+    public Projectile projectile;
     public void setDefaultData()
     {
         EnemyData data = DefaultEnemyData.defaultRangerData;
@@ -37,8 +37,53 @@ public class E_Ranger : Enemy
             return;
         }
 
+        List<GameObject> _attackTargetsWithinRange = new List<GameObject>();
+        List<GameObject> blockers = new List<GameObject>();
+        List<GameObject> others = new List<GameObject>();
         int restAttackNumber = attackData.attackNumber;
+        Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, attackData.attackRange, "Ally");
+        Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
+        foreach(GameObject x in _attackTargetsWithinRange)
+        {
+            if (restAttackNumber == 0) { break; }
+            
 
+            if (x.GetComponent<Blocker>() != null)
+            {
+                if (!FollowAnimationCurve.ifHitWall(FollowAnimationCurve.CurveRayCast(transform.position, x.transform.position, curve, 5)))
+                {
+                    blockers.Add(x);
+                    restAttackNumber--;
+                }
+            }
+            else
+            {
+                if (!FollowAnimationCurve.ifHitWall(FollowAnimationCurve.CurveRayCast(transform.position, x.transform.position, curve, 5)) || FollowAnimationCurve.ifHitRanger(FollowAnimationCurve.CurveRayCast(transform.position, x.transform.position, curve, 5)))
+                {
+                    others.Add(x);
+                    restAttackNumber--;
+                }
+            }
+        }
+
+        if(blockers.Count != 0)
+        {
+            foreach(GameObject x in blockers)
+            {
+                _attackTargets.Add(x);
+            }
+            return;
+        }
+        
+        foreach(GameObject x in others)
+        {
+            _attackTargets.Add(x);
+        }
+
+        if (Utils.isWithinRangeObstacle(transform.position, _base.transform.position, attackData.attackRange)) _attackTargets.Add(_base);
+
+
+        /*
         // Check if the base is within attack range
         Utils.findGameObjectsWithinRange(_attackTargets, transform.position, attackData.attackRange, "Base");
         if (_attackTargets.Count != 0 && restAttackNumber > 0)
@@ -77,9 +122,7 @@ public class E_Ranger : Enemy
                 break;
             }
         }
-
-
-
+        */
     }
 
 }
