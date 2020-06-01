@@ -18,8 +18,8 @@ public class AllyProjectileController : MonoBehaviour
             {AllyType.Ranger, 15f},
             {AllyType.Blocker, 5f},
             {AllyType.Fire, 5f},
-            {AllyType.Water, 10f},
-            {AllyType.Wind, 10f},
+            {AllyType.Water, 8f},
+            {AllyType.Wind, 8f},
             {AllyType.Thunder, 15f},
             {AllyType.None, 10f},
         };

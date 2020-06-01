@@ -13,19 +13,25 @@ public class ProjectileSetFire : ProjectileSet
         "Prefabs/Projectile/Projectiles/fire_level4_projectile",
     };
 
+    public static readonly string[] modifyNamesLevel1 = {
+        "MainBeam",
+        // "GlowBeam",
+        // "Smoke",
+        "Particles",
+    };
 
-    public static readonly string[] defaultModifyNames = {
+    public static readonly string[] modifyNamesLevel2 = {
         //"InnerRing",
         "Beam",
         //"Trail",
         "Particles"
     };
 
-    public static readonly string[] modifyNamesLevel1 = {
-        "MainBeam",
-        // "GlowBeam",
-        // "Smoke",
-        "Particles",
+    public static readonly string[] modifyNamesLevel3 = {
+        //"InnerRing",
+        "Beam",
+        //"Trail",
+        "Particles"
     };
 
     public static readonly string[] modifyNamesLevel4 = {
@@ -40,8 +46,8 @@ public class ProjectileSetFire : ProjectileSet
         base.Start();
 
         addLevel(new LevelConfig(defaultPaths[0], modifyNamesLevel1, defaultModifyAction));
-        addLevel(new LevelConfig(defaultPaths[1], defaultModifyNames, fireDefaultModifyAction));
-        addLevel(new LevelConfig(defaultPaths[2], defaultModifyNames, fireDefaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[1], modifyNamesLevel2, fireDefaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[2], modifyNamesLevel3, fireDefaultModifyAction));
         addLevel(new LevelConfig(defaultPaths[3], modifyNamesLevel4, fireDefaultModifyAction));
     }
 
