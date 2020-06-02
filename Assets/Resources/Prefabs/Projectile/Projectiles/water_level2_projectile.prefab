@@ -5028,8 +5028,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.15
-      minScalar: 0.05
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5197,7 +5197,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
+      scalar: 1.4
       minScalar: 0.8
       maxCurve:
         serializedVersion: 2
@@ -5778,7 +5778,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9753,10 +9753,10 @@ MonoBehaviour:
   shotSFX: {fileID: 0}
   hitSFX: {fileID: 0}
   trails:
-  - {fileID: 4636502524379253500}
-  - {fileID: 0}
   - {fileID: 4637013640051508946}
+  - {fileID: 1030315947333457702}
   - {fileID: 4638379512291631220}
+  - {fileID: 855969169586498643}
   useMuzzleVFX: 1
   useHitVFX: 1
 --- !u!54 &4656042279738170838
@@ -10682,7 +10682,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2

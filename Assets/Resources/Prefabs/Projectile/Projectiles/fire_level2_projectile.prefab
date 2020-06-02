@@ -14575,6 +14575,7 @@ MonoBehaviour:
   trails:
   - {fileID: 2839621408419752033}
   - {fileID: 2840440004560973811}
+  - {fileID: 2052565828532363468}
   useMuzzleVFX: 1
   useHitVFX: 1
 --- !u!199 &2713563432733589727

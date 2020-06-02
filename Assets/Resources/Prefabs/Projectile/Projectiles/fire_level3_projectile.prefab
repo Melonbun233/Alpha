@@ -65,8 +65,6 @@ MonoBehaviour:
   trails:
   - {fileID: 1063542825066744784}
   - {fileID: 1063253111333358658}
-  - {fileID: 1063670475613445618}
-  - {fileID: 1063717931257304432}
   - {fileID: 1204061809886159957}
   useMuzzleVFX: 1
   useHitVFX: 1

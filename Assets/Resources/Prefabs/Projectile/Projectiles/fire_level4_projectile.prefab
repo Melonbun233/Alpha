@@ -4844,11 +4844,9 @@ MonoBehaviour:
   shotSFX: {fileID: 0}
   hitSFX: {fileID: 0}
   trails:
-  - {fileID: 0}
-  - {fileID: 5190242507139057884}
-  - {fileID: 5189726583761687972}
-  - {fileID: 5189673317284296578}
   - {fileID: 4859576522139582977}
+  - {fileID: 5671087458673198509}
+  - {fileID: 8947638393077492683}
   useMuzzleVFX: 1
   useHitVFX: 1
 --- !u!1 &5189673317284296578

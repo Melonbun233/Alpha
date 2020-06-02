@@ -19181,9 +19181,7 @@ MonoBehaviour:
   shotSFX: {fileID: 0}
   hitSFX: {fileID: 0}
   trails:
-  - {fileID: 6176387629692208031}
   - {fileID: 6176338343783504037}
-  - {fileID: 6175622586475775745}
   - {fileID: 6176062854287217553}
   - {fileID: 8704402932562844204}
   useMuzzleVFX: 1
