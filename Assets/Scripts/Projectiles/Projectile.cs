@@ -189,10 +189,13 @@ public class Projectile : MonoBehaviour
             if (trail == null) {
                 continue;
             }
+            trail.transform.parent = null;
             ParticleSystem ps = trail.GetComponent<ParticleSystem>();
             if (ps != null) {
                 ps.Stop();
                 Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+            } else {
+                Destroy(trail);
             }
         }
 
