@@ -56,7 +56,6 @@ public class Spawner : Destroyable
     private float _preparationWaited = 0f;
     private float _spawnWaited = 0f;
     private int _spawnCount = 0;
-    private int _waveIndex = 0;
     private bool _isSpawning = false;
 
     public GameObject fetchPrefab(EnemyData data)
@@ -67,6 +66,10 @@ public class Spawner : Destroyable
                 return prefabs[0];
             case EnemyType.ranger:
                 return prefabs[1];
+            case EnemyType.melee:
+                return prefabs[2];
+            case EnemyType.boss_general:
+                return prefabs[3];
         }
         return null;
     }

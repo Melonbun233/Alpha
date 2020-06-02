@@ -7,6 +7,8 @@ public enum EnemyType
 {
     ranger,
     suicidal,
+    melee,
+    boss_general,
     none
 }
 
@@ -21,6 +23,59 @@ public class Enemy : Unit {
     // public int priority;
 
 
+    //updates attack target every .5second. Blocker is first piority.
+    public override void updateAttackTarget()
+    {
+        _attackTargets.Clear();
+
+        GameObject _base = GameObject.FindGameObjectWithTag("Base");
+        // Check if base is destroyed
+        if (_base == null)
+        {
+            return;
+        }
+
+        List<GameObject> _attackTargetsWithinRange = new List<GameObject>();
+        List<GameObject> blockers = new List<GameObject>();
+        List<GameObject> others = new List<GameObject>();
+        int restAttackNumber = attackData.attackNumber;
+        Utils.findGameObjectsWithinRange(_attackTargetsWithinRange, transform.position, attackData.attackRange, "Ally");
+        Utils.sortByDistance(_attackTargetsWithinRange, transform.position);
+        foreach (GameObject x in _attackTargetsWithinRange)
+        {
+            if (restAttackNumber == 0) { break; }
+
+
+            if (x.GetComponent<Blocker>() != null)
+            {
+                if (!FollowAnimationCurve.ifHitWall(FollowAnimationCurve.CurveRayCast(transform.position, x.transform.position, FollowAnimationCurve.DefaultCurveY, 5)))
+                {
+                    blockers.Add(x);
+                    restAttackNumber--;
+                }
+            }
+        }
+
+        foreach (GameObject x in _attackTargetsWithinRange)
+        {
+            if (restAttackNumber == 0) { break; }
+            others.Add(x);
+            restAttackNumber--;
+        }
+
+        foreach (GameObject x in blockers)
+        {
+            _attackTargets.Add(x);
+        }
+
+        foreach (GameObject x in others)
+        {
+            _attackTargets.Add(x);
+        }
+
+        if (Utils.isWithinRangeObstacle(transform.position, _base.transform.position, attackData.attackRange) && restAttackNumber != 0) _attackTargets.Add(_base);
+    }
+    /*
     // Update the attack target of this enemy
     // Default alg is to check if base is within attack range
     // If not, check whether any ally is within range
@@ -64,7 +119,7 @@ public class Enemy : Unit {
         }
 
 
-    }
+    }*/
 
     public override void dealAoeDamage(GameObject initialTarget, DamageData damage) {
         List<GameObject> nearbyEnemies = new List<GameObject>();

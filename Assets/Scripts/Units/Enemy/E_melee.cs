@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-
-public class E_Ranger : Enemy
+public class E_melee : Enemy
 {
-    public AnimationCurve curve;
-    public Projectile projectile;
     public void setDefaultData()
     {
-        EnemyData data = DefaultEnemyData.defaultRangerData;
+        EnemyData data = DefaultEnemyData.defaultMeleeData;
         this.type = data.type;
         this.attackData = data.attackData;
         this.resistanceData = data.resistanceData;
@@ -22,6 +20,5 @@ public class E_Ranger : Enemy
     {
         setDefaultData();
         base.Start();
-
     }
 }

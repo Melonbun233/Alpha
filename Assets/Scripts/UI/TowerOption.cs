@@ -87,6 +87,11 @@ public class TowerOption : MonoBehaviour
 
     void OnMouseUp()
     {
+        if(placement.toPlace.towerToFollow != null)
+        {
+            Destroy(placement.toPlace.towerToFollow);
+        }
+
         if ((int)placement.toPlace.Mana < allyData.allyLevelData.cost)
         {
             print("Not Enough Mana");

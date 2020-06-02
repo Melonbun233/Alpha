@@ -705,7 +705,7 @@ MonoBehaviour:
   colums: 5
   iterations: 3
   Levels: 1
-  seed: 1
+  seed: -1
   ManaRegen: 1
   MaxMana: 100
   StartingMana: 30

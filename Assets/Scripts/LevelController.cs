@@ -61,8 +61,10 @@ public class LevelController : MonoBehaviour
         teamList = LevelGenerator.GetComponent<TeamList>();
         Placement = LevelGenerator.GetComponent<placement>();
         MapGenerator = LevelGenerator.GetComponent<Map_Generator>();
-        MapGenerator.seed = this.seed;
-
+        if(seed != -1)
+        {
+            MapGenerator.seed = this.seed;
+        }
         teamList.UI = UI;
         MapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
         MapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
@@ -82,8 +84,12 @@ public class LevelController : MonoBehaviour
 
         ManaText = UI.GetComponentInChildren<Text>();
 
-        waves.Add(WaveFormation.RangerSuicidal23());
+        waves.Add(WaveFormation.Melee3());
+        waves.Add(WaveFormation.MeleeRanger32());
+        waves.Add(WaveFormation.MeleeSuicidal32());
         waves.Add(WaveFormation.RangerWave3());
+        waves.Add(WaveFormation.suicidalWave5());
+        waves.Add(WaveFormation.Boss_General());
     }
 
     void Start()
@@ -98,7 +104,10 @@ public class LevelController : MonoBehaviour
     {
         if(times < 1)
         {
-            spawns[0].GetComponent<Spawner>().waves = this.waves;
+            foreach(GameObject x in spawns)
+            {
+                x.GetComponent<Spawner>().waves = this.waves;
+            }
             times++;
         }
         
