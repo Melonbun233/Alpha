@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ToonCircle02_Add_3x3
+  m_Name: ToonCircle02_add
   m_Shader: {fileID: -6465566751694194690, guid: 205af08487bc2494ca7e0cd3b38aa12d,
     type: 3}
   m_ShaderKeywords: _BLENDMODE_ADD _SURFACE_TYPE_TRANSPARENT
