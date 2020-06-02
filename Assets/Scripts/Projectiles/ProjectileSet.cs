@@ -64,6 +64,12 @@ public abstract class ProjectileSet : MonoBehaviour
                     renderer.material.SetColor("_Color", color * 0.02f);
                     main.startColor = color;
                 }
+                TrailRenderer tr = obj.GetComponent<TrailRenderer>();
+                if (tr != null) {
+                    tr.startColor = color;
+                    tr.material.SetFloat("_Emission", 0.1f);
+                    tr.material.SetColor("_Color", color * 0.02f);
+                }
             }
         );
     }

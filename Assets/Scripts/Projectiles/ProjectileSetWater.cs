@@ -18,6 +18,7 @@ public class ProjectileSetWater : ProjectileSet
         // "GlowBeam",
         // "Smoke",
         "Particles",
+        "Trail",
     };
 
     public static readonly string[] modifyNamesLevel2 = {

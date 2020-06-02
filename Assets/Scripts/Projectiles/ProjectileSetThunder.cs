@@ -14,18 +14,12 @@ public class ProjectileSetThunder : ProjectileSet
         "Prefabs/Projectile/Projectiles/thunder_level4_projectile",
     };
 
-    // public static readonly string[] defaultModifyNames = {
-    //     //"InnerRing",
-    //     "Beam",
-    //     //"Trail",
-    //     "Particles"
-    // };
-
     public static readonly string[] modifyNamesLevel1 = {
         "MainBeam",
         // "GlowBeam",
         // "Smoke",
         "Particles",
+        // "Projectiles",
     };
 
     protected override void Start() {

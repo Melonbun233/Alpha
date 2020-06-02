@@ -13,18 +13,12 @@ public class ProjectileSetWind : ProjectileSet
         "Prefabs/Projectile/Projectiles/wind_level4_projectile",
     };
 
-    // public static readonly string[] defaultModifyNames = {
-    //     //"InnerRing",
-    //     "Beam",
-    //     //"Trail",
-    //     "Particles"
-    // };
-
     public static readonly string[] modifyNamesLevel1 = {
         "MainBeam",
         // "GlowBeam",
         // "Smoke",
         "Particles",
+        "Trail",
     };
 
     protected override void Start() {
