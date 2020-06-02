@@ -15,34 +15,29 @@ public class ProjectileSetWater : ProjectileSet
 
     public static readonly string[] modifyNamesLevel1 = {
         "MainBeam",
-        // "GlowBeam",
-        // "Smoke",
         "Particles",
         "Trail",
     };
 
     public static readonly string[] modifyNamesLevel2 = {
-        // "SemiCircleOuter",
-        // "SemiCircleInner",
-        // "Center",
         "Beam",
-        "Particles"
+        "SemiCirclesInner",
+        "Particles",
+        "Trail",
     };
 
     public static readonly string[] modifyNamesLevel3 = {
-        // "SemiCircleOuter",
-        // "SemiCircleInner",
-        // "Center",
         "Beam",
-        "Particles"
+        "SemiCirclesInner",
+        "Particles",
+        "Trail",
     };
 
     public static readonly string[] modifyNamesLevel4 = {
         "Beam",
-        // "BeamCenter",
+        "SemiCircles",
         "Particles",
-        // "Shockwaves",
-        // "SemiCircles",
+        "Trail",
     };
 
     protected override void Start() {
@@ -74,7 +69,20 @@ public class ProjectileSetWater : ProjectileSet
                     renderer.material.SetColor("_Color", color * 0.02f);
                     main.startColor = color;
                 }
+
+                if (obj.name == "Particles") {
+                    renderer.material.SetFloat("_Emission", 0.7f);
+                    renderer.material.SetColor("_Color", color * 0.04f);
+                }
                 
+            }
+
+            // Trail
+            TrailRenderer tr = obj.GetComponent<TrailRenderer>();
+            if (tr != null) {
+                tr.startColor = color;
+                tr.material.SetFloat("_Emission", 0.1f);
+                tr.material.SetColor("_Color", color * 0.02f);
             }
         }
 
