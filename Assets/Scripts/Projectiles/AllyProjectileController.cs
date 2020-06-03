@@ -105,7 +105,7 @@ public class AllyProjectileController : MonoBehaviour
                 allyProjectileSpeeds[ally.getMainType()]);
 
             // Some other customizations
-            if (ally.allyType1 == AllyType.Thunder && ally.allyType1Level == 4) {
+            if (ally.allyType1Level == 4) {
                 projectile.speed = 5;
             }
 
