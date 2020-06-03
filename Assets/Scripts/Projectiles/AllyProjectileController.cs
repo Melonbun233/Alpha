@@ -104,6 +104,11 @@ public class AllyProjectileController : MonoBehaviour
             projectile.setProjectile(position, rotation, attacker, target,
                 allyProjectileSpeeds[ally.getMainType()]);
 
+            // Some other customizations
+            if (ally.allyType1 == AllyType.Thunder && ally.allyType1Level == 4) {
+                projectile.speed = 5;
+            }
+
             return obj;
     }
 }
