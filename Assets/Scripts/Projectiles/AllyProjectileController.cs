@@ -15,7 +15,7 @@ public class AllyProjectileController : MonoBehaviour
     // Speed for different ally projectile main type
     public static readonly Dictionary<AllyType, float> allyProjectileSpeeds = 
         new Dictionary<AllyType, float>() {
-            {AllyType.Ranger, 10f},
+            {AllyType.Ranger, 12f},
             {AllyType.Blocker, 5f},
             {AllyType.Fire, 5f},
             {AllyType.Water, 8f},
@@ -105,7 +105,7 @@ public class AllyProjectileController : MonoBehaviour
                 allyProjectileSpeeds[ally.getMainType()]);
 
             // Some other customizations
-            if (ally.allyType1Level == 4) {
+            if (ally.allyType1Level == 4 && ally.getMainType() != AllyType.Ranger) {
                 projectile.speed = 5;
             }
 
