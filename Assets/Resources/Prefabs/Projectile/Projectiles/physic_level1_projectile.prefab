@@ -14376,9 +14376,9 @@ GameObject:
   - component: {fileID: 9114615306343682082}
   - component: {fileID: 2264762384671465111}
   - component: {fileID: 7027784891375190899}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: physic_level1_projectile
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

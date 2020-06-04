@@ -14364,9 +14364,9 @@ GameObject:
   - component: {fileID: 3825739841985822151}
   - component: {fileID: 3761805590868051361}
   - component: {fileID: 3765288647809363937}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: wind_level4_projectile
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

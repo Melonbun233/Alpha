@@ -103,7 +103,7 @@ public class Projectile : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, movePosition, step);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, step);
+        transform.rotation.SetLookRotation(targetCenter);
     }
 
     // Update the position and rotation this projectile is moving towards

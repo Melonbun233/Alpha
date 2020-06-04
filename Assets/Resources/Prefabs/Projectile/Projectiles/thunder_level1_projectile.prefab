@@ -28660,9 +28660,9 @@ GameObject:
   - component: {fileID: 8633477184672539934}
   - component: {fileID: 1640391042168449963}
   - component: {fileID: 7505933268863825487}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: thunder_level1_projectile
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

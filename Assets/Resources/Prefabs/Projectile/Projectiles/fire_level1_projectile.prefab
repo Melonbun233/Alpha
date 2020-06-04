@@ -15330,7 +15330,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -19253,9 +19253,9 @@ GameObject:
   - component: {fileID: 3438684082107586077}
   - component: {fileID: 5668690268860602536}
   - component: {fileID: 3477486722913305932}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: fire_level1_projectile
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

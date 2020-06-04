@@ -20,13 +20,29 @@ public class ProjectileSetPhysic : ProjectileSet
         "Particles",
         // "Projectiles",
     };
+    
+    public static readonly string[] modifyNamesLevel2 = {
+        "Particles",
+        "Beam",
+    };
+    
+    public static readonly string[] modifyNamesLevel3 = {
+        "Particles",
+        "Beam"
+    };
+
+    public static readonly string[] modifyNamesLevel4 = {
+        "Particles",
+        "Beam"
+    };
+    
 
     protected override void Start() {
         base.Start();
 
         addLevel(new LevelConfig(defaultPaths[0], modifyNamesLevel1, defaultModifyAction));
-        // addLevel(new LevelConfig(defaultPaths[1], defaultModifyNames, defaultModifyAction));
-        // addLevel(new LevelConfig(defaultPaths[2], defaultModifyNames, defaultModifyAction));
-        // addLevel(new LevelConfig(defaultPaths[3], defaultModifyNames, defaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[1], modifyNamesLevel2, defaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[2], modifyNamesLevel3, defaultModifyAction));
+        addLevel(new LevelConfig(defaultPaths[3], modifyNamesLevel4, defaultModifyAction));
     }
 }

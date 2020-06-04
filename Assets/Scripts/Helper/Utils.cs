@@ -50,6 +50,9 @@ public static class Utils
         Collider[] colliders = Physics.OverlapSphere(position, range);
 
         foreach(Collider collider in colliders) {
+            if (collider.gameObject == null) {
+                continue;
+            }
             if (collider.gameObject.tag == tag) {
                 ptr.Add(collider.gameObject);
             }   

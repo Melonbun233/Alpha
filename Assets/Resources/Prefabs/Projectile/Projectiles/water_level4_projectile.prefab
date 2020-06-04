@@ -23871,9 +23871,9 @@ GameObject:
   - component: {fileID: 7287917295419524155}
   - component: {fileID: 7239170350332918275}
   - component: {fileID: 4193001702706008435}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: water_level4_projectile
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
