@@ -19,7 +19,7 @@ public class placement : MonoBehaviour
     [Header("OffSets")]
     public Vector3 wallOffset;
     public Vector3 valleyOffset;
-    public Vector3 rotate;
+    public Vector3 rotate = new Vector3();
 
     [Header("References")]
     public Camera Maincamera;
@@ -73,15 +73,6 @@ public class placement : MonoBehaviour
         instant.GetComponent<status>().setAllydata(data);
         return instant;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rotate = new Vector3();
-
-    }
-
-
 
     // Update is called once per frame
     void Update()
