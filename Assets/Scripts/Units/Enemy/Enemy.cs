@@ -117,8 +117,6 @@ public class Enemy : Unit {
                 break;
             }
         }
-
-
     }*/
 
     public override void dealAoeDamage(GameObject initialTarget, DamageData damage) {
