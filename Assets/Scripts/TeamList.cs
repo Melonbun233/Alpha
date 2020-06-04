@@ -11,6 +11,12 @@ public class TeamList : MonoBehaviour
     public Vector2 startPoint;
     public float offset;
     // Start is called before the first frame update
+
+    public TeamList(List<AllyData> allydatas)
+    {
+        this.team = allydatas;
+    }
+
     void Start()
     {
         foreach (AllyData ally in team)
@@ -21,11 +27,5 @@ public class TeamList : MonoBehaviour
             tower.GetComponent<TowerOption>().allyData = ally;
             tower.GetComponent<TowerOption>().cd = ally.allyLevelData.cd;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

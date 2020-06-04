@@ -78,6 +78,7 @@ public class placement : MonoBehaviour
     void Start()
     {
         rotate = new Vector3();
+
     }
 
 
