@@ -81,6 +81,8 @@ public class placement : MonoBehaviour
         if(Physics.Raycast(ray, out hit, 1000, (layer1 | layer2)) && towerToFollow != null)
             //&& hit.transform.tag != "UI" && hit.transform.tag != "Ally" && hit.transform.tag != "Untagged")
         {
+
+            Time.timeScale = 0.3f;
             if(hit.transform.tag == "walls")
             {
                 towerToFollow.transform.position = hit.transform.position + wallOffset;
@@ -89,6 +91,11 @@ public class placement : MonoBehaviour
             {
                 towerToFollow.transform.position = hit.transform.position + valleyOffset;
             }
+        }
+
+        if(towerToFollow == null)
+        {
+            Time.timeScale = 1f;
         }
 
         if (Input.GetMouseButtonDown(1) && towerToFollow != null)

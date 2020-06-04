@@ -85,8 +85,8 @@ public class LevelController : MonoBehaviour
 
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
-        //teamList.team.Add(DefaultAllyData.TestRangerData);
-        //teamList.team.Add(DefaultAllyData.defaultBlockerData);
+        teamList.team.Add(DefaultAllyData.TestRangerData);
+        teamList.team.Add(DefaultAllyData.defaultBlockerData);
 
         Placement.wallOffset = wallOffset;
         Placement.valleyOffset = valleyOffset;
@@ -103,14 +103,14 @@ public class LevelController : MonoBehaviour
         //waves.Add(WaveFormation.Melee3());
         //waves.Add(WaveFormation.MeleeRanger32());
         //waves.Add(WaveFormation.MeleeSuicidal32());
-        //waves.Add(WaveFormation.RangerWave3());
+        waves.Add(WaveFormation.RangerWave3());
         //waves.Add(WaveFormation.suicidalWave5());
         //waves.Add(WaveFormation.Boss_General());
     }
 
     void Start()
     {
-        //generate();
+        generateLevel();
     }
 
     // Update is called once per frame
