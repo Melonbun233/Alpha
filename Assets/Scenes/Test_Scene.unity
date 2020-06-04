@@ -56464,6 +56464,11 @@ PrefabInstance:
       propertyPath: attackData.attackDamage.physicalDamage
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1530841986067063137, guid: f306b79c99068d14da1aba091cd590a5,
+        type: 3}
+      propertyPath: allyType1
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7927832156493680333, guid: f306b79c99068d14da1aba091cd590a5,
         type: 3}
       propertyPath: m_Name
