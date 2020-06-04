@@ -14456,7 +14456,7 @@ GameObject:
   - component: {fileID: 6668060659740309002}
   - component: {fileID: 6743743960469970024}
   - component: {fileID: 6763525408751694788}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: wind_level2_projectile
   m_TagString: projectile
   m_Icon: {fileID: 0}

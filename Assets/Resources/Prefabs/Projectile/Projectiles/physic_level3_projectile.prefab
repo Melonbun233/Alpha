@@ -14385,7 +14385,7 @@ GameObject:
   - component: {fileID: 6725261118776548870}
   - component: {fileID: 129094732858362168}
   - component: {fileID: 6782031698203536670}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: physic_level3_projectile
   m_TagString: projectile
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 428768880958431495}
   - component: {fileID: 420448011906603709}
   - component: {fileID: 2180262182094723888}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: thunder_level4_projectile
   m_TagString: projectile
   m_Icon: {fileID: 0}
