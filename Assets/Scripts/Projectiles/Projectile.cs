@@ -20,15 +20,15 @@ public class Projectile : MonoBehaviour
     public bool useMuzzleVFX;
     public bool useHitVFX;
 
-    private bool collided;
-    private Rigidbody rb;
+    protected bool collided;
+    protected Rigidbody rb;
 
-    private Vector3 movePosition;
-    private Quaternion moveRotation;
-    private Vector3 targetCenter;
+    protected Vector3 movePosition;
+    protected Quaternion moveRotation;
+    protected Vector3 targetCenter;
 
-    private Transform muzzleParent;
-    private Transform hitParent;
+    protected Transform muzzleParent;
+    protected Transform hitParent;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -166,6 +166,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void onHitTarget(Collider collider) {
         // deal damage to the enemy
+        if (attacker == null) return;
         GameObject target = collider.gameObject;
         Unit attackUnit = attacker.GetComponent<Unit>();
         DamageData damage = attackUnit.attackData.attackDamage;
@@ -255,6 +256,7 @@ public class Projectile : MonoBehaviour
 
         return projectileParent;
     }
+
 
     public GameObject spawnProjectile(Vector3 position, Quaternion rotation, 
         GameObject attacker, GameObject target, float speed) {

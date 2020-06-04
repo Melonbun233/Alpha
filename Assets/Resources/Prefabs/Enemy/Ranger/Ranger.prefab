@@ -183,9 +183,9 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0.06
-      outSlope: 0.06
+      value: 0.5
+      inSlope: 0.05
+      outSlope: 0.05
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -193,15 +193,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 50
       value: 3
-      inSlope: 0.01
-      outSlope: 0.01
+      inSlope: -0.004999999
+      outSlope: -0.004999999
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 100
-      value: 1
+      value: 0
       inSlope: -0.068953656
       outSlope: -0.068953656
       tangentMode: 0
@@ -211,7 +211,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  projectile: {fileID: 0}
+  projectile: {fileID: 7271477576077316512, guid: 17d97506952d48245be14069b4da1fab,
+    type: 3}
+  projSpeed: 4
 --- !u!195 &8993511224633411677
 NavMeshAgent:
   m_ObjectHideFlags: 0

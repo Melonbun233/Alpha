@@ -22,8 +22,7 @@ public static class Utils
     {
         RaycastHit hit;
         Ray ray = new Ray(origin, (targetPosition - origin));
-        Debug.DrawRay(origin, (targetPosition - origin), Color.red, 30f);
-        if (Physics.Raycast(ray, out hit, range))
+        if (Physics.Raycast(ray, out hit, range, 31))
         {
             if (hit.transform.tag == "walls")
             {

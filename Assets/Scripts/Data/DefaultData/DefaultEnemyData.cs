@@ -7,7 +7,7 @@
             return new EnemyData
             (
                 new HealthData(20, 20, 0f, 0),
-                new AttackData(1, 1, new DamageData(0, 10, 0, 0, 0), 1, 1),
+                new AttackData(2f, 1, new DamageData(0, 10, 0, 0, 0), 1, 1),
                 new ResistanceData(0, 10, 0, 0, 0),
                 EnemyType.suicidal,
                 new MoveData(3f),
@@ -23,7 +23,7 @@
         {
             return new EnemyData(
                 new HealthData(20, 20, 0f, 0),
-                new AttackData(10f, 1, new DamageData(8, 0, 0, 0, 0), 1, 0),
+                new AttackData(8f, 1, new DamageData(8, 0, 0, 0, 0), 1, 0),
                 new ResistanceData(0, 0, 0, 0, 0),
                 EnemyType.ranger,
                 new MoveData(2f),
@@ -39,7 +39,7 @@
         {
             return new EnemyData(
                 new HealthData(40,40,0f,0),
-                new AttackData(1f,1,new DamageData(8,0,0,0,0), 1 ,0),
+                new AttackData(2f,1,new DamageData(8,0,0,0,0), 1 ,0),
                 new ResistanceData(0,0,0,0,0),
                 EnemyType.melee,
                 new MoveData(2.5f),
