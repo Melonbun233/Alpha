@@ -55,10 +55,10 @@ public class LevelController : MonoBehaviour
     private int times = 0;
     private bool initialized = false;
 
-    public void SetUpLevel(int rows, int colums, float ManaRegen, float MaxMana, float StartingMana, List<AllyData> allydatas, int seed = -1)
+    public void SetUpLevel(int level, float ManaRegen, float MaxMana, float StartingMana, List<AllyData> allydatas, int seed = -1)
     {
-        this.rows = rows;
-        this.colums = colums;
+        this.rows = level / 5 + 3;
+        this.colums = level / 5 + 2;
         this.ManaRegen = ManaRegen;
         this.MaxMana = MaxMana;
         this.StartingMana = StartingMana;
