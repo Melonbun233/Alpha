@@ -15,12 +15,12 @@ public class AllyProjectileController : MonoBehaviour
     // Speed for different ally projectile main type
     public static readonly Dictionary<AllyType, float> allyProjectileSpeeds = 
         new Dictionary<AllyType, float>() {
-            {AllyType.Ranger, 15f},
+            {AllyType.Ranger, 10f},
             {AllyType.Blocker, 5f},
             {AllyType.Fire, 5f},
             {AllyType.Water, 8f},
             {AllyType.Wind, 8f},
-            {AllyType.Thunder, 15f},
+            {AllyType.Thunder, 10f},
             {AllyType.None, 10f},
         };
 
@@ -103,6 +103,11 @@ public class AllyProjectileController : MonoBehaviour
             
             projectile.setProjectile(position, rotation, attacker, target,
                 allyProjectileSpeeds[ally.getMainType()]);
+
+            // Some other customizations
+            if (ally.allyType1Level == 4) {
+                projectile.speed = 5;
+            }
 
             return obj;
     }
