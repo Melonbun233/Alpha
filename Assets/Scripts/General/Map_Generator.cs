@@ -394,7 +394,7 @@ public class Map_Generator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Random.seed = this.seed;
+        if(seed != -1) { Random.seed = this.seed; }
         reached = new List<int>();
         midPoints = new List<int>();
         List<grid> grids = SetUpGridSystem();

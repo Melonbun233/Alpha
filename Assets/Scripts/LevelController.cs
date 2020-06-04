@@ -54,25 +54,39 @@ public class LevelController : MonoBehaviour
 
     private int times = 0;
 
+    public void SetUpLevel(int rows, int colums, float ManaRegen, float MaxMana, float StartingMana, List<AllyData> allydatas, List<Wave> EnemyWaves, int seed = -1)
+    {
+        this.rows = rows;
+        this.colums = colums;
+        this.ManaRegen = ManaRegen;
+        this.MaxMana = MaxMana;
+        this.StartingMana = StartingMana;
+        teamList = new TeamList(allydatas);
+        waves = EnemyWaves;
+        this.seed = seed;
+        generateLevel();
+    }
+
     private void Awake()
     {
         levelCtr = this;
+    }
+
+    private void generateLevel()
+    {
         GameObject LevelGenerator = Instantiate(levelGenerator, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
         teamList = LevelGenerator.GetComponent<TeamList>();
         Placement = LevelGenerator.GetComponent<placement>();
         MapGenerator = LevelGenerator.GetComponent<Map_Generator>();
-        if(seed != -1)
-        {
-            MapGenerator.seed = this.seed;
-        }
+        MapGenerator.seed = this.seed;
         teamList.UI = UI;
         MapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
         MapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
 
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
-        teamList.team.Add(DefaultAllyData.TestRangerData);
-        teamList.team.Add(DefaultAllyData.defaultBlockerData);
+        //teamList.team.Add(DefaultAllyData.TestRangerData);
+        //teamList.team.Add(DefaultAllyData.defaultBlockerData);
 
         Placement.wallOffset = wallOffset;
         Placement.valleyOffset = valleyOffset;
@@ -81,21 +95,21 @@ public class LevelController : MonoBehaviour
         Placement.ManaRegen = this.ManaRegen;
         Placement.MaxMana = this.MaxMana;
         Placement.startingMana = this.StartingMana;
+        placement.toPlace.Mana = this.StartingMana;
 
         ManaText = UI.GetComponentInChildren<Text>();
 
         //waves.Add(WaveFormation.Melee3());
         //waves.Add(WaveFormation.MeleeRanger32());
         //waves.Add(WaveFormation.MeleeSuicidal32());
-        waves.Add(WaveFormation.RangerWave3());
+        //waves.Add(WaveFormation.RangerWave3());
         //waves.Add(WaveFormation.suicidalWave5());
         //waves.Add(WaveFormation.Boss_General());
     }
 
     void Start()
     {
-        placement.toPlace.Mana = StartingMana;
-        
+        //generate();
     }
 
     // Update is called once per frame
