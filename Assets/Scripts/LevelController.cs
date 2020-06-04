@@ -53,6 +53,7 @@ public class LevelController : MonoBehaviour
     public float preparationTime;
 
     private int times = 0;
+    private bool initialized = false;
 
     public void SetUpLevel(int rows, int colums, float ManaRegen, float MaxMana, float StartingMana, List<AllyData> allydatas, List<Wave> EnemyWaves, int seed = -1)
     {
@@ -98,6 +99,7 @@ public class LevelController : MonoBehaviour
         placement.toPlace.Mana = this.StartingMana;
 
         ManaText = UI.GetComponentInChildren<Text>();
+        initialized = true;
 
         //waves.Add(WaveFormation.Melee3());
         //waves.Add(WaveFormation.MeleeRanger32());
@@ -116,6 +118,8 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
+        if (!initialized) return;
+
         if(times < 1)
         {
             foreach(GameObject x in spawns)
