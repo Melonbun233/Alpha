@@ -431,7 +431,7 @@ public class Map_Generator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (!hasBaked)
         {
