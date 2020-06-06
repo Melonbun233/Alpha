@@ -24,11 +24,18 @@ public abstract class Effect
     // Remove the effect from the unit
     public abstract void removeEffect(Unit unit); 
 
+    //for effects that are related to damage
+    public virtual DamageData damage { get; set; }
+
 }
 
 
 // All types of effect
 public enum EffectType {
     BurningEffect,
-    BurningAttackEffect
+    BurningAttackEffect,
+    BleedingEffect,
+    BleedingAttackEffect,
+    CrippleEffect,
+    CrippleAttackEffect,
 }

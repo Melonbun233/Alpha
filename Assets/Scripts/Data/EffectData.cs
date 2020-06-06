@@ -12,6 +12,12 @@ public class EffectData
     public int burningStack;
     public int burningAttackStack;
 
+    public int crippleStack;
+    public int crippleAttackStack;
+
+    public int bleedingStack;
+    public int bleedingAttackStack;
+
     public EffectData() {}
 
     public EffectData(List<Effect> effects) {
