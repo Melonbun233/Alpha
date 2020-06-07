@@ -18,6 +18,8 @@ public class EffectData
     public int bleedingStack;
     public int bleedingAttackStack;
 
+    public int DamageReflectStack;
+
     public EffectData() {}
 
     public EffectData(List<Effect> effects) {

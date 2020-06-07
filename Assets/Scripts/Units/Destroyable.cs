@@ -18,6 +18,9 @@ public class Destroyable : MonoBehaviour
     // used to be pointed by attack indicator
     public Vector3 center;
 
+    //Reference to the last unit that attacked this.
+    public Unit LastAttacker;
+
     protected virtual void Start() {
         if (healthData.maxHealth < healthData.health) {
             healthData.health = healthData.maxHealth;

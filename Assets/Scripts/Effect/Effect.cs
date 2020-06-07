@@ -38,4 +38,5 @@ public enum EffectType {
     BleedingAttackEffect,
     CrippleEffect,
     CrippleAttackEffect,
+    DamageReflectEffect
 }
