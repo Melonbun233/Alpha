@@ -20,6 +20,8 @@ public class EffectData
 
     public int DamageReflectStack;
 
+    public int KnockBackAttackEffectStack;
+
     public EffectData() {}
 
     public EffectData(List<Effect> effects) {
