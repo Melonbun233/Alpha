@@ -20,6 +20,8 @@ public class EffectData
 
     public int DamageReflectStack;
 
+    public int KnockBackAttackEffectStack;
+
     public EffectData() {}
 
     public EffectData(List<Effect> effects) {
@@ -33,9 +35,32 @@ public class EffectData
                 case EffectType.BurningAttackEffect:
                     list.Add(BurningAttackEffect.deepCopy((BurningAttackEffect)effect) as Effect);
                     break;
-                
                 case EffectType.BurningEffect:
                     list.Add(BurningEffect.deepCopy((BurningEffect)effect) as Effect);
+                    break;
+
+
+                case EffectType.CrippleAttackEffect:
+                    list.Add(CrippleAttackEffect.deepCopy((CrippleAttackEffect)effect) as Effect);
+                    break;
+                case EffectType.CrippleEffect:
+                    list.Add(CrippleEffect.deepCopy((CrippleEffect)effect) as Effect);
+                    break;
+
+
+                case EffectType.BleedingAttackEffect:
+                    list.Add(BleedingAttackEffect.deepCopy((BleedingAttackEffect)effect) as Effect);
+                    break;
+                case EffectType.BleedingEffect:
+                    list.Add(BleedingEffect.deepCopy((BleedingEffect)effect) as Effect);
+                    break;
+
+                case EffectType.DamageReflectEffect:
+                    list.Add(DamageReflectEffect.deepCopy((DamageReflectEffect)effect) as Effect);
+                    break;
+
+                case EffectType.KnockBackAttackEffect:
+                    list.Add(KnockBackAttackEffect.deepCopy((KnockBackAttackEffect)effect) as Effect);
                     break;
             }
         }

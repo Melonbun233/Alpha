@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CrippleEffectAttack : Effect
+public class CrippleAttackEffect : Effect
 {
     public const float defaultPeriod = float.PositiveInfinity;
     public const bool defaultStackable = false;
@@ -35,7 +35,7 @@ public class CrippleEffectAttack : Effect
 
     // Constructor for the cripple attack effect
     // Note that we will directly use the reference of the provided cripple effect
-    public CrippleEffectAttack(int crippleEffectPerAttack, CrippleEffect crippleEffect)
+    public CrippleAttackEffect(int crippleEffectPerAttack, CrippleEffect crippleEffect)
     {
         this.cripplePerAttack = crippleEffectPerAttack;
         this.crippleEffect = crippleEffect;
@@ -44,16 +44,16 @@ public class CrippleEffectAttack : Effect
         this.period = defaultPeriod;
     }
 
-    public CrippleEffectAttack()
+    public CrippleAttackEffect()
     {
         this.onAttackAction = new Action<Unit, Unit>(OnAttack);
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
         this.period = defaultPeriod;
     }
 
-    public static CrippleEffectAttack deepCopy(CrippleEffectAttack effect)
+    public static CrippleAttackEffect deepCopy(CrippleAttackEffect effect)
     {
-        CrippleEffectAttack ret = new CrippleEffectAttack(effect.cripplePerAttack,
+        CrippleAttackEffect ret = new CrippleAttackEffect(effect.cripplePerAttack,
             CrippleEffect.deepCopy(effect.crippleEffect));
         ret.period = effect.period;
         ret.stackable = effect.stackable;
@@ -69,7 +69,7 @@ public class CrippleEffectAttack : Effect
         if (hasEffect && !stackable)
         {
             // overwrite the effect only when the new effect has longer period
-            CrippleEffectAttack oldEffect = effectData.getEffect(type) as CrippleEffectAttack;
+            CrippleAttackEffect oldEffect = effectData.getEffect(type) as CrippleAttackEffect;
             if (oldEffect.periodCD < this.period)
             {
                 oldEffect.removeEffect(unit);

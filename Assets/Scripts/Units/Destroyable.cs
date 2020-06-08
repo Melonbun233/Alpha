@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,11 @@ public class Destroyable : MonoBehaviour
     //Reference to the last unit that attacked this.
     public Unit LastAttacker;
 
+    // Called on receive damage
+    public event Action<Unit, int> OnReceiveDamageEvent;
+    // Called on receive healing
+    public event Action<Unit, int> OnReceiveHealingEvent;
+
     protected virtual void Start() {
         if (healthData.maxHealth < healthData.health) {
             healthData.health = healthData.maxHealth;
@@ -39,6 +45,10 @@ public class Destroyable : MonoBehaviour
     // Over damage will not result in negative health!
     public virtual void receiveDamage(DamageData damageData, GameObject receiveFrom) {
         int damage = damageData.getTotalDamage(this.resistanceData);
+
+        if (OnReceiveDamageEvent != null) {
+            OnReceiveDamageEvent(receiveFrom.GetComponent<Unit>(), damage);
+        }
 
         // Avoid negative health
         if (healthData.health <= damage) {
@@ -63,6 +73,10 @@ public class Destroyable : MonoBehaviour
             healthData.healingFlatMultiplier);
         if (actualHealing < 0) {
             return;
+        }
+
+        if (OnReceiveHealingEvent != null) {
+            OnReceiveHealingEvent(receiveFrom.GetComponent<Unit>(), actualHealing);
         }
         
         // Avoid overheal
