@@ -94,6 +94,7 @@ public abstract class Unit : Destroyable
             OnAttack(target); 
 
             dealAoeDamage(target, attackData.attackDamage);
+            target.GetComponent<Destroyable>().LastAttacker = this;
         }
 
         _attackCoolDown = attackData.attackCoolDown;
