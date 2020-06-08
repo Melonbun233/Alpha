@@ -65,7 +65,8 @@ public class GameController : MonoBehaviour
 
     // Quit the game to desktop, can be called in any scene
     public void quitGame() {
-        Debug.Log("Quit game called");
+        Debug.Log("Quit game");
+        Application.Quit();
     }
 
     // Discard all current data and return to menu menu
