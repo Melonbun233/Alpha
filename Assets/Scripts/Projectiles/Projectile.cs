@@ -98,7 +98,7 @@ public class Projectile : MonoBehaviour
 
         if (target != null) {
             Destroyable d = target.GetComponent<Destroyable>();
-            targetCenter = d.center;
+            targetCenter = target.transform.TransformPoint(d.center);
             updateMoveTarget();
         }
 
@@ -114,7 +114,7 @@ public class Projectile : MonoBehaviour
             return;
         }
         moveRotation = Quaternion.LookRotation(target.transform.position);
-        movePosition = target.transform.TransformPoint(targetCenter);
+        movePosition = targetCenter;
     }
 
     protected virtual void OnTriggerEnter(Collider collider) {
@@ -209,8 +209,7 @@ public class Projectile : MonoBehaviour
         if (!target) {
             rotation = Quaternion.identity;
         } else {
-            rotation = Quaternion.LookRotation(collidingPosition -
-                target.transform.TransformPoint(targetCenter));
+            rotation = Quaternion.LookRotation(collidingPosition - targetCenter);
         }
         
 
