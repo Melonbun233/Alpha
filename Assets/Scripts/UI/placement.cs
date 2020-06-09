@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class placement : MonoBehaviour
+public class Placement : MonoBehaviour
 {
-    public static placement toPlace;
+    public static Placement toPlace;
 
     [Header("Raycast layers.")]
     public LayerMask layer1;
@@ -59,7 +59,7 @@ public class placement : MonoBehaviour
         temp2.z = 1f;
         Vector3 temp = Camera.main.ScreenToWorldPoint(temp2);
         instant.GetComponent<RectTransform>().position = temp;
-        instant.GetComponent<status>().setAllydata(data);
+        instant.GetComponent<Status>().setAllydata(data);
         return instant;
     }
 
@@ -70,7 +70,7 @@ public class placement : MonoBehaviour
         temp2.z = 1f;
         Vector3 temp = Camera.main.ScreenToWorldPoint(temp2);
         instant.GetComponent<RectTransform>().position = temp;
-        instant.GetComponent<status>().setAllydata(data);
+        instant.GetComponent<Status>().setAllydata(data);
         return instant;
     }
 
@@ -113,7 +113,7 @@ public class placement : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && hit.transform != null && hit.transform.tag != "UI"  && towerToFollow != null)
         {
-            if (towerToFollow.GetComponent<placementValidation>().Validbuild)
+            if (towerToFollow.GetComponent<PlacementValidation>().Validbuild)
             {
                 hit.transform.GetComponent<Build>().towerOption = this.towerOption;
                 hit.transform.GetComponent<Build>().buildT();

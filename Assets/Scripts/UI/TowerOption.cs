@@ -85,7 +85,7 @@ public class TowerOption : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1)&&status==null)
         {
-            status = placement.toPlace.instStatus(allyData);
+            status = Placement.toPlace.instStatus(allyData);
         }
     }
 
@@ -99,12 +99,12 @@ public class TowerOption : MonoBehaviour
 
     void OnMouseUp()
     {
-        if(placement.toPlace.towerToFollow != null)
+        if(Placement.toPlace.towerToFollow != null)
         {
-            Destroy(placement.toPlace.towerToFollow);
+            Destroy(Placement.toPlace.towerToFollow);
         }
 
-        if ((int)placement.toPlace.Mana < allyData.allyLevelData.cost)
+        if ((int)Placement.toPlace.Mana < allyData.allyLevelData.cost)
         {
             print("Not Enough Mana");
             return;
@@ -117,10 +117,10 @@ public class TowerOption : MonoBehaviour
             //temp.GetComponent<Collider>().enabled = false;
             //if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
             //temp.tag = "allyToPlace";
-            placement.toPlace.towerPrefab = temp;
-            placement.toPlace.allyData = allyData;
-            placement.toPlace.towerToFollow = Instantiate(getModel()) as GameObject;
-            placement.toPlace.towerOption = this;
+            Placement.toPlace.towerPrefab = temp;
+            Placement.toPlace.allyData = allyData;
+            Placement.toPlace.towerToFollow = Instantiate(getModel()) as GameObject;
+            Placement.toPlace.towerOption = this;
         }
         else
         {
@@ -204,7 +204,7 @@ public class TowerOption : MonoBehaviour
                     break;
             }
 
-        if (LevelController.levelCtr.Base.isDead())
+        if (LevelController.levelCtr.character.isDead())
         {
             gameObject.GetComponent<TowerOption>().enabled = false;
         }
@@ -220,7 +220,7 @@ public class TowerOption : MonoBehaviour
             highLight.SetActive(true);
         }
 
-        if ((int)placement.toPlace.Mana < allyData.allyLevelData.cost)
+        if ((int)Placement.toPlace.Mana < allyData.allyLevelData.cost)
         {
             button.enabled = false;
             highLight.SetActive(false);

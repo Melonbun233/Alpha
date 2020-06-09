@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEditor.AI;
 
-public class Map_Generator : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
 
     [Header("Map parameter")]
@@ -191,9 +191,15 @@ public class Map_Generator : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             int Place = reached[Random.Range(0, reached.Count - 1)];
+            int loop = 0;
             while (Place == baselocMark || Place == (baselocMark + 1) || Place == baselocMark - 1 || Place == baselocMark + rows || Place == baselocMark + rows + 1 || Place == baselocMark + rows - 1 || Place == baselocMark - rows || Place == baselocMark - rows - 1 || Place == baselocMark - rows + 1)
             {
+                if (loop > 100) {
+                    Debug.LogError("Failed to instantiate a enemy spawn due to too many iterations");
+                    break;
+                }
                 Place = reached[Random.Range(0, reached.Count - 1)];
+                loop ++;
             }
             spawnlocMark.Add(Place);
         }
@@ -376,9 +382,15 @@ public class Map_Generator : MonoBehaviour
         int Place = reached[Random.Range(0, reached.Count - 1)];
         for (int i = 0; i < goldNum; i++)
         {
+            int loop = 0;
             while (Place == baselocMark || spawnlocMark.Contains(Place))
             {
+                if (loop > 100) {
+                    Debug.LogError("Failed to instantiate a gold");
+                    break;
+                }
                 Place = reached[Random.Range(0, reached.Count - 1)];
+                loop ++;
             }
         }
         goldsMark.Add(Place);
@@ -391,9 +403,7 @@ public class Map_Generator : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void generate() {
         if(seed != -1) { Random.seed = this.seed; }
         reached = new List<int>();
         midPoints = new List<int>();
@@ -405,6 +415,10 @@ public class Map_Generator : MonoBehaviour
         int i = 0;
         while (!checkValid(grids))
         {
+            if (i > 50) {
+                Debug.LogError("Iterate too many times while generating map, abort");
+                break;
+            }
             eraseMap(mapHolder, baseHolder, spawnHolder, grids);
             mapHolder = new GameObject("MapTiles" + i).transform;
             baseHolder = new GameObject("BaseTiles" + i).transform;
@@ -422,12 +436,19 @@ public class Map_Generator : MonoBehaviour
         setupGold(grids);
         fillOut(grids, mapHolder);
         GameObject base_ = Instantiate(BasePrefabs, grids[baselocMark].Grid.transform.position, Quaternion.identity) as GameObject;
-        LevelController.levelCtr.Base = base_.GetComponent<Character>();
+        LevelController.levelCtr.character = base_.GetComponent<Character>();
         LevelController.levelCtr.spawns = spawns;
+
+        // Setup the camera to look at the base
+        CameraController camController = Camera.main.gameObject.GetComponent<CameraController>();
+        if (camController != null) {
+            camController.setupCamera(base_.transform.position);
+        } else {
+            Debug.LogWarning("Cannot find camera controller");
+        }
+
         //map built
         hasBaked = false;
-        
-
     }
 
     // Update is called once per frame

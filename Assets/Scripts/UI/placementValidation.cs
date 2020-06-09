@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class placementValidation : MonoBehaviour
+public class PlacementValidation : MonoBehaviour
 {
 
     public bool Validbuild;

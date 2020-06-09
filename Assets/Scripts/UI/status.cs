@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class status : MonoBehaviour
+public class Status : MonoBehaviour
 {
     public GameObject physical;
     public GameObject fire;

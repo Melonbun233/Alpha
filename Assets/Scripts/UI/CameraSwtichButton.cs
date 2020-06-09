@@ -7,7 +7,7 @@ public class CameraSwtichButton : MonoBehaviour
 
     private void OnMouseUp()
     {
-        placement.toPlace.CameraAngleSwitch();
+        Placement.toPlace.CameraAngleSwitch();
     }
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class onclickUI : MonoBehaviour
+public class OnclickUI : MonoBehaviour
 {
 
     private Ally ally;
@@ -10,7 +10,7 @@ public class onclickUI : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            placement.toPlace.instStatus(ally);
+            Placement.toPlace.instStatus(ally);
         }
     }
 

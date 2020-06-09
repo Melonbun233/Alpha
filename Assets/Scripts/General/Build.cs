@@ -18,54 +18,54 @@ public class Build : MonoBehaviour
 
     public void buildT()
     {
-        if (Tower != null && !hasbuilt && placement.toPlace.towerPrefab != null)
+        if (Tower != null && !hasbuilt && Placement.toPlace.towerPrefab != null)
         {
-            if (placement.toPlace.hit.transform.tag == "walls")
+            if (Placement.toPlace.hit.transform.tag == "walls")
             {
-                if (placement.toPlace.allyData.isType(AllyType.Blocker))
+                if (Placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
                     print("cannot place blocker on walls!");
                     return;
                 }
-                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
+                //GameObject instant = Instantiate(Tower, transform.position + Placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
                 Quaternion rotate = new Quaternion();
-                rotate.eulerAngles = placement.toPlace.rotate;
-                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.wallOffset, rotate);
+                rotate.eulerAngles = Placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, Placement.toPlace.allyData, transform.position + Placement.toPlace.wallOffset, rotate);
                 Instant.GetComponent<Ally>().enabled = true;
                 Instant.GetComponent<Collider>().enabled = true;
                 Instant.tag = "Ally";
-                Destroy(placement.toPlace.towerToFollow);
-                placement.toPlace.Mana -= placement.toPlace.allyData.allyLevelData.cost;
-                placement.toPlace.rotate = new Vector3(0, 0, 0);
-                placement.toPlace.towerToFollow = null;
-                placement.toPlace.towerPrefab = null;
+                Destroy(Placement.toPlace.towerToFollow);
+                Placement.toPlace.Mana -= Placement.toPlace.allyData.allyLevelData.cost;
+                Placement.toPlace.rotate = new Vector3(0, 0, 0);
+                Placement.toPlace.towerToFollow = null;
+                Placement.toPlace.towerPrefab = null;
                 Tower = null;
                 hasbuilt = true;
                 towerOption.isCd = true;
 
             }
 
-            if (placement.toPlace.hit.transform.tag == "valley")
+            if (Placement.toPlace.hit.transform.tag == "valley")
             {
-                if (!placement.toPlace.allyData.isType(AllyType.Blocker))
+                if (!Placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
                     print("cannot place ranger class on valleys!");
                     return;
                 }
 
-                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
+                //GameObject instant = Instantiate(Tower, transform.position + Placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
                 Quaternion rotate = new Quaternion();
-                rotate.eulerAngles = placement.toPlace.rotate;
-                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, rotate);
+                rotate.eulerAngles = Placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, Placement.toPlace.allyData, transform.position + Placement.toPlace.valleyOffset, rotate);
                 Instant.GetComponent<Ally>().enabled = true;
                 Instant.GetComponent<Collider>().enabled = true;
                 Instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                 Instant.tag = "Ally";
-                Destroy(placement.toPlace.towerToFollow);
-                placement.toPlace.Mana -= placement.toPlace.allyData.allyLevelData.cost;
-                placement.toPlace.rotate = new Vector3(0, 0, 0);
-                placement.toPlace.towerToFollow = null;
-                placement.toPlace.towerPrefab = null;
+                Destroy(Placement.toPlace.towerToFollow);
+                Placement.toPlace.Mana -= Placement.toPlace.allyData.allyLevelData.cost;
+                Placement.toPlace.rotate = new Vector3(0, 0, 0);
+                Placement.toPlace.towerToFollow = null;
+                Placement.toPlace.towerPrefab = null;
                 Tower = null;
                 hasbuilt = true;
                 towerOption.isCd = true;
@@ -75,34 +75,34 @@ public class Build : MonoBehaviour
 
     /*void OnMouseUp()
     {
-        if (Tower != null && !hasbuilt && placement.toPlace.towerModel != null)
+        if (Tower != null && !hasbuilt && Placement.toPlace.towerModel != null)
         {
-            if (placement.toPlace.hit.transform.tag == "walls")
+            if (Placement.toPlace.hit.transform.tag == "walls")
             {
-                if (placement.toPlace.allyData.isType(AllyType.Blocker))
+                if (Placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
                     print("cannot place blocker on walls!");
                     return;
                 }
-                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
+                //GameObject instant = Instantiate(Tower, transform.position + Placement.toPlace.wallOffset, Quaternion.identity) as GameObject;
                 Quaternion rotate = new Quaternion();
-                rotate.eulerAngles = placement.toPlace.rotate;
-                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.wallOffset, rotate);
+                rotate.eulerAngles = Placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, Placement.toPlace.allyData, transform.position + Placement.toPlace.wallOffset, rotate);
                 Instant.GetComponent<Ally>().enabled = true;
                 Instant.GetComponent<Collider>().enabled = true;
                 Instant.tag = "Ally";
-                Destroy(placement.toPlace.towerToFollow);
-                placement.toPlace.rotate = new Vector3(0, 0, 0);
-                placement.toPlace.towerToFollow = null;
-                placement.toPlace.towerModel = null;
+                Destroy(Placement.toPlace.towerToFollow);
+                Placement.toPlace.rotate = new Vector3(0, 0, 0);
+                Placement.toPlace.towerToFollow = null;
+                Placement.toPlace.towerModel = null;
                 Tower = null;
                 hasbuilt = true;
 
             }
 
-            if (placement.toPlace.hit.transform.tag == "valley")
+            if (Placement.toPlace.hit.transform.tag == "valley")
             {
-                if (!placement.toPlace.allyData.isType(AllyType.Blocker))
+                if (!Placement.toPlace.allyData.isType(AllyType.Blocker))
                 {
                     print("cannot place ranger class on valleys!");
                     return;
@@ -113,18 +113,18 @@ public class Build : MonoBehaviour
                     return;
                 }
 
-                //GameObject instant = Instantiate(Tower, transform.position + placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
+                //GameObject instant = Instantiate(Tower, transform.position + Placement.toPlace.valleyOffset, Quaternion.identity) as GameObject;
                 Quaternion rotate = new Quaternion();
-                rotate.eulerAngles = placement.toPlace.rotate;
-                Instant = Ally.spawn(Tower, placement.toPlace.allyData, transform.position + placement.toPlace.valleyOffset, rotate);
+                rotate.eulerAngles = Placement.toPlace.rotate;
+                Instant = Ally.spawn(Tower, Placement.toPlace.allyData, transform.position + Placement.toPlace.valleyOffset, rotate);
                 Instant.GetComponent<Ally>().enabled = true;
                 Instant.GetComponent<Collider>().enabled = true;
                 Instant.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                 Instant.tag = "Ally";
-                Destroy(placement.toPlace.towerToFollow);
-                placement.toPlace.rotate = new Vector3(0, 0, 0);
-                placement.toPlace.towerToFollow = null;
-                placement.toPlace.towerModel = null;
+                Destroy(Placement.toPlace.towerToFollow);
+                Placement.toPlace.rotate = new Vector3(0, 0, 0);
+                Placement.toPlace.towerToFollow = null;
+                Placement.toPlace.towerModel = null;
                 Tower = null;
                 hasbuilt = true;
             }
@@ -135,9 +135,9 @@ public class Build : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (placement.toPlace.towerPrefab != null)
+        if (Placement.toPlace.towerPrefab != null)
         {
-            Tower = placement.toPlace.towerPrefab;
+            Tower = Placement.toPlace.towerPrefab;
         }
 
         if (Instant == null) hasbuilt = false;

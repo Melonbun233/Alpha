@@ -17,6 +17,7 @@ public class LevelController : MonoBehaviour
     public int iterations;
     public int Levels;
     public int seed;
+    public bool autoGenerateMap;
 
     [Header("Level Settings")]
     public float ManaRegen;
@@ -39,12 +40,12 @@ public class LevelController : MonoBehaviour
 
 
     private TeamList teamList;
-    private placement Placement;
-    private Map_Generator MapGenerator;
+    private Placement placement;
+    private MapGenerator mapGenerator;
     private Text ManaText;
 
     [Header("Game Status")]
-    public Character Base;
+    public Character character;
     public List<GameObject> spawns;
     public List<GameObject> enemyPrefabs;
     [SerializeField]
@@ -75,28 +76,36 @@ public class LevelController : MonoBehaviour
 
     private void generateLevel()
     {
-        GameObject LevelGenerator = Instantiate(levelGenerator, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-        teamList = LevelGenerator.GetComponent<TeamList>();
-        Placement = LevelGenerator.GetComponent<placement>();
-        MapGenerator = LevelGenerator.GetComponent<Map_Generator>();
-        MapGenerator.seed = this.seed;
-        teamList.UI = UI;
-        MapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
-        MapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
+        GameObject LevelGenerator = Instantiate(levelGenerator, new Vector3(0f, 0f, 0f), 
+            Quaternion.identity) as GameObject;
 
+        // Setup map generator
+        mapGenerator = LevelGenerator.GetComponent<MapGenerator>();
+        mapGenerator.seed = this.seed;
+        mapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
+        mapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
+        mapGenerator.rows = this.rows;
+        mapGenerator.columns = this.colums;
+        mapGenerator.generate();
+
+        // Setup team list UI
+        teamList = LevelGenerator.GetComponent<TeamList>();
+        teamList.UI = UI;
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
         teamList.team.Add(DefaultAllyData.TestRangerData);
         teamList.team.Add(DefaultAllyData.defaultBlockerData);
 
-        Placement.wallOffset = wallOffset;
-        Placement.valleyOffset = valleyOffset;
-        Placement.Maincamera = cam;
-        Placement.UIE = UI;
-        Placement.ManaRegen = this.ManaRegen;
-        Placement.MaxMana = this.MaxMana;
-        Placement.startingMana = this.StartingMana;
-        placement.toPlace.Mana = this.StartingMana;
+        // Setup placement
+        placement = LevelGenerator.GetComponent<Placement>();  
+        placement.wallOffset = wallOffset;
+        placement.valleyOffset = valleyOffset;
+        placement.Maincamera = cam;
+        placement.UIE = UI;
+        placement.ManaRegen = this.ManaRegen;
+        placement.MaxMana = this.MaxMana;
+        placement.startingMana = this.StartingMana;
+        Placement.toPlace.Mana = this.StartingMana;
 
         ManaText = UI.GetComponentInChildren<Text>();
         initialized = true;
@@ -111,7 +120,9 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-        generateLevel();
+        if (autoGenerateMap) {
+            generateLevel();
+        }
     }
 
     // Update is called once per frame
@@ -129,17 +140,17 @@ public class LevelController : MonoBehaviour
             times++;
         }
         
-        if (Base.isDead())
+        if (character.isDead())
         {
             UI.transform.Find("GO").gameObject.SetActive(true);
-            placement.toPlace.enabled = false;
+            Placement.toPlace.enabled = false;
         }
 
-        mana = placement.toPlace.Mana;
-        if (placement.toPlace.Mana <= MaxMana)
+        mana = Placement.toPlace.Mana;
+        if (Placement.toPlace.Mana <= MaxMana)
         {
-            placement.toPlace.Mana += ManaRegen * Time.deltaTime;
-            int intMana = (int)placement.toPlace.Mana;
+            Placement.toPlace.Mana += ManaRegen * Time.deltaTime;
+            int intMana = (int)Placement.toPlace.Mana;
             ManaText.text = intMana.ToString();
         }
         else

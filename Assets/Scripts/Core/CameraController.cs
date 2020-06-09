@@ -14,23 +14,44 @@ public class CameraController : MonoBehaviour
 
     [Header("Camera Vertical Movement")]
     public float scrollSpeed = 20f;
-    public float minY = 0;
-    public float maxY;
+    public float minY = 0f;
+    public float maxY = 20f;
+    public float characterHeightOffset = 40f;
 
     private Vector3 _initialPosition;
     public int cameraAngle1;
     public int cameraAngle2;
 
-    void Start() {
+    void Awake() {
         _initialPosition = transform.position;
         _initialMoveLimitXAxis = moveLimitXAxis;
         _initialMoveLimitZAxis = moveLimitZAxis;
+    }
+
+    void Start() {
+        
     }
 
     void Update()
     {
         updateHorizontally();
         updateVertically();
+    }
+
+    // Set up the camera's initial location based on the position of character
+    public void setupCamera(Vector3 position) {
+        position.y += characterHeightOffset;
+        position.z -= characterHeightOffset/2;
+
+        float height = maxY - minY;
+        maxY = position.y;
+        minY = maxY - height;
+
+        gameObject.transform.position = position;
+
+        _initialPosition = position;
+        moveLimitXAxis = _initialMoveLimitXAxis;
+        moveLimitZAxis = _initialMoveLimitZAxis;
     }
 
     private void updateHorizontally() {
