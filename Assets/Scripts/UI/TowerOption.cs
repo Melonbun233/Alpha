@@ -34,7 +34,7 @@ public class TowerOption : MonoBehaviour
     public Sprite Wind;
     public Sprite Thunder;
 
-
+    private LevelController levelController;
 
 
     public GameObject allyPrefab()
@@ -129,8 +129,15 @@ public class TowerOption : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
+        GameObject levelControllerObject = GameObject.Find("LevelController");
+        if (levelControllerObject == null) {
+            Debug.LogError("Tower option should be used with a LevelController in the same scene");
+        } else {
+            levelController = levelControllerObject.GetComponent<LevelController>();
+        }
+
         GameObject towerVisual = Instantiate(getModel(), TowerVisual.transform);
         towerVisual.transform.localScale = new Vector3(20, 20, 20);
         isCd = false;
@@ -204,7 +211,7 @@ public class TowerOption : MonoBehaviour
                     break;
             }
 
-        if (LevelController.levelCtr.character.isDead())
+        if (levelController.levelEnded())
         {
             gameObject.GetComponent<TowerOption>().enabled = false;
         }

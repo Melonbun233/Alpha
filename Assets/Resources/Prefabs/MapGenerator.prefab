@@ -55,7 +55,7 @@ MonoBehaviour:
   goldsMark: 
   mapCenterMark: 0
   seed: 1
-  Base:
+  baseTiles:
   - {fileID: 5265161450082493002, guid: 9aa09ed8dc17dc741a76af5c368e5228, type: 3}
   midTiles:
   - {fileID: 2714446005675880362, guid: d4f73a9199e11354580aa2efef8ab7c2, type: 3}
@@ -67,15 +67,15 @@ MonoBehaviour:
   - {fileID: 6416124027416348221, guid: 0ebe2837b62c50041a7d93a513134fd1, type: 3}
   - {fileID: 3927405374823997457, guid: fc17bb76c2e6e6b4cb716b49a632d6b0, type: 3}
   - {fileID: 3861427725135284278, guid: 7af37347c94f3ee469fa69d23dd1dde6, type: 3}
-  enemySpawn:
+  enemySpawnTiles:
   - {fileID: 2289844012128985510, guid: 88ade2c2b4d85e14a9c52eff72f385f7, type: 3}
-  fillOuts:
+  fillOutTiles:
   - {fileID: 8912448474209229975, guid: 8336d315d3d24414bb6a0c79d9198816, type: 3}
-  Golds:
-  - {fileID: 2270177611936942419, guid: 02f782513ec63ff41b897fe27472d3c1, type: 3}
-  spawnPrefabs: {fileID: 309079086921007040, guid: cb80de8fac6c7594aaf97ffaa3753428,
+  spawnPrefab: {fileID: 309079086921007040, guid: cb80de8fac6c7594aaf97ffaa3753428,
     type: 3}
-  BasePrefabs: {fileID: 2105381977008142762, guid: ca55958be2b390d42840ae582234543e,
+  basePrefab: {fileID: 2105381977008142762, guid: ca55958be2b390d42840ae582234543e,
+    type: 3}
+  goldPrefab: {fileID: 2270177611936942419, guid: 02f782513ec63ff41b897fe27472d3c1,
     type: 3}
 --- !u!114 &2136086837156166600
 MonoBehaviour:

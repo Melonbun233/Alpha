@@ -4,21 +4,21 @@ using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
 
-public class grid
+public class Grid
 {
-        public GameObject Grid;
+        public GameObject gridObject;
         public int index;
-        public grid up;
-        public grid down;
-        public grid left;
-        public grid right;
+        public Grid up;
+        public Grid down;
+        public Grid left;
+        public Grid right;
         public int exit;
         public GameObject tile;
 
-        public grid(Vector3 position, int index)
+        public Grid(Vector3 position, int index)
         {
-            Grid = new GameObject("grid" + index);
-            Grid.transform.position = position;
+            gridObject = new GameObject("grid" + index);
+            gridObject.transform.position = position;
             this.index = index;
             up = null;
             down = null;
@@ -28,9 +28,17 @@ public class grid
             exit = 0;
         }
 
-        public static String checkTileType(grid Grid)
+        public static String checkTileType(Grid grid)
         {
-            if (Grid.tile.name.Contains("Base_tile_template01") || Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template01") || Grid.tile.name.Contains("midtile_template02") || Grid.tile.name.Contains("midtile_template03") || Grid.tile.name.Contains("midtile_template04") || Grid.tile.name.Contains("transiTile_template01") || Grid.tile.name.Contains("Enemy"))
+            if (grid.tile.name.Contains("Base_tile_template01") || 
+                grid.tile.name.Contains("Base_tile_template02") || 
+                grid.tile.name.Contains("Base_tile_template03") || 
+                grid.tile.name.Contains("Base_tile_template04") || 
+                grid.tile.name.Contains("midtile_template01") || 
+                grid.tile.name.Contains("midtile_template02") || 
+                grid.tile.name.Contains("midtile_template03") || 
+                grid.tile.name.Contains("midtile_template04") || 
+                grid.tile.name.Contains("transiTile_template01") || grid.tile.name.Contains("Enemy"))
             {
                 return "mid";
             }
@@ -40,11 +48,13 @@ public class grid
             }
         }
 
-        public static String checkExit(grid Grid)
+        public static String checkExit(Grid grid)
         {
-            if (Grid.tile.name.Contains("Base_tile_template01") || Grid.tile.name.Contains("EnemySpawn_tile_template01") || Grid.tile.name.Contains("midtile_template01"))
+            if (grid.tile.name.Contains("Base_tile_template01") || 
+                grid.tile.name.Contains("EnemySpawn_tile_template01") || 
+                grid.tile.name.Contains("midtile_template01"))
             {
-                if (Grid.exit == 1 || Grid.exit == 3)
+                if (grid.exit == 1 || grid.exit == 3)
                 {
                     return "LR";
                 }
@@ -54,81 +64,83 @@ public class grid
                 }
             }
 
-            if (Grid.tile.name.Contains("Base_tile_template02") || Grid.tile.name.Contains("EnemySpawn_tile_template02") || Grid.tile.name.Contains("midtile_template02") || Grid.tile.name.Contains("sidetile_template02"))
+            if (grid.tile.name.Contains("Base_tile_template02") || 
+                grid.tile.name.Contains("EnemySpawn_tile_template02") || 
+                grid.tile.name.Contains("midtile_template02") || grid.tile.name.Contains("sidetile_template02"))
             {
                 return "LRUD";
             }
 
-            if (Grid.tile.name.Contains("Base_tile_template03") || Grid.tile.name.Contains("midtile_template03"))
+            if (grid.tile.name.Contains("Base_tile_template03") || grid.tile.name.Contains("midtile_template03"))
             {
-                if (Grid.exit == 0)
+                if (grid.exit == 0)
                 {
                     return "LUD";
                 }
 
-                if (Grid.exit == 1)
+                if (grid.exit == 1)
                 {
                     return "LRU";
                 }
 
-                if (Grid.exit == 3)
+                if (grid.exit == 3)
                 {
                     return "LRD";
                 }
 
-                if (Grid.exit == 2)
+                if (grid.exit == 2)
                 {
                     return "RUD";
                 }
             }
 
-            if (Grid.tile.name.Contains("Base_tile_template04") || Grid.tile.name.Contains("midtile_template04"))
+            if (grid.tile.name.Contains("Base_tile_template04") || grid.tile.name.Contains("midtile_template04"))
             {
-                if (Grid.exit == 0)
+                if (grid.exit == 0)
                 {
                     return "LU";
                 }
 
-                if (Grid.exit == 1)
+                if (grid.exit == 1)
                 {
                     return "RU";
                 }
 
-                if (Grid.exit == 3)
+                if (grid.exit == 3)
                 {
                     return "LD";
                 }
 
-                if (Grid.exit == 2)
+                if (grid.exit == 2)
                 {
                     return "RD";
                 }
             }
 
-            if (Grid.tile.name.Contains("Base_tile_template05") || Grid.tile.name.Contains("sidetile_template01"))
+            if (grid.tile.name.Contains("Base_tile_template05") || grid.tile.name.Contains("sidetile_template01"))
             {
-                if (Grid.exit == 0)
+                if (grid.exit == 0)
                 {
                     return "LUD";
                 }
 
-                if (Grid.exit == 1)
+                if (grid.exit == 1)
                 {
                     return "LRU";
                 }
 
-                if (Grid.exit == 3)
+                if (grid.exit == 3)
                 {
                     return "LRD";
                 }
 
-                if (Grid.exit == 2)
+                if (grid.exit == 2)
                 {
                     return "RUD";
                 }
             }
 
-            if (Grid.tile.name.Contains("Base_tile_template06") || Grid.tile.name.Contains("transiTile_template01"))
+            if (grid.tile.name.Contains("Base_tile_template06") || grid.tile.name.Contains("transiTile_template01"))
             {
                 return "LRUD";
             }
@@ -139,7 +151,7 @@ public class grid
         public GameObject setMapTile(GameObject tile)
         {
             this.tile = tile;
-            this.tile.transform.position = Grid.transform.position;
+            this.tile.transform.position = gridObject.transform.position;
             this.tile.transform.rotation = ranRotation();
             return this.tile;
         }
@@ -152,14 +164,14 @@ public class grid
             return temp;
         }
 
-        public void makeConnect(grid toConnect, String Exit)
+        public void makeConnect(Grid toConnect, String Exit)
         {
-            String connectivity = grid.checkExit(toConnect);
+            String connectivity = Grid.checkExit(toConnect);
             int i = 0;
-            while (!connectivity.Contains(grid.connectOrient(Exit)))
+            while (!connectivity.Contains(Grid.connectOrient(Exit)))
             {
                 toConnect.tile.transform.rotation = ranRotation();
-                connectivity = grid.checkExit(toConnect);
+                connectivity = Grid.checkExit(toConnect);
                 i++;
             }
         }
@@ -180,7 +192,7 @@ public class grid
             return null;
         }
 
-        public grid turnSwitch(String turn)
+        public Grid turnSwitch(String turn)
         {
             switch (turn)
             {
@@ -196,7 +208,7 @@ public class grid
             return null;
         }
 
-        public static bool isConnected(grid first, grid second)
+        public static bool isConnected(Grid first, Grid second)
         {
 
             if (first.up != second && first.down != second && first.left != second && first.right != second)
@@ -205,8 +217,8 @@ public class grid
             }
             else
             {
-                String firstE = checkExit(first);
-                String secondE = checkExit(second);
+                String firstE = Grid.checkExit(first);
+                String secondE = Grid.checkExit(second);
                 List<String> temp = new List<String>();
                 foreach (char x in firstE)
                 {
@@ -223,12 +235,12 @@ public class grid
 
         }
 
-        public static int distance(grid first, grid second)
+        public static int distance(Grid first, Grid second)
         {
             if (isConnected(first, second)) return 1;
             int dist = 0;
             bool arrived = false;
-            grid pointer = first;
+            Grid pointer = first;
             while (arrived == false)
             {
                 String exit = checkExit(pointer);

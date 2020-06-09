@@ -6,11 +6,15 @@ public class CameraController : MonoBehaviour
 {
     [Header("Camera Horizontal Movement")]
     public float moveSpeed = 20f;
-    public float moveLimitXAxis;
-    public float moveLimitZAxis;
+    public float moveLimitPositiveXAxis;
+    public float moveLimitNegativeXAxis;
+    public float moveLimitPositiveZAxis;
+    public float moveLimitNegativeZAxis;
 
-    private float _initialMoveLimitXAxis;
-    private float _initialMoveLimitZAxis;
+    private float initialMoveLimitPositiveXAxis;
+    private float initialMoveLimitNegativeXAxis;
+    private float initialMoveLimitPositiveZAxis;
+    private float initialMoveLimitNegativeZAxis;
 
     [Header("Camera Vertical Movement")]
     public float scrollSpeed = 20f;
@@ -18,14 +22,16 @@ public class CameraController : MonoBehaviour
     public float maxY = 20f;
     public float characterHeightOffset = 40f;
 
-    private Vector3 _initialPosition;
+    private Vector3 initialPosition;
     public int cameraAngle1;
     public int cameraAngle2;
 
     void Awake() {
-        _initialPosition = transform.position;
-        _initialMoveLimitXAxis = moveLimitXAxis;
-        _initialMoveLimitZAxis = moveLimitZAxis;
+        initialPosition = transform.position;
+        initialMoveLimitPositiveXAxis = moveLimitPositiveXAxis;
+        initialMoveLimitNegativeXAxis = moveLimitNegativeXAxis;
+        initialMoveLimitPositiveZAxis = moveLimitPositiveZAxis;
+        initialMoveLimitNegativeZAxis = moveLimitNegativeZAxis;
     }
 
     void Start() {
@@ -39,7 +45,8 @@ public class CameraController : MonoBehaviour
     }
 
     // Set up the camera's initial location based on the position of character
-    public void setupCamera(Vector3 position) {
+    public void setupCamera(Vector3 position, float limitPositiveX, float limitNegativeX,
+        float limitPositiveZ, float limitNegativeZ) {
         position.y += characterHeightOffset;
         position.z -= characterHeightOffset/2;
 
@@ -49,9 +56,16 @@ public class CameraController : MonoBehaviour
 
         gameObject.transform.position = position;
 
-        _initialPosition = position;
-        moveLimitXAxis = _initialMoveLimitXAxis;
-        moveLimitZAxis = _initialMoveLimitZAxis;
+        initialPosition = position;
+        moveLimitPositiveXAxis = limitPositiveX;
+        moveLimitNegativeXAxis = limitNegativeX;
+        moveLimitPositiveZAxis = limitPositiveZ;
+        moveLimitNegativeZAxis = limitNegativeZ;
+
+        initialMoveLimitPositiveXAxis = moveLimitPositiveXAxis;
+        initialMoveLimitNegativeXAxis = moveLimitNegativeXAxis;
+        initialMoveLimitPositiveZAxis = moveLimitPositiveZAxis;
+        initialMoveLimitNegativeZAxis = moveLimitNegativeZAxis;
     }
 
     private void updateHorizontally() {
@@ -74,10 +88,10 @@ public class CameraController : MonoBehaviour
             position.x += moveSpeed * Time.deltaTime;
         }
 
-        position.z = Mathf.Clamp(position.z, _initialPosition.z - moveLimitZAxis, 
-            _initialPosition.z + moveLimitZAxis);
-        position.x = Mathf.Clamp(position.x, _initialPosition.x - moveLimitXAxis, 
-            _initialPosition.x + moveLimitXAxis);
+        position.z = Mathf.Clamp(position.z, initialPosition.z - moveLimitNegativeZAxis, 
+            initialPosition.z + moveLimitPositiveZAxis);
+        position.x = Mathf.Clamp(position.x, initialPosition.x - moveLimitNegativeXAxis, 
+            initialPosition.x + moveLimitPositiveXAxis);
 
         transform.position = position;
     }
@@ -111,8 +125,10 @@ public class CameraController : MonoBehaviour
         position.y -= Input.mouseScrollDelta.y * scrollSpeed * 100 * Time.deltaTime;
         position.y = Mathf.Clamp(position.y, minY, maxY);
 
-        moveLimitXAxis = _initialMoveLimitXAxis - (position.y - _initialPosition.y);
-        moveLimitZAxis = _initialMoveLimitZAxis - (position.y - _initialPosition.y);
+        moveLimitPositiveXAxis = initialMoveLimitPositiveXAxis - (position.y - initialPosition.y);
+        moveLimitNegativeXAxis = initialMoveLimitNegativeXAxis - (position.y - initialPosition.y);
+        moveLimitPositiveZAxis = initialMoveLimitPositiveZAxis - (position.y - initialPosition.y);
+        moveLimitNegativeZAxis = initialMoveLimitNegativeZAxis - (position.y - initialPosition.y);
 
         transform.position = position;
     }

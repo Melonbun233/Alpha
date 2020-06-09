@@ -8,10 +8,7 @@ using Random = UnityEngine.Random;
 
 public class LevelController : MonoBehaviour
 {
-    public static LevelController levelCtr;
-
     [Header("Map Settings")]
-    public GameObject levelGenerator;
     public int rows;
     public int colums;
     public int iterations;
@@ -38,10 +35,11 @@ public class LevelController : MonoBehaviour
     public Camera cam;
     public GameObject UI;
 
-
+    private GameObject mapGeneratorObject;
+    private MapGenerator mapGenerator;
     private TeamList teamList;
     private Placement placement;
-    private MapGenerator mapGenerator;
+
     private Text ManaText;
 
     [Header("Game Status")]
@@ -57,7 +55,8 @@ public class LevelController : MonoBehaviour
     private int times = 0;
     private bool initialized = false;
 
-    public void SetUpLevel(int level, float ManaRegen, float MaxMana, float StartingMana, List<AllyData> allydatas, int seed = -1)
+    public void SetUpLevel(int level, float ManaRegen, float MaxMana, float StartingMana, 
+        List<AllyData> allydatas, int seed = -1)
     {
         this.rows = level / 5 + 3;
         this.colums = level / 5 + 2;
@@ -69,18 +68,9 @@ public class LevelController : MonoBehaviour
         generateLevel();
     }
 
-    private void Awake()
-    {
-        levelCtr = this;
-    }
-
     private void generateLevel()
     {
-        GameObject LevelGenerator = Instantiate(levelGenerator, new Vector3(0f, 0f, 0f), 
-            Quaternion.identity) as GameObject;
-
         // Setup map generator
-        mapGenerator = LevelGenerator.GetComponent<MapGenerator>();
         mapGenerator.seed = this.seed;
         mapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
         mapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
@@ -89,7 +79,7 @@ public class LevelController : MonoBehaviour
         mapGenerator.generate();
 
         // Setup team list UI
-        teamList = LevelGenerator.GetComponent<TeamList>();
+        teamList = GetComponent<TeamList>();
         teamList.UI = UI;
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
@@ -97,7 +87,7 @@ public class LevelController : MonoBehaviour
         teamList.team.Add(DefaultAllyData.defaultBlockerData);
 
         // Setup placement
-        placement = LevelGenerator.GetComponent<Placement>();  
+        placement = GetComponent<Placement>();  
         placement.wallOffset = wallOffset;
         placement.valleyOffset = valleyOffset;
         placement.Maincamera = cam;
@@ -118,8 +108,20 @@ public class LevelController : MonoBehaviour
         //waves.Add(WaveFormation.Boss_General());
     }
 
-    void Start()
+    public bool levelEnded() {
+        return character.isDead();
+    }
+
+    void Awake()
     {
+        GameObject mapGeneratorObject = GameObject.Find("MapGenerator");
+        if (mapGeneratorObject == null) {
+            Debug.LogError("There should be a MapGenerator game object in the level scene");
+            return;
+        }
+
+        mapGenerator = mapGeneratorObject.GetComponent<MapGenerator>(); 
+
         if (autoGenerateMap) {
             generateLevel();
         }
