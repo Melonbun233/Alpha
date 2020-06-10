@@ -295,7 +295,7 @@ MonoBehaviour:
   status: {fileID: 8666502980356797597, guid: e6942d5904db1664d85f24b5fc42c033, type: 3}
   towerOption: {fileID: -1889223326394362648, guid: 7a42e00439a2aa842914610a190afa91,
     type: 3}
-  manaText: {fileID: 0}
+  manaText: {fileID: 8985297932174767607}
   manaRegen: 0
   maxMana: 0
   startingMana: 0
