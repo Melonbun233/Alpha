@@ -5,17 +5,19 @@ using UnityEngine;
 public class OnclickUI : MonoBehaviour
 {
 
+    private static PlacementController placementController;
     private Ally ally;
+
+    void Awake() {
+        placementController = LevelController.getPlacementController();
+    }
     private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Placement.toPlace.instStatus(ally);
+            placementController.instStatus(ally);
         }
     }
-
-
-
 
 
     private void Start()

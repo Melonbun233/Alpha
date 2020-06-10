@@ -30,12 +30,17 @@ public class Projectile : MonoBehaviour
     protected Transform muzzleParent;
     protected Transform hitParent;
 
+    public List<string> invalidCollisionTags = new List<string>();
+
+    protected virtual void Awake() {
+        rb = GetComponent<Rigidbody>();
+
+        invalidCollisionTags.Add("wall");
+    }
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody>();    
-        
-
         updateMoveTarget();
 
         GameObject muzzleParentGameObject = GameObject.Find("Muzzles");
@@ -137,12 +142,14 @@ public class Projectile : MonoBehaviour
     // Check wheter we want to ignore this collision
     // return false if we want to ignore this, and the projectile
     // will continue move to the target
-    // By default, ignore all walls and valley
+    // By default, ignore all wall and valley
     protected virtual bool isValidCollision(Collider collider) {
-        if (collider.tag == "walls" || collider.tag == "valley") {
-            return false;
+        foreach (string tag in invalidCollisionTags) {
+            if (tag == collider.tag) {
+                return false;
+            }
         }
-
+ 
         return true;
     }
 

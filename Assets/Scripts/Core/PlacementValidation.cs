@@ -9,7 +9,7 @@ public class PlacementValidation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "walls")
+        if (other.transform.tag == "wall")
         {
             core.SetActive(false);
             invalid_indication.SetActive(true);
@@ -19,7 +19,7 @@ public class PlacementValidation : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "walls")
+        if (other.transform.tag == "wall")
         {
             core.SetActive(true);
             invalid_indication.SetActive(false);

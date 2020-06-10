@@ -10,22 +10,28 @@ public class TeamList : MonoBehaviour
     public GameObject UI;
     public Vector2 startPoint;
     public float offset;
-    // Start is called before the first frame update
 
-    public TeamList(List<AllyData> allydatas)
+    private LevelController levelController;
+
+
+    void Awake()
     {
-        this.team = allydatas;
+        levelController = LevelController.getLevelController();
+        UI = levelController.UI;
     }
 
-    void Start()
-    {
-        foreach (AllyData ally in team)
-        {
-            GameObject tower = Instantiate(towerTab, UI.transform) as GameObject;
-            tower.GetComponent<RectTransform>().anchoredPosition = startPoint;
-            startPoint.x = startPoint.x + offset;
-            tower.GetComponent<TowerOption>().allyData = ally;
-            tower.GetComponent<TowerOption>().cd = ally.allyLevelData.cd;
+    public void addTowerOption(AllyData allyData) {
+        team.Add(allyData);
+        GameObject tower = Instantiate(towerTab, UI.transform) as GameObject;
+        tower.GetComponent<RectTransform>().anchoredPosition = startPoint;
+        startPoint.x = startPoint.x + offset;
+        tower.GetComponent<TowerTab>().allyData = allyData;
+        tower.GetComponent<TowerTab>().cd = allyData.allyLevelData.cd;
+    }
+
+    public void addTowerOptions(List<AllyData> allyDatas) {
+        foreach (AllyData allyData in allyDatas) {
+            addTowerOption(allyData);
         }
     }
 }

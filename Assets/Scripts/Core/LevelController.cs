@@ -17,10 +17,14 @@ public class LevelController : MonoBehaviour
     public bool autoGenerateMap;
 
     [Header("Level Settings")]
-    public float ManaRegen;
-    public float MaxMana;
-    public float StartingMana;
-    public float mana;
+    [SerializeField]
+    private float manaRegen;
+    [SerializeField]
+    private float maxMana;
+    [SerializeField]
+    private float startingMana;
+    [SerializeField]
+    private float mana;
 
     [Header("TeamList settings")]
     public float TeamOptionOffset;
@@ -32,15 +36,18 @@ public class LevelController : MonoBehaviour
 
 
     [Header("References. No need to change")]
-    public Camera cam;
     public GameObject UI;
 
-    private GameObject mapGeneratorObject;
-    private MapGenerator mapGenerator;
-    private TeamList teamList;
-    private Placement placement;
+    private static MapGenerator mapGenerator;
+    private static bool cannotFindMapGenerator;
+    private static TeamList teamList;
+    private static bool cannotFindTeamList;
+    private static PlacementController placementController;
+    private static bool cannotFindPlacementController;
+    private static LevelController levelController;
+    private static bool cannotFindLevelController;
 
-    private Text ManaText;
+    private Text manaText;
 
     [Header("Game Status")]
     public Character character;
@@ -55,15 +62,30 @@ public class LevelController : MonoBehaviour
     private int times = 0;
     private bool initialized = false;
 
-    public void SetUpLevel(int level, float ManaRegen, float MaxMana, float StartingMana, 
-        List<AllyData> allydatas, int seed = -1)
+    void Awake()
+    {
+        mapGenerator = getMapGenerator();
+        teamList = getTeamList();
+        placementController = getPlacementController();
+        levelController = getLevelController();
+    }
+
+    void Start() {
+        if (autoGenerateMap) {
+            generateLevel();
+        }
+    }
+
+    public void setupLevel(int level, float manaRegen, int maxMana, int startingMana, 
+        List<AllyData> allyDatas, int seed = -1)
     {
         this.rows = level / 5 + 3;
         this.colums = level / 5 + 2;
-        this.ManaRegen = ManaRegen;
-        this.MaxMana = MaxMana;
-        this.StartingMana = StartingMana;
-        teamList = new TeamList(allydatas);
+        this.manaRegen = manaRegen;
+        this.maxMana = maxMana;
+        this.startingMana = startingMana;
+        this.mana = startingMana;
+        teamList.addTowerOptions(allyDatas);
         this.seed = seed;
         generateLevel();
     }
@@ -79,25 +101,25 @@ public class LevelController : MonoBehaviour
         mapGenerator.generate();
 
         // Setup team list UI
-        teamList = GetComponent<TeamList>();
         teamList.UI = UI;
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
-        teamList.team.Add(DefaultAllyData.TestRangerData);
-        teamList.team.Add(DefaultAllyData.defaultBlockerData);
+        teamList.addTowerOption(DefaultAllyData.TestRangerData);
+        teamList.addTowerOption(DefaultAllyData.defaultBlockerData);
 
         // Setup placement
-        placement = GetComponent<Placement>();  
-        placement.wallOffset = wallOffset;
-        placement.valleyOffset = valleyOffset;
-        placement.Maincamera = cam;
-        placement.UIE = UI;
-        placement.ManaRegen = this.ManaRegen;
-        placement.MaxMana = this.MaxMana;
-        placement.startingMana = this.StartingMana;
-        Placement.toPlace.Mana = this.StartingMana;
+        placementController.wallOffset = wallOffset;
+        placementController.valleyOffset = valleyOffset;
+        placementController.UIE = UI;
+        placementController.mana = startingMana;
+        placementController.manaRegen = manaRegen;
+        placementController.maxMana = maxMana;
+        placementController.startingMana = startingMana;
 
-        ManaText = UI.GetComponentInChildren<Text>();
+        manaText = UI.GetComponentInChildren<Text>();
+        placementController.manaText = manaText;
+
+        
         initialized = true;
 
         waves.Add(WaveFormation.Melee3());
@@ -112,20 +134,6 @@ public class LevelController : MonoBehaviour
         return character.isDead();
     }
 
-    void Awake()
-    {
-        GameObject mapGeneratorObject = GameObject.Find("MapGenerator");
-        if (mapGeneratorObject == null) {
-            Debug.LogError("There should be a MapGenerator game object in the level scene");
-            return;
-        }
-
-        mapGenerator = mapGeneratorObject.GetComponent<MapGenerator>(); 
-
-        if (autoGenerateMap) {
-            generateLevel();
-        }
-    }
 
     // Update is called once per frame
 
@@ -145,20 +153,125 @@ public class LevelController : MonoBehaviour
         if (character.isDead())
         {
             UI.transform.Find("GO").gameObject.SetActive(true);
-            Placement.toPlace.enabled = false;
+            placementController.enabled = false;
         }
 
-        mana = Placement.toPlace.Mana;
-        if (Placement.toPlace.Mana <= MaxMana)
-        {
-            Placement.toPlace.Mana += ManaRegen * Time.deltaTime;
-            int intMana = (int)Placement.toPlace.Mana;
-            ManaText.text = intMana.ToString();
+        
+    }
+
+    public void switchCameraAngle()
+    {
+        Camera.main.GetComponent<CameraController>().angleSwtich();
+    }
+
+    public static MapGenerator getMapGenerator() {
+        if (mapGenerator != null) {
+            return mapGenerator;
         }
-        else
-        {
-            int intMana = (int)MaxMana;
-            ManaText.text = intMana.ToString();
+
+        if (cannotFindMapGenerator) {
+            return null;
         }
+
+        GameObject mapGeneratorObject = GameObject.Find("MapGenerator");
+        if (mapGeneratorObject == null) {
+            Debug.LogError("There should be a MapGenerator game object in the level scene");
+            cannotFindMapGenerator = true;
+            return null;
+        }
+
+        mapGenerator = mapGeneratorObject.GetComponent<MapGenerator>(); 
+        if (mapGenerator == null) {
+            Debug.LogError("There should be a MapGenerator component in the " + 
+                "MapGenerator gameobject");
+            cannotFindMapGenerator = true;
+            return null;
+        }
+
+        return mapGenerator;
+    }
+
+    public static LevelController getLevelController() {
+        if (levelController != null) {
+            return levelController;
+        }
+        
+        if (cannotFindLevelController) {
+            return null;
+        }
+        
+        GameObject levelControllerObject = GameObject.Find("LevelController");
+        if (levelControllerObject == null) {
+            Debug.LogError("There should be a LevelController game object in the " + 
+                "level scene");
+            cannotFindLevelController = true;
+            return null;
+        }
+
+        levelController = levelControllerObject.GetComponent<LevelController>();
+        if (levelController == null) {
+            Debug.LogError("There should be a LevelController component in the " + 
+                "LevelController game object");
+            cannotFindLevelController = true;
+            return null;
+        }
+
+        return levelController;
+    }
+
+    public static PlacementController getPlacementController() {
+        if (placementController != null) {
+            return placementController;
+        }
+
+        if (cannotFindPlacementController) {
+            return null;
+        }
+
+        if (levelController == null) {
+            levelController = getLevelController();
+            if (levelController == null) {
+                cannotFindPlacementController = true;
+                return null;
+            }
+        }
+
+        placementController = levelController.gameObject.GetComponent<PlacementController>();
+        if (placementController == null) {
+            Debug.LogError("There should be a PlacementController component in " +
+                "the LevelController game object");
+            cannotFindPlacementController = true;
+            return null;
+        }
+
+        return placementController;
+    }
+
+    public static TeamList getTeamList() {
+        if (teamList != null) {
+            return teamList;
+        }
+
+        if (cannotFindTeamList) {
+            return null;
+        }
+
+        if (levelController == null) {
+            levelController = getLevelController();
+            if (levelController == null) {
+                cannotFindTeamList = true;
+                return null;
+            }
+        }
+
+        teamList = levelController.gameObject.GetComponent<TeamList>();
+        if (teamList == null) {
+            Debug.LogError("There should be a TeamList component in the " +
+                "LevelController game object");
+            cannotFindTeamList = true;
+            return null;
+        }
+
+        return teamList;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-public class TowerOption : MonoBehaviour
+public class TowerTab : MonoBehaviour
 {
     [Header("GameObject reference field.")]
     public int type1_lvl;
@@ -23,6 +23,7 @@ public class TowerOption : MonoBehaviour
     [Header("Status data")]
     public float cd;
     public bool isCd;
+    public Image cdIcon;
     public AllyData allyData;
 
     [Header("Sprites for UI icons")]
@@ -35,11 +36,22 @@ public class TowerOption : MonoBehaviour
     public Sprite Thunder;
 
     private LevelController levelController;
+    private PlacementController placementController;
 
-
-    public GameObject allyPrefab()
+    void Awake()
     {
-        AllyType type = allyData.allyType1;
+        levelController = LevelController.getLevelController();
+        placementController = LevelController.getPlacementController();
+
+        GameObject towerVisual = Instantiate(getAllyModel(allyData.getMainType()), 
+            TowerVisual.transform);
+        towerVisual.transform.localScale = new Vector3(20, 20, 20);
+        isCd = false;
+        button = gameObject.GetComponent<Button>();
+    }
+
+    public GameObject getAllyPrefab(AllyType type)
+    {
         switch (type)
         {
             case AllyType.Ranger:
@@ -58,9 +70,8 @@ public class TowerOption : MonoBehaviour
         return null;
     }
 
-    public GameObject getModel()
+    public GameObject getAllyModel(AllyType type)
     {
-        AllyType type = allyData.allyType1;
         switch (type)
         {
             case AllyType.Ranger:
@@ -81,11 +92,9 @@ public class TowerOption : MonoBehaviour
 
     private void OnMouseOver()
     {
-
-
-        if (Input.GetMouseButtonDown(1)&&status==null)
+        if (Input.GetMouseButtonDown(1) && status==null)
         {
-            status = Placement.toPlace.instStatus(allyData);
+            status = placementController.instStatus(allyData);
         }
     }
 
@@ -99,12 +108,12 @@ public class TowerOption : MonoBehaviour
 
     void OnMouseUp()
     {
-        if(Placement.toPlace.towerToFollow != null)
+        if(placementController.towerPreview != null)
         {
-            Destroy(Placement.toPlace.towerToFollow);
+            Destroy(placementController.towerPreview);
         }
 
-        if ((int)Placement.toPlace.Mana < allyData.allyLevelData.cost)
+        if ((int)placementController.mana < allyData.allyLevelData.cost)
         {
             print("Not Enough Mana");
             return;
@@ -112,41 +121,33 @@ public class TowerOption : MonoBehaviour
 
         if (!isCd)
         {
-            GameObject temp = allyPrefab();
-            //temp.GetComponent<Ally>().enabled = false;
-            //temp.GetComponent<Collider>().enabled = false;
-            //if(allyData.isType(AllyType.Blocker))temp.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
-            //temp.tag = "allyToPlace";
-            Placement.toPlace.towerPrefab = temp;
-            Placement.toPlace.allyData = allyData;
-            Placement.toPlace.towerToFollow = Instantiate(getModel()) as GameObject;
-            Placement.toPlace.towerOption = this;
-        }
-        else
-        {
+            placementController.allyData = allyData;
+            placementController.towerPrefab = getAllyPrefab(allyData.getMainType());;
+            placementController.towerPreview = Instantiate(getAllyModel(allyData.getMainType()));
+            placementController.towerOption = this;
+        } else {
             print("This Tower is on CD!");
             return;
         }
     }
 
-    void Awake()
-    {
-        GameObject levelControllerObject = GameObject.Find("LevelController");
-        if (levelControllerObject == null) {
-            Debug.LogError("Tower option should be used with a LevelController in the same scene");
-        } else {
-            levelController = levelControllerObject.GetComponent<LevelController>();
+    void updateCD() {
+        if (isCd)
+        {
+            cdIcon.fillAmount += 1 / cd * Time.deltaTime;
         }
 
-        GameObject towerVisual = Instantiate(getModel(), TowerVisual.transform);
-        towerVisual.transform.localScale = new Vector3(20, 20, 20);
-        isCd = false;
-        button = gameObject.GetComponent<Button>();
+        if(cdIcon.fillAmount >= 1)
+        {
+            isCd = false;
+            cdIcon.fillAmount = 0f;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateCD();
         Cost.GetComponent<Text>().text = "Cost: " + allyData.allyLevelData.cost.ToString();
             AllyType x = allyData.allyType1;
             switch (x)
@@ -211,29 +212,22 @@ public class TowerOption : MonoBehaviour
                     break;
             }
 
-        if (levelController.levelEnded())
-        {
-            gameObject.GetComponent<TowerOption>().enabled = false;
+        if (levelController.levelEnded()) {
+            enabled = false;
         }
 
-        if (isCd) 
-        {
+        if (isCd) {
             button.enabled = false;
             highLight.SetActive(false);
-        } 
-        else
-        {
+        } else {
             button.enabled = true;
             highLight.SetActive(true);
         }
 
-        if ((int)Placement.toPlace.Mana < allyData.allyLevelData.cost)
-        {
+        if ((int)placementController.mana < allyData.allyLevelData.cost) {
             button.enabled = false;
             highLight.SetActive(false);
-        }
-        else
-        {
+        } else {
             button.enabled = true;
             highLight.SetActive(true);
         }

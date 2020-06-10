@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4126472530714489037}
   - component: {fileID: 5249097601643410642}
   - component: {fileID: 7735372854617664818}
-  - component: {fileID: 5614418687344708890}
   - component: {fileID: 8613889424210072382}
   - component: {fileID: 271046957784700372}
   m_Layer: 8
@@ -82,18 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5614418687344708890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 250582152414206152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8613889424210072382
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -147,11 +134,10 @@ GameObject:
   - component: {fileID: 7856514243339290069}
   - component: {fileID: 7955316789341190378}
   - component: {fileID: 1768218142672825037}
-  - component: {fileID: 2130517667378092858}
   - component: {fileID: 5928279273458094283}
   - component: {fileID: 6720406340265875516}
   m_Layer: 8
-  m_Name: valley (1)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,18 +204,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2130517667378092858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527364328092117969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &5928279273458094283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -283,11 +257,10 @@ GameObject:
   - component: {fileID: 3859068015257948271}
   - component: {fileID: 7057004548512595734}
   - component: {fileID: 5604774505346766372}
-  - component: {fileID: 4983947018849798009}
   - component: {fileID: 2075295521182318433}
   - component: {fileID: 8034390444432315585}
   m_Layer: 8
-  m_Name: valley (16)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
@@ -354,18 +327,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4983947018849798009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813279050748264127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2075295521182318433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -419,11 +380,10 @@ GameObject:
   - component: {fileID: 4808937563139133711}
   - component: {fileID: 5706615066900157887}
   - component: {fileID: 8824136632425588167}
-  - component: {fileID: 8932186543045720904}
   - component: {fileID: 485328533916726004}
   - component: {fileID: 9199191252419011768}
   m_Layer: 8
-  m_Name: valley (10)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,18 +450,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8932186543045720904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738683789945732640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &485328533916726004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -555,12 +503,11 @@ GameObject:
   - component: {fileID: 2027910678430696069}
   - component: {fileID: 530892265950542244}
   - component: {fileID: 574790600943087805}
-  - component: {fileID: 3557730250942928887}
   - component: {fileID: 8802066618237998706}
   - component: {fileID: 7216117225467093978}
   m_Layer: 8
-  m_Name: walls
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -626,18 +573,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3557730250942928887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881068866237701164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8802066618237998706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -691,12 +626,11 @@ GameObject:
   - component: {fileID: 8122449495748601081}
   - component: {fileID: 871487426669827580}
   - component: {fileID: 835890502426380401}
-  - component: {fileID: 2218469135960720362}
   - component: {fileID: 7903908332274801772}
   - component: {fileID: 1133840601353191891}
   m_Layer: 8
-  m_Name: walls (5)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -762,18 +696,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2218469135960720362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940491298311485286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7903908332274801772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -827,12 +749,11 @@ GameObject:
   - component: {fileID: 6366691881007304820}
   - component: {fileID: 4043457244397112568}
   - component: {fileID: 5537811947764016447}
-  - component: {fileID: 7662934264389715298}
   - component: {fileID: 1211408115202071800}
   - component: {fileID: 1408990579717748365}
   m_Layer: 8
-  m_Name: walls (9)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -898,18 +819,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7662934264389715298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2400423213384632594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1211408115202071800
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -963,11 +872,10 @@ GameObject:
   - component: {fileID: 7854954331179382030}
   - component: {fileID: 2785241337090656833}
   - component: {fileID: 283313317606993068}
-  - component: {fileID: 811215879707713150}
   - component: {fileID: 8283707358050135621}
   - component: {fileID: 4879743041484108098}
   m_Layer: 8
-  m_Name: valley (3)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,18 +942,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &811215879707713150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2653048909178363402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8283707358050135621
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1099,12 +995,11 @@ GameObject:
   - component: {fileID: 8152580728721217749}
   - component: {fileID: 1022943064560132451}
   - component: {fileID: 696031236424232644}
-  - component: {fileID: 2325249026921659402}
   - component: {fileID: 9064642786645657038}
   - component: {fileID: 7240167245634919068}
   m_Layer: 8
-  m_Name: walls (4)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -1170,18 +1065,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2325249026921659402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962500322351601227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &9064642786645657038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1235,12 +1118,11 @@ GameObject:
   - component: {fileID: 7876272484006714993}
   - component: {fileID: 4490399118107272475}
   - component: {fileID: 3485125990971320735}
-  - component: {fileID: 2957012908664084418}
   - component: {fileID: 4038526420594781600}
   - component: {fileID: 7589413549872179155}
   m_Layer: 8
-  m_Name: walls (2)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -1306,18 +1188,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2957012908664084418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119750984411882099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4038526420594781600
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1371,11 +1241,10 @@ GameObject:
   - component: {fileID: 1776992045735998967}
   - component: {fileID: 4373809670418894072}
   - component: {fileID: 6631489320172859889}
-  - component: {fileID: 2497990771169701651}
   - component: {fileID: 3478379603632317756}
   - component: {fileID: 1249041963232530157}
   m_Layer: 8
-  m_Name: valley (17)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
@@ -1442,18 +1311,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2497990771169701651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3229774055289222693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &3478379603632317756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1562,11 +1419,10 @@ GameObject:
   - component: {fileID: 163876067062323060}
   - component: {fileID: 2774431331479290896}
   - component: {fileID: 6411488060600909850}
-  - component: {fileID: 637036820517306431}
   - component: {fileID: 4567388887510861813}
   - component: {fileID: 5218072665635540406}
   m_Layer: 8
-  m_Name: valley (15)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
@@ -1633,18 +1489,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &637036820517306431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512777690216542381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4567388887510861813
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1698,11 +1542,10 @@ GameObject:
   - component: {fileID: 6730420895435289662}
   - component: {fileID: 4787461332888509409}
   - component: {fileID: 4539629875571269799}
-  - component: {fileID: 5736768498855454125}
   - component: {fileID: 887250598000929261}
   - component: {fileID: 2981709325791339637}
   m_Layer: 8
-  m_Name: valley (7)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
@@ -1769,18 +1612,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5736768498855454125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3729787971108154456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &887250598000929261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1834,12 +1665,11 @@ GameObject:
   - component: {fileID: 606108097836741632}
   - component: {fileID: 642521310620994687}
   - component: {fileID: 5802991801255870725}
-  - component: {fileID: 3051135614474331712}
   - component: {fileID: 8860681613240396099}
   - component: {fileID: 4741743526517568174}
   m_Layer: 8
-  m_Name: walls (1)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -1905,18 +1735,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3051135614474331712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3904326753347012949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8860681613240396099
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1970,11 +1788,10 @@ GameObject:
   - component: {fileID: 1343118997913745620}
   - component: {fileID: 6518016327593348162}
   - component: {fileID: 3159360821102372470}
-  - component: {fileID: 2926193144719347561}
   - component: {fileID: 503137860497212105}
   - component: {fileID: 3121563539214752812}
   m_Layer: 8
-  m_Name: valley (13)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2041,18 +1858,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2926193144719347561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4083959987364298494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &503137860497212105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2106,11 +1911,10 @@ GameObject:
   - component: {fileID: 7880428972107528752}
   - component: {fileID: 5441178744666851556}
   - component: {fileID: 1404570584123523208}
-  - component: {fileID: 4664205988170012929}
   - component: {fileID: 9135942135477974070}
   - component: {fileID: 1427950837121183211}
   m_Layer: 8
-  m_Name: valley (2)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
@@ -2177,18 +1981,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4664205988170012929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4146983148366919650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &9135942135477974070
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2242,12 +2034,11 @@ GameObject:
   - component: {fileID: 1414534141172083032}
   - component: {fileID: 5359188227404165662}
   - component: {fileID: 2922675334657861879}
-  - component: {fileID: 556648978714626673}
   - component: {fileID: 7509975785036099766}
   - component: {fileID: 8404177727112031269}
   m_Layer: 8
-  m_Name: walls (3)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -2313,18 +2104,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &556648978714626673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4992328779443504560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7509975785036099766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2378,11 +2157,10 @@ GameObject:
   - component: {fileID: 2096052515646685785}
   - component: {fileID: 7774101005518460019}
   - component: {fileID: 1988621406391004846}
-  - component: {fileID: 5907735641480682595}
   - component: {fileID: 3977576857148755903}
   - component: {fileID: 7054126326494660389}
   m_Layer: 8
-  m_Name: valley (12)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
@@ -2449,18 +2227,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5907735641480682595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5604653604389521846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &3977576857148755903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2514,11 +2280,10 @@ GameObject:
   - component: {fileID: 2598031877081022669}
   - component: {fileID: 4072314633675916155}
   - component: {fileID: 5122372978682343870}
-  - component: {fileID: 8339832808502555667}
   - component: {fileID: 5965128383768063145}
   - component: {fileID: 8978632024115766093}
   m_Layer: 8
-  m_Name: valley (11)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2585,18 +2350,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8339832808502555667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5989992851915473817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &5965128383768063145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2650,11 +2403,10 @@ GameObject:
   - component: {fileID: 6262794596565389805}
   - component: {fileID: 2299247268119836316}
   - component: {fileID: 42924093978527511}
-  - component: {fileID: 8437756608873415985}
   - component: {fileID: 1293100322189205813}
   - component: {fileID: 3305627798710057373}
   m_Layer: 8
-  m_Name: valley (5)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2721,18 +2473,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8437756608873415985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6052402404482160864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1293100322189205813
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2786,11 +2526,10 @@ GameObject:
   - component: {fileID: 6037140343135361869}
   - component: {fileID: 8015971607760384226}
   - component: {fileID: 2450636784460176825}
-  - component: {fileID: 2557447496711306617}
   - component: {fileID: 6010771972205544143}
   - component: {fileID: 9123424137974233860}
   m_Layer: 8
-  m_Name: valley (8)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2857,18 +2596,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2557447496711306617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7125977049857026205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6010771972205544143
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2922,12 +2649,11 @@ GameObject:
   - component: {fileID: 1099713526773017592}
   - component: {fileID: 6395701657128920949}
   - component: {fileID: 7704780947986773885}
-  - component: {fileID: 2071313975787861435}
   - component: {fileID: 4344194173180832894}
   - component: {fileID: 5835493953201903703}
   m_Layer: 8
-  m_Name: walls (8)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -2993,18 +2719,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2071313975787861435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7619690183953903423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4344194173180832894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3058,11 +2772,10 @@ GameObject:
   - component: {fileID: 1235984908956365785}
   - component: {fileID: 5085636016690477122}
   - component: {fileID: 5524318577565119009}
-  - component: {fileID: 7152491586216864699}
   - component: {fileID: 2521026648809223978}
   - component: {fileID: 891219631694110048}
   m_Layer: 8
-  m_Name: valley (6)
+  m_Name: valley
   m_TagString: valley
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3129,18 +2842,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7152491586216864699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427016720273125559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2521026648809223978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3194,12 +2895,11 @@ GameObject:
   - component: {fileID: 3265746165681688403}
   - component: {fileID: 7306928831628773283}
   - component: {fileID: 8797103687330013466}
-  - component: {fileID: 6116341664636483291}
   - component: {fileID: 453642984163871980}
   - component: {fileID: 3940882614286047147}
   m_Layer: 8
-  m_Name: walls (6)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -3265,18 +2965,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6116341664636483291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8850662980576046217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &453642984163871980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3330,12 +3018,11 @@ GameObject:
   - component: {fileID: 7270514150392092385}
   - component: {fileID: 6822756615918671599}
   - component: {fileID: 3784442230709053191}
-  - component: {fileID: 6199799763871750409}
   - component: {fileID: 1182431225537091002}
   - component: {fileID: 2139657706024234009}
   m_Layer: 8
-  m_Name: walls (7)
-  m_TagString: walls
+  m_Name: wall
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
@@ -3401,18 +3088,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6199799763871750409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9011411667609603859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ef7732564ee9544835b3a5336aa32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1182431225537091002
 BoxCollider:
   m_ObjectHideFlags: 0

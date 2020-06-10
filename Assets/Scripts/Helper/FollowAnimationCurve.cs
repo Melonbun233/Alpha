@@ -36,7 +36,7 @@ public class FollowAnimationCurve : MonoBehaviour
 
         foreach(RaycastHit x in hits)
         {
-            if (x.transform.tag == "walls") return true;
+            if (x.transform.tag == "wall") return true;
         }
         return false;
     }
