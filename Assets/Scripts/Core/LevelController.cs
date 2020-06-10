@@ -76,16 +76,16 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public void setupLevel(int level, float manaRegen, int maxMana, int startingMana, 
-        List<AllyData> allyDatas, int seed = -1)
+    public void setupLevel(int level, Character player, 
+        List<AllyData> hand, int seed = -1)
     {
         this.rows = level / 5 + 3;
         this.colums = level / 5 + 2;
-        this.manaRegen = manaRegen;
-        this.maxMana = maxMana;
-        this.startingMana = startingMana;
+        this.manaRegen = player.manaData.manaRegeneration;
+        this.maxMana = player.manaData.maxMana;
+        this.startingMana = player.manaData.mana;
         this.mana = startingMana;
-        teamList.addTowerOptions(allyDatas);
+        teamList.addTowerOptions(hand);
         this.seed = seed;
         generateLevel();
     }
