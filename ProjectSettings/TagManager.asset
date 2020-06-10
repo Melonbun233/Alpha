@@ -11,8 +11,8 @@ TagManager:
   - allyToPlace
   - Ally
   - valley
-  - walls
   - Enemy_spawn
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -45,7 +45,7 @@ TagManager:
   - 
   - 
   - 
-  - projectiles
+  - Projectile
   m_SortingLayers:
   - name: Default
     uniqueID: 0

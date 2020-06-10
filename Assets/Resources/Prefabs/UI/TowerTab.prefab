@@ -450,6 +450,7 @@ MonoBehaviour:
   highLight: {fileID: 4438020178820870750}
   cd: 0
   isCd: 0
+  cdIcon: {fileID: 1506552899846868948}
   allyData:
     healthData:
       health: 0
@@ -498,6 +499,12 @@ MonoBehaviour:
     effectData:
       burningStack: 0
       burningAttackStack: 0
+      crippleStack: 0
+      crippleAttackStack: 0
+      bleedingStack: 0
+      bleedingAttackStack: 0
+      DamageReflectStack: 0
+      KnockBackAttackEffectStack: 0
     allyType1: 0
     allyType1Level: 0
     allyType2: 0
@@ -659,7 +666,6 @@ GameObject:
   - component: {fileID: 5346677698888997867}
   - component: {fileID: 7662461136044866922}
   - component: {fileID: 1506552899846868948}
-  - component: {fileID: 2318982992092670975}
   m_Layer: 5
   m_Name: cooldown_grey
   m_TagString: Untagged
@@ -723,19 +729,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2318982992092670975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6063704507126115474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d17e3152353e447a031b899ced503b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerTab: {fileID: 5775279043506786854}
 --- !u!1 &6424629942211140015
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     public static readonly string UpgradeSceneName = "UpgradeScene";
     public static readonly string LevelSceneName = "LevelScene";
     public List<AllyData> hand;
+    public Character player;
     public GameStatus status;
     public int level;
 
@@ -125,8 +126,10 @@ public class GameController : MonoBehaviour
             yield return null;
         }
 
-        status = GameStatus.Level;
+        LevelController.getLevelController().setupLevel(level, player, hand);
         hideSceneLoading("Level");
+
+        status = GameStatus.Level;
     }
 
     IEnumerator gotoUpgradeScene() {
@@ -138,8 +141,10 @@ public class GameController : MonoBehaviour
             yield return null;
         }
 
-        status = GameStatus.Upgrade;
+        
         hideSceneLoading("Upgrade");
+
+        status = GameStatus.Upgrade;
     }
 
     IEnumerator gotoMenuScene() {
@@ -151,9 +156,10 @@ public class GameController : MonoBehaviour
             yield return null;
         }
 
+        
+        hideSceneLoading("Menu");
 
         status = GameStatus.Menu;
-        hideSceneLoading("Menu");
     }
 
     void showSceneLoading(string name) {

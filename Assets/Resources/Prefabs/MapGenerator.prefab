@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2136086837156166600}
   - component: {fileID: 2136086837156166599}
   m_Layer: 0
-  m_Name: Map_Generator
+  m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136086837156166598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -927.64124, y: -574.6865, z: 1556.9669}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,19 +42,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2136086837156166598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92df2d88d50f27e43b38ce357e7fb86e, type: 3}
+  m_Script: {fileID: 11500000, guid: 39e141f41a169a94d94f32188405bdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 7
-  columns: 6
-  iterations: 3
+  rows: 5
+  columns: 5
+  iterations: 2
   spawnNumber: 2
   goldNum: 1
   baselocMark: 0
   spawnlocMark: 
   goldsMark: 
   mapCenterMark: 0
-  Base:
+  seed: 1
+  baseTiles:
   - {fileID: 5265161450082493002, guid: 9aa09ed8dc17dc741a76af5c368e5228, type: 3}
   midTiles:
   - {fileID: 2714446005675880362, guid: d4f73a9199e11354580aa2efef8ab7c2, type: 3}
@@ -64,17 +65,17 @@ MonoBehaviour:
   - {fileID: 3861427725135284278, guid: 7af37347c94f3ee469fa69d23dd1dde6, type: 3}
   sideTiles:
   - {fileID: 6416124027416348221, guid: 0ebe2837b62c50041a7d93a513134fd1, type: 3}
-  - {fileID: 3861427725135284278, guid: 7af37347c94f3ee469fa69d23dd1dde6, type: 3}
   - {fileID: 3927405374823997457, guid: fc17bb76c2e6e6b4cb716b49a632d6b0, type: 3}
-  enemySpawn:
+  - {fileID: 3861427725135284278, guid: 7af37347c94f3ee469fa69d23dd1dde6, type: 3}
+  enemySpawnTiles:
   - {fileID: 2289844012128985510, guid: 88ade2c2b4d85e14a9c52eff72f385f7, type: 3}
-  fillOuts:
+  fillOutTiles:
   - {fileID: 8912448474209229975, guid: 8336d315d3d24414bb6a0c79d9198816, type: 3}
-  Golds:
-  - {fileID: 2270177611936942419, guid: 02f782513ec63ff41b897fe27472d3c1, type: 3}
-  spawnPrefabs: {fileID: 309079086921007040, guid: cb80de8fac6c7594aaf97ffaa3753428,
+  spawnPrefab: {fileID: 309079086921007040, guid: cb80de8fac6c7594aaf97ffaa3753428,
     type: 3}
-  BasePrefabs: {fileID: 2105381977008142762, guid: ca55958be2b390d42840ae582234543e,
+  basePrefab: {fileID: 2105381977008142762, guid: ca55958be2b390d42840ae582234543e,
+    type: 3}
+  goldPrefab: {fileID: 2270177611936942419, guid: 02f782513ec63ff41b897fe27472d3c1,
     type: 3}
 --- !u!114 &2136086837156166600
 MonoBehaviour:
@@ -142,8 +143,16 @@ MonoBehaviour:
     effectData:
       burningStack: 0
       burningAttackStack: 0
+      crippleStack: 0
+      crippleAttackStack: 0
+      bleedingStack: 0
+      bleedingAttackStack: 0
+      DamageReflectStack: 0
+      KnockBackAttackEffectStack: 0
     allyType1: 0
+    allyType1Level: 0
     allyType2: 0
+    allyType2Level: 0
     allyLevelData:
       cost: 0
       level: 0
@@ -159,6 +168,10 @@ MonoBehaviour:
   status: {fileID: 8666502980356797597, guid: e6942d5904db1664d85f24b5fc42c033, type: 3}
   towerOption: {fileID: -1889223326394362648, guid: 7a42e00439a2aa842914610a190afa91,
     type: 3}
+  Mana: 0
+  MaxMana: 0
+  ManaRegen: 0
+  startingMana: 0
 --- !u!114 &2136086837156166599
 MonoBehaviour:
   m_ObjectHideFlags: 0

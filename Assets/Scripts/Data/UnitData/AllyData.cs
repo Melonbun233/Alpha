@@ -69,4 +69,32 @@ public class AllyData: UnitData {
 
         return true;
     }
+
+    public AllyType getMainType() {
+        if (isType(AllyType.Blocker)) {
+            return AllyType.Blocker;
+        }
+        return allyType1Level >= allyType2Level ? allyType1 : allyType2;
+    }
+
+    public int getMainTypeLevel() {
+        if (isType(AllyType.Blocker)) {
+            return allyType1 == AllyType.Blocker ? allyType1Level : allyType2Level;
+        }
+        return allyType1Level >= allyType2Level ? allyType1Level : allyType2Level;
+    }
+ 
+    public AllyType getSubType() {
+        if (isType(AllyType.Blocker)) {
+            return allyType1 == AllyType.Blocker ? allyType2 : allyType1;
+        }
+        return allyType1Level >= allyType2Level ? allyType2 : allyType1; 
+    }
+
+    public int getSubTypeLevel() {
+        if (isType(AllyType.Blocker)) {
+            return allyType1 == AllyType.Blocker ? allyType2Level : allyType1Level;
+        }
+        return allyType1Level >= allyType2Level ? allyType2Level : allyType1Level;
+    }
 }

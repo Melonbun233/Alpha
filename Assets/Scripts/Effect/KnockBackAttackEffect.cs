@@ -84,7 +84,7 @@ public class KnockBackAttackEffect : Effect
         unit.effectData.effects.Add(this);
         unit.OnUpdateEvent += onUpdateAction;
         unit.OnAttackEvent += onAttackAction;
-        unit.effectData.KnockBackAttackEffectStack++;
+        unit.effectData.knockBackAttackEffectStack++;
     }
 
     // Action attached to OnAttackEvent on a unit, and it applies knockback effect
@@ -117,6 +117,6 @@ public class KnockBackAttackEffect : Effect
         unit.effectData.effects.Remove(this);
         unit.OnUpdateEvent -= onUpdateAction;
         unit.OnAttackEvent -= onAttackAction;
-        unit.effectData.KnockBackAttackEffectStack--;
+        unit.effectData.knockBackAttackEffectStack--;
     }
 }

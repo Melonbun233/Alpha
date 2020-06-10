@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEditor.AI;
 
-public class Map_Generator : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
 
     [Header("Map parameter")]
@@ -20,37 +20,51 @@ public class Map_Generator : MonoBehaviour
     public int seed;
 
     [Header("Map tile prefabs")]
-    public GameObject[] Base;
+    public GameObject[] baseTiles;
     public GameObject[] midTiles;
     public GameObject[] sideTiles;
-    public GameObject[] enemySpawn;
-    public GameObject[] fillOuts;
-    public GameObject[] Golds;
-    public GameObject spawnPrefabs;
-    public GameObject BasePrefabs;
+    public GameObject[] enemySpawnTiles;
+    public GameObject[] fillOutTiles;
+
+    [Header("Some initial prefabs")]
+    public GameObject spawnPrefab;
+    public GameObject basePrefab;
+    public GameObject goldPrefab;
+
+    public List<Grid> spawnGrids = new List<Grid>();
+    public List<Grid> baseGrids = new List<Grid>();
+    public List<Grid> goldGrids = new List<Grid>();
 
     private int mapLength;
     private List<int> reached;
     private List<int> midPoints;
     private bool hasBaked;
+    private LevelController levelController;
+
+    void Awake() {
+        GameObject levelControllerObject = GameObject.Find("LevelController");
+        if (levelControllerObject != null) {
+            levelController = levelControllerObject.GetComponent<LevelController>();
+        }
+    }
 
     //Initialize Grids.
-    List<grid> SetUpGridSystem()
+    List<Grid> SetUpGridSystem()
     {
         int i = 0;
         Transform gridHolder = new GameObject("Grids").transform;
-        List<grid> Grid = new List<grid>();
+        List<Grid> grids = new List<Grid>();
 
         for (int c = 0; c < columns * 10; c = c + 10)
         {
             for (int r = 0; r < rows * 10; r = r + 10)
             {
-                grid aGrid = new grid(new Vector3(c, 0f, r), i);
-                Grid.Add(aGrid);
-                Grid[i].Grid.transform.SetParent(gridHolder);
+                Grid grid = new Grid(new Vector3(c, 0f, r), i);
+                grids.Add(grid);
+                grids[i].gridObject.transform.SetParent(gridHolder);
                 if (r != 0)
                 {
-                    Grid[i].left = Grid[i - 1];
+                    grids[i].left = grids[i - 1];
                 }
                 i++;
             }
@@ -61,59 +75,61 @@ public class Map_Generator : MonoBehaviour
         for (int count = 0; count <= i - 1; count++)
         {
 
-            if (Grid[count].right == null && (count + 1) % rows != 0)
+            if (grids[count].right == null && (count + 1) % rows != 0)
             {
-                Grid[count].right = Grid[count + 1];
+                grids[count].right = grids[count + 1];
             }
 
-            if (Grid[count].down == null && count <= i - rows - 1)
+            if (grids[count].down == null && count <= i - rows - 1)
             {
-                Grid[count].down = Grid[count + rows];
+                grids[count].down = grids[count + rows];
             }
 
-            if (Grid[count].up == null && count >= rows)
+            if (grids[count].up == null && count >= rows)
             {
-                Grid[count].up = Grid[count - rows];
+                grids[count].up = grids[count - rows];
             }
 
         }
-        return Grid;
+        return grids;
     }
 
+    private int baseX;
+    private int baseZ;
     int markBase()
     {
-        int row = Random.Range(1, rows - 1);
-        int colm = Random.Range(1, columns - 1);
-        baselocMark = colm * rows + row;
+        baseX = Random.Range(1, rows - 1);
+        baseZ = Random.Range(1, columns - 1);
+        baselocMark = baseZ * rows + baseX;
         return baselocMark;
     }
 
     //Setup the base tiles
-    void baseSetup(List<grid> grids, Transform baseHolder)
+    void baseSetup(List<Grid> grids, Transform baseHolder)
     {
         int marks = markBase();
-        GameObject Base_ = Instantiate(Base[Random.Range(0, Base.Length)], baseHolder);
-        grids[marks].setMapTile(Base_);
+        GameObject baseTile = Instantiate(baseTiles[Random.Range(0, baseTiles.Length)], baseHolder);
+        grids[marks].setMapTile(baseTile);
         this.reached.Add(baselocMark);
     }
 
-    String ranTurn(grid pointer)
+    String ranTurn(Grid pointer)
     {
         List<String> temp = new List<String>();
 
-        if (grid.checkExit(pointer).Contains("U"))
+        if (Grid.checkExit(pointer).Contains("U"))
         {
             temp.Add("U");
         }
-        if (grid.checkExit(pointer).Contains("D"))
+        if (Grid.checkExit(pointer).Contains("D"))
         {
             temp.Add("D");
         }
-        if (grid.checkExit(pointer).Contains("L"))
+        if (Grid.checkExit(pointer).Contains("L"))
         {
             temp.Add("L");
         }
-        if (grid.checkExit(pointer).Contains("R"))
+        if (Grid.checkExit(pointer).Contains("R"))
         {
             temp.Add("R");
         }
@@ -146,9 +162,10 @@ public class Map_Generator : MonoBehaviour
         }
     }
 
-    bool checkInner(grid grid)
+    bool checkInner(Grid grid)
     {
-        if (grid.index >= rows && grid.index < (mapLength - rows) && ((grid.index + 1) % rows) != 0 && (grid.index + 1) % rows != 1)
+        if (grid.index >= rows && grid.index < (mapLength - rows) && ((grid.index + 1) % rows) != 0 && 
+            (grid.index + 1) % rows != 1)
         {
             return true;
         }
@@ -158,9 +175,9 @@ public class Map_Generator : MonoBehaviour
         }
     }
 
-    List<String> midPointMarker(grid grid, String turn)
+    List<String> midPointMarker(Grid grid, String turn)
     {
-        String exit = grid.checkExit(grid);
+        String exit = Grid.checkExit(grid);
         int temp = exit.IndexOf(turn);
         exit = exit.Remove(temp);
         List<String> Exits = new List<String>();
@@ -174,55 +191,65 @@ public class Map_Generator : MonoBehaviour
     }
 
 
-    List<int> innerGrids(List<grid> grids)
+    List<int> innerGrids(List<Grid> grids)
     {
         List<int> temp = new List<int>();
-        foreach (grid x in grids)
+        foreach (Grid x in grids)
         {
             if (checkInner(x)) temp.Add(x.index);
         }
         return temp;
     }
 
-    List<int> markSpawn(int num, List<grid> grids)
+    List<int> markSpawn(int num, List<Grid> grids)
     {
         if (num > 6) throw new System.ArgumentException("Too many enemy spawns");
 
         for (int i = 0; i < num; i++)
         {
             int Place = reached[Random.Range(0, reached.Count - 1)];
-            while (Place == baselocMark || Place == (baselocMark + 1) || Place == baselocMark - 1 || Place == baselocMark + rows || Place == baselocMark + rows + 1 || Place == baselocMark + rows - 1 || Place == baselocMark - rows || Place == baselocMark - rows - 1 || Place == baselocMark - rows + 1)
+            int loop = 0;
+            while (Place == baselocMark || Place == (baselocMark + 1) || Place == baselocMark - 1 || 
+                Place == baselocMark + rows || Place == baselocMark + rows + 1 || 
+                Place == baselocMark + rows - 1 || Place == baselocMark - rows || 
+                Place == baselocMark - rows - 1 || Place == baselocMark - rows + 1)
             {
+                if (loop > 100) {
+                    Debug.LogError("Failed to instantiate a enemy spawn due to too many iterations");
+                    break;
+                }
                 Place = reached[Random.Range(0, reached.Count - 1)];
+                loop ++;
             }
             spawnlocMark.Add(Place);
         }
         return spawnlocMark;
     }
 
-    List<GameObject> setupSpawn(List<grid> grids, Transform spawnHolder)
+    List<GameObject> setupSpawn(List<Grid> grids, Transform spawnHolder)
     {
         List<int> temp = markSpawn(spawnNumber, grids);
         List<GameObject> temp2 = new List<GameObject>();
         foreach (int x in temp)
         {
-            GameObject spawnsTile = Instantiate(enemySpawn[0], spawnHolder);
-            GameObject spawn = Instantiate(spawnPrefabs, grids[x].Grid.transform.position, Quaternion.identity) as GameObject;
+            GameObject spawnsTile = Instantiate(enemySpawnTiles[0], spawnHolder);
+            GameObject spawn = Instantiate(spawnPrefab, grids[x].gridObject.transform.position, 
+                Quaternion.identity) as GameObject;
             replaceTile(grids, x, spawnsTile, spawnHolder);
             temp2.Add(spawn);
         }
         return temp2;
     }
 
-    void replaceTile(List<grid> grids, int index, GameObject tile, Transform holder)
+    void replaceTile(List<Grid> grids, int index, GameObject tile, Transform holder)
     {
         Destroy(grids[index].tile);
         grids[index].setMapTile(tile);
     }
 
-    void setupMap(int startGrid, List<grid> grids, Transform mapHolder)
+    void setupMap(int startGrid, List<Grid> grids, Transform mapHolder)
     {
-        grid pointer = grids[startGrid];
+        Grid pointer = grids[startGrid];
         if (pointer.tile == null && !this.reached.Contains(pointer.index))
         {
             GameObject temp = Instantiate(midTiles[4], mapHolder) as GameObject;
@@ -233,12 +260,12 @@ public class Map_Generator : MonoBehaviour
 
         int i = 0;
 
-        String Exit = grid.checkExit(pointer);
-        String Type = grid.checkTileType(pointer);
+        String Exit = Grid.checkExit(pointer);
+        String Type = Grid.checkTileType(pointer);
         while (i < columns * rows * 10)
         {
-            Exit = grid.checkExit(pointer);
-            Type = grid.checkTileType(pointer);
+            Exit = Grid.checkExit(pointer);
+            Type = Grid.checkTileType(pointer);
             String turn = ranTurn(pointer);
             if (Type == "mid")
             {
@@ -285,7 +312,7 @@ public class Map_Generator : MonoBehaviour
         }
     }
 
-    List<int> ReturnUnreached(List<grid> grids)
+    List<int> ReturnUnreached(List<Grid> grids)
     {
         List<int> unreached = new List<int>();
         for (int i = 0; i < grids.Count; i++)
@@ -298,14 +325,15 @@ public class Map_Generator : MonoBehaviour
         return unreached;
     }
 
-    List<int> checkBorder(List<grid> grids)
+    List<int> checkBorder(List<Grid> grids)
     {
         List<int> unreached = ReturnUnreached(grids);
         List<int> temp = new List<int>();
 
         foreach (int x in unreached)
         {
-            if (grids[x].up.tile != null || grids[x].down.tile != null || grids[x].left.tile != null || grids[x].right.tile != null)
+            if (grids[x].up.tile != null || grids[x].down.tile != null || grids[x].left.tile != null || 
+                grids[x].right.tile != null)
             {
                 temp.Add(x);
             }
@@ -313,22 +341,22 @@ public class Map_Generator : MonoBehaviour
         return temp;
     }
 
-    void fillOut(List<grid> grids, Transform mapHolder)
+    void fillOut(List<Grid> grids, Transform mapHolder)
     {
         List<int> unreached = checkBorder(grids);
 
         for (int i = 0; i < unreached.Count; i++)
         {
-            GameObject temp = Instantiate(fillOuts[Random.Range(0, fillOuts.Length)], mapHolder);
+            GameObject temp = Instantiate(fillOutTiles[Random.Range(0, fillOutTiles.Length)], mapHolder);
             grids[unreached[i]].setMapTile(temp);
             reached.Add(unreached[i]);
         }
     }
 
-    bool checkValid(List<grid> grids)
+    bool checkValid(List<Grid> grids)
     {
         int count = 0;
-        foreach (grid x in grids)
+        foreach (Grid x in grids)
         {
             if (x.tile != null)
             {
@@ -346,7 +374,7 @@ public class Map_Generator : MonoBehaviour
         }
     }
 
-    void eraseMap(Transform mapHolder, Transform baseHolder, Transform spawnHolder, List<grid> grids)
+    void eraseMap(Transform mapHolder, Transform baseHolder, Transform spawnHolder, List<Grid> grids)
     {
 
 
@@ -360,7 +388,7 @@ public class Map_Generator : MonoBehaviour
 
             reached = new List<int>();
 
-            foreach (grid x in grids)
+            foreach (Grid x in grids)
             {
                 x.tile = null;
             }
@@ -371,33 +399,37 @@ public class Map_Generator : MonoBehaviour
         }
     }
 
-    void setupGold(List<grid> grids)
+    void setupGold(List<Grid> grids)
     {
         int Place = reached[Random.Range(0, reached.Count - 1)];
         for (int i = 0; i < goldNum; i++)
         {
+            int loop = 0;
             while (Place == baselocMark || spawnlocMark.Contains(Place))
             {
+                if (loop > 100) {
+                    Debug.LogError("Failed to instantiate a gold");
+                    break;
+                }
                 Place = reached[Random.Range(0, reached.Count - 1)];
+                loop ++;
             }
         }
         goldsMark.Add(Place);
 
         foreach (int x in goldsMark)
         {
-            GameObject gold = Instantiate(Golds[0]);
-            gold.transform.position = grids[x].Grid.transform.position;
+            GameObject gold = Instantiate(goldPrefab);
+            gold.transform.position = grids[x].gridObject.transform.position;
         }
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void generate() {
         if(seed != -1) { Random.seed = this.seed; }
         reached = new List<int>();
         midPoints = new List<int>();
-        List<grid> grids = SetUpGridSystem();
+        List<Grid> grids = SetUpGridSystem();
         Transform mapHolder = new GameObject("MapTiles").transform;
         Transform baseHolder = new GameObject("BaseTiles").transform;
         Transform spawnHolder = new GameObject("SpawnTiles").transform;
@@ -405,6 +437,10 @@ public class Map_Generator : MonoBehaviour
         int i = 0;
         while (!checkValid(grids))
         {
+            if (i > 50) {
+                Debug.LogError("Iterate too many times while generating map, abort");
+                break;
+            }
             eraseMap(mapHolder, baseHolder, spawnHolder, grids);
             mapHolder = new GameObject("MapTiles" + i).transform;
             baseHolder = new GameObject("BaseTiles" + i).transform;
@@ -421,13 +457,40 @@ public class Map_Generator : MonoBehaviour
         List<GameObject> spawns = setupSpawn(grids, spawnHolder);
         setupGold(grids);
         fillOut(grids, mapHolder);
-        GameObject base_ = Instantiate(BasePrefabs, grids[baselocMark].Grid.transform.position, Quaternion.identity) as GameObject;
-        LevelController.levelCtr.Base = base_.GetComponent<Character>();
-        LevelController.levelCtr.spawns = spawns;
+        GameObject base_ = Instantiate(basePrefab, grids[baselocMark].gridObject.transform.position, 
+            Quaternion.identity);
+
+        if (levelController != null) {
+            levelController.character = base_.GetComponent<Character>();
+            levelController.spawns = spawns;
+        }
+        
+        // Setup the camera to look at the base
+        setupCamera(base_.transform.position);
+
         //map built
         hasBaked = false;
-        
+    }
 
+    // Setup the camera on top of the base
+    void setupCamera(Vector3 basePosition) {
+        CameraController camController = Camera.main.gameObject.GetComponent<CameraController>();
+        if (camController == null) {
+            Debug.LogWarning("Cannot find camera controller");
+            return;
+        }
+
+        Debug.Log($"Base X: {baseX}");
+        Debug.Log($"Base Z: {baseZ}");
+
+        int scale = 5;
+        int xPositiveLimit = (rows - baseX + 1) * scale;
+        int xNegativeLimit = (baseX + 1) * scale;
+        int zPositiveLimit = (columns - baseZ + 1) * scale;
+        int znegativeLimit = (baseZ + 1) * scale;
+
+        camController.setupCamera(basePosition, xPositiveLimit, xNegativeLimit, 
+            zPositiveLimit, znegativeLimit);
     }
 
     // Update is called once per frame

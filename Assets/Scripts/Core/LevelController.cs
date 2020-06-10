@@ -8,21 +8,23 @@ using Random = UnityEngine.Random;
 
 public class LevelController : MonoBehaviour
 {
-    public static LevelController levelCtr;
-
     [Header("Map Settings")]
-    public GameObject levelGenerator;
     public int rows;
     public int colums;
     public int iterations;
     public int Levels;
     public int seed;
+    public bool autoGenerateMap;
 
     [Header("Level Settings")]
-    public float ManaRegen;
-    public float MaxMana;
-    public float StartingMana;
-    public float mana;
+    [SerializeField]
+    private float manaRegen;
+    [SerializeField]
+    private float maxMana;
+    [SerializeField]
+    private float startingMana;
+    [SerializeField]
+    private float mana;
 
     [Header("TeamList settings")]
     public float TeamOptionOffset;
@@ -34,17 +36,21 @@ public class LevelController : MonoBehaviour
 
 
     [Header("References. No need to change")]
-    public Camera cam;
     public GameObject UI;
 
+    private static MapGenerator mapGenerator;
+    private static bool cannotFindMapGenerator;
+    private static TeamList teamList;
+    private static bool cannotFindTeamList;
+    private static PlacementController placementController;
+    private static bool cannotFindPlacementController;
+    private static LevelController levelController;
+    private static bool cannotFindLevelController;
 
-    private TeamList teamList;
-    private placement Placement;
-    private Map_Generator MapGenerator;
-    private Text ManaText;
+    private Text manaText;
 
     [Header("Game Status")]
-    public Character Base;
+    public Character character;
     public List<GameObject> spawns;
     public List<GameObject> enemyPrefabs;
     [SerializeField]
@@ -56,49 +62,64 @@ public class LevelController : MonoBehaviour
     private int times = 0;
     private bool initialized = false;
 
-    public void SetUpLevel(int level, float ManaRegen, float MaxMana, float StartingMana, List<AllyData> allydatas, int seed = -1)
+    void Awake()
+    {
+        mapGenerator = getMapGenerator();
+        teamList = getTeamList();
+        placementController = getPlacementController();
+        levelController = getLevelController();
+    }
+
+    void Start() {
+        if (autoGenerateMap) {
+            generateLevel();
+        }
+    }
+
+    public void setupLevel(int level, Character player, 
+        List<AllyData> hand, int seed = -1)
     {
         this.rows = level / 5 + 3;
         this.colums = level / 5 + 2;
-        this.ManaRegen = ManaRegen;
-        this.MaxMana = MaxMana;
-        this.StartingMana = StartingMana;
-        teamList = new TeamList(allydatas);
+        this.manaRegen = player.manaData.manaRegeneration;
+        this.maxMana = player.manaData.maxMana;
+        this.startingMana = player.manaData.mana;
+        this.mana = startingMana;
+        teamList.addTowerOptions(hand);
         this.seed = seed;
         generateLevel();
     }
 
-    private void Awake()
-    {
-        levelCtr = this;
-    }
-
     private void generateLevel()
     {
-        GameObject LevelGenerator = Instantiate(levelGenerator, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-        teamList = LevelGenerator.GetComponent<TeamList>();
-        Placement = LevelGenerator.GetComponent<placement>();
-        MapGenerator = LevelGenerator.GetComponent<Map_Generator>();
-        MapGenerator.seed = this.seed;
-        teamList.UI = UI;
-        MapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
-        MapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
+        // Setup map generator
+        mapGenerator.seed = this.seed;
+        mapGenerator.spawnNumber = (int)Mathf.Log(Levels, 2f) + 1;
+        mapGenerator.goldNum = Random.Range(0, (int)Mathf.Log(Levels, 2f));
+        mapGenerator.rows = this.rows;
+        mapGenerator.columns = this.colums;
+        mapGenerator.generate();
 
+        // Setup team list UI
+        teamList.UI = UI;
         teamList.offset = TeamOptionOffset;
         teamList.startPoint = TeamOptionStartingPoint;
-        teamList.team.Add(DefaultAllyData.TestRangerData);
-        teamList.team.Add(DefaultAllyData.defaultBlockerData);
+        teamList.addTowerOption(DefaultAllyData.TestRangerData);
+        teamList.addTowerOption(DefaultAllyData.defaultBlockerData);
 
-        Placement.wallOffset = wallOffset;
-        Placement.valleyOffset = valleyOffset;
-        Placement.Maincamera = cam;
-        Placement.UIE = UI;
-        Placement.ManaRegen = this.ManaRegen;
-        Placement.MaxMana = this.MaxMana;
-        Placement.startingMana = this.StartingMana;
-        placement.toPlace.Mana = this.StartingMana;
+        // Setup placement
+        placementController.wallOffset = wallOffset;
+        placementController.valleyOffset = valleyOffset;
+        placementController.UIE = UI;
+        placementController.mana = startingMana;
+        placementController.manaRegen = manaRegen;
+        placementController.maxMana = maxMana;
+        placementController.startingMana = startingMana;
 
-        ManaText = UI.GetComponentInChildren<Text>();
+        manaText = UI.GetComponentInChildren<Text>();
+        placementController.manaText = manaText;
+
+        
         initialized = true;
 
         waves.Add(WaveFormation.Melee3());
@@ -109,10 +130,10 @@ public class LevelController : MonoBehaviour
         //waves.Add(WaveFormation.Boss_General());
     }
 
-    void Start()
-    {
-        generateLevel();
+    public bool levelEnded() {
+        return character.isDead();
     }
+
 
     // Update is called once per frame
 
@@ -129,23 +150,128 @@ public class LevelController : MonoBehaviour
             times++;
         }
         
-        if (Base.isDead())
+        if (character.isDead())
         {
             UI.transform.Find("GO").gameObject.SetActive(true);
-            placement.toPlace.enabled = false;
+            placementController.enabled = false;
         }
 
-        mana = placement.toPlace.Mana;
-        if (placement.toPlace.Mana <= MaxMana)
-        {
-            placement.toPlace.Mana += ManaRegen * Time.deltaTime;
-            int intMana = (int)placement.toPlace.Mana;
-            ManaText.text = intMana.ToString();
+        
+    }
+
+    public void switchCameraAngle()
+    {
+        Camera.main.GetComponent<CameraController>().angleSwtich();
+    }
+
+    public static MapGenerator getMapGenerator() {
+        if (mapGenerator != null) {
+            return mapGenerator;
         }
-        else
-        {
-            int intMana = (int)MaxMana;
-            ManaText.text = intMana.ToString();
+
+        if (cannotFindMapGenerator) {
+            return null;
         }
+
+        GameObject mapGeneratorObject = GameObject.Find("MapGenerator");
+        if (mapGeneratorObject == null) {
+            Debug.LogError("There should be a MapGenerator game object in the level scene");
+            cannotFindMapGenerator = true;
+            return null;
+        }
+
+        mapGenerator = mapGeneratorObject.GetComponent<MapGenerator>(); 
+        if (mapGenerator == null) {
+            Debug.LogError("There should be a MapGenerator component in the " + 
+                "MapGenerator gameobject");
+            cannotFindMapGenerator = true;
+            return null;
+        }
+
+        return mapGenerator;
+    }
+
+    public static LevelController getLevelController() {
+        if (levelController != null) {
+            return levelController;
+        }
+        
+        if (cannotFindLevelController) {
+            return null;
+        }
+        
+        GameObject levelControllerObject = GameObject.Find("LevelController");
+        if (levelControllerObject == null) {
+            Debug.LogError("There should be a LevelController game object in the " + 
+                "level scene");
+            cannotFindLevelController = true;
+            return null;
+        }
+
+        levelController = levelControllerObject.GetComponent<LevelController>();
+        if (levelController == null) {
+            Debug.LogError("There should be a LevelController component in the " + 
+                "LevelController game object");
+            cannotFindLevelController = true;
+            return null;
+        }
+
+        return levelController;
+    }
+
+    public static PlacementController getPlacementController() {
+        if (placementController != null) {
+            return placementController;
+        }
+
+        if (cannotFindPlacementController) {
+            return null;
+        }
+
+        if (levelController == null) {
+            levelController = getLevelController();
+            if (levelController == null) {
+                cannotFindPlacementController = true;
+                return null;
+            }
+        }
+
+        placementController = levelController.gameObject.GetComponent<PlacementController>();
+        if (placementController == null) {
+            Debug.LogError("There should be a PlacementController component in " +
+                "the LevelController game object");
+            cannotFindPlacementController = true;
+            return null;
+        }
+
+        return placementController;
+    }
+
+    public static TeamList getTeamList() {
+        if (teamList != null) {
+            return teamList;
+        }
+
+        if (cannotFindTeamList) {
+            return null;
+        }
+
+        if (levelController == null) {
+            levelController = getLevelController();
+            if (levelController == null) {
+                cannotFindTeamList = true;
+                return null;
+            }
+        }
+
+        teamList = levelController.gameObject.GetComponent<TeamList>();
+        if (teamList == null) {
+            Debug.LogError("There should be a TeamList component in the " +
+                "LevelController game object");
+            cannotFindTeamList = true;
+            return null;
+        }
+
+        return teamList;
     }
 }

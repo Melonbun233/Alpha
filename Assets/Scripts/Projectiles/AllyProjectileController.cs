@@ -100,6 +100,8 @@ public class AllyProjectileController : MonoBehaviour
                 return null;
             }
             Projectile projectile = obj.GetComponent<Projectile>();
+
+            projectile.invalidCollisionTags.Add("Ally");
             
             projectile.setProjectile(position, rotation, attacker, target,
                 allyProjectileSpeeds[ally.getMainType()]);

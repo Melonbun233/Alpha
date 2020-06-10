@@ -24,7 +24,7 @@ public static class Utils
         Ray ray = new Ray(origin, (targetPosition - origin));
         if (Physics.Raycast(ray, out hit, range, 31))
         {
-            if (hit.transform.tag == "walls")
+            if (hit.transform.tag == "wall")
             {
                 return false;
             }

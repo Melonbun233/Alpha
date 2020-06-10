@@ -18,9 +18,13 @@ public class EffectData
     public int bleedingStack;
     public int bleedingAttackStack;
 
-    public int DamageReflectStack;
+    public int damageReflectStack;
 
-    public int KnockBackAttackEffectStack;
+    public int knockBackAttackEffectStack;
+
+    public int intangibleEffectStack;
+
+    public int regenerationStack;
 
     public EffectData() {}
 
