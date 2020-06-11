@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// UI controller for a list of TowerTab
 public class TeamList : MonoBehaviour
 {
 
     public List<AllyData> team;
-    public GameObject towerTab;
+    public GameObject towerTabPrefab;
     public GameObject UI;
     public Vector2 startPoint;
     public float offset;
@@ -22,11 +23,11 @@ public class TeamList : MonoBehaviour
 
     public void addTowerOption(AllyData allyData) {
         team.Add(allyData);
-        GameObject tower = Instantiate(towerTab, UI.transform) as GameObject;
-        tower.GetComponent<RectTransform>().anchoredPosition = startPoint;
+        GameObject towerTabObject = Instantiate(towerTabPrefab, UI.transform) as GameObject;
+        towerTabObject.GetComponent<RectTransform>().anchoredPosition = startPoint;
         startPoint.x = startPoint.x + offset;
-        tower.GetComponent<TowerTab>().allyData = allyData;
-        tower.GetComponent<TowerTab>().cd = allyData.allyLevelData.cd;
+
+        towerTabObject.GetComponent<TowerTab>().setupTowerTab(allyData);
     }
 
     public void addTowerOptions(List<AllyData> allyDatas) {

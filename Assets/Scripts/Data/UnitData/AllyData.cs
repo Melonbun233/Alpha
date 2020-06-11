@@ -9,17 +9,19 @@ public class AllyData: UnitData {
     public AllyType allyType2;
     public int allyType2Level;
     public AllyLevelData allyLevelData;
+    public float cd;
 
     public AllyData(HealthData healthData, AttackData attackData,
         ResistanceData resistanceData, MoveData moveData, EffectData effectData,
         AllyType allyType1, int allyType1Level, AllyType allyType2, int allyType2Level,
-        AllyLevelData allyLevelData) : 
+        AllyLevelData allyLevelData, float cd) : 
         base(healthData, attackData, resistanceData, moveData, effectData) {
             this.allyType1 = allyType1;
             this.allyType1Level = allyType1Level;
             this.allyType2 = allyType2;
             this.allyType2Level = allyType2Level;
             this.allyLevelData = allyLevelData;
+            this.cd = cd;
         }
 
     public static GameObject copyData(GameObject obj, AllyData data) {

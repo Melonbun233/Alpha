@@ -455,13 +455,16 @@ public class MapGenerator : MonoBehaviour
             i++;
         }
         List<GameObject> spawns = setupSpawn(grids, spawnHolder);
+        
         setupGold(grids);
         fillOut(grids, mapHolder);
-        GameObject base_ = Instantiate(basePrefab, grids[baselocMark].gridObject.transform.position, 
-            Quaternion.identity);
+
+        GameObject base_ = Character.spawn(basePrefab, DefaultCharacterData.testCharacterData,
+            grids[baselocMark].gridObject.transform.position, Quaternion.identity);
+        
 
         if (levelController != null) {
-            levelController.character = base_.GetComponent<Character>();
+            levelController.player = base_.GetComponent<Character>();
             levelController.spawns = spawns;
         }
         
