@@ -34,10 +34,10 @@ public class E_Ranger : Enemy
         _attackCoolDown = attackData.attackCoolDown;
         
     }
+
     protected override void Start()
     {
         setDefaultData();
         base.Start();
-
     }
 }

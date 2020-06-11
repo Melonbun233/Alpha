@@ -20,7 +20,10 @@ public class Destroyable : MonoBehaviour
     public Vector3 center;
 
     //Reference to the last unit that attacked this.
-    public Unit LastAttacker;
+    public Unit LastAttacker = null;
+    public bool isIntangible = false;
+    public bool isStun = false;
+    public bool isFragile = false;
 
     // Called on receive damage
     public event Action<Unit, int> OnReceiveDamageEvent;
@@ -44,7 +47,10 @@ public class Destroyable : MonoBehaviour
     // is 0 in the next frame
     // Over damage will not result in negative health!
     public virtual void receiveDamage(DamageData damageData, GameObject receiveFrom) {
+        if (this.isIntangible == true) return;
+
         int damage = damageData.getTotalDamage(this.resistanceData);
+        if (isFragile) damage = (int)(damage * 1.3f);
 
         if (OnReceiveDamageEvent != null) {
             OnReceiveDamageEvent(receiveFrom.GetComponent<Unit>(), damage);

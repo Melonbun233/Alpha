@@ -39,5 +39,11 @@ public enum EffectType {
     CrippleEffect,
     CrippleAttackEffect,
     DamageReflectEffect,
-    KnockBackAttackEffect
+    KnockBackAttackEffect,
+    IntangibleEffect,
+    RegenerationEffect,
+    StunEffect,
+    StunAttackEffect,
+    FragileEffect,
+    FragileAttackEffect
 }

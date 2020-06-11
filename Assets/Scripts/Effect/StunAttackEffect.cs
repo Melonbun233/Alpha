@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class KnockBackAttackEffect : Effect
+public class StunAttackEffect : Effect
 {
     public const float defaultPeriod = float.PositiveInfinity;
     public const bool defaultStackable = false;
-    public const int defaultKnockEffectPerAttack = 1;
-    public const float defaultKnockBackDistance = 2f;
+    public const int defaultStunEffectPerAttack = 1;
 
-    public override EffectType type { get; } = EffectType.KnockBackAttackEffect;
+
+    public override EffectType type { get; } = EffectType.StunAttackEffect;
     public override bool stackable { get; set; } = defaultStackable;
 
     private float _period;
@@ -28,33 +28,38 @@ public class KnockBackAttackEffect : Effect
     }
     public float periodCD;
 
-    // Add amount of knockback stacks to the target on every attack
-    public int KnockEffectPerAttack = defaultKnockEffectPerAttack;
-    public float knockBackDistance = defaultKnockBackDistance;
+
+    // Add amount of stun stacks to the target on every attack
+    public int stunEffectPerAttack = defaultStunEffectPerAttack;
+    // stun effect used on each attack
+    public StunEffect stunEffect = new StunEffect();
 
     Action<Unit, Unit> onAttackAction;
     Action<Unit, float> onUpdateAction;
 
-    // Constructor for the knockback attack effect
-    // Note that we will directly use the reference of the provided knockback effect
-    public KnockBackAttackEffect(float knockBackDistance)
+
+    // Constructor for the stun attack effect
+    // Note that we will directly use the reference of the provided stun effect
+    public StunAttackEffect(int stunEffectPerAttack, StunEffect stunEffect)
     {
-        this.knockBackDistance = knockBackDistance;
+        this.stunEffectPerAttack = stunEffectPerAttack;
+        this.stunEffect = stunEffect;
         this.onAttackAction = new Action<Unit, Unit>(OnAttack);
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
         this.period = defaultPeriod;
     }
 
-    public KnockBackAttackEffect()
+    public StunAttackEffect()
     {
         this.onAttackAction = new Action<Unit, Unit>(OnAttack);
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
         this.period = defaultPeriod;
     }
 
-    public static KnockBackAttackEffect deepCopy(KnockBackAttackEffect effect)
+    public static StunAttackEffect deepCopy(StunAttackEffect effect)
     {
-        KnockBackAttackEffect ret = new KnockBackAttackEffect(effect.knockBackDistance);
+        StunAttackEffect ret = new StunAttackEffect(effect.stunEffectPerAttack,
+            StunEffect.deepCopy(effect.stunEffect));
         ret.period = effect.period;
         ret.stackable = effect.stackable;
         return ret;
@@ -69,7 +74,7 @@ public class KnockBackAttackEffect : Effect
         if (hasEffect && !stackable)
         {
             // overwrite the effect only when the new effect has longer period
-            KnockBackAttackEffect oldEffect = effectData.getEffect(type) as KnockBackAttackEffect;
+            StunAttackEffect oldEffect = effectData.getEffect(type) as StunAttackEffect;
             if (oldEffect.periodCD < this.period)
             {
                 oldEffect.removeEffect(unit);
@@ -84,14 +89,18 @@ public class KnockBackAttackEffect : Effect
         unit.effectData.effects.Add(this);
         unit.OnUpdateEvent += onUpdateAction;
         unit.OnAttackEvent += onAttackAction;
-        unit.effectData.knockBackAttackEffectStack++;
+        unit.effectData.stunAttackEffectStack++;
     }
 
-    // Action attached to OnAttackEvent on a unit, and it applies knockback effect
+    // Action attached to OnAttackEvent on a unit, and it applies stun effect
     // on unit's attack
     private void OnAttack(Unit attacker, Unit target)
     {
-        target.transform.GetComponent<Rigidbody>().AddForce(-target.transform.forward * knockBackDistance);
+        for (int i = 0; i < stunEffectPerAttack; i++)
+        {
+            StunEffect stun = StunEffect.deepCopy(stunEffect);
+            stun.applyEffect(target);
+        }
     }
 
     // Calculate the period of this effect. 
@@ -117,6 +126,6 @@ public class KnockBackAttackEffect : Effect
         unit.effectData.effects.Remove(this);
         unit.OnUpdateEvent -= onUpdateAction;
         unit.OnAttackEvent -= onAttackAction;
-        unit.effectData.knockBackAttackEffectStack--;
+        unit.effectData.stunAttackEffectStack--;
     }
 }
