@@ -22,6 +22,8 @@ public class Destroyable : MonoBehaviour
     //Reference to the last unit that attacked this.
     public Unit LastAttacker = null;
     public bool isIntangible = false;
+    public bool isStun = false;
+    public bool isFragile = false;
 
     // Called on receive damage
     public event Action<Unit, int> OnReceiveDamageEvent;
@@ -48,6 +50,7 @@ public class Destroyable : MonoBehaviour
         if (this.isIntangible == true) return;
 
         int damage = damageData.getTotalDamage(this.resistanceData);
+        if (isFragile) damage = (int)(damage * 1.3f);
 
         if (OnReceiveDamageEvent != null) {
             OnReceiveDamageEvent(receiveFrom.GetComponent<Unit>(), damage);

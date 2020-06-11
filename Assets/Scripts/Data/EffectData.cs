@@ -26,6 +26,12 @@ public class EffectData
 
     public int regenerationStack;
 
+    public int stunEffectStack;
+    public int stunAttackEffectStack;
+
+    public int fragileEffectStack;
+    public int fragileAttackEffectStack;
+
     public EffectData() {}
 
     public EffectData(List<Effect> effects) {
