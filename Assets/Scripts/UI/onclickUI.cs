@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnclickUI : MonoBehaviour
+public class OnClickUI : MonoBehaviour
 {
 
     private static PlacementController placementController;

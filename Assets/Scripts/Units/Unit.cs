@@ -59,6 +59,8 @@ public abstract class Unit : Destroyable
     // Update is called once per frame
     protected override void Update()
     {
+        if (isStun) return;
+
         base.Update();
 
         if (gameObject.activeSelf) {

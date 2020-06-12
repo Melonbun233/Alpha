@@ -16,27 +16,18 @@ public class LevelController : MonoBehaviour
     public int seed;
     public bool autoGenerateMap;
 
-    [Header("Level Settings")]
-    [SerializeField]
-    private float manaRegen;
-    [SerializeField]
-    private float maxMana;
-    [SerializeField]
-    private float startingMana;
-    [SerializeField]
-    private float mana;
-
-    [Header("TeamList settings")]
-    public float TeamOptionOffset;
-    public Vector2 TeamOptionStartingPoint;
-
-    [Header("Placement Settings")]
-    public Vector3 wallOffset;
-    public Vector3 valleyOffset;
-
-
     [Header("References. No need to change")]
     public GameObject UI;
+
+    [Header("Game Status")]
+    public Character player;
+    public List<GameObject> spawns;
+    public List<GameObject> enemyPrefabs;
+    [SerializeField]
+    public List<Wave> waves = new List<Wave>();
+    public float SpawnCoolDown;
+    public int count;
+    public float preparationTime;
 
     private static MapGenerator mapGenerator;
     private static bool cannotFindMapGenerator;
@@ -48,16 +39,6 @@ public class LevelController : MonoBehaviour
     private static bool cannotFindLevelController;
 
     private Text manaText;
-
-    [Header("Game Status")]
-    public Character character;
-    public List<GameObject> spawns;
-    public List<GameObject> enemyPrefabs;
-    [SerializeField]
-    public List<Wave> waves = new List<Wave>();
-    public float SpawnCoolDown;
-    public int count;
-    public float preparationTime;
 
     private int times = 0;
     private bool initialized = false;
@@ -76,16 +57,13 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public void setupLevel(int level, float manaRegen, int maxMana, int startingMana, 
-        List<AllyData> allyDatas, int seed = -1)
+    public void setupLevel(int level, Character player, 
+        List<AllyData> hand, int seed = -1)
     {
         this.rows = level / 5 + 3;
         this.colums = level / 5 + 2;
-        this.manaRegen = manaRegen;
-        this.maxMana = maxMana;
-        this.startingMana = startingMana;
-        this.mana = startingMana;
-        teamList.addTowerOptions(allyDatas);
+        this.player = player;
+        teamList.addTowerOptions(hand);
         this.seed = seed;
         generateLevel();
     }
@@ -101,24 +79,12 @@ public class LevelController : MonoBehaviour
         mapGenerator.generate();
 
         // Setup team list UI
-        teamList.UI = UI;
-        teamList.offset = TeamOptionOffset;
-        teamList.startPoint = TeamOptionStartingPoint;
         teamList.addTowerOption(DefaultAllyData.TestRangerData);
         teamList.addTowerOption(DefaultAllyData.defaultBlockerData);
 
         // Setup placement
-        placementController.wallOffset = wallOffset;
-        placementController.valleyOffset = valleyOffset;
-        placementController.UIE = UI;
-        placementController.mana = startingMana;
-        placementController.manaRegen = manaRegen;
-        placementController.maxMana = maxMana;
-        placementController.startingMana = startingMana;
-
+        placementController.player = player;
         manaText = UI.GetComponentInChildren<Text>();
-        placementController.manaText = manaText;
-
         
         initialized = true;
 
@@ -131,7 +97,7 @@ public class LevelController : MonoBehaviour
     }
 
     public bool levelEnded() {
-        return character.isDead();
+        return player.isDead();
     }
 
 
@@ -150,9 +116,9 @@ public class LevelController : MonoBehaviour
             times++;
         }
         
-        if (character.isDead())
+        if (levelEnded())
         {
-            UI.transform.Find("GO").gameObject.SetActive(true);
+            UI.transform.Find("GameOverText").gameObject.SetActive(true);
             placementController.enabled = false;
         }
 

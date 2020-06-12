@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using System;
 
 // This controller is used to control the placement of a tower
@@ -12,39 +13,26 @@ public class PlacementController : MonoBehaviour
     [Header("Raycast ignore layers")]
     public LayerMask ignoreLayerMask;
 
-    public AllyData allyData;
-    [Header("Prefabs")]
-    public GameObject towerPrefab;
-    public GameObject towerPreview;
-
     [Header("OffSets")]
     public Vector3 wallOffset;
     public Vector3 valleyOffset;
     public Vector3 rotateAngle;
 
     [Header("References")]
-    public GameObject UIE;
+    public GameObject UI;
     public GameObject status;
-    public TowerTab towerOption;
     public Text manaText;
 
-    public float manaRegen;
-    public float maxMana;
-    public float startingMana;
-    public float mana;
-
-    
-
-
+    public Character player;
 
 
     public GameObject instStatus(Ally ally)
     {
-        GameObject instant = Instantiate(status, UIE.transform) as GameObject;
+        GameObject instant = Instantiate(status, UI.transform) as GameObject;
 
         AllyData data = new AllyData(ally.healthData, ally.attackData, ally.resistanceData, ally.moveData,
             ally.effectData, ally.allyType1, ally.allyType1Level, ally.allyType2, ally.allyType2Level, 
-            ally.allyLevelData);
+            ally.allyLevelData, 10);
 
         Vector3 temp2 = Input.mousePosition;
         temp2.z = 1f;
@@ -56,7 +44,7 @@ public class PlacementController : MonoBehaviour
 
     public GameObject instStatus(AllyData data)
     {
-        GameObject instant = Instantiate(status, UIE.transform) as GameObject;
+        GameObject instant = Instantiate(status, UI.transform) as GameObject;
         Vector3 temp2 = Input.mousePosition;
         temp2.z = 1f;
         Vector3 temp = Camera.main.ScreenToWorldPoint(temp2);
@@ -65,23 +53,65 @@ public class PlacementController : MonoBehaviour
         return instant;
     }
 
+    // Build the tower from selected tower tab
+    public void buildTower(RaycastHit hit, Vector3 position)
+    {
+        if (TowerTab.selectedTowerTab == null) {
+            return;
+        }
+        
+        AllyData allyData = TowerTab.selectedTowerTab.allyData;
+        // Validate the tag
+        // This should be moved to placement validation later
+        if (hit.transform.tag == "wall")
+        {
+            if (allyData.isType(AllyType.Blocker))
+            {
+                print("cannot place blocker on wall!");
+                return;
+            } 
+        } else if (hit.transform.tag == "valley") {
+            if (!allyData.isType(AllyType.Blocker))
+            {
+                print("cannot place non-blocker class on valleys!");
+                return;
+            }
+        }
+
+        // Spawn ally
+        Quaternion rotation = new Quaternion();
+        rotation.eulerAngles = rotateAngle;
+        GameObject allyGameObject = TowerTab.selectedTowerTab.buildTower(position, rotation, null);
+
+        player.manaData.mana -= allyData.allyLevelData.cost;
+        rotateAngle = new Vector3(0, 0, 0);
+
+        enableAlly(allyGameObject);
+    }
+
+    public bool hasEnoughMana(float manaCost) {
+        return manaCost <= player.manaData.mana;
+    }
+
     // Update is called once per frame
     void Update()
     {
         updateMana();
-        updateBuildTower();
+        updateTowerPreview();
     }
 
-    // Update the build tower process
-    void updateBuildTower() {
-        if(towerPreview == null)
+    // Update the tower preview from the selected tower tab
+    void updateTowerPreview() {
+        if(TowerTab.selectedTowerTab == null)
         {
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        GameObject towerPreview = TowerTab.selectedTowerTab.towerPreview;
         RaycastHit hit;
         int layerMask = ~ ignoreLayerMask;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         // preview to place a tower
         if(Physics.Raycast(ray, out hit, 1000, layerMask))
@@ -101,11 +131,12 @@ public class PlacementController : MonoBehaviour
 
         if (Input.GetKeyUp("escape"))
         {
-            Destroy(towerPreview);
+            TowerTab.selectedTowerTab.deselectTowerTab();
             Time.timeScale = 1f;
         }
 
-        if (Input.GetMouseButtonUp(0) && hit.transform != null)
+        if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject() 
+            && hit.transform != null)
         {
             if (towerPreview.GetComponent<PlacementValidation>().Validbuild)
             {
@@ -131,53 +162,23 @@ public class PlacementController : MonoBehaviour
     }
 
     void updateMana() {
-        if (mana <= maxMana)
-        {
-            mana += manaRegen * Time.deltaTime;
-            int intMana = (int)mana;
-            manaText.text = intMana.ToString();
-        } else {
-            int intMana = (int)maxMana;
-            manaText.text = intMana.ToString();
-        }
-    }
-
-    public void buildTower(RaycastHit hit, Vector3 position)
-    {
-        if (towerPrefab == null) {
+        if (player == null) {
             return;
         }
-        
-        // Validate the tag
-        // This should be moved to placement validation later
-        if (hit.transform.tag == "wall")
+
+        ManaData manaData = player.manaData;
+        if (manaData.mana <= manaData.maxMana)
         {
-            if (allyData.isType(AllyType.Blocker))
-            {
-                print("cannot place blocker on wall!");
-                return;
-            } 
-        } else if (hit.transform.tag == "valley") {
-            if (!allyData.isType(AllyType.Blocker))
-            {
-                print("cannot place non-blocker class on valleys!");
-                return;
-            }
+            manaData.mana += manaData.manaRegeneration * Time.deltaTime;
+            int intMana = (int)manaData.mana;
+            manaText.text = intMana.ToString();
+        } else {
+            int intMana = (int)manaData.maxMana;
+            manaText.text = intMana.ToString();
         }
-
-        // Spawn ally
-        Quaternion rotate = new Quaternion();
-        rotate.eulerAngles = rotateAngle;
-        GameObject allyGameObject = Ally.spawn(towerPrefab, allyData, position, rotate);
-
-        Destroy(towerPreview);
-        mana -= allyData.allyLevelData.cost;
-        rotateAngle = new Vector3(0, 0, 0);
-        towerPrefab = null;
-        towerOption.isCd = true;
-
-        enableAlly(allyGameObject);
     }
+
+    
 
     void enableAlly(GameObject allyGameObject) {
         allyGameObject.GetComponent<Ally>().enabled = true;

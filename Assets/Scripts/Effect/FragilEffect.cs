@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class DamageReflectEffect : Effect
+public class FragilEffect : Effect
 {
-    public const float defaultPeriod = float.PositiveInfinity;
+    public const float defaultPeriod = 5f;
     public const bool defaultStackable = false;
-    public override EffectType type { get; } = EffectType.DamageReflectEffect;
+    public override EffectType type { get; } = EffectType.FragileEffect;
     public override bool stackable { get; set; } = defaultStackable;
 
     private float _period;
@@ -25,40 +25,35 @@ public class DamageReflectEffect : Effect
     }
     public float periodCD;
 
-    public DamageData damageData = new DamageData(2, 0, 0, 0, 0);
-
     Action<Unit, float> onUpdateAction;
 
-    public DamageReflectEffect(float Period, DamageData damageData)
+    public FragilEffect(float Period)
     {
-        this.damageData = damageData;
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
         this.period = Period;
     }
 
-    public DamageReflectEffect()
+    public FragilEffect()
     {
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
         this.period = defaultPeriod;
     }
 
-    public static DamageReflectEffect deepCopy(DamageReflectEffect effect)
+    public static FragilEffect deepCopy(FragilEffect effect)
     {
-        return new DamageReflectEffect(effect.period, DamageData.deepCopy(effect.damageData));
+        return new FragilEffect(effect.period);
     }
 
-    private Unit EffectedUnit;
     public override void applyEffect(Unit unit)
     {
-        if (unit.effectData.hasEffect(EffectType.DamageReflectEffect))
+        if (unit.effectData.hasEffect(EffectType.FragileEffect))
         {
-            unit.effectData.getEffect(type).damage = this.damageData;
+            unit.effectData.getEffect(type).period = this.period;
         }
         else
         {
             unit.effectData.effects.Add(this);
-            EffectedUnit = unit;
-            unit.effectData.damageReflectStack++;
+            unit.effectData.fragileEffectStack++;
             unit.OnUpdateEvent += onUpdateAction;
         }
     }
@@ -67,12 +62,8 @@ public class DamageReflectEffect : Effect
     {
         unit.effectData.effects.Remove(this);
         unit.OnUpdateEvent -= onUpdateAction;
-        unit.effectData.damageReflectStack--;
+        unit.effectData.fragileEffectStack--;
     }
-
-    int LastHp = 0;
-
-    
 
     private void OnUpdate(Unit unit, float deltaTime)
     {
@@ -84,13 +75,5 @@ public class DamageReflectEffect : Effect
             removeEffect(unit);
             return;
         }
-
-        if (unit.healthData.health != LastHp)
-        {
-            EffectedUnit?.LastAttacker.receiveDamage(damageData, EffectedUnit.gameObject);
-            LastHp = unit.healthData.health;
-        }
-
-
     }
 }
