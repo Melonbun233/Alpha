@@ -6,7 +6,7 @@ using System;
 using UnityEditor.AI;
 using Random = UnityEngine.Random;
 
-public class LevelController : MonoBehaviour
+public class LevelSceneController : MonoBehaviour
 {
     [Header("Map Settings")]
     public int rows;
@@ -35,8 +35,8 @@ public class LevelController : MonoBehaviour
     private static bool cannotFindTeamList;
     private static PlacementController placementController;
     private static bool cannotFindPlacementController;
-    private static LevelController levelController;
-    private static bool cannotFindLevelController;
+    private static LevelSceneController levelSceneController;
+    private static bool cannotFindLevelSceneController;
 
     private Text manaText;
 
@@ -48,7 +48,7 @@ public class LevelController : MonoBehaviour
         mapGenerator = getMapGenerator();
         teamList = getTeamList();
         placementController = getPlacementController();
-        levelController = getLevelController();
+        levelSceneController = getLevelSceneController();
     }
 
     void Start() {
@@ -157,32 +157,32 @@ public class LevelController : MonoBehaviour
         return mapGenerator;
     }
 
-    public static LevelController getLevelController() {
-        if (levelController != null) {
-            return levelController;
+    public static LevelSceneController getLevelSceneController() {
+        if (levelSceneController != null) {
+            return levelSceneController;
         }
         
-        if (cannotFindLevelController) {
+        if (cannotFindLevelSceneController) {
             return null;
         }
         
-        GameObject levelControllerObject = GameObject.Find("LevelController");
-        if (levelControllerObject == null) {
-            Debug.LogError("There should be a LevelController game object in the " + 
+        GameObject levelSceneControllerObject = GameObject.Find("LevelSceneController");
+        if (levelSceneControllerObject == null) {
+            Debug.LogError("There should be a LevelSceneController game object in the " + 
                 "level scene");
-            cannotFindLevelController = true;
+            cannotFindLevelSceneController = true;
             return null;
         }
 
-        levelController = levelControllerObject.GetComponent<LevelController>();
-        if (levelController == null) {
-            Debug.LogError("There should be a LevelController component in the " + 
-                "LevelController game object");
-            cannotFindLevelController = true;
+        levelSceneController = levelSceneControllerObject.GetComponent<LevelSceneController>();
+        if (levelSceneController == null) {
+            Debug.LogError("There should be a LevelSceneController component in the " + 
+                "LevelSceneController game object");
+            cannotFindLevelSceneController = true;
             return null;
         }
 
-        return levelController;
+        return levelSceneController;
     }
 
     public static PlacementController getPlacementController() {
@@ -194,18 +194,18 @@ public class LevelController : MonoBehaviour
             return null;
         }
 
-        if (levelController == null) {
-            levelController = getLevelController();
-            if (levelController == null) {
+        if (levelSceneController == null) {
+            levelSceneController = getLevelSceneController();
+            if (levelSceneController == null) {
                 cannotFindPlacementController = true;
                 return null;
             }
         }
 
-        placementController = levelController.gameObject.GetComponent<PlacementController>();
+        placementController = levelSceneController.gameObject.GetComponent<PlacementController>();
         if (placementController == null) {
             Debug.LogError("There should be a PlacementController component in " +
-                "the LevelController game object");
+                "the LevelSceneController game object");
             cannotFindPlacementController = true;
             return null;
         }
@@ -222,18 +222,18 @@ public class LevelController : MonoBehaviour
             return null;
         }
 
-        if (levelController == null) {
-            levelController = getLevelController();
-            if (levelController == null) {
+        if (levelSceneController == null) {
+            levelSceneController = getLevelSceneController();
+            if (levelSceneController == null) {
                 cannotFindTeamList = true;
                 return null;
             }
         }
 
-        teamList = levelController.gameObject.GetComponent<TeamList>();
+        teamList = levelSceneController.gameObject.GetComponent<TeamList>();
         if (teamList == null) {
             Debug.LogError("There should be a TeamList component in the " +
-                "LevelController game object");
+                "LevelSceneController game object");
             cannotFindTeamList = true;
             return null;
         }

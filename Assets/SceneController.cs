@@ -8,8 +8,8 @@ public class SceneController : MonoBehaviour
 
     // private void OnMouseDown()
     // {
-    //     LevelController.levelCtr.rows = 10;
-    //     LevelController.levelCtr.colums = 10;
+    //     LevelSceneController.levelCtr.rows = 10;
+    //     LevelSceneController.levelCtr.colums = 10;
     //     SceneManager.LoadScene("map generation");
     // }
 }

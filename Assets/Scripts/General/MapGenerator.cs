@@ -39,12 +39,12 @@ public class MapGenerator : MonoBehaviour
     private List<int> reached;
     private List<int> midPoints;
     private bool hasBaked;
-    private LevelController levelController;
+    private LevelSceneController levelSceneController;
 
     void Awake() {
-        GameObject levelControllerObject = GameObject.Find("LevelController");
-        if (levelControllerObject != null) {
-            levelController = levelControllerObject.GetComponent<LevelController>();
+        GameObject levelSceneControllerObject = GameObject.Find("LevelSceneController");
+        if (levelSceneControllerObject != null) {
+            levelSceneController = levelSceneControllerObject.GetComponent<LevelSceneController>();
         }
     }
 
@@ -463,9 +463,9 @@ public class MapGenerator : MonoBehaviour
             grids[baselocMark].gridObject.transform.position, Quaternion.identity);
         
 
-        if (levelController != null) {
-            levelController.player = base_.GetComponent<Character>();
-            levelController.spawns = spawns;
+        if (levelSceneController != null) {
+            levelSceneController.player = base_.GetComponent<Character>();
+            levelSceneController.spawns = spawns;
         }
         
         // Setup the camera to look at the base

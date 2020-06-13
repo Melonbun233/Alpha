@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class CameraSwtichButton : MonoBehaviour
 {
-    LevelController levelController;
+    LevelSceneController levelSceneController;
 
     void Awake() {
-        levelController = LevelController.getLevelController();
+        levelSceneController = LevelSceneController.getLevelSceneController();
     }
 
     private void OnMouseUp()
     {
-        levelController.switchCameraAngle();
+        levelSceneController.switchCameraAngle();
     }
 
 }

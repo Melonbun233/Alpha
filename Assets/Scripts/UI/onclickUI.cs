@@ -9,7 +9,7 @@ public class OnClickUI : MonoBehaviour
     private Ally ally;
 
     void Awake() {
-        placementController = LevelController.getPlacementController();
+        placementController = LevelSceneController.getPlacementController();
     }
     private void OnMouseOver()
     {

@@ -49,13 +49,13 @@ public class TowerTab : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     // Whether this tower tab is setup and ready
     private bool isTowerTabReady;
 
-    private LevelController levelController;
+    private LevelSceneController levelSceneController;
     private PlacementController placementController;
 
     void Awake()
     {
-        levelController = LevelController.getLevelController();
-        placementController = LevelController.getPlacementController();
+        levelSceneController = LevelSceneController.getLevelSceneController();
+        placementController = LevelSceneController.getPlacementController();
     }
 
     // Setup this tower tab using an existing ally data
@@ -229,7 +229,7 @@ public class TowerTab : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     {
         updateCD();
 
-        if (levelController.levelEnded()) {
+        if (levelSceneController.levelEnded()) {
             enabled = false;
         }
     }

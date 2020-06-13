@@ -11,14 +11,14 @@ public enum GameStatus {
     // Status during a level
     Level,
     // Status for inter-levels
-    Upgrade,
+    Preparation,
 }
 
 // Used to control the whole game
 public class GameController : MonoBehaviour
 {
     public static readonly string MenuSceneName = "MenuScene";
-    public static readonly string UpgradeSceneName = "UpgradeScene";
+    public static readonly string PreparationSceneName = "PreparationScene";
     public static readonly string LevelSceneName = "LevelScene";
     public List<AllyData> hand;
     public Character player;
@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
             return;
         }
         
-        StartCoroutine(gotoUpgradeScene());
+        StartCoroutine(gotoPreparationScene());
     }
 
     // Quit the game to desktop, can be called in any scene
@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour
     // This should only be called in a level or upgrade
     // Goes to menu scene
     public void endGame() {
-        if (status != GameStatus.Level || status != GameStatus.Upgrade) {
+        if (status != GameStatus.Level || status != GameStatus.Preparation) {
             Debug.LogWarning("endGame() should only be called during a run");
             return;
         }
@@ -86,19 +86,19 @@ public class GameController : MonoBehaviour
     // Discard all current data and restart a new game
     // Goes to the first upgrade scene
     public void restartGame() {
-        if (status != GameStatus.Level || status != GameStatus.Upgrade) {
+        if (status != GameStatus.Level || status != GameStatus.Preparation) {
             Debug.LogWarning("restartGame() should only be called during a run");
             return;
         }
 
         resetGameData();
-        StartCoroutine(gotoUpgradeScene());
+        StartCoroutine(gotoPreparationScene());
     }
 
     // Increment level and Start a new level, should be called within upgrade scene
     // Goes to the level scene
     public void startLevel() {
-        if (status != GameStatus.Upgrade) {
+        if (status != GameStatus.Preparation) {
             Debug.LogWarning("startLevel() should only be called in upgrade scene");
             return;
         }
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
             Debug.LogWarning("endLevel() should only be called within a level");
         }
 
-        StartCoroutine(gotoUpgradeScene());
+        StartCoroutine(gotoPreparationScene());
     }
 
     IEnumerator gotoLevelScene() {
@@ -126,25 +126,25 @@ public class GameController : MonoBehaviour
             yield return null;
         }
 
-        LevelController.getLevelController().setupLevel(level, player, hand);
+        LevelSceneController.getLevelSceneController().setupLevel(level, player, hand);
         hideSceneLoading("Level");
 
         status = GameStatus.Level;
     }
 
-    IEnumerator gotoUpgradeScene() {
+    IEnumerator gotoPreparationScene() {
         showSceneLoading("upgrade");
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(UpgradeSceneName);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(PreparationSceneName);
 
         while (!asyncLoad.isDone) {
             yield return null;
         }
 
         
-        hideSceneLoading("Upgrade");
+        hideSceneLoading("Preparation");
 
-        status = GameStatus.Upgrade;
+        status = GameStatus.Preparation;
     }
 
     IEnumerator gotoMenuScene() {

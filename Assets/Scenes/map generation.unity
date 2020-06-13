@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 884876095}
   - component: {fileID: 884876094}
   m_Layer: 0
-  m_Name: LevelController
+  m_Name: LevelSceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1619,8 +1619,8 @@ Canvas:
   m_GameObject: {fileID: 1940171075}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 837295276}
   m_PlaneDistance: 1
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
