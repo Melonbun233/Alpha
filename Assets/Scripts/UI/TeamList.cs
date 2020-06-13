@@ -12,13 +12,13 @@ public class TeamList : MonoBehaviour
     public Vector2 startPoint;
     public float offset;
 
-    private LevelController levelController;
+    private LevelSceneController levelSceneController;
 
 
     void Awake()
     {
-        levelController = LevelController.getLevelController();
-        UI = levelController.UI;
+        levelSceneController = LevelSceneController.getLevelSceneController();
+        UI = levelSceneController.UI;
     }
 
     public void addTowerOption(AllyData allyData) {
