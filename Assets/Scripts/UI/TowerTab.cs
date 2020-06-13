@@ -2,38 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System;
-public class TowerTab : MonoBehaviour
+
+
+// Controller for one tower tab/ one card in the hand
+public class TowerTab : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
+    IPointerExitHandler
 {
     [Header("GameObject reference field.")]
-    public int type1_lvl;
-    public int type2_lvl;
-    public GameObject Type1;
-    public GameObject Type2;
-    public GameObject Type1_lvl;
-    public GameObject Type2_lvl;
-    public GameObject TowerVisual;
-    public GameObject Cost;
-    public GameObject[] prefabs;
-    public GameObject[] modelsOnly;
-    private Button button;
-    public GameObject highLight;
+    public Image type1Image;
+    public Image type2Image;
+    public Text type1LevelText;
+    public Text type2LevelText;
+    public GameObject towerVisual; // preview in the tower tab
+    public Text costText;
+    public Image highlight;
+    public Color highlightedColor;
+    public GameObject[] towerPrefabs;
+    public GameObject[] towerPreviewPrefabs;
+
+    [Header("UI icons")]
+    public Sprite rangerIcon;
+    public Sprite blockerIcon;
+    public Sprite physicalIcon; // What's the use of physical icon ??
+    public Sprite fireIcon;
+    public Sprite waterIcon;
+    public Sprite windIcon;
+    public Sprite thunderIcon;
+    public Image cdIcon;
+
+    [Header("Stuffs set automatically")]
+    public GameObject towerPrefab; // prefab used for actual tower building
+    public GameObject towerPreview; // preview for the placement when this tower tab is selected
+
+    public AllyData allyData {get; set;} 
+    public static TowerTab selectedTowerTab {get; set;}
+
+    // ???
     private static GameObject status;
 
-    [Header("Status data")]
-    public float cd;
-    public bool isCd;
-    public Image cdIcon;
-    public AllyData allyData;
-
-    [Header("Sprites for UI icons")]
-    public Sprite ranger;
-    public Sprite melee;
-    public Sprite physical;
-    public Sprite Fire;
-    public Sprite Water;
-    public Sprite Wind;
-    public Sprite Thunder;
+    // Whether this tower option is in cd
+    private bool isCd;
+    // Whether this tower tab is selected
+    private bool isSelected {get {return selectedTowerTab == this;}}
+    // Whether this tower tab is setup and ready
+    private bool isTowerTabReady;
 
     private LevelController levelController;
     private PlacementController placementController;
@@ -42,89 +56,150 @@ public class TowerTab : MonoBehaviour
     {
         levelController = LevelController.getLevelController();
         placementController = LevelController.getPlacementController();
+    }
 
-        GameObject towerVisual = Instantiate(getAllyModel(allyData.getMainType()), 
-            TowerVisual.transform);
-        towerVisual.transform.localScale = new Vector3(20, 20, 20);
+    // Setup this tower tab using an existing ally data
+    public void setupTowerTab(AllyData allyData) {
+        this.allyData = allyData;
+        // Setup tower preview in the tower tab
+        GameObject preview = Instantiate(getTowerPreviewPrefab(allyData.getMainType()), 
+            towerVisual.transform);
+        preview.transform.localScale = new Vector3(20, 20, 20);
+
+        // Setup icons based on ally's type
+        setupTowerTabType(type1Image, type1LevelText, allyData.getMainType(), 
+            allyData.getMainTypeLevel());
+        setupTowerTabType(type2Image, type2LevelText, allyData.getSubType(),
+            allyData.getSubTypeLevel());
+        costText.text = $"Cost: {allyData.allyLevelData.cost}";
+        
+        // Setup tower prefab and tower preview
+        towerPrefab = getTowerPrefab(allyData.getMainType());
+        towerPreview = Instantiate(getTowerPreviewPrefab(allyData.getMainType()));
+        towerPreview.SetActive(false);
+
+        // Setup tower tab ready
+        isTowerTabReady = true;
         isCd = false;
-        button = gameObject.GetComponent<Button>();
+    }
+    
+    // Build this tower on a specific position and rotation
+    public GameObject buildTower(Vector3 position, Quaternion rotation, Transform parent) {
+        GameObject tower = Ally.spawn(towerPrefab, allyData, position, rotation);
+        tower.transform.parent = parent;
+
+        isCd = true;
+
+        // Unselect the tower tab
+        deselectTowerTab();
+
+        return tower;
     }
 
-    public GameObject getAllyPrefab(AllyType type)
-    {
+    // Set the tower tab as the selected tower tab
+    // If there's already an existing selected tower tab, this method
+    // will automatically unselect the previous tower tab
+    public void selectTowerTab() {
+        if (selectedTowerTab != null) {
+            deselectTowerTab();
+        }
+        towerPreview.SetActive(true);
+        highlight.color = highlightedColor;
+
+        selectedTowerTab = this;
+    }
+
+    // unselect the current selected tower tab
+    public void deselectTowerTab() {
+        if (!isSelected) {
+            return;
+        }
+        towerPreview.SetActive(false);
+        highlight.color = Color.white;
+
+        selectedTowerTab = null;
+    }
+
+
+    void setupTowerTabType(Image iconImage, Text levelText, 
+        AllyType type, int typeLevel) {
+
         switch (type)
         {
-            case AllyType.Ranger:
-                return prefabs[0];
-            case AllyType.Blocker:
-                return prefabs[1];
             case AllyType.Fire:
-                return prefabs[0];
-            case AllyType.Thunder:
-                return prefabs[0];
+                iconImage.sprite = fireIcon;
+                levelText.text = typeLevel.ToString();
+                break;
             case AllyType.Water:
-                return prefabs[0];
+                iconImage.sprite = waterIcon;
+                levelText.text = typeLevel.ToString();
+                break;
+            case AllyType.Thunder:
+                iconImage.sprite = thunderIcon;
+                levelText.text = typeLevel.ToString();
+                break;
             case AllyType.Wind:
-                return prefabs[0];
+                iconImage.sprite = windIcon;
+                levelText.text = typeLevel.ToString();
+                break;
+            case AllyType.Ranger:
+                iconImage.sprite = rangerIcon;
+                levelText.text = typeLevel.ToString();
+                break;
+            case AllyType.Blocker:
+                iconImage.sprite = blockerIcon;
+                levelText.text = typeLevel.ToString();
+                break;
         }
-        return null;
     }
 
-    public GameObject getAllyModel(AllyType type)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        switch (type)
-        {
-            case AllyType.Ranger:
-                return modelsOnly[0];
-            case AllyType.Blocker:
-                return modelsOnly[1];
-            case AllyType.Fire:
-                return modelsOnly[0];
-            case AllyType.Thunder:
-                return modelsOnly[0];
-            case AllyType.Water:
-                return modelsOnly[0];
-            case AllyType.Wind:
-                return modelsOnly[0];
+        if (!isTowerTabReady) {
+            return;
         }
-        return null;
-    }
 
-    private void OnMouseOver()
-    {
         if (Input.GetMouseButtonDown(1) && status==null)
         {
             status = placementController.instStatus(allyData);
         }
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
+        if (!isTowerTabReady) {
+            return;
+        }
+
         if (status != null)
         {
             Destroy(status);
         }
     }
 
-    void OnMouseUp()
+    // Select this tower tab only when this tab is ready, 
+    // and the player has enought mana, and this tower tab is not in cd
+    // However, if this tower tab is already selected, unselect this tower tab
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if(placementController.towerPreview != null)
-        {
-            Destroy(placementController.towerPreview);
+        if (!isTowerTabReady) { 
+            return;
         }
 
-        if ((int)placementController.mana < allyData.allyLevelData.cost)
+        if (!placementController.hasEnoughMana(allyData.allyLevelData.cost))
         {
             print("Not Enough Mana");
             return;
         }
 
+        if (isSelected) {
+            deselectTowerTab();
+            return;
+        }
+
         if (!isCd)
         {
-            placementController.allyData = allyData;
-            placementController.towerPrefab = getAllyPrefab(allyData.getMainType());;
-            placementController.towerPreview = Instantiate(getAllyModel(allyData.getMainType()));
-            placementController.towerOption = this;
+            selectTowerTab();
         } else {
             print("This Tower is on CD!");
             return;
@@ -132,9 +207,13 @@ public class TowerTab : MonoBehaviour
     }
 
     void updateCD() {
+        if (!isTowerTabReady) {
+            return;
+        }
+
         if (isCd)
         {
-            cdIcon.fillAmount += 1 / cd * Time.deltaTime;
+            cdIcon.fillAmount += 1 / allyData.cd * Time.deltaTime;
         }
 
         if(cdIcon.fillAmount >= 1)
@@ -144,92 +223,56 @@ public class TowerTab : MonoBehaviour
         }
     }
 
+
     // Update is called once per frame
     void Update()
     {
         updateCD();
-        Cost.GetComponent<Text>().text = "Cost: " + allyData.allyLevelData.cost.ToString();
-            AllyType x = allyData.allyType1;
-            switch (x)
-            {
-                case AllyType.Fire:
-                    Type1.GetComponent<Image>().sprite = Fire;
-                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getFireDamage().ToString();
-                    break;
-                case AllyType.Water:
-                    Type1.GetComponent<Image>().sprite = Water;
-                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWaterDamage().ToString();
-                    break;
-                case AllyType.Thunder:
-                    Type1.GetComponent<Image>().sprite = Thunder;
-                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getThunderDamage().ToString();
-                    break;
-                case AllyType.Wind:
-                    Type1.GetComponent<Image>().sprite = Wind;
-                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWindDamage().ToString();
-                    break;
-                case AllyType.Ranger:
-                    Type1.GetComponent<Image>().sprite = ranger;
-                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
-                    break;
-                case AllyType.Blocker:
-                    Type1.GetComponent<Image>().sprite = physical;
-                    Type1_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
-                    break;
-            }
-
-            AllyType z = allyData.allyType2;
-
-            switch (z)
-            {
-                case AllyType.Fire:
-                    Type2.GetComponent<Image>().sprite = Fire;
-                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getFireDamage().ToString();
-                    break;
-                case AllyType.Water:
-                    Type2.GetComponent<Image>().sprite = Water;
-                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWaterDamage().ToString();
-                    break;
-                case AllyType.Thunder:
-                    Type2.GetComponent<Image>().sprite = Thunder;
-                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getThunderDamage().ToString();
-                    break;
-                case AllyType.Wind:
-                    Type2.GetComponent<Image>().sprite = Wind;
-                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getWindDamage().ToString();
-                    break;
-                case AllyType.Ranger:
-                    Type2.GetComponent<Image>().sprite = ranger;
-                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
-                    break;
-                case AllyType.Blocker:
-                    Type2.GetComponent<Image>().sprite = physical;
-                    Type2_lvl.GetComponent<Text>().text = allyData.attackData.attackDamage.getPhysicalDamage().ToString();
-                    break;
-                case AllyType.None:
-                    Type2.SetActive(false);
-                    Type2_lvl.SetActive(false);
-                    break;
-            }
 
         if (levelController.levelEnded()) {
             enabled = false;
         }
+    }
 
-        if (isCd) {
-            button.enabled = false;
-            highLight.SetActive(false);
-        } else {
-            button.enabled = true;
-            highLight.SetActive(true);
+
+    public GameObject getTowerPrefab(AllyType type)
+    {
+        switch (type)
+        {
+            case AllyType.Ranger:
+                return towerPrefabs[0];
+            case AllyType.Blocker:
+                return towerPrefabs[1];
+            case AllyType.Fire:
+                return towerPrefabs[0];
+            case AllyType.Thunder:
+                return towerPrefabs[0];
+            case AllyType.Water:
+                return towerPrefabs[0];
+            case AllyType.Wind:
+                return towerPrefabs[0];
+        }
+        return null;
+    }
+
+    public GameObject getTowerPreviewPrefab(AllyType type)
+    {
+        switch (type)
+        {
+            case AllyType.Ranger:
+                return towerPreviewPrefabs[0];
+            case AllyType.Blocker:
+                return towerPreviewPrefabs[1];
+            case AllyType.Fire:
+                return towerPreviewPrefabs[0];
+            case AllyType.Thunder:
+                return towerPreviewPrefabs[0];
+            case AllyType.Water:
+                return towerPreviewPrefabs[0];
+            case AllyType.Wind:
+                return towerPreviewPrefabs[0];
         }
 
-        if ((int)placementController.mana < allyData.allyLevelData.cost) {
-            button.enabled = false;
-            highLight.SetActive(false);
-        } else {
-            button.enabled = true;
-            highLight.SetActive(true);
-        }
+        return null;
     }
 }
