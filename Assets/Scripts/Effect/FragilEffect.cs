@@ -7,9 +7,12 @@ public class FragilEffect : Effect
 {
     public const float defaultPeriod = 5f;
     public const bool defaultStackable = false;
+    public const float defaultFragileCoeficient = 0.3f;
+
     public override EffectType type { get; } = EffectType.FragileEffect;
     public override bool stackable { get; set; } = defaultStackable;
 
+    public float fragileCoeficient;
     private float _period;
     public override float period
     {
@@ -27,21 +30,23 @@ public class FragilEffect : Effect
 
     Action<Unit, float> onUpdateAction;
 
-    public FragilEffect(float Period)
+    public FragilEffect(float Period, float FragileCoeficient)
     {
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
         this.period = Period;
+        this.fragileCoeficient = FragileCoeficient;
     }
 
     public FragilEffect()
     {
         this.onUpdateAction = new Action<Unit, float>(OnUpdate);
+        this.fragileCoeficient = defaultFragileCoeficient;
         this.period = defaultPeriod;
     }
 
     public static FragilEffect deepCopy(FragilEffect effect)
     {
-        return new FragilEffect(effect.period);
+        return new FragilEffect(effect.period, effect.fragileCoeficient);
     }
 
     public override void applyEffect(Unit unit)
@@ -55,7 +60,13 @@ public class FragilEffect : Effect
             unit.effectData.effects.Add(this);
             unit.effectData.fragileEffectStack++;
             unit.OnUpdateEvent += onUpdateAction;
+            unit.OnReceiveDamageEvent += fragileDmg;
         }
+    }
+
+    public void fragileDmg(Unit from, Unit _this, int dmg)
+    {
+        _this.healthData.health -= (int)(dmg * fragileCoeficient);
     }
 
     public override void removeEffect(Unit unit)
@@ -63,6 +74,7 @@ public class FragilEffect : Effect
         unit.effectData.effects.Remove(this);
         unit.OnUpdateEvent -= onUpdateAction;
         unit.effectData.fragileEffectStack--;
+        unit.OnReceiveDamageEvent -= fragileDmg;
     }
 
     private void OnUpdate(Unit unit, float deltaTime)

@@ -27,6 +27,8 @@ public abstract class Unit : Destroyable
     // Effects
     public EffectData effectData;
 
+    public bool isStun = false;
+
     // Effect Events & Delegates
     // Called on each attack
     public event Action<Unit, Unit> OnAttackEvent;
@@ -90,13 +92,12 @@ public abstract class Unit : Destroyable
             if (target == null) {
                 continue;
             }
-            
+
             target.GetComponent<Destroyable>().receiveDamage(attackData.attackDamage, gameObject);
             
             OnAttack(target); 
 
             dealAoeDamage(target, attackData.attackDamage);
-            target.GetComponent<Destroyable>().LastAttacker = this;
         }
 
         _attackCoolDown = attackData.attackCoolDown;

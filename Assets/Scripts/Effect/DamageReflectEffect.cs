@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Diagnostics.Tracing;
 
 public class DamageReflectEffect : Effect
 {
@@ -60,7 +61,9 @@ public class DamageReflectEffect : Effect
             EffectedUnit = unit;
             unit.effectData.damageReflectStack++;
             unit.OnUpdateEvent += onUpdateAction;
+            unit.OnReceiveDamageEvent += reflectDmg;
         }
+        
     }
 
     public override void removeEffect(Unit unit)
@@ -68,11 +71,13 @@ public class DamageReflectEffect : Effect
         unit.effectData.effects.Remove(this);
         unit.OnUpdateEvent -= onUpdateAction;
         unit.effectData.damageReflectStack--;
+        unit.OnReceiveDamageEvent -= reflectDmg;
     }
 
-    int LastHp = 0;
-
-    
+    public void reflectDmg(Unit from, Unit _this, int dmg)
+    {
+        from.receiveDamage(damageData, EffectedUnit.gameObject);
+    }
 
     private void OnUpdate(Unit unit, float deltaTime)
     {
@@ -84,13 +89,5 @@ public class DamageReflectEffect : Effect
             removeEffect(unit);
             return;
         }
-
-        if (unit.healthData.health != LastHp)
-        {
-            EffectedUnit?.LastAttacker.receiveDamage(damageData, EffectedUnit.gameObject);
-            LastHp = unit.healthData.health;
-        }
-
-
     }
 }

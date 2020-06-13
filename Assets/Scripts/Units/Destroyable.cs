@@ -20,13 +20,10 @@ public class Destroyable : MonoBehaviour
     public Vector3 center;
 
     //Reference to the last unit that attacked this.
-    public Unit LastAttacker = null;
     public bool isIntangible = false;
-    public bool isStun = false;
-    public bool isFragile = false;
 
     // Called on receive damage
-    public event Action<Unit, int> OnReceiveDamageEvent;
+    public event Action<Unit, Unit, int> OnReceiveDamageEvent;
     // Called on receive healing
     public event Action<Unit, int> OnReceiveHealingEvent;
 
@@ -50,10 +47,9 @@ public class Destroyable : MonoBehaviour
         if (this.isIntangible == true) return;
 
         int damage = damageData.getTotalDamage(this.resistanceData);
-        if (isFragile) damage = (int)(damage * 1.3f);
 
         if (OnReceiveDamageEvent != null) {
-            OnReceiveDamageEvent(receiveFrom.GetComponent<Unit>(), damage);
+            OnReceiveDamageEvent(receiveFrom.GetComponent<Unit>(), this.GetComponent<Unit>(), damage);
         }
 
         // Avoid negative health
