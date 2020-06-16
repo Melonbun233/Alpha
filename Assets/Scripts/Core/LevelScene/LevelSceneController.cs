@@ -130,6 +130,13 @@ public class LevelSceneController : MonoBehaviour
         Camera.main.GetComponent<CameraController>().angleSwtich();
     }
 
+    public static bool isBossLevel(int level) {
+        if (level > 0 && level % 5 == 0) {
+            return true;
+        }
+        return false;
+    }
+
     public static MapGenerator getMapGenerator() {
         if (mapGenerator != null) {
             return mapGenerator;

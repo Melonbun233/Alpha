@@ -178,10 +178,4 @@ public class GameController : MonoBehaviour
         level = 0;
     }
 
-    public static bool isBossLevel(int level) {
-        if (level > 0 && level % 5 == 0) {
-            return true;
-        }
-        return false;
-    }
 }
