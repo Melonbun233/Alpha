@@ -3,37 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Check the project google drive folder Gamestatus.drawio
-// for the complete status diagram!!!
-public enum GameStatus {
-    // Status in the menu
-    Menu,
-    // Status during a level
-    Level,
-    // Status for inter-levels
-    Preparation,
-}
-
 // Used to control the whole game
 public class GameController : MonoBehaviour
 {
     public static readonly string MenuSceneName = "MenuScene";
     public static readonly string PreparationSceneName = "PreparationScene";
     public static readonly string LevelSceneName = "LevelScene";
-    public List<AllyData> hand;
     public Character player;
-    public GameStatus status;
-    public int level;
+    public GameStatus gameStatus;
 
     GameObject loadingUI;
 
+    private static GameController gameController;
+    private static bool cannotFindGameController;
+
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
+        getGameController();
 
-        // Initialize all parameters
-        hand = new List<AllyData>();
-        level = 0;
-        status = GameStatus.Menu;
+        // Initialize the game status
+        gameStatus = new GameStatus();
 
         // Scene loading UI
         loadingUI = GameObject.Find("SceneLoadingCanvas");
@@ -56,7 +45,7 @@ public class GameController : MonoBehaviour
     // Start a new game from menu menu
     // Goes to the first upgrade scene
     public void startGame() {
-        if (status != GameStatus.Menu) {
+        if (gameStatus.state != GameState.Menu) {
             Debug.LogWarning("startGame() should only be called at menu");
             return;
         }
@@ -74,7 +63,7 @@ public class GameController : MonoBehaviour
     // This should only be called in a level or upgrade
     // Goes to menu scene
     public void endGame() {
-        if (status != GameStatus.Level || status != GameStatus.Preparation) {
+        if (gameStatus.state != GameState.Level || gameStatus.state != GameState.Preparation) {
             Debug.LogWarning("endGame() should only be called during a run");
             return;
         }
@@ -86,7 +75,7 @@ public class GameController : MonoBehaviour
     // Discard all current data and restart a new game
     // Goes to the first upgrade scene
     public void restartGame() {
-        if (status != GameStatus.Level || status != GameStatus.Preparation) {
+        if (gameStatus.state != GameState.Level || gameStatus.state != GameState.Preparation) {
             Debug.LogWarning("restartGame() should only be called during a run");
             return;
         }
@@ -98,19 +87,19 @@ public class GameController : MonoBehaviour
     // Increment level and Start a new level, should be called within upgrade scene
     // Goes to the level scene
     public void startLevel() {
-        if (status != GameStatus.Preparation) {
+        if (gameStatus.state != GameState.Preparation) {
             Debug.LogWarning("startLevel() should only be called in upgrade scene");
             return;
         }
 
-        level++;
+        gameStatus.level ++;
         StartCoroutine(gotoLevelScene());
     }
 
     // End the current level, shuold be called only in level scenes
     // Goes to the upgrade scene
     public void endLevel() {
-        if (status != GameStatus.Level) {
+        if (gameStatus.state != GameState.Level) {
             Debug.LogWarning("endLevel() should only be called within a level");
         }
 
@@ -126,10 +115,10 @@ public class GameController : MonoBehaviour
             yield return null;
         }
 
-        LevelSceneController.getLevelSceneController().setupLevel(level, player, hand);
+        LevelSceneController.getLevelSceneController().setupLevel();
         hideSceneLoading("Level");
 
-        status = GameStatus.Level;
+        gameStatus.state = GameState.Level;
     }
 
     IEnumerator gotoPreparationScene() {
@@ -144,7 +133,7 @@ public class GameController : MonoBehaviour
         
         hideSceneLoading("Preparation");
 
-        status = GameStatus.Preparation;
+        gameStatus.state = GameState.Preparation;
     }
 
     IEnumerator gotoMenuScene() {
@@ -159,7 +148,7 @@ public class GameController : MonoBehaviour
         
         hideSceneLoading("Menu");
 
-        status = GameStatus.Menu;
+        gameStatus.state = GameState.Menu;
     }
 
     void showSceneLoading(string name) {
@@ -174,8 +163,33 @@ public class GameController : MonoBehaviour
     }
 
     void resetGameData() {
-        hand.Clear();
-        level = 0;
+        gameStatus.resetGameStatus();
+    }
+
+    public static GameController getGameController() {
+        if (gameController != null) {
+            return gameController;
+        }
+
+        if (cannotFindGameController) {
+            return null;
+        }
+
+        GameObject obj = GameObject.Find("GameController");
+        if (obj == null) {
+            Debug.LogError("There should be a GameController game object in the menu scene");
+            cannotFindGameController = true;
+            return null;
+        }
+
+        gameController = obj.GetComponent<GameController>();
+        if (gameController == null) {
+            Debug.LogError("There should be a GameController component in the GameController object");
+            cannotFindGameController = true;
+            return null;
+        }
+
+        return gameController;
     }
 
 }

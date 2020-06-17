@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 6097072682632901963}
   - component: {fileID: 6803775304097138853}
   - component: {fileID: 7359050680728626505}
-  - component: {fileID: -1622927310755373645}
   - component: {fileID: -3897458851015269409}
   m_Layer: 0
   m_Name: Blocker
@@ -168,6 +167,7 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 0.5, z: 0}
+  isIntangible: 0
   attackData:
     attackRange: 1
     attackCoolDown: 1
@@ -195,6 +195,19 @@ MonoBehaviour:
   effectData:
     burningStack: 0
     burningAttackStack: 0
+    crippleStack: 0
+    crippleAttackStack: 0
+    bleedingStack: 0
+    bleedingAttackStack: 0
+    damageReflectStack: 0
+    knockBackAttackEffectStack: 0
+    intangibleEffectStack: 0
+    regenerationStack: 0
+    stunEffectStack: 0
+    stunAttackEffectStack: 0
+    fragileEffectStack: 0
+    fragileAttackEffectStack: 0
+  isStun: 0
   allyType1: 1
   allyType1Level: 0
   allyType2: 6
@@ -217,18 +230,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &-1622927310755373645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7878802123115981918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c8d1713a3782a459798cb6e77d9eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &-3897458851015269409
 Rigidbody:
   m_ObjectHideFlags: 0

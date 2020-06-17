@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6861531239737234898}
   - component: {fileID: 1530841986067063137}
   - component: {fileID: 6734697425312543982}
-  - component: {fileID: 5773033368118252837}
   - component: {fileID: 707320481711794991}
   m_Layer: 0
   m_Name: Ranger
@@ -86,6 +85,7 @@ MonoBehaviour:
   destroyEffect: {fileID: 0}
   destroyEffectPeriod: 0
   center: {x: 0, y: 1, z: 0}
+  isIntangible: 0
   attackData:
     attackRange: 10
     attackCoolDown: 1
@@ -114,6 +114,19 @@ MonoBehaviour:
   effectData:
     burningStack: 0
     burningAttackStack: 0
+    crippleStack: 0
+    crippleAttackStack: 0
+    bleedingStack: 0
+    bleedingAttackStack: 0
+    damageReflectStack: 0
+    knockBackAttackEffectStack: 0
+    intangibleEffectStack: 0
+    regenerationStack: 0
+    stunEffectStack: 0
+    stunAttackEffectStack: 0
+    fragileEffectStack: 0
+    fragileAttackEffectStack: 0
+  isStun: 0
   allyType1: 0
   allyType1Level: 0
   allyType2: 6
@@ -138,18 +151,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43eff301cca186a4da3a9e04adb4aa6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5773033368118252837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7927832156493680333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c8d1713a3782a459798cb6e77d9eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &707320481711794991

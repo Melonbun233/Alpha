@@ -29,6 +29,8 @@ public class LevelSceneController : MonoBehaviour
     public int count;
     public float preparationTime;
 
+    private GameController gameController;
+
     private static MapGenerator mapGenerator;
     private static bool cannotFindMapGenerator;
     private static TeamList teamList;
@@ -45,6 +47,7 @@ public class LevelSceneController : MonoBehaviour
 
     void Awake()
     {
+        gameController = GameController.getGameController();
         mapGenerator = getMapGenerator();
         teamList = getTeamList();
         placementController = getPlacementController();
@@ -57,14 +60,16 @@ public class LevelSceneController : MonoBehaviour
         }
     }
 
-    public void setupLevel(int level, Character player, 
-        List<AllyData> hand, int seed = -1)
+    public void setupLevel(int seed = -1)
     {
-        this.rows = level / 5 + 3;
-        this.colums = level / 5 + 2;
-        this.player = player;
-        teamList.addTowerOptions(hand);
+        GameStatus gameStatus = gameController.gameStatus;
+
+        this.rows = gameStatus.level / 5 + 3;
+        this.colums = gameStatus.level / 5 + 2;
+        this.player = gameController.player;
+        teamList.addTowerOptions(gameStatus.hand);
         this.seed = seed;
+        
         generateLevel();
     }
 
